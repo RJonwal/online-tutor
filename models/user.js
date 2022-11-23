@@ -21,12 +21,17 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type : String,
+        default: '',
     },
     role:{
         type: Number,
     },
     status:{
         type: Number,
+    },
+    token:{
+        type: String,
+        default: ''
     },
 },{
     timestamps : true
