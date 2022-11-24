@@ -5,5 +5,4 @@ const userController  = require('../controllers/user_controller')
 
 router.get('/dashboard',passport.checkAuthentication,userController.dashboard);
 
-
 module.exports = router;

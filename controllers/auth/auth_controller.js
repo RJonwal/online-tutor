@@ -1,5 +1,4 @@
 const User          = require('../../models/user');
-const bcrypt        = require("bcryptjs");
 const mail          = require('../../config/mail');
 const randomstring  = require("randomstring");
 const global        = require("../../_helper/GlobalHelper");
@@ -48,7 +47,6 @@ function logout (req,res){
 
 function forgetPassword(req,res){
     try {
-        
         return res.render('../views/auth/forget-password');
     } catch {
         return res.json(500, {
@@ -62,7 +60,7 @@ async function forget(req,res){
         let user =  await User.findOne({email: req.body.email});
         if(user){
             const randomString = randomstring.generate();
-            const url = req.protocol+"://"+req.headers.host+'/reset-password?token='+randomString;
+            const url = global.baseUrl(req)+'/reset-password?token='+randomString;
             let updated = await User.findByIdAndUpdate(user.id,{token:randomString});
             let htmlString = mail.renderTemplate({token:url},'/forget.ejs');
             let mailOptions = {
@@ -93,7 +91,8 @@ async function forget(req,res){
 
 async function resetPassword(req,res){
     try {
-        return res.render('../views/auth/reset-password');
+        let token = req.query.token;
+        return res.render('../views/auth/reset-password',{token:token});
     } catch (error) {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -102,12 +101,20 @@ async function resetPassword(req,res){
 }
 async function verifyPassword(req,res){
     try {
-        //let token = req.query.token;
-        console.log('amit',token);
-        if(req.password != req.confirm_password){
+        let result = req.body.token.trim();
+        //let hash = req.body.password;
+        let hash = global.securePassword(req.body.password);
+        console.log(hash);
+        if(req.body.password != req.body.confirm_password){
             req.flash('error','Confirm password and password not matched');
-            return res.redirect('/reset-password?token='+token);
+            return res.redirect('/reset-password?token='+result);
         }
+        let tokenData = await User.findOne({token:result});
+        if(tokenData){
+            let updated = await User.findByIdAndUpdate(tokenData.id,{password:hash,token:''});
+        }
+        req.flash('success','Password Changed Successfully');
+        return res.redirect('/');
     } catch (error) {
         return res.json(500, {
             message: 'Internal Server Error'
