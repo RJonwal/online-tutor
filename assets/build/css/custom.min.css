@@ -6187,3 +6187,6 @@ ul.notifications {
 #slash {
     display: none;
 }
+table#datatable {
+    font-size: 14px;
+}
