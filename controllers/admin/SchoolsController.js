@@ -5,6 +5,7 @@ module.exports = {
     create,
     store,
     edit,
+    update,
     destroy,
 }
 
@@ -69,16 +70,43 @@ async function store(req, res) {
  * @param {*} res 
  * @returns 
  */
- async function edit(req, res) {
+async function edit(req, res) {
     try {
-        
-        return res.render('../views/admin/schools/edit');
+        let schoolId = req.params.id;
+        let school = await School.find({ "_id": schoolId });
+        if (school) {
+            return res.render('../views/admin/schools/edit', { data: school[0] });
+        }
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
         })
     }
 }
+
+
+/**
+ * update school
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function update(req, res) {
+    try {
+        if (req.body.school_id && req.body.school_id != '') {
+            let school = await School.findByIdAndUpdate(req.body.school_id, req.body)
+            console.log(school);
+            req.flash('success', 'School is updated successfully!');
+            return res.redirect('/schools');
+        }
+        
+    } catch {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+}
+
 
 /**
  * delete school

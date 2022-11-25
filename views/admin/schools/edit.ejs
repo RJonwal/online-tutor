@@ -20,7 +20,8 @@
                 </div>
                 <div class="x_content">
                   <br>
-                  <form action="./store" method="post" class="form-horizontal form-label-left" id="demo-form2">
+                  <form action="/schools/update" method="post" class="form-horizontal form-label-left" id="demo-form2">
+                    <input type="hidden" name="school_id" value="<%=data.id %>">
 
                     <div class="item form-group">
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">School Name<span
@@ -28,7 +29,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 ">
                         <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name"
-                          required="required">
+                          required="required" value="<%=data.name %>">
                       </div>
                     </div>
 
@@ -37,7 +38,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 ">
                         <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone.."
-                          id="phone">
+                          id="phone" value="<%=data.phone %>">
                       </div>
                     </div>
 
@@ -45,7 +46,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address</span>
                       </label>
                       <div class="col-md-6 col-sm-6 ">
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email">
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email" value="<%=data.email %>">
                       </div>
                     </div>
 
@@ -54,14 +55,14 @@
                       </label>
                       <div class="col-md-6 col-sm-6 ">
                         <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
-                          id="address"></textarea>
+                          id="address"><%=data.address %></textarea>
                       </div>
                     </div>
 
                     <div class="ln_solid"></div>
                     <div class="form-group row">
                       <div class="col-md-9 col-sm-9  offset-md-3">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                       </div>
                     </div>
 
