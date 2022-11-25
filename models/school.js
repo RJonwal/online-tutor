@@ -1,29 +1,34 @@
-const mongoose   = require('mongoose');
-const schoolSchema = new mongoose.Schema({
-    name:{
-        type     : String,
-        required : true,
+const mongoose = require('mongoose');
+const schoolsSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
     },
-    address:{
-        type    : String,
-        default : ''
+    email: {
+        type: String,
+        unique: true,
+        default: ''
     },
-    phone:{
-        type     : Number,
-        unique   :true,
-        default  : ''
+    phone: {
+        type: Number,
+        unique: true,
+        default: ''
     },
-    email:{
-        type     : String,
-        unique   :true,
-        default  : ''
+    address: {
+        type: String,
+        default: ''
     },
-    status:{
-        type     : Number,
-        default  : ''
+    status: {
+        type: Number,
+        default: 1
     },
-},{
-    timestamps : true
-}); 
-const School = mongoose.model('school',schoolSchema);
+    deleted_at: {
+        type: Date,
+        default: null
+    }
+}, 
+{
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+});
+const School = mongoose.model('schools', schoolsSchema);
 module.exports = School;

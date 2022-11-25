@@ -1,0 +1,76 @@
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <%- include('../../partials/_sidebar'); %>
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="row">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Add School<small></small></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br>
+                  <form action="./store" method="post" class="form-horizontal form-label-left" id="demo-form2">
+
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">School Name<span
+                          class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 ">
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name"
+                          required="required">
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Contact No.</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 ">
+                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone.."
+                          id="phone">
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 ">
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email">
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">School Address</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 ">
+                        <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
+                          id="address"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group row">
+                      <div class="col-md-9 col-sm-9  offset-md-3">
+                        <button type="submit" class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
