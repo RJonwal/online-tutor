@@ -53,13 +53,14 @@ async function store(req, res) {
     try {
         let school = await School.create(req.body);
         if (school) {
-            req.flash('success', 'School is created successfully!');
+            res.status(200).json({ "success": true, "message": "School is created successfully!", "redirectUrl": "/schools" });
         }
-        return res.redirect('/schools');
-    } catch {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        })
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
+        // return res.status(500).json({
+        //     message: 'Internal Server Error'
+        // })
     }
 }
 
@@ -95,14 +96,11 @@ async function update(req, res) {
     try {
         if (req.body.school_id && req.body.school_id != '') {
             let school = await School.findByIdAndUpdate(req.body.school_id, req.body)
-            req.flash('success', 'School is updated successfully!');
-            return res.redirect('/schools');
+            res.status(200).json({ "success": true, "message": "School is updated successfully!", "redirectUrl": "/schools" });
         }
-        
-    } catch {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        })
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
     }
 }
 

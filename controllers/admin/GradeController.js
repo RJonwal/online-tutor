@@ -53,13 +53,11 @@ async function store(req, res) {
     try {
         let grade = await Grade.create(req.body);
         if (grade) {
-            req.flash('success', 'Grade is created successfully!');
-        }
-        return res.redirect('/grade');
-    } catch {
-        return res.status(500).json({
-            message: 'Internal Server Error'
-        })
+            res.status(200).json({ "success": true, "message": "Grade is created successfully!", "redirectUrl": "/grade" });
+        }   
+    } catch(e) {
+        console.log(e);
+        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
     }
 }
 
@@ -94,8 +92,7 @@ async function store(req, res) {
     try {
         if (req.body.grade_id && req.body.grade_id != '') {
             let school = await Grade.findByIdAndUpdate(req.body.grade_id, req.body)
-            req.flash('success', 'Grade is updated successfully!');
-            return res.redirect('/grade');
+            res.status(200).json({ "success": true, "message": "Grade is updated successfully!", "redirectUrl": "/grade" });
         }
         
     } catch {

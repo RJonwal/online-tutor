@@ -1,33 +1,185 @@
 <script>
-  <% if(flash.success && flash.success.length > 0) { %>
+  <% if (flash.success && flash.success.length > 0) { %>
     new Noty({
       theme: 'relax',
       text: '<%= flash.success %>',
-      type : 'success',
-      layout : 'topRight',
-      timeout : 1500
-  }).show();
+      type: 'success',
+      layout: 'topRight',
+      timeout: 1500
+    }).show();
   <% } %>
   
-  <% if(flash.error && flash.error.length > 0) { %>
+  <% if (flash.error && flash.error.length > 0) { %>
     new Noty({
       theme: 'relax',
       text: '<%= flash.error %>',
-      type : 'error',
-      layout : 'topRight',
-      timeout : 1500
-  }).show();
+      type: 'error',
+      layout: 'topRight',
+      timeout: 1500
+    }).show();
 <% } %>
 
-// for school update
-$(".updateData").click(function(){
-  $('.modal').modal('show')
-});
-// $(".close").click(function(){
-//   $('.modal').modal('hide')
-// });
-$('[data-toggle=confirmation]').confirmation({
-   rootSelector: '[data-toggle=confirmation]'
-});
+    // for school update
+    $(".updateData").click(function () {
+      $('.modal').modal('show')
+    });
+  // $(".close").click(function(){
+  //   $('.modal').modal('hide')
+  // });
+  $('[data-toggle=confirmation]').confirmation({
+    rootSelector: '[data-toggle=confirmation]'
+  });
+
+
+  $("#createSchool").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+
+    var formData = $('#createSchool').serialize();
+    var url = $('#createSchool').attr('action');
+    $("#storeSchoolBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#storeSchoolBtn").prop('disabled', false);
+      },
+    })
+  });
+
+
+  $("#updateSchool").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+
+    var formData = $('#updateSchool').serialize();
+    var url = $('#updateSchool').attr('action');
+    $("#updateSchoolBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateSchoolBtn").prop('disabled', false);
+      },
+    })
+  });
+
+
+  $("#createGrade").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+
+    var formData = $('#createGrade').serialize();
+    var url = $('#createGrade').attr('action');
+    $("#createGradeBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#createGradeBtn").prop('disabled', false);
+      },
+    })
+  });
+
+
+  $("#updateGrade").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+
+    var formData = $('#updateGrade').serialize();
+    var url = $('#updateGrade').attr('action');
+    $("#updateGradeBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateGradeBtn").prop('disabled', false);
+      },
+    })
+  });
 
 </script>

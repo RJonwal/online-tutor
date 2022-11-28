@@ -1,66 +1,84 @@
 <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <%- include('../../partials/_sidebar'); %>
-          <!-- top navigation -->
-          <div class="top_nav">
-            <div class="nav_menu">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-            </div>
-          </div>
+  <div class="container body">
+    <div class="main_container">
+      <%- include('../../partials/_sidebar'); %>
+
+        <%- include('../../partials/_topNavigation'); %>
+
           <div class="right_col" role="main">
-            <div class="row">
-              <div class="col-sm-12 text-right">
-                <a href="./grade/create" class="btn btn-info btn-sm" rel="tooltip" data-placement="top" title="Add">+
-                  Add Grade</a>
+            <div class="">
+
+              <!-- page title starts -->
+              <div class="page-title">
+                <div class="title_left">
+                  <h3>Grade</h3>
+                </div>
+
+                <!-- <div class="title_right">
+                  <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search for...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                      </span>
+                    </div>
+                  </div>
+                </div> -->
               </div>
-              <div class="col-sm-12">
-                <div class="card-box table-responsive">
-                  <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>S.No</th>
-                        <th>Grade</th>
-                        <th>Created At</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% let i=0; for(grade of data) { %>
+              <div class="clearfix"></div>
+              <!-- page title end -->
+
+              <div class="row">
+                <div class="col-sm-12 text-right">
+                  <a href="./grade/create" class="btn btn-info btn-sm" rel="tooltip" data-placement="top" title="Add">+
+                    Add Grade</a>
+                </div>
+                <div class="col-sm-12">
+                  <div class="card-box table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      <thead>
                         <tr>
-                          <td>
-                            <%=++i%>
-                          </td>
-                          <td>
-                            <%=grade.name%>
-                          </td>
-                          <td>
-                            <%=grade.created_at.toDateString()%>
-                          </td>
-                          <td>
-                            <%=grade.status == 1 ? 'Active' : 'Deactive' %>
-                          </td>
-                          <td>
-                            <a class="btn btn-info m-1" href="/grade/edit/<%=grade.id%>" data-toggle="tooltip"
-                              rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-  
-                            <a class="btn btn-info m-1" data-toggle="tooltip"
-                            rel="tooltip" data-placement="top" title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
-                                data-toggle="confirmation" data-singleton="true" data-title="Are You Sure Want To Delete?"
-                                href="/grade/destroy/<%=grade.id%>"></i></a>
-                          </td>
+                          <th>S.No</th>
+                          <th>Grade</th>
+                          <th>Created At</th>
+                          <th>Status</th>
+                          <th>Action</th>
                         </tr>
-                        <% } %>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <% let i=0; for(grade of data) { %>
+                          <tr>
+                            <td>
+                              <%=++i%>
+                            </td>
+                            <td>
+                              <%=grade.name%>
+                            </td>
+                            <td>
+                              <%=grade.created_at.toDateString()%>
+                            </td>
+                            <td>
+                              <%=grade.status==1 ? 'Active' : 'Deactive' %>
+                            </td>
+                            <td>
+                              <a class="btn btn-info m-1" href="/grade/edit/<%=grade.id%>" data-toggle="tooltip"
+                                rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+
+                              <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
+                                  data-toggle="confirmation" data-singleton="true"
+                                  data-title="Are You Sure Want To Delete?" href="/grade/destroy/<%=grade.id%>"></i></a>
+                            </td>
+                          </tr>
+                          <% } %>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- /top navigation -->
-      </div>
     </div>
-  </body>
+  </div>
+</body>

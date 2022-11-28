@@ -1,13 +1,17 @@
-const express           = require('express');
-const router            = express.Router();
-const passport          = require('passport');
-const SchoolsController = require('../controllers/admin/SchoolsController')
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const schoolsController = require('../controllers/admin/SchoolsController')
 
-router.get('/',passport.checkAuthentication,SchoolsController.index);
-router.get('/create',passport.checkAuthentication,SchoolsController.create);
-router.post('/store',passport.checkAuthentication,SchoolsController.store);
-router.get('/edit/:id',passport.checkAuthentication,SchoolsController.edit);
-router.post('/update',passport.checkAuthentication,SchoolsController.update);
-router.get('/destroy/:id',passport.checkAuthentication,SchoolsController.destroy);
+var storeSchoolRequest = require('../requests/School/StoreSchoolRequest');
+var updateSchoolRequest = require('../requests/School/UpdateSchoolRequest');
+
+
+router.get('/', passport.checkAuthentication, schoolsController.index);
+router.get('/create', passport.checkAuthentication, schoolsController.create);
+router.post('/store', passport.checkAuthentication, storeSchoolRequest, schoolsController.store);
+router.get('/edit/:id', passport.checkAuthentication, schoolsController.edit);
+router.post('/update', passport.checkAuthentication, updateSchoolRequest, schoolsController.update);
+router.get('/destroy/:id', passport.checkAuthentication, schoolsController.destroy);
 
 module.exports = router;
