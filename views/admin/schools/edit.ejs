@@ -49,7 +49,17 @@
                         <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email" value="<%=data.email %>">
                       </div>
                     </div>
-
+                    <div class="item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Status<span
+                          class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 ">
+                          <select class="form-control" name="status">
+                              <option value="1" <%= data.status == '1' ? 'selected' : ''%>>Active</option>
+                              <option value="2" <%= data.status == '2' ? 'selected' : ''%>>Deactive</option>
+                          </select>
+                      </div>
+                    </div>
                     <div class="item form-group">
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">School Address</span>
                       </label>

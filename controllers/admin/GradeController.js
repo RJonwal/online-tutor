@@ -1,4 +1,4 @@
-const School = require('../../models/school');
+const Grade = require('../../models/grade');
 let session = require('express-session');
 module.exports = {
     index,
@@ -10,15 +10,15 @@ module.exports = {
 }
 
 /**
- * Create school 
+ * Create Grade 
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
-async function index(req, res) {
+ async function index(req, res) {
     try {
-        let schools = await School.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/schools/index', { data: schools });
+        let Grades = await Grade.find({}).sort({ '_id': -1 });
+        return res.render('../views/admin/grade/index', { data: Grades });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -27,14 +27,14 @@ async function index(req, res) {
 }
 
 /**
- * create school
+ * create Grade
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function create(req, res) {
     try {
-        return res.render('../views/admin/schools/create');
+        return res.render('../views/admin/grade/create');
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -44,18 +44,18 @@ async function create(req, res) {
 
 
 /**
- * store school
+ * store Grade
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function store(req, res) {
     try {
-        let school = await School.create(req.body);
-        if (school) {
-            req.flash('success', 'School is created successfully!');
+        let grade = await Grade.create(req.body);
+        if (grade) {
+            req.flash('success', 'Grade is created successfully!');
         }
-        return res.redirect('/schools');
+        return res.redirect('/grade');
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -65,17 +65,17 @@ async function store(req, res) {
 
 
 /**
- * edit school
+ * edit Grade
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
-async function edit(req, res) {
+ async function edit(req, res) {
     try {
-        let schoolId = req.params.id;
-        let school = await School.find({ "_id": schoolId });
-        if (school) {
-            return res.render('../views/admin/schools/edit', { data: school[0] });
+        let gradeId = req.params.id;
+        let grade = await Grade.find({ "_id": gradeId });
+        if (grade) {
+            return res.render('../views/admin/grade/edit', { data: grade[0] });
         }
     } catch {
         return res.status(500).json({
@@ -83,7 +83,6 @@ async function edit(req, res) {
         })
     }
 }
-
 
 /**
  * update school
@@ -91,12 +90,12 @@ async function edit(req, res) {
  * @param {*} res 
  * @returns 
  */
-async function update(req, res) {
+ async function update(req, res) {
     try {
-        if (req.body.school_id && req.body.school_id != '') {
-            let school = await School.findByIdAndUpdate(req.body.school_id, req.body)
-            req.flash('success', 'School is updated successfully!');
-            return res.redirect('/schools');
+        if (req.body.grade_id && req.body.grade_id != '') {
+            let school = await Grade.findByIdAndUpdate(req.body.grade_id, req.body)
+            req.flash('success', 'Grade is updated successfully!');
+            return res.redirect('/grade');
         }
         
     } catch {
@@ -106,21 +105,21 @@ async function update(req, res) {
     }
 }
 
-
 /**
- * delete school
+ * delete Grade
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
+
 async function destroy(req, res) {
     try {
         let id = req.params.id;
-        let schoolDeleted = await School.findByIdAndDelete(id);
-        if (schoolDeleted) {
-            req.flash('success', 'School is deleted successfully !');
+        let GradeDeleted = await Grade.findByIdAndDelete(id);
+        if (GradeDeleted) {
+            req.flash('success', 'Grade is deleted successfully !');
         }
-        return res.redirect('/schools');
+        return res.redirect('/grade');
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'

@@ -48,7 +48,7 @@
                         <td>
                           <%=school.email%>
                         </td>
-                        <td>Active</td>
+                        <td><%= school.status == 1 ? 'Active' : 'Deactive' %></td>
                         <td>
                           <a class="btn btn-info m-1" href="/schools/edit/<%=school.id%>" data-toggle="tooltip"
                             rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
