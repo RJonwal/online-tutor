@@ -4,7 +4,7 @@ const randomstring  = require("randomstring");
 const global        = require("../../_helper/GlobalHelper");
 module.exports = {
     login,
-    signin,
+    signIn,
     logout,
     forgetPassword,
     forget,
@@ -15,7 +15,7 @@ module.exports = {
 async function login(req,res){
     try {
         if (req.isAuthenticated()){
-            return res.redirect('/user/dashboard');
+            return res.redirect('/dashboard');
         }
         return res.render('../views/auth/login');
     } catch{
@@ -24,12 +24,13 @@ async function login(req,res){
         })
     }
 }
-async function signin (req,res){
+
+async function signIn (req,res){
     try{
         //let obj = { firstname: 'Super', lastname: 'Admin', email: 'superadmin@gmail.com',phone:9908765442, password: '12345',role:1,status:1 };
         //let userAdded = await User.create(obj);
         req.flash('success','User Login Successfully !');
-        return res.redirect('/user/dashboard');
+        return res.redirect('/dashboard');
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -37,7 +38,6 @@ async function signin (req,res){
     }
 }
 
-// destroy session/cookies
 function logout (req,res){
     req.logout(function(err){
         if (err) { return next(err); }

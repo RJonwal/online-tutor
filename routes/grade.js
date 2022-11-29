@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const GradeController = require('../controllers/admin/GradeController')
+const GradeController = require('../controllers/Admin/GradeController')
 
 var storeGradeRequest = require('../requests/Grade/StoreGradeRequest');
 var updateGradeRequest = require('../requests/Grade/UpdateGradeRequest');

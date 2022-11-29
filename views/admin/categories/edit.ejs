@@ -12,7 +12,7 @@
               <!-- page title starts -->
               <div class="page-title">
                 <div class="title_left">
-                  <!-- <h3>School</h3> -->
+                  <!-- <h3>Category</h3> -->
                 </div>
 
                 <!-- <div class="title_right">
@@ -33,42 +33,45 @@
               <div class="row">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Edit School<small></small></h2>
+                    <h2>Edit Category<small></small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
-                    <form id="updateSchool" action="/schools/update" method="post"
-                      class="form-horizontal form-label-left">
-                      <input type="hidden" name="school_id" value="<%=data.id %>">
+                    <form id="updateCategory" action="/categories/update" method="post"
+                      class="form-horizontal form-label-left" novalidate>
+
+                      <input type="hidden" name="category_id" value="<%=data.id %>">
 
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">School Name<span
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Category Name<span
                             class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                          <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name"
-                            required="required" value="<%=data.name %>">
+                          <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
+                            required="required" id="name" value="<%=data.name %>">
                         </div>
                       </div>
 
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Contact No.
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_image">Featured
+                          Image<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                          <input type="text" name="phone" class="form-control" placeholder="Enter Phone.."
-                            id="phone" value="<%=data.phone %>">
+                          <input type="file" name="category_image" id="category_image" class="form-control dropify"
+                          data-default-file="/CategoryImage/<%=data.category_image%>" data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M" value="<%=data.category_image %>">
                         </div>
                       </div>
 
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="note">Note</span>
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                          <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email"
-                            value="<%=data.email %>">
+                          <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
+                            id="note"><%=data.note %></textarea>
                         </div>
                       </div>
+
                       <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
                             class="required">*</span>
@@ -80,19 +83,13 @@
                           </select>
                         </div>
                       </div>
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">School Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
-                            id="address"><%=data.address %></textarea>
-                        </div>
-                      </div>
 
                       <div class="ln_solid"></div>
                       <div class="form-group row">
                         <div class="col-md-9 col-sm-9  offset-md-3">
-                          <button type="submit" id="updateSchoolBtn" class="btn btn-success">Update</button>
+
+                          <button type="submit" id="updateCategoryBtn"
+                            class="btn btn-success form-button">Update</button>
                         </div>
                       </div>
 
@@ -103,6 +100,7 @@
               <!-- page title end -->
             </div>
           </div>
+
     </div>
   </div>
 </body>

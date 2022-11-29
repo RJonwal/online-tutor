@@ -1,8 +1,8 @@
 const express         = require('express');
 const router          = express.Router();
 const passport        = require('passport');
-const userController  = require('../controllers/user_controller')
+const dashboardController  = require('../controllers/Admin/DashboardController')
 
-router.get('/dashboard',passport.checkAuthentication,userController.dashboard);
+router.get('/',passport.checkAuthentication,dashboardController.dashboard);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const schoolsController = require('../controllers/admin/SchoolsController')
+const schoolsController = require('../controllers/Admin/SchoolsController')
 
 var storeSchoolRequest = require('../requests/School/StoreSchoolRequest');
 var updateSchoolRequest = require('../requests/School/UpdateSchoolRequest');

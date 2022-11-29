@@ -1,20 +1,21 @@
-const express        = require('express');
-const port           = 8000;
-const env            = require('dotenv').config();
+const express = require('express');
+const port = 8000;
+const env = require('dotenv').config();
 const expressLayouts = require('express-ejs-layouts');
-const cookieParser   = require('cookie-parser');
-const bodyParser     = require("body-parser");
-const session        = require('express-session');
-const passport       = require('passport');
-const passportLocal  = require('./config/passport-local-strategy');
-const MongoStore     = require('connect-mongo');
-const flash          = require("connect-flash");
-const customMware    = require('./config/middleware');
-const app            = express();
+const cookieParser = require('cookie-parser');
+const bodyParser = require("body-parser");
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo');
+const flash = require("connect-flash");
+
+const customMware = require('./config/middleware');
+const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(expressLayouts);
 app.use(express.static('./assets'));
@@ -39,6 +40,8 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.DB_URL })
 
 }));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
@@ -48,9 +51,9 @@ app.use(customMware.setFlash);
 // use express router
 app.use('/', require('./routes'));
 
-app.listen(port, function(err){
-    if (err){
+app.listen(port, function (err) {
+    if (err) {
         console.log(`Error in running the server: ${err}`);
     }
-       console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${port}`);
 });

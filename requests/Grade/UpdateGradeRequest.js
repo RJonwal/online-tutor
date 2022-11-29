@@ -28,10 +28,10 @@ var validateUser = () => [
   body('status')
     .not()
     .isEmpty()
-    .withMessage('status can not be empty!')
+    .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('select a valid status')
+    .withMessage('Please select a valid status')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);
