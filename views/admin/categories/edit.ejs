@@ -55,13 +55,17 @@
 
                       <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_image">Featured
-                          Image<span class="required">*</span>
+                          Image
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                          <input type="file" name="category_image" id="category_image" class="form-control dropify"
-                          data-default-file="/CategoryImage/<%=data.category_image%>" data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M" value="<%=data.category_image %>">
+                          <input type="file" name="category_image" id="category_image" class="form-control dropify" 
+                          <% if (data.category_image !='' &&  fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>  data-default-file="/CategoryImage/<%=data.category_image%>" <% }%>
+                          data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M" 
+                          <% if (data.category_image !='' &&  fs.existsSync("assets/CategoryImage/"+data.category_image)) { %> value=" <%=data.category_image %>"  <% } else { %>  value="" <% } %> >
                         </div>
                       </div>
+                      <input type="hidden" name="is_remove" id="is_image_removed" value="0">
+
 
                       <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="note">Note</span>

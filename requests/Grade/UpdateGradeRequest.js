@@ -13,18 +13,18 @@ var validateUser = () => [
     .bail()
     .isLength({ min: 5, max: 255 })
     .withMessage('Name length is should be in a valid range!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(req.body);
+      return School.findOne({ "name": value, _id: {$ne: req.body.grade_id} })
+        .then(school => {
+          console.log(school);
+          if (school != null) {
+            return Promise.reject('Grade name is already in use!');
+          }
+        })
+    })
     .bail(),
-  // .custom((value, { req }) => {
-  //   console.log(req.body);
-  //   return School.find({ "name": value })
-  //     .then(school => {
-  //       console.log(school.length);
-  //       if (school.length) {
-  //         return Promise.reject('School name is already in use!');
-  //       }
-  //     })
-  // })
-  // .bail(),
   body('status')
     .not()
     .isEmpty()

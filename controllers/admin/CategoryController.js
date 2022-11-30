@@ -20,7 +20,7 @@ module.exports = {
 async function index(req, res) {
     try {
         let categories = await Category.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/categories/index', { data: categories });
+        return res.render('../views/admin/categories/index', { data: categories, fs: fs });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -84,7 +84,7 @@ async function edit(req, res) {
         let categoryId = req.params.id;
         let category = await Category.find({ "_id": categoryId });
         if (category) {
-            return res.render('../views/admin/categories/edit', { data: category[0] });
+            return res.render('../views/admin/categories/edit', { data: category[0], fs: fs });
         }
     } catch {
         return res.status(500).json({
@@ -109,21 +109,46 @@ async function update(req, res) {
                 categoryData = category[0];
                 let categoryImage = categoryData.category_image;
                 const filePath = './assets/CategoryImage/' + categoryImage;
-                console.log(filePath);
 
                 if (req.file != undefined) {
-                    fs.exists(filePath, function (exists) {
-                        if (exists) {
-                            fs.unlinkSync(filePath);
-                        } else {
-                            // console.log('File not found, so not deleting.');
-                        }
-                    });
+                    if (categoryImage != '') {
+                        fs.exists(filePath, function (exists) {
+                            if (exists) {
+                                fs.unlinkSync(filePath);
+                            } else {
+                                // console.log('File not found, so not deleting.');
+                            }
+                        });
+                    }
+
                     req.body.category_image = req.file.filename;
-                }else{
-                    req.body.category_image = categoryImage;
+
+                    let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
+
+                } else {
+
+                    if (req.body.is_remove == 1) {
+                        let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
+                            $set:
+                            {
+                                name: req.body.name,
+                                category_image: '',
+                                note: req.body.note,
+                                status: req.body.status
+                            }
+                        })
+                    }
+                    else {
+                        let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
+                            $set:
+                            {
+                                name: req.body.name,
+                                note: req.body.note,
+                                status: req.body.status
+                            }
+                        })
+                    }
                 }
-                let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
 
 
                 res.status(200).json({ "success": true, "message": "Category is updated successfully!", "redirectUrl": "/categories" });

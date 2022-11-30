@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const fs = require('fs');
+
 var multer = require('multer');
 
 const categoryController = require('../controllers/Admin/CategoryController')
@@ -10,7 +12,11 @@ var updateCategoryRequest = require('../requests/Category/UpdateCategoryRequest'
 
 const storageCategoryImage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, './assets/CategoryImage/');
+        const dir = './assets/CategoryImage/';
+        if(!fs.existsSync(dir)){
+            fs.mkdir(dir, err => callback(err, dir));
+        }
+        callback(null, dir);
     },
     filename: (req, file, callback) => {
         const fileName = file.originalname.toLowerCase().split(' ').join('-');

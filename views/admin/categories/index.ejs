@@ -68,7 +68,17 @@
                                       <%=category.name%>
                                     </td>
                                     <td>
-                                      <div class="avatar avatar-blue mr-3"><img src="/CategoryImage/<%=category.category_image%>" alt="<%=category.name%>" /></div>
+                                        <div class="avatar avatar-blue mr-3">
+                                          <% if (category.category_image != '' && fs.existsSync("assets/CategoryImage/"+category.category_image)) { %>
+                                            <img src="/CategoryImage/<%=category.category_image%>"
+                                            alt="<%=category.name%>" />
+                                            <% } else{ %>
+                                              <img src="/images/noImage.jpg"
+                                              alt="no-image" />
+                                              <% } %>
+
+                                          </div>
+                                      
                                     </td>
                                     <td>
                                       <%=category.created_at.toDateString()%>

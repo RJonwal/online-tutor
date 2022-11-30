@@ -2,12 +2,14 @@
 
   $(document).ready(function () {
     $('.dropify').dropify();
+
+    $('.dropify-clear').on('click', function () {
+      $('#is_image_removed').val('1');
+      $('.dropify').attr('required', true);
+    });
   });
 
-  // $('.dropify-clear').on('click', function () {
-  //   $('#is_image_removed').val('1');
-  //   $('#dropify_image').attr('required', true);
-  // });
+ 
   
   <% if (flash.success && flash.success.length > 0) { %>
     new Noty({
@@ -106,7 +108,7 @@
         $.each(response.responseJSON.errors, function (field_name, error) {
           console.log(field_name);
           console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span><br>');
         })
       },
       complete: function () {

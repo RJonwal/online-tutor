@@ -13,18 +13,18 @@ var validateUser = () => [
     .bail()
     .isLength({ min: 5, max: 255 })
     .withMessage('Name length is should be in a valid range!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(req.body);
+      return School.findOne({ "name": value, _id: { $ne: req.body.school_id } })
+        .then(school => {
+          console.log(school);
+          if (school != null) {
+            return Promise.reject('School name is already in use!');
+          }
+        })
+    })
     .bail(),
-    // .custom((value, { req }) => {
-    //   console.log(req.body);
-    //   return School.find({ "name": value })
-    //     .then(school => {
-    //       console.log(school.length);
-    //       if (school.length) {
-    //         return Promise.reject('School name is already in use!');
-    //       }
-    //     })
-    // })
-    // .bail(),
   body('phone')
     .optional({ checkFalsy: true })
     .not().isEmpty()
@@ -32,6 +32,17 @@ var validateUser = () => [
     .withMessage('Phone no. length is should be 10 digits.')
     .isInt()
     .trim()
+    .bail()
+    .custom((value, { req }) => {
+      console.log(req.body);
+      return School.findOne({ "phone": value, _id: { $ne: req.body.school_id } })
+        .then(school => {
+          console.log(school);
+          if (school != null) {
+            return Promise.reject('School phone no. is already in use!');
+          }
+        })
+    })
     .bail(),
   body('email')
     .optional({ checkFalsy: true })
@@ -42,11 +53,22 @@ var validateUser = () => [
     .bail()
     .isEmail()
     .withMessage('Input must be a valid email!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(req.body);
+      return School.findOne({ "email": value, _id: { $ne: req.body.school_id } })
+        .then(school => {
+          console.log(school);
+          if (school != null) {
+            return Promise.reject('School email is already in use!');
+          }
+        })
+    })
     .bail(),
   body('address')
     .optional({ checkFalsy: true })
     .isLength({ min: 5, max: 255 })
-    .withMessage('Name length is should be in a valid range!')
+    .withMessage('Address length is should be in a valid range!')
     .bail(),
   body('status')
     .not()

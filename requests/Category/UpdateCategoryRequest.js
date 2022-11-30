@@ -13,18 +13,18 @@ var validateUser = () => [
     .bail()
     .isLength({ min: 5, max: 255 })
     .withMessage('Category Name length is should be in a valid range!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return Category.findOne({ "name": value, _id: {$ne: req.body.category_id} })
+        .then(category => {
+          console.log(category);
+          if (category != null) {
+            return Promise.reject('Category name is already in use!');
+          }
+        })
+    })
     .bail(),
-    // .custom((value, { req }) => {
-    //   console.log(value);
-    //   return Category.find({ "name": value })
-    //     .then(category => {
-    //       console.log(category.length);
-    //       if (category.length) {
-    //         return Promise.reject('Category name is already in use!');
-    //       }
-    //     })
-    // })
-    // .bail(),
   body('note')
     .optional({ checkFalsy: true })
     .isLength({ min: 5, max: 255 })
