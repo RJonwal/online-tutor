@@ -1,6 +1,7 @@
 const Category = require('../../models/Category');
-let session = require('express-session');
 const fs = require('fs');
+let session = require('express-session');
+var slugify = require('slugify')
 
 module.exports = {
     index,
@@ -10,6 +11,16 @@ module.exports = {
     update,
     destroy,
 }
+
+const slugify_options = {
+    replacement: '-',  // replace spaces with replacement character, defaults to `-`
+    remove: undefined, // remove characters that match regex, defaults to `undefined`
+    lower: true,      // convert to lower case, defaults to `false`
+    strict: false,     // strip special characters except replacement, defaults to `false`
+    locale: 'en',       // language code of the locale to use
+    trim: true         // trim leading and trailing replacement chars, defaults to `true`
+}
+
 
 /**
  * Create Category 
@@ -103,7 +114,7 @@ async function edit(req, res) {
 async function update(req, res) {
     try {
         if (req.body.category_id && req.body.category_id != '') {
-
+    
             let category = await Category.find({ "_id": req.body.category_id });
             if (category) {
                 categoryData = category[0];
@@ -124,6 +135,7 @@ async function update(req, res) {
                     req.body.category_image = req.file.filename;
 
                     let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
+                    
 
                 } else {
 

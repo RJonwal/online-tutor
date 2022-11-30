@@ -11,7 +11,7 @@ const slugify_options = {
 }
 
 
-const categoriesSchema = new mongoose.Schema({
+const subCategoriesSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
@@ -21,10 +21,10 @@ const categoriesSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    category_image: {
-        type: String,
-        default: ''
-    },
+    // category_id: {
+    //     type: String,
+    //     required: true,
+    // },
     note: {
         type: String,
         default: ''
@@ -43,17 +43,16 @@ const categoriesSchema = new mongoose.Schema({
     });
 
 
-categoriesSchema.pre("save", function (next) {
+subCategoriesSchema.pre("save", function (next) {
     this.slug = slugify(this.name, slugify_options);
     next();
 });
 
-
-categoriesSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
+subCategoriesSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
     this._update.slug = slugify(this.name, slugify_options);
     next();
 });
 
 
-const Category = mongoose.model('categories', categoriesSchema);
-module.exports = Category;
+const SubCategory = mongoose.model('subCategories', subCategoriesSchema);
+module.exports = SubCategory;

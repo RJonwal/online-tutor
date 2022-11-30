@@ -276,4 +276,76 @@
     })
   });
 
+
+  $("#createSubCategory").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var formData = $('#createSubCategory').serialize();
+    var url = $('#createSubCategory').attr('action');
+    $("#storeSubCategoryBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#storeSubCategoryBtn").prop('disabled', false);
+      },
+    })
+  });
+
+  $("#updateSubCategory").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var formData = $('#updateSubCategory').serialize();
+    var url = $('#updateSubCategory').attr('action');
+    $("#updateSubCategoryBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateSubCategoryBtn").prop('disabled', false);
+      },
+    })
+  });
 </script>

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const fs = require('fs');
-
 var multer = require('multer');
 
 const categoryController = require('../controllers/Admin/CategoryController')
