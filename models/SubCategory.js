@@ -21,10 +21,11 @@ const subCategoriesSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    // category_id: {
-    //     type: String,
-    //     required: true,
-    // },
+    category_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'categories',
+        required: true,
+    },
     note: {
         type: String,
         default: ''
@@ -48,8 +49,9 @@ subCategoriesSchema.pre("save", function (next) {
     next();
 });
 
-subCategoriesSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
-    this._update.slug = slugify(this.name, slugify_options);
+
+subCategoriesSchema.pre('update,updateOne,updateMany,findByIdAndUpdate,findOneAndUpdate', function (next) {
+    this.update.slug = slugify(this.name, slugify_options);
     next();
 });
 

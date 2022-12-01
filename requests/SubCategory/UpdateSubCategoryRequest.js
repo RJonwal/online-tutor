@@ -1,7 +1,29 @@
 const { body, validationResult } = require('express-validator');
 const SubCategory = require('../../models/SubCategory');
+const Category = require('../../models/Category');
 
 var validateUser = () => [
+  body('category_id')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('MainCategory is required')
+    .bail()
+    .isString()
+    .withMessage('MainCategory should be a valid string!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return Category.find({ "_id": value })
+        .then(category => {
+          console.log(category);
+          console.log(category.length);
+          if (category.length == 0) {
+            return Promise.reject('Please Select A Valid MainCategory!');
+          }
+        })
+    })
+    .bail(),
   body('name')
     .trim()
     .not()
@@ -16,7 +38,7 @@ var validateUser = () => [
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return SubCategory.findOne({ "name": value, _id: {$ne: req.body.sub_category_Id} })
+      return SubCategory.findOne({ "name": value, _id: { $ne: req.body.sub_category_Id } })
         .then(subCategory => {
           console.log(subCategory);
           if (subCategory != null) {

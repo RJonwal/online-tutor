@@ -52,6 +52,7 @@
                                 <tr>
                                   <th>S.No</th>
                                   <th>Name</th>
+                                  <th>Main Category</th>
                                   <th>Created At</th>
                                   <th>Status</th>
                                   <th>Action</th>
@@ -65,6 +66,9 @@
                                     </td>
                                     <td>
                                       <%=subCategory.name%>
+                                    </td>
+                                    <td>
+                                      <%=subCategory.category_id.name%>
                                     </td>
                                     <td>
                                       <%=subCategory.created_at.toDateString()%>

@@ -1,4 +1,5 @@
 const SubCategory = require('../../models/SubCategory');
+const Category = require('../../models/Category');
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify')
@@ -23,14 +24,15 @@ const slugify_options = {
 
 
 /**
- * Create Category 
+ * Create SubCategory 
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function index(req, res) {
     try {
-        let subCategories = await SubCategory.find({}).sort({ '_id': -1 });
+        let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
+            console.log(subCategories);
         return res.render('../views/admin/subCategories/index', { data: subCategories, fs: fs });
     } catch {
         return res.status(500).json({
@@ -40,14 +42,15 @@ async function index(req, res) {
 }
 
 /**
- * create Category
+ * create SubCategory
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function create(req, res) {
     try {
-        return res.render('../views/admin/subCategories/create');
+        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/subCategories/create', { data: activeCategories });
     } catch (e) {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -57,16 +60,14 @@ async function create(req, res) {
 
 
 /**
- * store Category
+ * store SubCategory
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function store(req, res) {
     try {
-        console.log("R;KGOIDRSGPLFDJG;KFDJGKFD");
 
-        console.log(req.body);
         let subCategory = await SubCategory.create(req.body);
         if (subCategory) {
             res.status(200).json({ "success": true, "message": "SubCategory is created successfully!", "redirectUrl": "/subCategories" });
@@ -79,7 +80,7 @@ async function store(req, res) {
 
 
 /**
- * edit Category
+ * edit SubCategory
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -88,8 +89,9 @@ async function edit(req, res) {
     try {
         let subCategoryId = req.params.id;
         let subCategory = await SubCategory.find({ "_id": subCategoryId });
+        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
         if (subCategory) {
-            return res.render('../views/admin/subCategories/edit', { data: subCategory[0], fs: fs });
+            return res.render('../views/admin/subCategories/edit', { data: subCategory[0], allCategories: activeCategories, fs: fs });
         }
     } catch (e) {
         return res.status(500).json({
@@ -100,7 +102,7 @@ async function edit(req, res) {
 
 
 /**
- * update Category
+ * update SubCategory
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -116,6 +118,7 @@ async function update(req, res) {
                     $set:
                     {
                         name: req.body.name,
+                        category_id: req.body.category_id,
                         note: req.body.note,
                         status: req.body.status
                     }
@@ -132,7 +135,7 @@ async function update(req, res) {
 
 
 /**
- * delete Category
+ * delete SubCategory
  * @param {*} req 
  * @param {*} res 
  * @returns 

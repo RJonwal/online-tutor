@@ -44,6 +44,23 @@
                       <input type="hidden" name="sub_category_Id" value="<%=data.id %>">
 
                       <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_id">Main Category<span
+                            class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                          <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1">
+                            <option value="">Select Main Category</option>
+                            <% let i=0; for(category of allCategories) { %>
+                              <option value="<%=category.id%>" <%=data.category_id==category.id ? 'selected' : '' %>>
+                                <%=category.name%>
+                              </option>
+                              <% } %>
+                          </select>
+                        </div>
+                      </div>
+
+
+                      <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">SubCategory Name<span
                             class="required">*</span>
                         </label>
