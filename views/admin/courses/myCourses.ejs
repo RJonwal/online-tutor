@@ -1,0 +1,256 @@
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <%- include('../../partials/_sidebar'); %>
+        
+        <%- include('../../partials/_topNavigation'); %>
+  
+          <div class="right_col" role="main">
+            <div class="card-block">
+              <h3 class="title-text">Filter Courses</h3>
+              <ul class="filter-row">
+                <li class="filter-col">
+                    <select class="subject form-control">
+                        <option value="1">English</option>
+                        <option value="2">Mathematics</option>
+                        <option value="3">Science</option>
+                        <option value="4">Chemestry</option>
+                        <option value="5">Math</option>
+                        <option value="6">Mathematics</option>
+                    </select>
+                </li>
+                <li class="filter-col">
+                    <select class="js-example-basic-single form-control">
+                        <option value="">Active</option>
+                        <option value="">Deactive</option>
+                    </select>
+                </li>
+                <li class="filter-col">
+                    <select class="js-example-basic-single form-control">
+                        <option value="">Class 1st</option>
+                        <option value="">Class 2nd</option>
+                        <option value="">Class 3rd</option>
+                        <option value="">Class 4th</option>
+                        <option value="">Class 5th</option>
+                    </select>
+                </li>
+                <li class="filter-col">
+                    <button class="btn theme-btn">Filter Results</button>
+                </li>
+            </ul>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card-box">
+                        <span class="shade1">35</span>
+                        <h3 class="title-text mb-0">Total Courses</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card-box">
+                        <span class="shade2">30</span>
+                        <h3 class="title-text mb-0">Active Courses</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card-box">
+                        <span class="shade3">02</span>
+                        <h3 class="title-text mb-0">Deactive Courses</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="card-box">
+                        <span class="shade4">03</span>
+                        <h3 class="title-text mb-0">Assign Courses</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block text-center text-md-left">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 align-self-center">
+                        <h3 class="title-text mb-0">Courses List <span class="total-count">Total Courses : 35</span></h3>
+                    </div>
+                    <div class="col-sm-12 col-md-8 align-self-center">
+                        <div class="course-pagination">
+                            <div class="input-group my-3 m-md-0 input-search">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <ul class="pagination mb-0 justify-content-end">
+                                <li><span class="showing-item">Showing 2 of 5</span></li>
+                                <li class="page-item">
+                                  <a class="page-link prev" href="#"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item">
+                                  <a class="page-link next" href="#"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <ul class="course-list">
+                            <li>
+                                <div class="course-thumb">
+                                    <img src="images/course-thumb.jpg">
+                                </div>
+                                <div class="course-description">
+                                    <div class="top-dis">
+                                      <h3 class="title-text">Early Reading Program</h3>
+                                      <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
+                                    </div>
+                                    <div class="course-detail">
+                                        <div class="detail-col">
+                                            <p class="p-light">Category</p>
+                                            <p class="p-dark">English</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Lesson</p>
+                                            <p class="p-dark">05</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Topics</p>
+                                            <p class="p-dark">20</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Practice</p>
+                                            <p class="p-dark">15</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Challenges</p>
+                                            <p class="p-dark">10</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Duration</p>
+                                            <p class="p-dark">2.3hr</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Status</p>
+                                            <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/menu-dot.svg" alt="Menu">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                      <a href="javascript:void(0);">View</a>
+                                      <a href="javascript:void(0);">Edit</a>
+                                      <a class="text-danger" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course-thumb">
+                                    <img src="images/course-thumb.jpg">
+                                </div>
+                                <div class="course-description">
+                                    <div class="top-dis">
+                                      <h3 class="title-text">Early Reading Worksheets</h3>
+                                      <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
+                                    </div>
+                                    <div class="course-detail">
+                                        <div class="detail-col">
+                                            <p class="p-light">Category</p>
+                                            <p class="p-dark">English</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Lesson</p>
+                                            <p class="p-dark">05</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Topics</p>
+                                            <p class="p-dark">20</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Practice</p>
+                                            <p class="p-dark">15</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Challenges</p>
+                                            <p class="p-dark">10</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Duration</p>
+                                            <p class="p-dark">2.3hr</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Status</p>
+                                            <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/menu-dot.svg" alt="Menu">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                      <a href="javascript:void(0);">View</a>
+                                      <a href="javascript:void(0);">Edit</a>
+                                      <a class="text-danger" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course-thumb">
+                                    <img src="images/course-thumb.jpg">
+                                </div>
+                                <div class="course-description">
+                                    <div class="top-dis">
+                                      <h3 class="title-text">Spelling and Vocabulary</h3>
+                                      <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
+                                    </div>
+                                    <div class="course-detail">
+                                        <div class="detail-col">
+                                            <p class="p-light">Category</p>
+                                            <p class="p-dark">English</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Lesson</p>
+                                            <p class="p-dark">05</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Topics</p>
+                                            <p class="p-dark">20</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Practice</p>
+                                            <p class="p-dark">15</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Challenges</p>
+                                            <p class="p-dark">10</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Duration</p>
+                                            <p class="p-dark">2.3hr</p>
+                                        </div>
+                                        <div class="detail-col">
+                                            <p class="p-light">Status</p>
+                                            <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/menu-dot.svg" alt="Menu">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                      <a href="javascript:void(0);">View</a>
+                                      <a href="javascript:void(0);">Edit</a>
+                                      <a class="text-danger" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    
+  </body>

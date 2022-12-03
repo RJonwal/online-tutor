@@ -11,7 +11,10 @@
     });
   });
 
- 
+  $(".subject").select2({
+      placeholder: "Select",
+      allowClear: false,
+  });
   
   <% if (flash.success && flash.success.length > 0) { %>
     new Noty({

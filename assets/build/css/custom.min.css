@@ -1065,7 +1065,7 @@
 }
 
 .left_col {
-    background: #2A3F54
+    background: #001D3D
 }
 
 .container {
@@ -1725,7 +1725,7 @@ a:focus {
 }
 
 .top_nav .navbar-right {
-    margin: 13px;
+    margin: 14px;
     width: auto;
     float: right
 }
@@ -1899,7 +1899,7 @@ a:focus {
     font-weight: 400;
     font-size: 22px;
     width: 100%;
-    color: #ECF0F1 !important;
+    color: #ECF0F1 ;
     margin-left: 0 !important;
     line-height: 59px;
     display: block;

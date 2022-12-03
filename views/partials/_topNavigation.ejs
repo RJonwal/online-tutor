@@ -6,10 +6,37 @@
     </div>
     <nav class="nav navbar-nav">
       <ul class=" navbar-right">
-        <li class="nav-item dropdown open" style="padding-left: 15px;">
+        <li class="nav-item">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button class="btn" type="button"><i class="fa fa-search"></i></button>
+              </span>
+          </div>
+          </li>
+        <li class="nav-item dropdown open">
+          <a href="javascript:;" class="message-drop" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-bell-o"></i>
+            <span class="badge-danger"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown1">
+            <li class="nav-item">
+              <a class="dropdown-item">
+                <strong>See All Alerts</strong>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+          </ul>
+          </li>
+        <li class="nav-item dropdown open">
           <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
             data-toggle="dropdown" aria-expanded="false">
-            <img src="/images/img.jpg" alt="">John Doe
+            <img src="/images/img.jpg" alt="">
+            <span class="active-status"></span>
+            <p>
+              <span class="wel-text">Welcome</span>
+              <span class="name-text">Daniel Estasmos</span>
+            </p>
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -20,7 +47,6 @@
             <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
           </div>
         </li>
-
       </ul>
     </nav>
   </div>
