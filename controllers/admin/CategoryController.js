@@ -1,7 +1,7 @@
 const Category = require('../../models/Category');
 const fs = require('fs');
 let session = require('express-session');
-var slugify = require('slugify')
+var slugify = require('slugify');
 
 module.exports = {
     index,
@@ -114,12 +114,15 @@ async function edit(req, res) {
 async function update(req, res) {
     try {
         if (req.body.category_id && req.body.category_id != '') {
-    
+
             let category = await Category.find({ "_id": req.body.category_id });
             if (category) {
                 categoryData = category[0];
                 let categoryImage = categoryData.category_image;
                 const filePath = './assets/CategoryImage/' + categoryImage;
+
+                let slug = '';
+                req.body.slug = slugify(req.body.name, slugify_options);
 
                 if (req.file != undefined) {
                     if (categoryImage != '') {
@@ -135,7 +138,7 @@ async function update(req, res) {
                     req.body.category_image = req.file.filename;
 
                     let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
-                    
+
 
                 } else {
 
@@ -144,6 +147,7 @@ async function update(req, res) {
                             $set:
                             {
                                 name: req.body.name,
+                                slug: req.body.slug,
                                 category_image: '',
                                 note: req.body.note,
                                 status: req.body.status
@@ -155,13 +159,13 @@ async function update(req, res) {
                             $set:
                             {
                                 name: req.body.name,
+                                slug: req.body.slug,
                                 note: req.body.note,
                                 status: req.body.status
                             }
                         })
                     }
                 }
-
 
                 res.status(200).json({ "success": true, "message": "Category is updated successfully!", "redirectUrl": "/categories" });
             }

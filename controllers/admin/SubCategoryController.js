@@ -2,7 +2,8 @@ const SubCategory = require('../../models/SubCategory');
 const Category = require('../../models/Category');
 const fs = require('fs');
 let session = require('express-session');
-var slugify = require('slugify')
+var slugify = require('slugify');
+
 
 module.exports = {
     index,
@@ -32,7 +33,7 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
-            console.log(subCategories);
+        console.log(subCategories);
         return res.render('../views/admin/subCategories/index', { data: subCategories, fs: fs });
     } catch {
         return res.status(500).json({
@@ -114,10 +115,14 @@ async function update(req, res) {
             let subCategory = await SubCategory.find({ "_id": req.body.sub_category_Id });
             if (subCategory) {
                 subCategoryData = subCategory[0];
+                let slug = '';
+                slug = slugify(req.body.name, slugify_options);
+
                 let subCategoryUpdated = await SubCategory.updateOne({ "_id": req.body.sub_category_Id }, {
                     $set:
                     {
                         name: req.body.name,
+                        slug: slug,
                         category_id: req.body.category_id,
                         note: req.body.note,
                         status: req.body.status

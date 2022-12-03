@@ -21,7 +21,7 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        return res.render('../views/admin/courses/myCourses' );
+        return res.render('../views/admin/courses/myCourses');
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -37,7 +37,7 @@ async function index(req, res) {
  */
 async function create(req, res) {
     try {
-        return res.render('../views/admin/courses/create' );
+        return res.render('../views/admin/courses/create');
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -53,7 +53,7 @@ async function create(req, res) {
  * @returns 
  */
 async function store(req, res) {
-    
+
 }
 
 
@@ -64,7 +64,7 @@ async function store(req, res) {
  * @returns 
  */
 async function edit(req, res) {
-   
+
 }
 
 
@@ -75,7 +75,7 @@ async function edit(req, res) {
  * @returns 
  */
 async function update(req, res) {
-    
+
 }
 
 
