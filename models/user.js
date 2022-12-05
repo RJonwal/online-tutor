@@ -29,12 +29,46 @@ const userSchema = new mongoose.Schema({
     status:{
         type: Number,
     },
+    gender:{
+        type: Number,
+    },
     token:{
         type: String,
         default: ''
     },
+    profile:{
+        type: String,
+        default:''
+    },
+    //extra field for student student start
+    start_date:{
+        type: Date,
+        default: ''
+    },
+    skill_level:{
+        type: String,
+        default: ''
+    },
+    birth_day:{
+        type: Date,
+        default: ''
+    },
+    referrer:{
+        type: Date,
+        default: ''
+    },
+    note:{
+        type: String,
+        default: ''
+    },
+    school_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'schools',
+        default: ''
+    },
+    // end student
 },{
-    timestamps : true
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 }); 
 
 
