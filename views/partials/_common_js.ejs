@@ -1,17 +1,28 @@
 <script>
 
   $(document).ready(function () {
-
-
     $('.dropify').dropify();
-
     $('.dropify-clear').on('click', function () {
       $('#is_image_removed').val('1');
       $('.dropify').attr('required', true);
     });
   });
 
-  $(".subject").select2({
+  $(document).ready(function () {
+    $('.select-cover').dropify({
+      tpl: {
+        message:'<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
+    },
+    });
+    
+    $('.dropify-clear').on('click', function () {
+      $('#is_image_removed').val('1');
+      $('.dropify').attr('required', true);
+    });
+  });
+
+
+  $(".selectlink").select2({
       placeholder: "Select",
       allowClear: false,
   });

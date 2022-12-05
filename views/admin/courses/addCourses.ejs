@@ -1,0 +1,159 @@
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <%- include('../../partials/_sidebar'); %>
+        
+        <%- include('../../partials/_topNavigation'); %>
+        
+          <div class="right_col" role="main">
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                <path d="M31.1663 14.1667V21.25C31.1663 28.3334 28.333 31.1667 21.2497 31.1667H12.7497C5.66634 31.1667 2.83301 28.3334 2.83301 21.25V12.75C2.83301 5.66671 5.66634 2.83337 12.7497 2.83337H19.833" stroke="#4A4674" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M31.1663 14.1667H25.4997C21.2497 14.1667 19.833 12.75 19.833 8.50004V2.83337L31.1663 14.1667Z" stroke="#4A4674" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path opacity="0.4" d="M9.91699 18.4166H18.417M9.91699 24.0833H15.5837" stroke="#4A4674" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                          </span>
+                          <span class="step_descr">Basic Information</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-2">
+                          <span class="step_no">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                <path d="M31.1663 6.61862V23.7178C31.1663 25.0778 30.0613 26.3528 28.7013 26.5228L28.2338 26.5795C25.1455 26.9903 20.3855 28.5628 17.6655 30.0645C17.2972 30.277 16.688 30.277 16.3055 30.0645L16.2488 30.0361C13.5288 28.5486 8.78301 26.9903 5.70884 26.5795L5.29801 26.5228C3.93801 26.3528 2.83301 25.0778 2.83301 23.7178V6.60446C2.83301 4.91862 4.20717 3.64362 5.89301 3.78529C8.86801 4.02612 13.373 5.52779 15.8947 7.10029L16.2488 7.31279C16.6597 7.56779 17.3397 7.56779 17.7505 7.31279L17.9913 7.15696C18.8838 6.60446 20.0172 6.05196 21.2497 5.55612C23.1055 4.81946 25.1738 4.22446 26.9163 3.94112C27.2988 3.87029 27.6672 3.82779 28.0072 3.79946H28.0922C29.778 3.65779 31.1663 4.91862 31.1663 6.61862Z" stroke="#4A4674" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path opacity="0.4" d="M17 7.77461V29.0246M26.9167 3.9397V11.3347L24.0833 9.45053L21.25 11.3347V5.5547C23.1058 4.81803 25.1742 4.22303 26.9167 3.9397V3.9397Z" stroke="#4A4674" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                          </span>
+                          <span class="step_descr">Add Content</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-3">
+                          <span class="step_no">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
+                                <path d="M30 1L10.0625 21L1 11.9091" stroke="#4A4674" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                          </span>
+                          <span class="step_descr">Complete</span>
+                        </a>
+                      </li>
+                    </ul>
+                    <div id="step-1">
+                      <div class="d-flex align-items-center justify-content-between mb-30">
+                        <h3 class="title-text mb-0">Basic Information</h3>
+                        <a class="back-link" href="./create"><span class="fa fa-chevron-left mr-2"></span> Back to list</a>
+                      </div>  
+                      <form class="form-design" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Course title</label>
+                                    <input class="form-control" type="text" placeholder="Enter your title">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Short Description</label>
+                                    <textarea class="form-control" placeholder="Enter your short description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Category</label>
+                                    <select class="selectlink form-control">
+                                        <option value="1">English</option>
+                                        <option value="2">Mathematics</option>
+                                        <option value="3">Science</option>
+                                        <option value="4">Chemestry</option>
+                                        <option value="5">Math</option>
+                                        <option value="6">Mathematics</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Class</label>
+                                    <select class="selectlink form-control">
+                                        <option value="1">Class 1st</option>
+                                        <option value="2">Class 2nd</option>
+                                        <option value="3">Class 3rd</option>
+                                        <option value="4">Class 4th</option>
+                                        <option value="5">Class 5th</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="drop-file">
+                                    <label class="form-label">Upload Thumbnail & Cover Image</label>
+                                    <input type="file" name="cover_image" id="cover_image" class="form-control  select-cover h-auto" data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M">
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div id="step-2">
+                      <div class="d-flex align-items-center justify-content-between mb-30">
+                        <h3 class="title-text mb-0">Add Secction</h3>
+                        <a class="add-section" href="javascript:void(0);"><img src="/images/addcircle.svg" alt="img"></a>
+                      </div>  
+                      <div class="accordion" id="accordionExample">
+                        <div class="card">
+                          <div class="card-header">
+                            <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img"> Lessons</div>
+                            <div class="">
+                              <a href="javascript:void(0);" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <img class="mr-2" src="/images/lessons.svg" alt="img">
+                              </a>
+                            </div>
+                            
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                            <div class="card-body">
+                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-header">
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <img class="mr-2" src="/images/practice.svg" alt="img"> Practice
+                            </a>
+                          </div>
+                          <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
+                            <div class="card-body">
+                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-header">
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              <img class="mr-2" src="/images/challenges.svg" alt="img"> Challenges
+                            </a>
+                          </div>
+                          <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+                            <div class="card-body">
+                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="step-3">
+                       <div class="success-box">
+                          <img src="/images/success-icon.svg" alt="img">
+                          <h4>Successfully Added to List</h4>
+                          <p>Lorem ipsum dolor sit amet secteturAmet<br> eu id sed nibh pellentesque.</p>
+                          <a href="/courses" class="theme-btn"><img class="mr-2" src="/images/arrow-left.svg" alt="img"></i> Back To List</a>
+                       </div>
+                    </div>
+                  </div>
+          </div>
+      </div>
+    </div>
+  </body>

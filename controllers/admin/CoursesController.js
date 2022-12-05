@@ -7,6 +7,7 @@ var slugify = require('slugify')
 module.exports = {
     index,
     create,
+    addCourses,
     store,
     edit,
     update,
@@ -38,6 +39,22 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         return res.render('../views/admin/courses/create' );
+    } catch {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+}
+
+/**
+ * add courses
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+ async function addCourses(req, res) {
+    try {
+        return res.render('../views/admin/courses/addCourses' );
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
