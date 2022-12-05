@@ -1,21 +1,13 @@
-<body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <%- include('../../partials/_sidebar'); %>
+<div class="right_col" role="main">
+  <div class="">
 
-        <%- include('../../partials/_topNavigation'); %>
+    <!-- page title starts -->
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>SubCategory</h3> -->
+      </div>
 
-
-          <div class="right_col" role="main">
-            <div class="">
-
-              <!-- page title starts -->
-              <div class="page-title">
-                <div class="title_left">
-                  <!-- <h3>SubCategory</h3> -->
-                </div>
-
-                <!-- <div class="title_right">
+      <!-- <div class="title_right">
                   <div class="col-md-5 col-sm-5 form-group pull-right top_search">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Search for...">
@@ -25,88 +17,83 @@
                     </div>
                   </div>
                 </div> -->
-              </div>
-              <div class="clearfix"></div>
-              <!-- page title end -->
-
-              <!-- page content starts-->
-              <div class="row">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Edit SubCategory<small></small></h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br>
-                    <form id="updateSubCategory" action="/subCategories/update" method="post"
-                      class="form-horizontal form-label-left">
-
-                      <input type="hidden" name="sub_category_Id" value="<%=data.id %>">
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_id">Main Category<span
-                            class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1">
-                            <option value="">Select Main Category</option>
-                            <% let i=0; for(category of allCategories) { %>
-                              <option value="<%=category.id%>" <%=data.category_id==category.id ? 'selected' : '' %>>
-                                <%=category.name%>
-                              </option>
-                              <% } %>
-                          </select>
-                        </div>
-                      </div>
-
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">SubCategory Name<span
-                            class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
-                            required="required" id="name" value="<%=data.name %>">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="note">Note</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
-                            id="note"><%=data.note %></textarea>
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
-                            class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <select class="form-control" name="status" id="status">
-                            <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
-                            <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group row">
-                        <div class="col-md-9 col-sm-9  offset-md-3">
-                          <button type="submit" id="updateSubCategoryBtn"
-                            class="btn btn-success form-button">Update</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <!-- page title end -->
-            </div>
-          </div>
-
     </div>
+    <div class="clearfix"></div>
+    <!-- page title end -->
+
+    <!-- page content starts-->
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Edit SubCategory<small></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br>
+          <form id="updateSubCategory" action="/subCategories/update" method="post"
+            class="form-horizontal form-label-left">
+
+            <input type="hidden" name="sub_category_Id" value="<%=data.id %>">
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="category_id">Main Category<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1">
+                  <option value="">Select Main Category</option>
+                  <% let i=0; for(category of allCategories) { %>
+                    <option value="<%=category.id%>" <%=data.category_id==category.id ? 'selected' : '' %>>
+                      <%=category.name%>
+                    </option>
+                    <% } %>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">SubCategory Name<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
+                  required="required" id="name" value="<%=data.name %>">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="note">Note</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
+                  id="note"><%=data.note %></textarea>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="form-control" name="status" id="status">
+                  <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
+                  <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ln_solid"></div>
+            <div class="form-group row">
+              <div class="col-md-9 col-sm-9  offset-md-3">
+                <button type="submit" id="updateSubCategoryBtn" class="btn btn-success form-button">Update</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- page title end -->
   </div>
-</body>
+</div>

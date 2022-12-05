@@ -1,21 +1,13 @@
-<body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <%- include('../../partials/_sidebar'); %>
+<div class="right_col" role="main">
+  <div class="">
 
-        <%- include('../../partials/_topNavigation'); %>
+    <!-- page title starts -->
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>School</h3> -->
+      </div>
 
-
-          <div class="right_col" role="main">
-            <div class="">
-
-              <!-- page title starts -->
-              <div class="page-title">
-                <div class="title_left">
-                  <!-- <h3>School</h3> -->
-                </div>
-
-                <!-- <div class="title_right">
+      <!-- <div class="title_right">
                   <div class="col-md-5 col-sm-5 form-group pull-right top_search">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Search for...">
@@ -25,84 +17,80 @@
                     </div>
                   </div>
                 </div> -->
-              </div>
-              <div class="clearfix"></div>
-              <!-- page title end -->
-
-              <!-- page content starts-->
-              <div class="row">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Edit School<small></small></h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br>
-                    <form id="updateSchool" action="/schools/update" method="post"
-                      class="form-horizontal form-label-left">
-                      <input type="hidden" name="school_id" value="<%=data.id %>">
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">School Name<span
-                            class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name"
-                            required="required" value="<%=data.name %>">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Contact No.
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <input type="text" name="phone" class="form-control" placeholder="Enter Phone.."
-                            id="phone" value="<%=data.phone %>">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email"
-                            value="<%=data.email %>">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
-                            class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <select class="form-control" name="status" id="status">
-                            <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
-                            <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">School Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                          <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
-                            id="address"><%=data.address %></textarea>
-                        </div>
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group row">
-                        <div class="col-md-9 col-sm-9  offset-md-3">
-                          <button type="submit" id="updateSchoolBtn" class="btn btn-success">Update</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <!-- page title end -->
-            </div>
-          </div>
     </div>
+    <div class="clearfix"></div>
+    <!-- page title end -->
+
+    <!-- page content starts-->
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Edit School<small></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br>
+          <form id="updateSchool" action="/schools/update" method="post" class="form-horizontal form-label-left">
+            <input type="hidden" name="school_id" value="<%=data.id %>">
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">School Name<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name"
+                  required="required" value="<%=data.name %>">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Contact No.
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="phone" class="form-control" placeholder="Enter Phone.." id="phone"
+                  value="<%=data.phone %>">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email"
+                  value="<%=data.email %>">
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="form-control" name="status" id="status">
+                  <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
+                  <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
+                </select>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">School Address
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
+                  id="address"><%=data.address %></textarea>
+              </div>
+            </div>
+
+            <div class="ln_solid"></div>
+            <div class="form-group row">
+              <div class="col-md-9 col-sm-9  offset-md-3">
+                <button type="submit" id="updateSchoolBtn" class="btn btn-success">Update</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- page title end -->
   </div>
-</body>
+</div>

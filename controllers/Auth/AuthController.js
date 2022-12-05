@@ -17,7 +17,7 @@ async function login(req,res){
         if (req.isAuthenticated()){
             return res.redirect('/dashboard');
         }
-        return res.render('../views/auth/login');
+        return res.render('../views/auth/login', {layout : false});
     } catch{
         return res.status(500).json({
             message:'Internal Server Error'
@@ -47,7 +47,7 @@ function logout (req,res){
 
 function forgetPassword(req,res){
     try {
-        return res.render('../views/auth/forget-password');
+        return res.render('../views/auth/forget-password', {layout : false});
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -92,7 +92,7 @@ async function forget(req,res){
 async function resetPassword(req,res){
     try {
         let token = req.query.token;
-        return res.render('../views/auth/reset-password',{token:token});
+        return res.render('../views/auth/reset-password',{token:token, layout : false});
     } catch (error) {
         return res.json(500, {
             message: 'Internal Server Error'

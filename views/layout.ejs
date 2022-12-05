@@ -2,29 +2,40 @@
 
 <head>
     <title>
-      Online-tutor  
+        Online-tutor
     </title>
-    <%- include('partials/_head'); %>
-    <%- style %>
+    <%- include('./partials/_head'); %>
+
+        <%- style %>
 
 </head>
 
-<body>
-    <%- body %>
 
-        <!-- footer content -->
-        <!-- <footer>
-            <div class="pull-right">
-                ©2022 All Rights Reserved <a href="javascript:void()">Online-tutor</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer> -->
-        <!-- /footer content -->
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <%- include('./partials/_sidebar'); %>
 
-        <%- include('partials/_footer'); %>
-            <%- include('partials/_common_js'); %>
-            <%- script %>
+                <%- include('./partials/_topNavigation'); %>
 
+                    <%- body %>
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    © 2022 <a href="javascript:void();">Online-tutor</a>All Rights Reserved.
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <%- include('./partials/_footer'); %>
+
+        <%- include('./partials/_common_js'); %>
+
+        <%- script %>
 
 </body>
 
