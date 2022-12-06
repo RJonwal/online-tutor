@@ -69,7 +69,7 @@ async function store(req, res) {
         } else {
             req.body.category_image = '';
         }
-
+ 
         let category = await Category.create(req.body);
         if (category) {
             res.status(200).json({ "success": true, "message": "Category is created successfully!", "redirectUrl": "/categories" });

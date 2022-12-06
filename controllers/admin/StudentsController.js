@@ -36,15 +36,14 @@ async function index(req, res) {
  */
 async function create(req, res) {
     try {
-        let schools = await School.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/students/create',{data:schools[0]});
+        let schools = await School.find({"status":1}).sort({ '_id': -1 });
+        return res.render('../views/admin/students/create',{data:schools});
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
         })
     }
 }
-
 
 /**
  * store Student

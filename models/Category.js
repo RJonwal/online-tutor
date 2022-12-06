@@ -24,7 +24,7 @@ const categoriesSchema = new mongoose.Schema({
     category_image: {
         type: String,
         default: ''
-    },
+    }, 
     note: {
         type: String,
         default: ''

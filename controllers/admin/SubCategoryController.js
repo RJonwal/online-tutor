@@ -68,7 +68,6 @@ async function create(req, res) {
  */
 async function store(req, res) {
     try {
-
         let subCategory = await SubCategory.create(req.body);
         if (subCategory) {
             res.status(200).json({ "success": true, "message": "SubCategory is created successfully!", "redirectUrl": "/subCategories" });

@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    profile:{
+    profile_image:{
         type: String,
         default:''
     },
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
         default: ''
     },
     referrer:{
-        type: Date,
+        type: String,
         default: ''
     },
     note:{

@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const Category = require('../../models/Category');
 
-var validateUser = () => [
+var validateUser = () => [ 
   body('name')
     .trim()
     .not()
