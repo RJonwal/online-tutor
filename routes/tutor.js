@@ -41,9 +41,9 @@ var uploadProfileImage = multer({
 
 router.get('/', passport.checkAuthentication, tutorsController.index);
 router.get('/create', passport.checkAuthentication, tutorsController.create);
-router.post('/store', passport.checkAuthentication, uploadProfileImage.single('profile_image'), tutorsController.store);
+router.post('/store', passport.checkAuthentication, uploadProfileImage.single('profile_image'), storeTutorRequest, tutorsController.store);
 router.get('/edit/:id', passport.checkAuthentication, tutorsController.edit);
-router.post('/update', passport.checkAuthentication, uploadProfileImage.single('profile_image'), tutorsController.update);
+router.post('/update', passport.checkAuthentication, uploadProfileImage.single('profile_image'), updateTutorRequest, tutorsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, tutorsController.destroy);
 
 module.exports = router;

@@ -58,8 +58,7 @@
                             <%=++i%>
                           </td>
                           <td>
-                            <%=tutor.first_name %>
-                              <%=tutor.last_name %>
+                            <%=tutor.title+'. '+tutor.first_name+' '+tutor.last_name %>
                           </td>
                           <td>
                             <%=tutor.email %>
@@ -80,7 +79,7 @@
                             <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
                               title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
                                 data-toggle="confirmation" data-singleton="true"
-                                data-title="Are You Sure Want To Delete?" href="/grade/destroy/<%=tutor.id%>"></i></a>
+                                data-title="Are You Sure Want To Delete?" href="/tutors/destroy/<%=tutor.id%>"></i></a>
                           </td>
                         </tr>
                         <% } %>

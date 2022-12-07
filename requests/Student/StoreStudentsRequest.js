@@ -13,19 +13,8 @@ var validateUser = () => [
     .bail()
     .isLength({ min: 3, max: 255 })
     .withMessage('First Name length is should be in a valid range!')
-    .bail()
-    .custom((value, { req }) => {
-      console.log(value);
-      return User.find({ "first_name": value })
-        .then(user => {
-          console.log(user.length);
-          if (user.length) {
-            return Promise.reject('First name is already in use!');
-          }
-        })
-    })
     .bail(),
-    body('last_name')
+  body('last_name')
     .trim()
     .not()
     .isEmpty()
@@ -36,20 +25,8 @@ var validateUser = () => [
     .bail()
     .isLength({ min: 3, max: 255 })
     .withMessage('Last Name length is should be in a valid range!')
-    .bail()
-    .custom((value, { req }) => {
-      console.log(value);
-      return User.find({ "last_name": value })
-        .then(user => {
-          console.log(user.length);
-          if (user.length) {
-            return Promise.reject('Last name is already in use!');
-          }
-        })
-    })
     .bail(),
-
-    body('email')
+  body('email')
     .trim()
     .not()
     .isEmpty()
@@ -69,7 +46,6 @@ var validateUser = () => [
         })
     })
     .bail(),
-
   body('status')
     .not()
     .isEmpty()

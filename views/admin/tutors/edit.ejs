@@ -53,6 +53,20 @@
             </div>
 
             <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="form-control" name="title" id="title">
+                  <option value="">Select the title</option>
+                  <option value="Mr" <%=data.title=='Mr' ? 'selected' : '' %>>Mr</option>
+                  <option value="Mrs" <%=data.title=='Mrs' ? 'selected' : '' %>>Mrs</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="item form-group">
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first_name">First Name<span
                   class="required">*</span>
               </label>
@@ -88,7 +102,7 @@
               </label>
               <div class="col-md-6 col-sm-6 ">
                 <input type="password" name="password" class="form-control" placeholder="Enter Password Name.."
-                   id="password" value="">
+                  id="password" value="">
               </div>
             </div>
 

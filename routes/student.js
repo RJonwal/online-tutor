@@ -11,7 +11,7 @@ const studentsController = require('../controllers/Admin/StudentsController')
 const storageProfileImg = multer.diskStorage({
     destination: (req, file, callback) => {
         const dir = './assets/ProfileImage/';
-        if(!fs.existsSync(dir)){
+        if (!fs.existsSync(dir)) {
             fs.mkdir(dir, err => callback(err, dir));
         }
         callback(null, dir);
@@ -38,9 +38,9 @@ var uploadProfileImgImage = multer({
 
 router.get('/', passport.checkAuthentication, studentsController.index);
 router.get('/create', passport.checkAuthentication, studentsController.create);
-router.post('/store', passport.checkAuthentication,uploadProfileImgImage.single('profile_image'),studentsController.store);
+router.post('/store', passport.checkAuthentication, uploadProfileImgImage.single('profile_image'), storeStudentRequest, studentsController.store);
 router.get('/edit/:id', passport.checkAuthentication, studentsController.edit);
-router.post('/update', passport.checkAuthentication,uploadProfileImgImage.single('profile_image'), studentsController.update);
+router.post('/update', passport.checkAuthentication, uploadProfileImgImage.single('profile_image'), studentsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, studentsController.destroy);
 
 module.exports = router;

@@ -133,6 +133,7 @@ async function edit(req, res) {
 async function update(req, res) {
     try {
         if (req.body.tutor_id && req.body.tutor_id != '') {
+            console.log(req.body);
 
             let user = await User.find({ "_id": req.body.tutor_id, "role": 2 });
             if (user) {

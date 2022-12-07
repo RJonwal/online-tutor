@@ -2,6 +2,15 @@ const { body, validationResult } = require('express-validator');
 const User = require('../../models/user');
 
 var validateUser = () => [
+  body('title')
+  .trim()
+  .not()
+  .isEmpty()
+  .withMessage('Title  can not be empty!')
+  .bail()
+  .isString()
+  .withMessage('Title should be a valid string!')
+  .bail(),
   body('first_name')
     .trim()
     .not()
@@ -40,7 +49,7 @@ var validateUser = () => [
     .bail()
     .custom((value, { req }) => {
       console.log(req.body);
-      return User.findOne({ "email": value, _id: { $ne: req.body.school_id } })
+      return User.findOne({ "email": value, _id: { $ne: req.body.tutor_id } })
         .then(user => {
           console.log(user);
           if (user != null) {
