@@ -34,7 +34,6 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-
         return res.render('../views/admin/tutors/index', { data: tutors, fs: fs });
     } catch {
         return res.status(500).json({

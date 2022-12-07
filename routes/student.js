@@ -38,7 +38,7 @@ var uploadProfileImgImage = multer({
 
 router.get('/', passport.checkAuthentication, studentsController.index);
 router.get('/create', passport.checkAuthentication, studentsController.create);
-router.post('/store', passport.checkAuthentication, uploadProfileImgImage.single('profile_image'), storeStudentRequest, studentsController.store);
+router.post('/store', passport.checkAuthentication, storeStudentRequest,uploadProfileImgImage.single('profile_image'),studentsController.store);
 router.get('/edit/:id', passport.checkAuthentication, studentsController.edit);
 router.post('/update', passport.checkAuthentication, uploadProfileImgImage.single('profile_image'), studentsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, studentsController.destroy);
