@@ -27,7 +27,7 @@ async function login(req,res){
 
 async function signIn (req,res){
     try{
-        //let obj = { firstname: 'Super', lastname: 'Admin', email: 'superadmin@gmail.com',phone:9908765442, password: '12345',role:1,status:1 };
+        //let obj = { first_name: 'Super', last_name: 'Admin', email: 'superadmin@gmail.com', phone:9908765442, password: '12345',role:1, status:1 };
         //let userAdded = await User.create(obj);
         req.flash('success','User Login Successfully !');
         return res.redirect('/dashboard');

@@ -1,0 +1,199 @@
+<div class="right_col" role="main">
+  <div class="">
+
+    <!-- page title starts -->
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>Category</h3> -->
+      </div>
+
+      <!-- <div class="title_right">
+                  <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search for...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                      </span>
+                    </div>
+                  </div>
+                </div> -->
+    </div>
+    <div class="clearfix"></div>
+    <!-- page title end -->
+
+    <!-- page content starts-->
+    <div class="row">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Add Tutor<small></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <br>
+          <form id="createTutor" action="./store" method="post" class="form-horizontal form-label-left"
+            enctype="multipart/form-data">
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="tutor_subject_ids">Subjects<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="selectlink form-control" name="tutor_subject_ids" id="tutor_subject_ids" tabindex="-1"
+                  multiple>
+                  <option value="">Please Select Subjects </option>
+                  <% let i=0; for(subject of data) { %>
+                    <option value="<%=subject.id%>">
+                      <%=subject.name%>
+                    </option>
+                    <% } %>
+                </select>
+              </div>
+            </div>
+
+    
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first_name">First Name<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
+                  required="required" id="first_name">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last_name">Last Name<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."
+                  required="required" id="last_name">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="email" class="form-control" placeholder="Enter Email Name.."
+                  required="required" id="email">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="password" name="password" class="form-control" placeholder="Enter Password Name.."
+                  required="required" id="password">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">Address</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
+                  id="address"></textarea>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="calendar_color">Calendar Color
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="calendar_color" class="form-control" placeholder="Enter Calendar Color Name.."
+                  required="required" id="calendar_color">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="profile_image">Profile
+                Image
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="file" name="profile_image" id="profile_image" class="form-control dropify"
+                  data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="note">Note</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.." id="note"></textarea>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <select class="form-control" name="status" id="status">
+                  <option value="1">Activate</option>
+                  <option value="0">Deactivate</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ln_solid"></div>
+            <div class="form-group row">
+              <div class="col-md-9 col-sm-9  offset-md-3">
+                <button type="submit" id="storeTutorBtn" class="btn btn-success form-button">Save</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- page title end -->
+  </div>
+</div>
+
+
+<script>
+  $("#createTutor").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var form = $('#createTutor');
+    var formData = new FormData(form[0]);
+    formData.append('profile_image', this.new_attachments)
+    var url = $('#createTutor').attr('action');
+    $("#storeTutorBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#storeTutorBtn").prop('disabled', false);
+      },
+    })
+  });
+</script>

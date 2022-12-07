@@ -10,5 +10,6 @@ router.use('/categories',require('./category'));    // route added for category
 router.use('/subCategories',require('./subCategory'));    // route added for subCategory
 router.use('/courses',require('./course'));    // route added for course
 router.use('/students',require('./student'));    // route added for student
+router.use('/tutors',require('./tutor'));    // route added for tutor
 
 module.exports = router;

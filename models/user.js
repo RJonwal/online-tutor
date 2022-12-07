@@ -1,76 +1,94 @@
-const mongoose   = require('mongoose');
+const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
-    firstname:{
-        type     : String,
-        required : true,
-    },
-    lastname:{
-        type     : String,
-        required : true,
-    },
-    email:{
-        type     : String,
-        required : true,
-        unique   :true,
-    }, 
-    phone: {
-        type: Number,
-        unique: true,
+    first_name: {
+        type: String,
         required: true,
-        maxlength: 10
     },
-    password:{
-        type : String,
+    last_name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
         default: '',
     },
-    role:{
-        type: Number,
-    },
-    status:{
-        type: Number,
-    },
-    gender:{
-        type: Number,
-    },
-    token:{
+    token: {
         type: String,
         default: ''
     },
-    profile:{
-        type: String,
-        default:''
+    phone: {
+        type: Number,
+        maxlength: 10,
+        default: null
     },
-    //extra field for student student start
-    start_date:{
+    gender: {
+        type: Number,
+    },
+    address: {
+        type: String,
+        default: ''
+    },
+    profile_image: {
+        type: String,
+        default: ''
+    },
+    note: {
+        type: String,
+        default: ''
+    },
+    role: {
+        type: Number,
+    },
+    status: {
+        type: Number,
+    },
+
+    /**
+     * extra field for student student start
+     */
+    start_date: {
         type: Date,
         default: ''
     },
-    skill_level:{
+    skill_level: {
         type: String,
         default: ''
     },
-    birth_day:{
+    birth_day: {
         type: Date,
         default: ''
     },
-    referrer:{
+    referrer: {
         type: Date,
-        default: ''
-    },
-    note:{
-        type: String,
         default: ''
     },
     school_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'schools',
+        default: null
+    },
+
+    /**
+     * fields for the tutor
+     */
+    calendar_color: {
+        type: String,
         default: ''
     },
-    // end student
-},{
+    tutor_subject_ids: {
+        type: Array,
+        default: null
+    },
+
+}, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-}); 
+});
 
 
-const User = mongoose.model('user',userSchema);
+const User = mongoose.model('user', userSchema);
 module.exports = User;
