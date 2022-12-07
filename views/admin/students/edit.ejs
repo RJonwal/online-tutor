@@ -1,0 +1,197 @@
+
+  <div class="right_col" role="main">
+    <div class="">
+      <!-- page title starts -->
+      <div class="page-title">
+        <div class="title_left">
+          <!-- <h3>School</h3> -->
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <!-- page title end -->
+
+      <!-- page content starts-->
+      <div class="row">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Edit Student<small></small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br>
+            <form id="updateStudent" action="/students/update" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
+
+              <input type="hidden" name="student_id" value="<%=data.id %>">
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first_name">First Name<span
+                    class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 ">
+                  <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.." id="first_name" value="<%=data.first_name %>" required="required">
+                </div>
+              </div>
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="last_name">Last Name<span
+                      class="required">*</span>
+                  </label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."  value="<%=data.last_name %>"  id="last_name"
+                      required="required">
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="start_date">Start Date
+                  </label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <input type="date" name="start_date" value="<%=start_date %>" class="form-control " placeholder="Enter Start Date.." id="start_date">
+                  </div>
+              </div>
+              
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address
+                  </label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <input type="email" name="email" class="form-control" value="<%=data.email %>" placeholder="Enter Email.." id="email" required="required">
+                  </div>
+              </div>
+              
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Phone No.
+                  </label>
+                  <div class="col-md-6 col-sm-6 ">
+                      <input type="text" name="phone" value="<%=data.phone %>" class="form-control " placeholder="Enter Phone.." id="phone">
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="skill_level">Skill Level</label>
+                <div class="col-md-6 col-sm-6 ">
+                  <input type="text" name="skill_level"  value="<%=data.skill_level %>"  class="form-control " placeholder="Enter Skill Level.." id="skill_level">
+                </div>
+              </div>
+              
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="school">School</label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <select class="form-control" name="school_id" id="school_id">
+                      <option value="">Select School</option>
+                      <% for(school of school_data) { %>
+                        <option value="<%=school.id%>" <%=data.school_id==school.id ? 'selected' : '' %>><%=school.name%></option>
+                      <% } %> 
+                    </select>
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="gender">Gender</label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <select class="form-control" name="gender" id="gender">
+                      <option value="">Select Gender</option>
+                      <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Male</option>
+                      <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Female</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="birth_day">Birth Day</label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <input type="date" name="birth_day" class="form-control " placeholder="Enter Skill Level.." id="birth_day" value="<%=birth_day %>">
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="referrer">Referrer</label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <input type="text" name="referrer" class="form-control " placeholder="Enter Skill Level.." id="referrer" value="<%=data.referrer %>">
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profile_image">Profile Image</label>
+                <div class="col-md-6 col-sm-6 ">
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify" <% if
+                  (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
+                data-default-file="/ProfileImage/<%=data.profile_image%>" <% }%>
+                    data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
+                    <% if (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
+                      value=" <%=data.profile_image %>" <% } else { %> value="" <% } %> >>
+                </div>
+              </div>
+              <input type="hidden" name="is_remove" id="is_image_removed" value="0">
+
+              <div class="item form-group">
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="notes">Notes </label>
+                  <div class="col-md-6 col-sm-6 ">
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"><%=data.notes %></textarea>
+                  </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
+                    class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 ">
+                  <select class="form-control" name="status" id="status">
+                    <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
+                    <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="ln_solid"></div>
+              
+              <div class="form-group row">
+                <div class="col-md-9 col-sm-9  offset-md-3">
+                  <button type="submit" id="updateStudentBtn" class="btn btn-success form-button">Save</button>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- page title end -->
+    </div>
+  </div>
+<script type="text/javascript">
+  $("#updateStudent").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var form = $('#updateStudent');
+    var formData = new FormData(form[0]);
+    formData.append('profile_image', this.new_attachments)
+    var url = $('#updateStudent').attr('action');
+    $("#updateStudentBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      }, 
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateStudentBtn").prop('disabled', false);
+      },
+    })
+  });
+
+</script>

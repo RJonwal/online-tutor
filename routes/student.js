@@ -4,6 +4,8 @@ const passport = require('passport');
 const fs = require('fs');
 var multer = require('multer');
 
+var storeStudentRequest = require('../requests/Student/StoreStudentsRequest');
+
 const studentsController = require('../controllers/Admin/StudentsController')
 
 const storageProfileImg = multer.diskStorage({
@@ -36,7 +38,7 @@ var uploadProfileImgImage = multer({
 
 router.get('/', passport.checkAuthentication, studentsController.index);
 router.get('/create', passport.checkAuthentication, studentsController.create);
-router.post('/store', passport.checkAuthentication, uploadProfileImgImage.single('profile_image'),studentsController.store);
+router.post('/store', passport.checkAuthentication,uploadProfileImgImage.single('profile_image'),studentsController.store);
 router.get('/edit/:id', passport.checkAuthentication, studentsController.edit);
 router.post('/update', passport.checkAuthentication,uploadProfileImgImage.single('profile_image'), studentsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, studentsController.destroy);

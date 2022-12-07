@@ -1,6 +1,9 @@
+
 const Student = require('../../models/user');
 const School = require('../../models/school');
+const moment = require('moment');
 
+const fs = require('fs');
 let session = require('express-session');
 module.exports = {
     index,
@@ -19,7 +22,7 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        let Students = await Student.find({}).sort({ '_id': -1 });
+        let Students = await Student.find({"role":3}).sort({ '_id': -1 });
         return res.render('../views/admin/students/index', { data: Students });
     } catch {
         return res.status(500).json({
@@ -53,16 +56,21 @@ async function create(req, res) {
  */
 async function store(req, res) {
     try {
+        if (req.file != undefined) {
+            req.body.profile_image = req.file.filename;
+        } else {
+            req.body.profile_image = '';
+        }
+        // set role for students
+        req.body.role = 3;
         let student = await Student.create(req.body);
         if (student) {
+            req.flash('success', 'Student is created successfully!');
             res.status(200).json({ "success": true, "message": "Student is created successfully!", "redirectUrl": "/Students" });
         }
     } catch (e) {
         console.log(e);
         return res.status(500).json({ "success": false, "message": "Something went wrong!" });
-        // return res.status(500).json({
-        //     message: 'Internal Server Error'
-        // })
     }
 }
 
@@ -76,9 +84,12 @@ async function store(req, res) {
 async function edit(req, res) {
     try {
         let StudentId = req.params.id;
+        let schools = await School.find({"status":1}).sort({ '_id': -1 });
         let student = await Student.find({ "_id": StudentId });
+        let start_date = res.locals.moment(student[0].start_date).format('YYYY-MM-DD');
+        let birth_day = res.locals.moment(student[0].birth_day).format('YYYY-MM-DD');
         if (student) {
-            return res.render('../views/admin/students/edit', { data: student[0] });
+            return res.render('../views/admin/students/edit', { data: student[0],school_data:schools,start_date:start_date,birth_day:birth_day,fs: fs  });
         }
     } catch {
         return res.status(500).json({
@@ -96,9 +107,34 @@ async function edit(req, res) {
  */
 async function update(req, res) {
     try {
-        if (req.body.Student_id && req.body.Student_id != '') {
-            let student = await Student.findByIdAndUpdate(req.body.Student_id, req.body)
-            res.status(200).json({ "success": true, "message": "Student is updated successfully!", "redirectUrl": "/Students" });
+        if (req.body.student_id && req.body.student_id != '') {
+            let Student_details = await Student.find({ "_id": req.body.student_id });
+            if (Student_details) {
+                console.log(Student_details);
+                studentData = Student_details[0];
+                let profileImage = studentData.profile_image;
+                const filePath = './assets/profileImage/' + profileImage;
+
+                if (req.file != undefined) {
+                    if (profileImage != '') {
+                        fs.exists(filePath, function (exists) {
+                            if (exists) {
+                                fs.unlinkSync(filePath);
+                            } else {
+                                // console.log('File not found, so not deleting.');
+                            }
+                        });
+                    }
+                    req.body.profile_image = req.file.filename;
+                    let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
+                }else{
+                    delete req.body.profile_image
+                    console.log(req.body.student_id);
+                    let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
+                }
+                req.flash('success', 'Student is updated successfully!');
+                res.status(200).json({ "success": true, "message": "Student is updated successfully!", "redirectUrl": "/Students" });     
+            }
         }
     } catch (e) {
         console.log(e);

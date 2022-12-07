@@ -22,21 +22,21 @@
             <form id="createStudent" action="./store" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
 
               <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="firstname">First Name<span
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first_name">First Name<span
                     class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input type="text" name="firstname" class="form-control" placeholder="Enter First Name.." id="firstname" required="required">
+                  <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.." id="first_name">
                 </div>
               </div>
 
               <div class="item form-group">
-                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="lastname">Last Name<span
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="last_name">Last Name<span
                       class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 ">
-                    <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name.." id="lastname"
-                      required="required">
+                    <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name"
+                      >
                   </div>
               </div>
 
@@ -49,10 +49,11 @@
               </div>
               
               <div class="item form-group">
-                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address
+                  <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address <span
+                    class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 ">
-                    <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email" required="required">
+                    <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email" >
                   </div>
               </div>
               
@@ -107,18 +108,18 @@
                     <input type="text" name="referrer" class="form-control " placeholder="Enter Skill Level.." id="referrer">
                   </div>
               </div>
-
+              
               <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profile_image">Profile Pic</label>
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profile_image">Profile Image</label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input class="form-control form-control-sm" name="profile_image" id="formFileSm" type="file">               
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify">
                 </div>
               </div>
 
               <div class="item form-group">
                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="notes">Notes </label>
                   <div class="col-md-6 col-sm-6 ">
-                    <textarea name="notes" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"></textarea>
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"></textarea>
                   </div>
               </div>
 
@@ -165,9 +166,6 @@
       data: formData,
       processData: false,
       contentType: false,
-      // beforeSend: function () {
-      //   $('#loading-bar-spinner').show();
-      // },
       success: function (response) {
         console.log(response);
         if (response.success == true) {

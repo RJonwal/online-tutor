@@ -18,6 +18,7 @@ passport.use(new LocalStrategy({
             }
             bcrypt.compare(password,user.password, function(err, isMatch) {
                 if (err) { console.log(err) }
+                console.log('match ',isMatch);
                 if(!isMatch){
                     req.flash('error','Incorrect Usernam or Password !');
                     return done(null, false);

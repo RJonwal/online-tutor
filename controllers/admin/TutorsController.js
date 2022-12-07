@@ -141,8 +141,12 @@ async function update(req, res) {
                 const filePath = './assets/ProfileImage/' + userImage;
 
                 req.body.role = 2;
-                let hash = global.securePassword(req.body.password);
-                req.body.password = hash;
+                if(req.body.password){
+                    let hash = global.securePassword(req.body.password);
+                    req.body.password = hash;
+                }else {
+                    delete req.body.password
+                }
 
                 if (req.file != undefined) {
                     if (userImage != '') {

@@ -1,3 +1,4 @@
+var moment = require('moment');
 module.exports.setFlash = function(req, res, next){
     res.locals.flash = {
         'success' : req.flash('success'),
@@ -5,3 +6,8 @@ module.exports.setFlash = function(req, res, next){
     }
     next();
 };
+
+module.exports.dateFormate = function(req, res, next){
+    res.locals.moment = moment;
+    next();
+}
