@@ -61,10 +61,9 @@ const userSchema = new mongoose.Schema({
     },
     birth_day: {
         type: Date,
-        default: ''
     },
-    referrer: {
-        type: Date,
+    referrer:{
+        type: String,
         default: ''
     },
     school_id: {
