@@ -47,6 +47,18 @@
     });
   });
 
+  $(document).ready(function () {
+    $('.single-img').dropify({
+      tpl: {
+        message:'<div class="dropify-message"><img src="/images/frame.svg" alt="img"> <p>Drag & Drop here</p><h6 class="mb-0 mt-1 fn-12 text-dblue">Select your preferred video type. (JPEG, PNG, SVG, etc.)</h6></div>',
+    },
+    });
+    
+    $('.dropify-clear').on('click', function () {
+      $('#is_image_removed').val('1');
+      $('.dropify').attr('required', true);
+    });
+  });
 
   $(".selectlink").select2({
       placeholder: "Select",

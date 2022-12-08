@@ -29,7 +29,6 @@
           <div class="card-header">
             <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img"> Lessons</div>
             <div class="right-icons">
-              <a href="javascript:void(0);"><img class="mr-2" src="/images/addcircle.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/trash.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/edit.svg" alt="img"></a>
@@ -40,6 +39,7 @@
           </div>
           <div id="lessons" class="collapse show" data-parent="#section1">
             <div class="card-body">
+             <div class="accordion" id="chp_section">
               <div class="chp-add-section">
                 <div class="chp-heading">
                   <div class="chp-title">  
@@ -47,14 +47,14 @@
                     English Developing People, Leading Teams & Managing Processes
                   </div>
                   <div class="right-icons">
-                    <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                    <a data-toggle="collapse" href="#panel1" aria-expanded="false">
+                    <a href="/courses/viewCourses"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                    <a href="#panel1" aria-expanded="false" data-toggle="collapse" data-target="#panel1" aria-controls="panel1">
                       <img class="mr-2" src="/images/edit.svg" alt="img">
                     </a>
-                    <a href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
+                    <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
                   </div> 
                 </div>
-                <div class="collapse" id="panel1">
+                <div class="collapse" id="panel1" data-parent="#chp_section">
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-30">
                       <h3 class="title-text mb-0">Edit Lecture</h3>
@@ -78,13 +78,13 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="English Developing People, Leading Teams & Managing Processes">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="form-group">
                                 <label class="form-label">Description</label>
                                 <textarea class="editer"></textarea>
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -97,7 +97,7 @@
                               <div class="form-group">
                                 <label class="form-label">Video URL</label>
                                 <input class="form-control" type="text" value="Enter your URL">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -106,7 +106,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Video</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-video h-auto" data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -119,7 +119,7 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="Enter your title">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -128,7 +128,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Attachments</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-attachments h-auto" data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -146,15 +146,15 @@
                     English Developing People, Leading Teams & Managing Processes
                   </div>
                   <div class="right-icons">
-                    <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                    <a data-toggle="collapse" href="#panel2" aria-expanded="false">
+                    <a href="/courses/viewCourses"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                    <a href="#panel2" aria-expanded="false" data-toggle="collapse" data-target="#panel2" aria-controls="panel2">
                       <img class="mr-2" src="/images/edit.svg" alt="img">
                     </a>
-                    <a href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
+                    <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
                   </div> 
                 </div>
                 
-                <div class="collapse" id="panel2">
+                <div class="collapse" id="panel2" data-parent="#chp_section">
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-30">
                       <h3 class="title-text mb-0">Edit Lecture</h3>
@@ -178,13 +178,13 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="English Developing People, Leading Teams & Managing Processes">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="form-group">
                                 <label class="form-label">Description</label>
                                 <textarea class="editer"></textarea>
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -197,7 +197,7 @@
                               <div class="form-group">
                                 <label class="form-label">Video URL</label>
                                 <input class="form-control" type="text" value="Enter your URL">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -206,7 +206,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Video</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-video h-auto" data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -219,7 +219,7 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="Enter your title">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -228,7 +228,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Attachments</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-attachments h-auto" data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -246,15 +246,15 @@
                     English Developing People, Leading Teams & Managing Processes
                   </div>
                   <div class="right-icons">
-                    <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                    <a data-toggle="collapse" href="#panel3" aria-expanded="false">
+                    <a href="/courses/viewCourses"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                    <a href="#panel3" aria-expanded="false" data-toggle="collapse" data-target="#panel3" aria-controls="panel3">
                       <img class="mr-2" src="/images/edit.svg" alt="img">
                     </a>
-                    <a href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
+                    <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
                   </div> 
                 </div>
                 
-                <div class="collapse" id="panel3">
+                <div class="collapse" id="panel3" data-parent="#chp_section">
                   <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-30">
                       <h3 class="title-text mb-0">Edit Lecture</h3>
@@ -278,13 +278,13 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="English Developing People, Leading Teams & Managing Processes">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="form-group">
                                 <label class="form-label">Description</label>
                                 <textarea class="editer"></textarea>
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -297,7 +297,7 @@
                               <div class="form-group">
                                 <label class="form-label">Video URL</label>
                                 <input class="form-control" type="text" value="Enter your URL">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -306,7 +306,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Video</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-video h-auto" data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -319,7 +319,7 @@
                               <div class="form-group">
                                 <label class="form-label">Course title</label>
                                 <input class="form-control" type="text" value="Enter your title">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="spacer">OR</div>
@@ -328,7 +328,7 @@
                               <div class="form-group">
                                 <label class="form-label">Upload Attachments</label>
                                 <input type="file" name="cover_image" id="cover_image" class="form-control select-attachments h-auto" data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
-                                </div>
+                               </div>
                             </div>
                             <div class="col-sm-12 text-right">
                               <button class="btn theme-btn" type="button"><img class="mr-1" src="/images/save.svg" alt="img"> Save</button>
@@ -340,6 +340,7 @@
                 </div>
               </div>
             </div>
+           </div> 
           </div>
         </div>
         
@@ -347,7 +348,6 @@
           <div class="card-header">
             <div class="left-heading"> <img class="mr-2" src="/images/practice.svg" alt="img"> Practice</div>
             <div class="right-icons">
-              <a href="javascript:void(0);"><img class="mr-2" src="/images/addcircle.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/trash.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/edit.svg" alt="img"></a>
@@ -366,7 +366,6 @@
           <div class="card-header">
             <div class="left-heading"> <img class="mr-2" src="/images/challenges.svg" alt="img"> Challenges</div>
             <div class="right-icons">
-              <a href="javascript:void(0);"><img class="mr-2" src="/images/addcircle.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/trash.svg" alt="img"></a>
               <a href="javascript:void(0);"><img class="mr-2" src="/images/edit.svg" alt="img"></a>
