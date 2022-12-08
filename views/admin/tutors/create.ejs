@@ -31,16 +31,14 @@
         <div class="x_content">
           <br>
           <form id="createTutor" action="./store" method="post" class="form-horizontal form-label-left"
-            enctype="multipart/form-data">
+            enctype="multipart/form-data" autocomplete="off">
 
             <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="tutor_subject_ids">Subjects<span
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="subject_ids">Subjects<span
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <select class="selectlink form-control" name="tutor_subject_ids" id="tutor_subject_ids" tabindex="-1"
-                  multiple>
-                  <option value="">Please Select Subjects </option>
+                <select class="form-control" name="subject_ids" id="subject_ids" tabindex="-1" multiple>
                   <% let i=0; for(subject of data) { %>
                     <option value="<%=subject.id%>">
                       <%=subject.name%>
@@ -55,14 +53,12 @@
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <select class="form-control" name="title" id="title">
-                  <option value="">Select the title</option>
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
+                <select class="form-control" name="title" id="userTitle" single="single" >
+                  <option value="1">Mr</option>
+                  <option value="2">Mrs</option>
                 </select>
               </div>
             </div>
-
 
             <div class="item form-group">
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first_name">First Name<span
@@ -152,6 +148,7 @@
               </div>
             </div>
 
+            <div class="clearfix"></div>
             <div class="ln_solid"></div>
             <div class="form-group row">
               <div class="col-md-9 col-sm-9  offset-md-3">
@@ -169,6 +166,21 @@
 
 
 <script>
+
+  $(document).ready(function () {
+
+    $("#subject_ids").select2({
+      placeholder: "Select Subject",
+      allowClear: false,
+    });
+
+    $("#userTitle").select2({
+      placeholder: "Select Title",
+      allowClear: false,
+    });
+
+  });
+
   $("#createTutor").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();

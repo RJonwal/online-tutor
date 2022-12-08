@@ -22,7 +22,7 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        let Students = await Student.find({"role":3}).sort({ '_id': -1 });
+        let Students = await Student.find({ "role": 3 }).sort({ '_id': -1 });
         return res.render('../views/admin/students/index', { data: Students });
     } catch {
         return res.status(500).json({
@@ -39,8 +39,8 @@ async function index(req, res) {
  */
 async function create(req, res) {
     try {
-        let schools = await School.find({"status":1}).sort({ '_id': -1 });
-        return res.render('../views/admin/students/create',{data:schools});
+        let schools = await School.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/students/create', { data: schools });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -84,12 +84,12 @@ async function store(req, res) {
 async function edit(req, res) {
     try {
         let StudentId = req.params.id;
-        let schools = await School.find({"status":1}).sort({ '_id': -1 });
+        let schools = await School.find({ "status": 1 }).sort({ '_id': -1 });
         let student = await Student.find({ "_id": StudentId });
         let start_date = res.locals.moment(student[0].start_date).format('YYYY-MM-DD');
         let birth_day = res.locals.moment(student[0].birth_day).format('YYYY-MM-DD');
         if (student) {
-            return res.render('../views/admin/students/edit', { data: student[0],school_data:schools,start_date:start_date,birth_day:birth_day,fs: fs  });
+            return res.render('../views/admin/students/edit', { data: student[0], school_data: schools, start_date: start_date, birth_day: birth_day, fs: fs });
         }
     } catch {
         return res.status(500).json({
@@ -127,13 +127,13 @@ async function update(req, res) {
                     }
                     req.body.profile_image = req.file.filename;
                     let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
-                }else{
+                } else {
                     delete req.body.profile_image
                     console.log(req.body.student_id);
                     let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
                 }
                 req.flash('success', 'Student is updated successfully!');
-                res.status(200).json({ "success": true, "message": "Student is updated successfully!", "redirectUrl": "/Students" });     
+                res.status(200).json({ "success": true, "message": "Student is updated successfully!", "redirectUrl": "/Students" });
             }
         }
     } catch (e) {
