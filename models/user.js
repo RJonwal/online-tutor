@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
+    role: {
+        type: Number,
+    },
     title: {
         type: String,
         default: '',
@@ -11,6 +14,12 @@ const userSchema = new mongoose.Schema({
     last_name: {
         type: String,
         required: true,
+    },
+    phone: {
+        type: Number,
+        minlength: 10,
+        maxlength: 15,
+        default: null
     },
     email: {
         type: String,
@@ -25,19 +34,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    phone: {
-        type: Number,
-        maxlength: 10,
-        default: null
-    },
     gender: {
         type: Number,
     },
-    address: {
+    profile_image: {
         type: String,
         default: ''
     },
-    profile_image: {
+    address: {
         type: String,
         default: ''
     },
@@ -45,11 +49,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    role: {
-        type: Number,
-    },
     status: {
         type: Number,
+    },
+
+    /**
+     * extra fields for the tutor
+     */
+    calendar_color: {
+        type: String,
+        default: ''
+    },
+    tutor_subject_ids: {
+        type: Array,
+        default: null
     },
 
     /**
@@ -73,18 +86,6 @@ const userSchema = new mongoose.Schema({
     school_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'schools',
-        default: null
-    },
-
-    /**
-     * fields for the tutor
-     */
-    calendar_color: {
-        type: String,
-        default: ''
-    },
-    tutor_subject_ids: {
-        type: Array,
         default: null
     },
 

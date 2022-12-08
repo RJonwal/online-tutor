@@ -114,7 +114,7 @@ async function destroy(req, res) {
         let id = req.params.id;
         let GradeDeleted = await Grade.findByIdAndDelete(id);
         if (GradeDeleted) {
-            req.flash('success', 'Grade is deleted successfully !');
+            req.flash('success', 'Grade is deleted successfully!');
         }
         return res.redirect('/grade');
     } catch {

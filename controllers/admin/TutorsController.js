@@ -42,6 +42,7 @@ async function index(req, res) {
     }
 }
 
+
 /**
  * create Tutor
  * @param {*} req 
@@ -50,8 +51,8 @@ async function index(req, res) {
  */
 async function create(req, res) {
     try {
-        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/tutors/create', { data: activeCategories });
+        let activeSubjects = await Category.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/tutors/create', { data: activeSubjects });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -88,9 +89,6 @@ async function store(req, res) {
     } catch (e) {
         console.log(e);
         return res.status(500).json({ "success": false, "message": "Something went wrong!" });
-        // return res.status(500).json({
-        //     message: 'Internal Server Error'
-        // })
     }
 }
 
@@ -101,16 +99,14 @@ async function store(req, res) {
  * @param {*} res 
  * @returns 
  */
-
-
 async function edit(req, res) {
     try {
-        let userId = req.params.id;
-        let user = await User.find({ "_id": userId, "role": 2 });
-        if (user) {
-            console.log(user);
+        let tutorId = req.params.id;
+        let tutor = await User.find({ "_id": tutorId, "role": 2 });
+        if (tutor) {
+            console.log(tutor);
             let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
-            return res.render('../views/admin/tutors/edit', { data: user[0], subjects: activeCategories, fs: fs });
+            return res.render('../views/admin/tutors/edit', { data: tutor[0], subjects: activeCategories, fs: fs });
         }
     } catch {
         return res.status(500).json({
@@ -120,36 +116,33 @@ async function edit(req, res) {
 }
 
 
-
 /**
  * update Tutor
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
-
-
 async function update(req, res) {
     try {
         if (req.body.tutor_id && req.body.tutor_id != '') {
             console.log(req.body);
 
-            let user = await User.find({ "_id": req.body.tutor_id, "role": 2 });
-            if (user) {
-                userData = user[0];
-                let userImage = userData.profile_image;
-                const filePath = './assets/ProfileImage/' + userImage;
+            let tutor = await User.find({ "_id": req.body.tutor_id, "role": 2 });
+            if (tutor) {
+                tutorData = tutor[0];
+                let tutorImage = tutorData.profile_image;
+                const filePath = './assets/ProfileImage/' + tutorImage;
 
                 req.body.role = 2;
-                if(req.body.password){
+                if (req.body.password) {
                     let hash = global.securePassword(req.body.password);
                     req.body.password = hash;
-                }else {
+                } else {
                     delete req.body.password
                 }
 
                 if (req.file != undefined) {
-                    if (userImage != '') {
+                    if (tutorImage != '') {
                         fs.exists(filePath, function (exists) {
                             if (exists) {
                                 fs.unlinkSync(filePath);
@@ -161,13 +154,13 @@ async function update(req, res) {
 
                     req.body.profile_image = req.file.filename;
 
-                    let userUpdated = await User.findByIdAndUpdate(req.body.tutor_id, req.body)
+                    let tutorUpdated = await User.findByIdAndUpdate(req.body.tutor_id, req.body)
 
 
                 } else {
 
                     if (req.body.is_remove == 1) {
-                        let userUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
+                        let tutorUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
                             $set:
                             {
                                 tutor_subject_ids: req.body.tutor_subject_ids,
@@ -185,7 +178,7 @@ async function update(req, res) {
                         })
                     }
                     else {
-                        let userUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
+                        let tutorUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
                             $set:
                             {
                                 tutor_subject_ids: req.body.tutor_subject_ids,
@@ -203,7 +196,7 @@ async function update(req, res) {
                     }
                 }
 
-                res.status(200).json({ "success": true, "message": "User is updated successfully!", "redirectUrl": "/tutors" });
+                res.status(200).json({ "success": true, "message": "Tutor is updated successfully!", "redirectUrl": "/tutors" });
             }
         }
     } catch (e) {
@@ -211,7 +204,6 @@ async function update(req, res) {
         return res.status(500).json({ "success": false, "message": "Something went wrong!" });
     }
 }
-
 
 
 /**

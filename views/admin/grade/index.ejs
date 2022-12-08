@@ -45,8 +45,8 @@
                       <tr>
                         <th>S.No</th>
                         <th>Grade</th>
-                        <th>Created At</th>
                         <th>Status</th>
+                        <th>Created At</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -60,10 +60,10 @@
                             <%=grade.name%>
                           </td>
                           <td>
-                            <%=grade.created_at.toDateString()%>
+                            <%=grade.status==1 ? 'Active' : 'Deactive' %>
                           </td>
                           <td>
-                            <%=grade.status==1 ? 'Active' : 'Deactive' %>
+                            <%=grade.created_at.toDateString()%>
                           </td>
                           <td>
                             <a class="btn btn-info m-1" href="/grade/edit/<%=grade.id%>" data-toggle="tooltip"

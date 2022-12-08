@@ -6,13 +6,13 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Name can not be empty!')
+    .withMessage('Grade Name can not be empty!')
     .bail()
     .isString()
-    .withMessage('Name should be a valid string!')
+    .withMessage('Grade Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Name length is should be in a valid range!')
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Grade Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
@@ -31,7 +31,7 @@ var validateUser = () => [
     .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('Please select a valid status!')
+    .withMessage('Select a valid status!')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

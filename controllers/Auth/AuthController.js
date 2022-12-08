@@ -1,7 +1,7 @@
-const User          = require('../../models/user');
-const mail          = require('../../config/mail');
-const randomstring  = require("randomstring");
-const global        = require("../../_helper/GlobalHelper");
+const User = require('../../models/user');
+const mail = require('../../config/mail');
+const randomstring = require("randomstring");
+const global = require("../../_helper/GlobalHelper");
 module.exports = {
     login,
     signIn,
@@ -9,28 +9,34 @@ module.exports = {
     forgetPassword,
     forget,
     resetPassword,
-    verifyPassword 
+    verifyPassword
 };
 
-async function login(req,res){
+async function login(req, res) {
     try {
-        if (req.isAuthenticated()){
-            return res.redirect('/dashboard');
+        // create a super admin user.
+        //let password = '12345'
+        //let hashedPassword = global.securePassword(password);
+        //let obj = { first_name: 'Super', last_name: 'Admin', email: 'superadmin@gmail.com', password: hashedPassword, role: 1, status: 1 };
+
+
+        //let userAdded = await User.create(obj);
+        if (req.isAuthenticated()) {
+            return res.redirect('/schools');
         }
-        return res.render('../views/auth/login', {layout : false});
-    } catch{
+        return res.render('../views/auth/login', { layout: false });
+    } catch {
         return res.status(500).json({
-            message:'Internal Server Error'
+            message: 'Internal Server Error'
         })
     }
 }
 
-async function signIn (req,res){
-    try{
-        //let obj = { first_name: 'Super', last_name: 'Admin', email: 'superadmin@gmail.com', phone:9908765442, password: '12345',role:1, status:1 };
-        //let userAdded = await User.create(obj);
-        req.flash('success','User Login Successfully !');
-        return res.redirect('/dashboard');
+async function signIn(req, res) {
+    try {
+
+        req.flash('success', 'User Login Successfully !');
+        return res.redirect('/schools');
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -38,16 +44,16 @@ async function signIn (req,res){
     }
 }
 
-function logout (req,res){
-    req.logout(function(err){
+function logout(req, res) {
+    req.logout(function (err) {
         if (err) { return next(err); }
         res.redirect('/');
     });
 };
 
-function forgetPassword(req,res){
+function forgetPassword(req, res) {
     try {
-        return res.render('../views/auth/forget-password', {layout : false});
+        return res.render('../views/auth/forget-password', { layout: false });
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -55,14 +61,14 @@ function forgetPassword(req,res){
     }
 };
 
-async function forget(req,res){
+async function forget(req, res) {
     try {
-        let user =  await User.findOne({email: req.body.email});
-        if(user){
+        let user = await User.findOne({ email: req.body.email });
+        if (user) {
             const randomString = randomstring.generate();
-            const url = global.baseUrl(req)+'/reset-password?token='+randomString;
-            let updated = await User.findByIdAndUpdate(user.id,{token:randomString});
-            let htmlString = mail.renderTemplate({token:url},'/forget.ejs');
+            const url = global.baseUrl(req) + '/reset-password?token=' + randomString;
+            let updated = await User.findByIdAndUpdate(user.id, { token: randomString });
+            let htmlString = mail.renderTemplate({ token: url }, '/forget.ejs');
             let mailOptions = {
                 from: 'admin@gmail.com',
                 to: 'amitpandey.his@gmail.com',
@@ -74,14 +80,14 @@ async function forget(req,res){
                 if (error) {
                     return console.log(error);
                 }
-                req.flash('success','Mail Sent! Please check your mail');
+                req.flash('success', 'Mail Sent! Please check your mail');
                 return res.redirect('/forget-password');
             });
-        }else {
-            req.flash('error','Sorry! User Not Found');
+        } else {
+            req.flash('error', 'Sorry! User Not Found');
             return res.redirect('/forget-password');
         }
-       
+
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -89,31 +95,31 @@ async function forget(req,res){
     }
 };
 
-async function resetPassword(req,res){
+async function resetPassword(req, res) {
     try {
         let token = req.query.token;
-        return res.render('../views/auth/reset-password',{token:token, layout : false});
+        return res.render('../views/auth/reset-password', { token: token, layout: false });
     } catch (error) {
         return res.json(500, {
             message: 'Internal Server Error'
         });
     }
 }
-async function verifyPassword(req,res){
+async function verifyPassword(req, res) {
     try {
         let result = req.body.token.trim();
         //let hash = req.body.password;
         let hash = global.securePassword(req.body.password);
         console.log(hash);
-        if(req.body.password != req.body.confirm_password){
-            req.flash('error','Confirm password and password not matched');
-            return res.redirect('/reset-password?token='+result);
+        if (req.body.password != req.body.confirm_password) {
+            req.flash('error', 'Confirm password and password not matched');
+            return res.redirect('/reset-password?token=' + result);
         }
-        let tokenData = await User.findOne({token:result});
-        if(tokenData){
-            let updated = await User.findByIdAndUpdate(tokenData.id,{password:hash,token:''});
+        let tokenData = await User.findOne({ token: result });
+        if (tokenData) {
+            let updated = await User.findByIdAndUpdate(tokenData.id, { password: hash, token: '' });
         }
-        req.flash('success','Password Changed Successfully');
+        req.flash('success', 'Password Changed Successfully');
         return res.redirect('/');
     } catch (error) {
         return res.json(500, {
