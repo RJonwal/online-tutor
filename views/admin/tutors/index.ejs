@@ -31,76 +31,72 @@
             <button class="btn theme-btn">Filter Results</button>
         </li>
     </ul>
-</div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-          <div class="x_title">
-            <h3 class="title-text">Tutor List</h3>
-            <ul class="right-btns">
-              <li> <a href="./tutors/create" class="btn theme-btn" rel="tooltip" data-placement="top"
-                  title="Add">+ Add Tutor</a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card-box table-responsive">
-                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
-                    cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>S.No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Subject</th>
-                        <th>Created At</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% let i=0; for(tutor of data) { %>
-                        <tr>
-                          <td>
-                            <%=++i%>
-                          </td>
-                          <td>
-                            <%=tutor.title+'. '+tutor.first_name+' '+tutor.last_name %>
-                          </td>
-                          <td>
-                            <%=tutor.email %>
-                          </td>
-                          <td>
-                            <%=tutor.tutor_subject_ids %>
-                          </td>
-                          <td>
-                            <%=tutor.created_at.toDateString()%>
-                          </td>
-                          <td>
-                            <%= tutor.status==1 ? 'Active' : 'Deactive' %>
-                          </td>
-                          <td>
-                            <a class="btn btn-info m-1" href="/tutors/edit/<%=tutor.id%>" data-toggle="tooltip"
-                              rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="x_panel">
+        <div class="x_title">
+          <h3 class="title-text">Tutor List</h3>
+          <ul class="right-btns">
+            <li> <a href="./tutors/create" class="btn theme-btn" rel="tooltip" data-placement="top"
+                title="Add">+ Add Tutor</a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="card-box table-responsive">
+            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
+              cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Created At</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% let i=0; for(tutor of data) { %>
+                  <tr>
+                    <td>
+                      <%=++i%>
+                    </td>
+                    <td>
+                      <%=tutor.title+'. '+tutor.first_name+' '+tutor.last_name %>
+                    </td>
+                    <td>
+                      <%=tutor.email %>
+                    </td>
+                    <td>
+                      <%=tutor.tutor_subject_ids %>
+                    </td>
+                    <td>
+                      <%=tutor.created_at.toDateString()%>
+                    </td>
+                    <td>
+                      <%= tutor.status==1 ? 'Active' : 'Deactive' %>
+                    </td>
+                    <td>
+                      <a class="btn btn-info m-1" href="/tutors/edit/<%=tutor.id%>" data-toggle="tooltip"
+                        rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
 
-                            <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                              title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
-                                data-toggle="confirmation" data-singleton="true"
-                                data-title="Are You Sure Want To Delete?" href="/tutors/destroy/<%=tutor.id%>"></i></a>
-                          </td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+                      <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                        title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
+                          data-toggle="confirmation" data-singleton="true"
+                          data-title="Are You Sure Want To Delete?" href="/tutors/destroy/<%=tutor.id%>"></i></a>
+                    </td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
     <!-- page content end -->
 </div>
