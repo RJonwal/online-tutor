@@ -1,6 +1,6 @@
 
 const Student = require('../../models/user');
-const School = require('../../models/school');
+const School = require('../../models/School');
 const moment = require('moment');
 
 const fs = require('fs');

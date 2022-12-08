@@ -35,7 +35,7 @@ var validateUser = () => [
     .withMessage('SubCategory Name should be a valid string!')
     .bail()
     .isLength({ min: 5, max: 255 })
-    .withMessage('SubCategory Name length is should be in a valid range!')
+    .withMessage('SubCategory Name length should be atleast 5 character!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
@@ -51,7 +51,7 @@ var validateUser = () => [
   body('note')
     .optional({ checkFalsy: true })
     .isLength({ min: 5, max: 255 })
-    .withMessage('Note is should be in a valid range!')
+    .withMessage('Note is should be atleast 5 character!')
     .bail(),
   body('status')
     .not()

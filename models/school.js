@@ -11,7 +11,7 @@ const schoolsSchema = new mongoose.Schema({
         default: ''
     },
     phone: {
-        type: Number,
+        type: String,
         unique: true,
         default: ''
     },

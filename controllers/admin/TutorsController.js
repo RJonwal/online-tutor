@@ -78,8 +78,12 @@ async function store(req, res) {
 
         // role for tutor
         req.body.role = 2;
-        let hash = global.securePassword(req.body.password);
-        req.body.password = hash;
+        if(req.body.password){
+            let hash = global.securePassword(req.body.password);
+            req.body.password = hash;
+        }else{
+            delete req.body.password;
+        }
         // console.log(req.body);
 
         let tutor = await User.create(req.body);

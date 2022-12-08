@@ -6,17 +6,6 @@
       <div class="title_left">
         <!-- <h3>SubCategory</h3> -->
       </div>
-
-      <!-- <div class="title_right">
-                  <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search for...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                      </span>
-                    </div>
-                  </div>
-                </div> -->
     </div>
     <div class="clearfix"></div>
     <!-- page title end -->
@@ -45,7 +34,6 @@
                         <th>S.No</th>
                         <th>Name</th>
                         <th>Main Category</th>
-                        <th>Created At</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -63,21 +51,14 @@
                             <%=subCategory.category_id.name%>
                           </td>
                           <td>
-                            <%=subCategory.created_at.toDateString()%>
-                          </td>
-                          <td>
                             <%= subCategory.status==1 ? 'Active' : 'Deactive' %>
                           </td>
                           <td>
                             <a class="btn btn-info m-1" href="/subCategories/edit/<%=subCategory.id%>"
                               data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit"><i
                                 class="fa fa-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-info m-1" onclick="confirm_modal('/subCategories/destroy/<%=subCategory.id%>')"> <i class="fa fa-trash" style="color: #ffffff;"></i></a>
 
-                            <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                              title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
-                                data-toggle="confirmation" data-singleton="true"
-                                data-title="Are You Sure Want To Delete?"
-                                href="/subCategories/destroy/<%=subCategory.id%>"></i></a>
                           </td>
                         </tr>
                         <% } %>

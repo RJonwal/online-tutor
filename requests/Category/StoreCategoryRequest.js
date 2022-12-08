@@ -12,7 +12,7 @@ var validateUser = () => [
     .withMessage('Category Name should be a valid string!')
     .bail()
     .isLength({ min: 5, max: 255 })
-    .withMessage('Category Name length is should be in a valid range!')
+    .withMessage('Category Name length should be atleast 5 character')
     .bail()
     .custom((value, { req }) => {
       console.log(value);

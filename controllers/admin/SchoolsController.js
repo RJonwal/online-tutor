@@ -1,4 +1,4 @@
-const School = require('../../models/school');
+const School = require('../../models/School');
 let session = require('express-session');
 module.exports = {
     index,

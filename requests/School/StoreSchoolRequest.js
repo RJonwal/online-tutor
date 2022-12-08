@@ -1,5 +1,5 @@
 const { body, validationResult } = require('express-validator');
-const School = require('../../models/school');
+const School = require('../../models/School');
 
 var validateUser = () => [
   body('name')
@@ -12,7 +12,7 @@ var validateUser = () => [
     .withMessage('Name should be a valid string!')
     .bail()
     .isLength({ min: 5, max: 255 })
-    .withMessage('Name length is should be in a valid range!')
+    .withMessage('Name length should be atleast 5 character!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
@@ -25,14 +25,13 @@ var validateUser = () => [
         })
     })
     .bail(),
-  body('phone')
-    .optional({ checkFalsy: true })
-    .not().isEmpty()
-    // .isLength({ min: 10, max: 10 })
-    .withMessage('Phone no. length is should be 10 digits.')
-    .isInt()
-    .trim()
-    .bail(),
+  // body('phone')
+  //   .optional({ checkFalsy: true })
+  //   .not().isEmpty()
+  //   // .isLength({ min: 10, max: 10 })
+  //   .withMessage('Phone no. length is should be 10 digits.')
+  //   .trim()
+  //   .bail(),
   body('email')
     .optional({ checkFalsy: true })
     .normalizeEmail()

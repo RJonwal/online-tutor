@@ -61,8 +61,6 @@ var validateUser = () => [
   body('password')
     .trim()
     .not()
-    .isEmpty()
-    .withMessage('Password can not be empty!')
     .bail()
     .isString()
     .withMessage('Password should be a valid string!')

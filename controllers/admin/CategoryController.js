@@ -139,7 +139,6 @@ async function update(req, res) {
 
                     let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
 
-
                 } else {
 
                     if (req.body.is_remove == 1) {

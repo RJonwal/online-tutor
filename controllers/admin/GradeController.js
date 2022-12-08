@@ -1,4 +1,4 @@
-const Grade = require('../../models/grade');
+const Grade = require('../../models/Grade');
 let session = require('express-session');
 module.exports = {
     index,

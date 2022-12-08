@@ -47,7 +47,6 @@
                         <th>Email</th>
                         <th>Contact No</th>
                         <th>Address</th>
-                        <th>Created At</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -71,23 +70,12 @@
                             <%=school.address%>
                           </td>
                           <td>
-                            <%=school.created_at.toDateString()%>
-                          </td>
-                          <td>
                             <%= school.status==1 ? 'Active' : 'Deactive' %>
                           </td>
                           <td>
                             <a class="btn btn-info m-1" href="/schools/edit/<%=school.id%>" data-toggle="tooltip"
                               rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-
-                            <a class="btn btn-info m-1" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                              title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
-                                data-toggle="confirmation" data-singleton="true"
-                                data-title="Are You Sure Want To Delete?"
-                                href="/schools/destroy/<%=school.id%>"></i></a>
-
-
-
+                              <a href="javascript:void(0)" class="btn btn-info m-1" onclick="confirm_modal('/schools/destroy/<%=school.id%>')"> <i class="fa fa-trash" style="color: #ffffff;"></i></a>
                           </td>
                         </tr>
                         <% } %>
