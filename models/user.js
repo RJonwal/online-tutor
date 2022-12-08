@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
     },
     title: {
-        type: String,
+        type: Number,
         default: '',
     },
     first_name: {
@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    tutor_subject_ids: {
+    subject_ids: {
         type: Array,
         default: null
     },

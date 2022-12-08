@@ -220,7 +220,17 @@ async function destroy(req, res) {
     try {
         let id = req.params.id;
         let tutorDeleted = await User.findByIdAndDelete(id);
+        console.log(tutorDeleted);
         if (tutorDeleted) {
+            let tutorImage = tutorDeleted.profile_image;
+            const filePath = './assets/ProfileImage/' + tutorImage;
+            fs.exists(filePath, function (exists) {
+                if (exists) {
+                    fs.unlinkSync(filePath);
+                } else {
+                    console.log('File not found, so not deleted.');
+                }
+            });
             req.flash('success', 'Tutor is deleted successfully!');
         }
         return res.redirect('/tutors');

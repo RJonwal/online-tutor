@@ -6,10 +6,10 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Title  can not be empty!')
+    .withMessage('Title can not be empty!')
     .bail()
-    .isString()
-    .withMessage('Title should be a valid string!')
+    .isBoolean()
+    .withMessage('Select a valid title!')
     .bail(),
   body('first_name')
     .trim()
@@ -20,7 +20,7 @@ var validateUser = () => [
     .isString()
     .withMessage('First Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
+    .isLength({ min: 1, max: 255 })
     .withMessage('First Name length is should be in a valid range!')
     .bail(),
   body('last_name')
@@ -32,7 +32,7 @@ var validateUser = () => [
     .isString()
     .withMessage('Last Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
+    .isLength({ min: 1, max: 255 })
     .withMessage('Last Name length is should be in a valid range!')
     .bail(),
   body('email')
@@ -68,9 +68,8 @@ var validateUser = () => [
     .withMessage('Password should be a valid string!')
     .bail()
     .isLength({ min: 8, max: 255 })
-    .withMessage('Password length is should be in a valid range!')
+    .withMessage('Password length is should be at least 8 characters!')
     .bail(),
-
   /*  body('address')
      .trim()
      .not()
@@ -125,7 +124,7 @@ var validateUser = () => [
     .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('Please select a valid status!')
+    .withMessage('Select a valid status!')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

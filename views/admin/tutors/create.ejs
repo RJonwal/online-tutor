@@ -10,7 +10,11 @@
       <!-- <div class="title_right">
                   <div class="col-md-5 col-sm-5 form-group pull-right top_search">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search for...">
+                      <input type="text" class="form-control" placeholder="Search 
+                      
+                      
+                      
+                      for...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
                       </span>
@@ -53,9 +57,9 @@
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <select class="form-control" name="title" id="userTitle" single="single" >
-                  <option value="1">Mr</option>
-                  <option value="2">Mrs</option>
+                <select class="form-control" name="title" id="title">
+                  <option value="0">Mr</option>
+                  <option value="1">Mrs</option>
                 </select>
               </div>
             </div>
@@ -66,7 +70,7 @@
               </label>
               <div class="col-md-6 col-sm-6 ">
                 <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
-                  required="required" id="first_name">
+                  id="first_name">
               </div>
             </div>
 
@@ -75,18 +79,25 @@
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."
-                  required="required" id="last_name">
+                <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name">
               </div>
             </div>
 
             <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email Address<span
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email<span
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="text" name="email" class="form-control" placeholder="Enter Email Name.."
-                  required="required" id="email">
+                <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email">
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Phone No.<span
+                  class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 ">
+                <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone">
               </div>
             </div>
 
@@ -95,8 +106,10 @@
                   class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="password" name="password" class="form-control" placeholder="Enter Password Name.."
-                  required="required" id="password">
+                <input type="password" name="password" class="form-control" placeholder="Enter Password.."
+                  id="password-field">
+                <span toggle="#password-field"
+                  class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
               </div>
             </div>
 
@@ -113,8 +126,8 @@
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="calendar_color">Calendar Color
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="text" name="calendar_color" class="form-control" placeholder="Enter Calendar Color Name.."
-                  required="required" id="calendar_color">
+                <input type="color" name="calendar_color" class="form-control" placeholder="Enter Calendar Color.."
+                  id="calendar_color">
               </div>
             </div>
 
@@ -170,16 +183,13 @@
   $(document).ready(function () {
 
     $("#subject_ids").select2({
-      placeholder: "Select Subject",
+      placeholder: "Select Subjects",
       allowClear: false,
     });
 
-    $("#userTitle").select2({
-      placeholder: "Select Title",
-      allowClear: false,
-    });
 
   });
+
 
   $("#createTutor").submit(function (e) {
     e.preventDefault();
