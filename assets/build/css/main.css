@@ -1606,8 +1606,18 @@ span.total-count {
 .x_content div.dataTables_wrapper div.dataTables_paginate .pagination a {
     display: inline-block;
     background: none !important;
-    font-size: 0 !important;
     padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--dblue);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3 ease-in;
+}
+.x_content div.dataTables_wrapper div.dataTables_paginate .pagination a:hover{
+    color: #fff;
 }
 
 .x_content div.dataTables_wrapper div.dataTables_paginate .pagination .previous:after,
@@ -1625,8 +1635,10 @@ span.total-count {
 .x_content div.dataTables_wrapper div.dataTables_paginate .pagination .next:after {
     content: "\f105";
 }
-
-.x_content div.dataTables_wrapper div.dataTables_paginate .pagination li:hover {
+.x_content div.dataTables_wrapper div.dataTables_paginate .pagination .previous a, .x_content div.dataTables_wrapper div.dataTables_paginate .pagination .next a{
+    font-size: 0 !important;
+}
+.x_content div.dataTables_wrapper div.dataTables_paginate .pagination li:hover{
     background: var(--dblue);
     border: 1px solid var(--dblue);
 }
@@ -1635,7 +1647,8 @@ span.total-count {
     color: #fff;
 }
 
-.x_content table {
+.x_content table{
+    margin-top: 8px !important;
     border-collapse: collapse !important;
     border: 1px solid #D2D6E3;
 }
@@ -1651,17 +1664,25 @@ span.total-count {
 .x_content table tbody td {
     font-size: 14px;
     font-weight: 400;
+    padding: 10px 15px;
     color: var(--dblue);
 }
-
-.x_content table.dataTable td.dataTables_empty,
-.x_content table.dataTable th.dataTables_empty {
+.x_content table thead th, .x_content table tbody td{
+    border: .5px solid var(--exLightBlue);
+}
+.x_content table.dataTable td.dataTables_empty, .x_content table.dataTable th.dataTables_empty{
     background: var(--lightgray);
 }
 
 .x_content table.dataTable thead .sorting:after,
 .x_content table.dataTable thead .sorting_asc:after {
     bottom: 12px;
+}
+.x_content table.table-striped tbody tr:nth-of-type(odd){
+    background: #fff;
+}
+.x_content table.table-striped tbody tr:nth-of-type(even){
+    background: var(--lightgray);
 }
 
 /* Main Content Css */
