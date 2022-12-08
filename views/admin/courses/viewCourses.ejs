@@ -1,0 +1,139 @@
+<div class="right_col" role="main">
+    <div class="back-page">
+        <ol class="breadcrumb">  
+            <li class="breadcrumb-item"><a href="#">Courses List</a></li>
+            <li class="breadcrumb-item"><a href="#">Early Reading Program</a></li>
+            <li class="breadcrumb-item active">Preview</li>
+        </ol>
+    </div>
+    <div class="card-block mb-30">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="chp1" role="tabpanel" aria-labelledby="chp1-tab">
+          <div class="slideshow">
+            <div class="item">
+              <div class="row">
+                  <div class="col-sm-12 col-md-7">
+                      <h3>English Developing People, Leading Teams & Managing Processes</h3>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                      <img src="/images/course-thumb.jpg" class="img-fluid w-100">
+                  </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="row">
+                  <div class="col-sm-12 col-md-7">
+                      <h3>English Developing People, Leading Teams & Managing Processes</h3>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                      <img src="/images/course-thumb.jpg" class="img-fluid w-100">
+                  </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="row">
+                  <div class="col-sm-12 col-md-7">
+                      <h3>English Developing People, Leading Teams & Managing Processes</h3>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                      <img src="/images/course-thumb.jpg" class="img-fluid w-100">
+                  </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="row">
+                  <div class="col-sm-12 col-md-7">
+                      <h3>English Developing People, Leading Teams & Managing Processes</h3>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                      <img src="/images/course-thumb.jpg" class="img-fluid w-100">
+                  </div>
+              </div>
+            </div>
+          </div>
+          <ul class="slide-bottom">
+            <li class="prev"><a href="javascript:void(0);" class="theme-btn">Previous</a></li>
+            <li>
+                <div class="slides-numbers" style="display: block;">
+                    <span class="active">01</span> of <span class="total"></span>
+                </div>
+            </li>
+            <li class="next"><a href="javascript:void(0);" class="theme-btn">Next</a></li>
+        </ul>
+        </div>
+        <div class="tab-pane fade" id="chp2" role="tabpanel" aria-labelledby="chp2-tab">
+          asdsa
+        </div>
+        <div class="tab-pane fade" id="chp3" role="tabpanel" aria-labelledby="chp3-tab">
+          sdfkdsf
+        </div>
+        <div class="tab-pane fade" id="chp4" role="tabpanel" aria-labelledby="chp4-tab">
+          yujyj
+        </div>
+      </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script>
+
+var helpers = {
+	addZeros: function (n) {
+		return (n < 10) ? '0' + n : '' + n;
+	}
+};
+
+function sliderInit() {
+  var $slider = $('.slideshow');
+  $slider.each(function() {
+    var $sliderParent = $(this).parent();
+    $(this).slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: false,
+      dots: false,
+      arrow:false,
+      infinite: false,
+    //fade: true,
+      prevArrow: $('.prev'),
+      nextArrow: $('.next'),
+      responsive: [
+        {
+          breakpoint: 767,
+          settings: {
+            adaptiveHeight: true
+          }
+        }
+      ]
+    });
+
+    if ($(this).find('.item').length > 1) {
+      $(this).siblings('.slides-numbers').show();
+    }
+
+    $(this).on('afterChange', function(event, slick, currentSlide){
+      $sliderParent.find('.slides-numbers .active').html(helpers.addZeros(currentSlide + 1));
+    });
+
+    var sliderItemsNum = $(this).find('.slick-slide').not('.slick-cloned').length;
+    $sliderParent.find('.slides-numbers .total').html(helpers.addZeros(sliderItemsNum));
+
+  });
+};
+
+sliderInit();
+</script>

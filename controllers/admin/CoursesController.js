@@ -11,6 +11,8 @@ module.exports = {
     store,
     edit,
     update,
+    previewCourses,
+    viewCourses,
     destroy,
 }
 
@@ -97,6 +99,37 @@ async function update(req, res) {
 
 
 /**
+ * Preview Courses
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+ async function previewCourses(req, res) {
+    try {
+        return res.render('../views/admin/courses/previewCourses');
+    } catch {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+}
+
+/**
+ * Preview Courses
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+ async function viewCourses(req, res) {
+    try {
+        return res.render('../views/admin/courses/viewCourses');
+    } catch {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    }
+}
+/**
  * delete SubCategory
  * @param {*} req 
  * @param {*} res 
@@ -105,3 +138,5 @@ async function update(req, res) {
 async function destroy(req, res) {
 
 }
+
+
