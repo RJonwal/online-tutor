@@ -17,5 +17,5 @@ const gradeSchema = new mongoose.Schema({
     {
         timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
     });
-const Grade = mongoose.model('grade', gradeSchema);
+const Grade = mongoose.model('grades', gradeSchema);
 module.exports = Grade;

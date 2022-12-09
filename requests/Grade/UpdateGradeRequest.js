@@ -1,5 +1,5 @@
 const { body, validationResult } = require('express-validator');
-const School = require('../../models/Grade');
+const Grade = require('../../models/Grade');
 
 var validateUser = () => [
   body('name')
@@ -16,10 +16,10 @@ var validateUser = () => [
     .bail()
     .custom((value, { req }) => {
       console.log(req.body);
-      return School.findOne({ "name": value, _id: {$ne: req.body.grade_id} })
-        .then(school => {
-          console.log(school);
-          if (school != null) {
+      return Grade.findOne({ "name": value, _id: { $ne: req.body.grade_id } })
+        .then(grade => {
+          console.log(grade);
+          if (grade != null) {
             return Promise.reject('Grade name is already in use!');
           }
         })

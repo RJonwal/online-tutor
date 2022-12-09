@@ -185,82 +185,6 @@
   });
 
 
-  $("#createGrade").submit(function (e) {
-    e.preventDefault();
-    $(document).find("span.text-danger").remove();
-
-    var formData = $('#createGrade').serialize();
-    var url = $('#createGrade').attr('action');
-    $("#createGradeBtn").prop('disabled', true);
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: "json",
-      data: formData,
-      // beforeSend: function () {
-      //   $('#loading-bar-spinner').show();
-      // },
-      success: function (response) {
-        console.log(response);
-        if (response.success == true) {
-          window.location = response.redirectUrl;
-        }
-      },
-      error: function (response) {
-        console.log(response);
-        let errorMessages = '';
-        $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
-          console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-        })
-      },
-      complete: function () {
-        // $("#loading-bar-spinner").hide();
-        $("#createGradeBtn").prop('disabled', false);
-      },
-    })
-  });
-
-
-  $("#updateGrade").submit(function (e) {
-    e.preventDefault();
-    $(document).find("span.text-danger").remove();
-
-    var formData = $('#updateGrade').serialize();
-    var url = $('#updateGrade').attr('action');
-    $("#updateGradeBtn").prop('disabled', true);
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: "json",
-      data: formData,
-      // beforeSend: function () {
-      //   $('#loading-bar-spinner').show();
-      // },
-      success: function (response) {
-        console.log(response);
-        if (response.success == true) {
-          window.location = response.redirectUrl;
-        }
-      },
-      error: function (response) {
-        console.log(response);
-        let errorMessages = '';
-        $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
-          console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-        })
-      },
-      complete: function () {
-        // $("#loading-bar-spinner").hide();
-        $("#updateGradeBtn").prop('disabled', false);
-      },
-    })
-  });
-
-
   $("#createCategory").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
@@ -435,7 +359,6 @@
 
 
   // Form Stepper 
-
   jQuery(document).ready(function () {
     // click on next button
     jQuery('.form-wizard-next-btn').click(function () {
@@ -551,28 +474,25 @@
     initialCountry: "Au",
   });
 
-  // delete modal
-  function confirm_modal(url) {
-    swal({
-      title: "Are you sure?",
-      text: "You will not be able to recover this action!",
-      type: "warning",
+
+  /**
+   * delete a record.
+   * 
+   * */
+  function confirmBeforeDeletion(url) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
       showCancelButton: true,
-      cancelButtonColor: "#038c00",
-      confirmButtonColor: '#ff0000',
-      confirmButtonText: 'Yes, delete it!',
-      closeOnConfirm: false,
-      //closeOnCancel: false
-    },
-      function () {
-        swal({
-          title: "Success!",
-          text: "Example success message",
-          type: "success"
-        }, function () {
-          window.location.href = url;
-        });
-      });
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = url;
+      }
+    })
   }
 
 
