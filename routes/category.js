@@ -12,7 +12,7 @@ var updateCategoryRequest = require('../requests/Category/UpdateCategoryRequest'
 const storageCategoryImage = multer.diskStorage({
     destination: (req, file, callback) => {
         const dir = './assets/CategoryImage/';
-        if(!fs.existsSync(dir)){
+        if (!fs.existsSync(dir)) {
             fs.mkdir(dir, err => callback(err, dir));
         }
         callback(null, dir);
@@ -44,5 +44,6 @@ router.post('/store', passport.checkAuthentication, uploadCategoryImage.single('
 router.get('/edit/:id', passport.checkAuthentication, categoryController.edit);
 router.post('/update', passport.checkAuthentication, uploadCategoryImage.single('category_image'), updateCategoryRequest, categoryController.update);
 router.get('/destroy/:id', passport.checkAuthentication, categoryController.destroy);
+router.post('/update-status', passport.checkAuthentication, categoryController.updateStatus);
 
 module.exports = router;

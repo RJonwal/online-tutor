@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const fs = require('fs');
 
 const subCategoryController = require('../controllers/Admin/SubCategoryController')
 
@@ -15,5 +14,6 @@ router.post('/store', passport.checkAuthentication, storeSubCategoryRequest, sub
 router.get('/edit/:id', passport.checkAuthentication, subCategoryController.edit);
 router.post('/update', passport.checkAuthentication, updateSubCategoryRequest, subCategoryController.update);
 router.get('/destroy/:id', passport.checkAuthentication, subCategoryController.destroy);
+router.post('/update-status', passport.checkAuthentication, subCategoryController.updateStatus);
 
 module.exports = router;

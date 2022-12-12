@@ -10,7 +10,6 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-
 const categoriesSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,7 +23,7 @@ const categoriesSchema = new mongoose.Schema({
     category_image: {
         type: String,
         default: ''
-    }, 
+    },
     note: {
         type: String,
         default: ''

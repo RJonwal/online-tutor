@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const Category = require('../../models/Category');
 
-var validateUser = () => [ 
+var validateUser = () => [
   body('name')
     .trim()
     .not()
@@ -11,8 +11,8 @@ var validateUser = () => [
     .isString()
     .withMessage('Category Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Category Name length should be atleast 5 character')
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Category Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
@@ -27,8 +27,8 @@ var validateUser = () => [
     .bail(),
   body('note')
     .optional({ checkFalsy: true })
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Note is should be in a valid range!')
+    .isString()
+    .withMessage('Note should be a valid string!')
     .bail(),
   body('status')
     .not()
@@ -36,7 +36,7 @@ var validateUser = () => [
     .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('Please select a valid status!')
+    .withMessage('Select a valid status!')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

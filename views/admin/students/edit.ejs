@@ -61,7 +61,10 @@
                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Phone No.
                   </label>
                   <div class="col-md-6 col-sm-6 ">
-                      <input type="text" name="phone" value="<%=data.phone %>" class="form-control " placeholder="Enter Phone.." id="phone">
+                    <input type="hidden" name="dial_code" id="dial_code" value="<%=data.dial_code%>">
+                    <input type="hidden" name="iso_code" id="iso_code" value="<%=data.iso_code%>">
+                      <input type="text" name="phone" value="<%=data.phone %>" class="form-control" id="phone">
+                      <span id="error-msg" class="hide"></span>
                   </div>
               </div>
 
@@ -159,11 +162,18 @@
 <script type="text/javascript">
   $("#updateStudent").submit(function (e) {
     e.preventDefault();
+    // var iti = window.intlTelInputGlobals.getInstance(input);
+    // var countryData = iti.getSelectedCountryData();
+    // var dialCode = countryData.dialCode;
+    // $('#dial_code').val(dialCode); // update country code
+
     $(document).find("span.text-danger").remove();
     var form = $('#updateStudent');
+  
     var formData = new FormData(form[0]);
     formData.append('profile_image', this.new_attachments)
     var url = $('#updateStudent').attr('action');
+    console.log(formData);
     $("#updateStudentBtn").prop('disabled', true);
     $.ajax({
       type: "POST",
@@ -182,7 +192,6 @@
         console.log(response);
         let errorMessages = '';
         $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
           console.log(error);
           $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
         })
@@ -194,4 +203,80 @@
     })
   });
 
+// phone number validate start intlTelInput
+  var input = document.querySelector("#phone"),
+  errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+  result = document.querySelector("#error-msg");
+  
+  window.addEventListener("load", function () {
+  errorMsg = document.querySelector("#error-msg");
+
+   function getIp(callback) {
+      fetch('https://ipinfo.io', {
+            headers: {
+               'Accept': 'application/json'
+            }
+         })
+         .then((resp) => resp.json())
+         .catch(() => {
+            return {
+               country: '',
+            };
+         })
+         .then((resp) => callback(resp.country));
+   }
+   var iso_code = $("#iso_code").val();
+   iso_code = iso_code ? iso_code:'in';
+   var iti = window.intlTelInput(input, {
+      initialCountry: iso_code,
+      separateDialCode: true
+   });
+
+
+   input.addEventListener('keyup', function () {
+      reset();
+      if (input.value.trim()) {
+         if (iti.isValidNumber()) {
+            $("#storeStudentBtn").prop('disabled', false);
+            $(input).addClass('is-valid');
+
+         } else {
+            $("#storeStudentBtn").prop('disabled', true);
+            $(input).addClass('is-invalid');
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            $(errorMsg).show();
+         }
+      }
+   });
+   input.addEventListener('change', reset);
+   input.addEventListener('keyup', reset);
+
+   var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+   };
+   input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+      valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+   }, false);
+
+   input.addEventListener("focus", function () {
+      result.textContent = "";
+   }, false);
+
+   $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      console.log(countryData);
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+   });
+});
+ // phone number validate end  
 </script>
