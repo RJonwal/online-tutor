@@ -13,5 +13,6 @@ router.post('/store', passport.checkAuthentication, storeSchoolRequest, schoolsC
 router.get('/edit/:id', passport.checkAuthentication, schoolsController.edit);
 router.post('/update', passport.checkAuthentication, updateSchoolRequest, schoolsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, schoolsController.destroy);
+router.post('/update-status', passport.checkAuthentication, schoolsController.updateStatus);
 
 module.exports = router;

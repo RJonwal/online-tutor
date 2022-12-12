@@ -46,7 +46,10 @@
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Contact No.
               </label>
               <div class="col-md-6 col-sm-6 ">
-                <input type="text" name="phone" class="form-control" placeholder="Enter Phone.." id="phone">
+                <input type="hidden" name="dial_code" id="dial_code">
+                <input type="hidden" name="iso_code" id="iso_code">
+                <input type="text" name="phone" class="form-control " id="phone">
+                <span id="error-msg" class="hide"></span>
               </div>
             </div>
 
@@ -79,6 +82,7 @@
               </div>
             </div>
 
+            <div class="clearfix"></div>
             <div class="ln_solid"></div>
             <div class="form-group row">
               <div class="col-md-9 col-sm-9  offset-md-3">
@@ -93,3 +97,124 @@
     <!-- page title end -->
   </div>
 </div>
+
+<script type="text/javascript">
+
+  /**
+   * createSchool
+   */
+  $("#createSchool").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+
+    var formData = $('#createSchool').serialize();
+    var url = $('#createSchool').attr('action');
+    $("#storeSchoolBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      // beforeSend: function () {
+      //   $('#loading-bar-spinner').show();
+      // },
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#storeSchoolBtn").prop('disabled', false);
+      },
+    })
+  });
+
+  /**
+   *  phone number validate start intlTelInput
+   */
+  var input = document.querySelector("#phone"),
+    errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+    result = document.querySelector("#error-msg");
+
+  window.addEventListener("load", function () {
+    errorMsg = document.querySelector("#error-msg");
+
+    function getIp(callback) {
+      fetch('https://ipinfo.io', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then((resp) => resp.json())
+        .catch(() => {
+          return {
+            country: '',
+          };
+        })
+        .then((resp) => callback(resp.country));
+    }
+
+    var iti = window.intlTelInput(input, {
+      initialCountry: "In",
+      separateDialCode: true,
+      formatOnDisplay: false
+    });
+
+
+    input.addEventListener('keyup', function () {
+      reset();
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          $("#storeStudentBtn").prop('disabled', false);
+          $(input).addClass('is-valid');
+
+        } else {
+          $("#storeStudentBtn").prop('disabled', true);
+          $(input).addClass('is-invalid');
+          var errorCode = iti.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          $(errorMsg).show();
+        }
+      }
+    });
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+    var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+
+    };
+    input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+        valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+    }, false);
+
+    input.addEventListener("focus", function () {
+      result.textContent = "";
+    }, false);
+
+    $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+    });
+  });
+</script>

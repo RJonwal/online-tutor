@@ -10,10 +10,23 @@ const schoolsSchema = new mongoose.Schema({
         unique: true,
         default: ''
     },
-    phone: {
+    dial_code: {
+        type: Number,
+        minlength: 1,
+        maxlength: 5,
+        default: null
+    },
+    iso_code: {
         type: String,
-        unique: true,
-        default: ''
+        minlength: 1,
+        maxlength: 5,
+        default: null
+    },
+    phone: {
+        type: Number,
+        minlength: 5,
+        maxlength: 15,
+        default: null
     },
     address: {
         type: String,
@@ -27,9 +40,9 @@ const schoolsSchema = new mongoose.Schema({
         type: Date,
         default: null
     }
-}, 
-{
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-});
+},
+    {
+        timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+    });
 const School = mongoose.model('schools', schoolsSchema);
 module.exports = School;

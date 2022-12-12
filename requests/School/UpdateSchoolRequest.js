@@ -6,13 +6,13 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Name can not be empty!')
+    .withMessage('School Name can not be empty!')
     .bail()
     .isString()
-    .withMessage('Name should be a valid string!')
+    .withMessage('School Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Name length should be atleast 5 character!')
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('School Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(req.body);
@@ -25,24 +25,24 @@ var validateUser = () => [
         })
     })
     .bail(),
-  // body('phone')
-  //   .optional({ checkFalsy: true })
-  //   .not().isEmpty()
-  //   .isLength({ min: 10, max: 10 })
-  //   .withMessage('Phone no. length is should be 10 digits.')
-  //   .trim()
-  //   .bail()
-  //   .custom((value, { req }) => {
-  //     console.log(req.body);
-  //     return School.findOne({ "phone": value, _id: { $ne: req.body.school_id } })
-  //       .then(school => {
-  //         console.log(school);
-  //         if (school != null) {
-  //           return Promise.reject('School phone no. is already in use!');
-  //         }
-  //       })
-  //   })
-  //   .bail(),
+  body('phone')
+    .optional({ checkFalsy: true })
+    .not().isEmpty()
+    .isInt()
+    .withMessage('Phone no. should be valid number.')
+    .trim()
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return School.findOne({ "dial_code": req.body.dial_code, "phone": value, _id: { $ne: req.body.school_id } })
+        .then(school => {
+          console.log(school);
+          if (school != null) {
+            return Promise.reject('School phone no. is already in use!');
+          }
+        })
+    })
+    .bail(),
   body('email')
     .optional({ checkFalsy: true })
     .normalizeEmail()
@@ -66,8 +66,8 @@ var validateUser = () => [
     .bail(),
   body('address')
     .optional({ checkFalsy: true })
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Address length is should be in a valid range!')
+    .isString()
+    .withMessage('Address should be a valid string!')
     .bail(),
   body('status')
     .not()
@@ -75,7 +75,7 @@ var validateUser = () => [
     .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('Please select a valid status!')
+    .withMessage('Select a valid status!')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

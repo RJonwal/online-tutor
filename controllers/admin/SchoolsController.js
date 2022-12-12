@@ -1,5 +1,6 @@
 const School = require('../../models/School');
 let session = require('express-session');
+
 module.exports = {
     index,
     create,
@@ -7,10 +8,11 @@ module.exports = {
     edit,
     update,
     destroy,
+    updateStatus
 }
 
 /**
- * Create school 
+ * list school. 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -18,16 +20,17 @@ module.exports = {
 async function index(req, res) {
     try {
         let schools = await School.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/schools/index', { data: schools });
-    } catch {
+        return res.render('../views/admin/schools/index', { data: schools, moment: res.locals.moment });
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 /**
- * create school
+ * create school.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -35,16 +38,16 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         return res.render('../views/admin/schools/create');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
-
 /**
- * store school
+ * store school.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -58,15 +61,11 @@ async function store(req, res) {
     } catch (e) {
         console.log(e);
         return res.status(500).json({ "success": false, "message": "Something went wrong!" });
-        // return res.status(500).json({
-        //     message: 'Internal Server Error'
-        // })
     }
 }
 
-
 /**
- * edit school
+ * edit school.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -78,16 +77,16 @@ async function edit(req, res) {
         if (school) {
             return res.render('../views/admin/schools/edit', { data: school[0] });
         }
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
-
 /**
- * update school
+ * update school.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -104,9 +103,8 @@ async function update(req, res) {
     }
 }
 
-
 /**
- * delete school
+ * delete school.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -119,9 +117,32 @@ async function destroy(req, res) {
             req.flash('success', 'School is deleted successfully !');
         }
         return res.redirect('/schools');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/** 
+ * update status of the school.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function updateStatus(req, res) {
+    try {
+        if (req.body.uid && req.body.uid != '') {
+            let status = ((req.body.status == 'true') ? '1' : '0');
+            let school = await School.findByIdAndUpdate(req.body.uid, { status: status });
+            console.log(school);
+            res.status(200).json({ "success": true, "message": "School status is updated successfully!" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
