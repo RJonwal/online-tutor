@@ -13,6 +13,7 @@ module.exports = {
     edit,
     update,
     destroy,
+    updateStatus
 }
 
 const slugify_options = {
@@ -237,6 +238,29 @@ async function destroy(req, res) {
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
+        })
+    }
+}
+
+
+/**
+ * update status of the Grade.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function updateStatus(req, res) {
+    try {
+        if (req.body.uid && req.body.uid != '') {
+            let status = ((req.body.status) ? 1 : 0);
+            let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
+            console.log(tutor);
+            res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
         })
     }
 }

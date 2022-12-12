@@ -45,5 +45,6 @@ router.post('/store', passport.checkAuthentication, uploadProfileImage.single('p
 router.get('/edit/:id', passport.checkAuthentication, tutorsController.edit);
 router.post('/update', passport.checkAuthentication, uploadProfileImage.single('profile_image'), updateTutorRequest, tutorsController.update);
 router.get('/destroy/:id', passport.checkAuthentication, tutorsController.destroy);
+router.post('/update-status', passport.checkAuthentication, tutorsController.updateStatus);
 
 module.exports = router;
