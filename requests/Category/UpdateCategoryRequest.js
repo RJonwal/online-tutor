@@ -11,8 +11,8 @@ var validateUser = () => [
     .isString()
     .withMessage('Category Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 1000 })
-    .withMessage('Grade Name length is should be in a valid range!')
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Category Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);

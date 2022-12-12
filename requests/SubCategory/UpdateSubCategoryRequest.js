@@ -7,7 +7,7 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('MainCategory is required')
+    .withMessage('MainCategory is required!')
     .bail()
     .isString()
     .withMessage('MainCategory should be a valid string!')
@@ -19,7 +19,7 @@ var validateUser = () => [
           console.log(category);
           console.log(category.length);
           if (category.length == 0) {
-            return Promise.reject('Please Select A Valid MainCategory!');
+            return Promise.reject('Select A Valid MainCategory!');
           }
         })
     })
@@ -33,8 +33,8 @@ var validateUser = () => [
     .isString()
     .withMessage('SubCategory Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
-    .withMessage('SubCategory Name length should be atleast 5 character!')
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('SubCategory Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
@@ -49,8 +49,8 @@ var validateUser = () => [
     .bail(),
   body('note')
     .optional({ checkFalsy: true })
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Note is should be atleast 5 character!')
+    .isString()
+    .withMessage('Note should be a valid string!')
     .bail(),
   body('status')
     .not()
