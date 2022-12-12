@@ -11,12 +11,12 @@ var validateUser = () => [
     .isString()
     .withMessage('Category Name should be a valid string!')
     .bail()
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Category Name length should be atleast 5 character')
+    .isLength({ min: 5, max: 1000 })
+    .withMessage('Grade Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return Category.findOne({ "name": value, _id: {$ne: req.body.category_id} })
+      return Category.findOne({ "name": value, _id: { $ne: req.body.category_id } })
         .then(category => {
           console.log(category);
           if (category != null) {
@@ -27,8 +27,8 @@ var validateUser = () => [
     .bail(),
   body('note')
     .optional({ checkFalsy: true })
-    .isLength({ min: 5, max: 255 })
-    .withMessage('Note is should be in a valid range!')
+    .isString()
+    .withMessage('Note should be a valid string!')
     .bail(),
   body('status')
     .not()
@@ -36,7 +36,7 @@ var validateUser = () => [
     .withMessage('The status can not be empty!')
     .bail()
     .isBoolean()
-    .withMessage('Please select a valid status!')
+    .withMessage('Select a valid status!')
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);

@@ -12,6 +12,7 @@ module.exports = {
     edit,
     update,
     destroy,
+    updateStatus,
 }
 
 const slugify_options = {
@@ -25,7 +26,7 @@ const slugify_options = {
 
 
 /**
- * Create SubCategory 
+ * list SubCategory 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -33,11 +34,11 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
-        console.log(subCategories);
-        return res.render('../views/admin/subCategories/index', { data: subCategories, fs: fs });
-    } catch {
+        return res.render('../views/admin/subCategories/index', { data: subCategories, fs: fs, moment: res.locals.moment });
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
@@ -54,11 +55,10 @@ async function create(req, res) {
         return res.render('../views/admin/subCategories/create', { data: activeCategories });
     } catch (e) {
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
-
 
 /**
  * store SubCategory
@@ -78,7 +78,6 @@ async function store(req, res) {
     }
 }
 
-
 /**
  * edit SubCategory
  * @param {*} req 
@@ -95,11 +94,10 @@ async function edit(req, res) {
         }
     } catch (e) {
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
-
 
 /**
  * update SubCategory
@@ -137,7 +135,6 @@ async function update(req, res) {
     }
 }
 
-
 /**
  * delete SubCategory
  * @param {*} req 
@@ -154,7 +151,29 @@ async function destroy(req, res) {
         return res.redirect('/subCategories');
     } catch (e) {
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/** 
+ * update status of the SubCategory.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function updateStatus(req, res) {
+    try {
+        if (req.body.uid && req.body.uid != '') {
+            let status = ((req.body.status == 'true') ? '1' : '0');
+            let subCategory = await SubCategory.findByIdAndUpdate(req.body.uid, { status: status });
+            console.log(subCategory);
+            res.status(200).json({ "success": true, "message": "SubCategory status is updated successfully!" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
         })
     }
 }

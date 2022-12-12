@@ -10,6 +10,7 @@ module.exports = {
     edit,
     update,
     destroy,
+    updateStatus
 }
 
 const slugify_options = {
@@ -23,7 +24,7 @@ const slugify_options = {
 
 
 /**
- * Create Category 
+ * list Category 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -31,10 +32,11 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let categories = await Category.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/categories/index', { data: categories, fs: fs });
-    } catch {
+        return res.render('../views/admin/categories/index', { data: categories, fs: fs, moment: res.locals.moment });
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
@@ -48,13 +50,13 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         return res.render('../views/admin/categories/create');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
-
 
 /**
  * store Category
@@ -69,7 +71,7 @@ async function store(req, res) {
         } else {
             req.body.category_image = '';
         }
- 
+
         let category = await Category.create(req.body);
         if (category) {
             res.status(200).json({ "success": true, "message": "Category is created successfully!", "redirectUrl": "/categories" });
@@ -77,12 +79,8 @@ async function store(req, res) {
     } catch (e) {
         console.log(e);
         return res.status(500).json({ "success": false, "message": "Something went wrong!" });
-        // return res.status(500).json({
-        //     message: 'Internal Server Error'
-        // })
     }
 }
-
 
 /**
  * edit Category
@@ -97,13 +95,13 @@ async function edit(req, res) {
         if (category) {
             return res.render('../views/admin/categories/edit', { data: category[0], fs: fs });
         }
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
-
 
 /**
  * update Category
@@ -142,6 +140,20 @@ async function update(req, res) {
                 } else {
 
                     if (req.body.is_remove == 1) {
+                        let category = await Category.find({ "_id": req.body.category_id });
+                        categoryData = category[0];
+                        let categoryImage = categoryData.category_image;
+                        const filePath = './assets/CategoryImage/' + categoryImage;
+
+                        if (categoryImage != '') {
+                            fs.exists(filePath, function (exists) {
+                                if (exists) {
+                                    fs.unlinkSync(filePath);
+                                } else {
+                                    // console.log('File not found, so not deleting.');
+                                }
+                            });
+                        }
                         let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
                             $set:
                             {
@@ -152,6 +164,7 @@ async function update(req, res) {
                                 status: req.body.status
                             }
                         })
+
                     }
                     else {
                         let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
@@ -171,10 +184,11 @@ async function update(req, res) {
         }
     } catch (e) {
         console.log(e);
-        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 }
-
 
 /**
  * delete Category
@@ -187,12 +201,44 @@ async function destroy(req, res) {
         let id = req.params.id;
         let categoryDeleted = await Category.findByIdAndDelete(id);
         if (categoryDeleted) {
+            let categoryImage = categoryDeleted.category_image;
+            const filePath = './assets/CategoryImage/' + categoryImage;
+            fs.exists(filePath, function (exists) {
+                if (exists) {
+                    fs.unlinkSync(filePath);
+                } else {
+                    console.log('File not found, so not deleted.');
+                }
+            });
             req.flash('success', 'Category is deleted successfully !');
         }
         return res.redirect('/categories');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/** 
+ * update status of the Category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function updateStatus(req, res) {
+    try {
+        if (req.body.uid && req.body.uid != '') {
+            let status = ((req.body.status == 'true') ? '1' : '0');
+            let category = await Category.findByIdAndUpdate(req.body.uid, { status: status });
+            console.log(category);
+            res.status(200).json({ "success": true, "message": "Category status is updated successfully!" });
+        }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
         })
     }
 }

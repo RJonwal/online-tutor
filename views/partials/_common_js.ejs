@@ -1,6 +1,4 @@
 <script>
-
-
   $(document).ready(function () {
     $('.dropify').dropify();
     $('.dropify-clear').on('click', function () {
@@ -108,7 +106,6 @@
     rootSelector: '[data-toggle=confirmation]'
   });
 
-
   $("#createSchool").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
@@ -145,7 +142,6 @@
       },
     })
   });
-
 
   $("#updateSchool").submit(function (e) {
     e.preventDefault();
@@ -184,89 +180,6 @@
     })
   });
 
-
-  $("#createCategory").submit(function (e) {
-    e.preventDefault();
-    $(document).find("span.text-danger").remove();
-    var form = $('#createCategory');
-    var formData = new FormData(form[0]);
-    formData.append('category_image', this.new_attachments)
-    var url = $('#createCategory').attr('action');
-    $("#storeCategoryBtn").prop('disabled', true);
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: "json",
-      data: formData,
-      processData: false,
-      contentType: false,
-      // beforeSend: function () {
-      //   $('#loading-bar-spinner').show();
-      // },
-      success: function (response) {
-        console.log(response);
-        if (response.success == true) {
-          window.location = response.redirectUrl;
-        }
-      },
-      error: function (response) {
-        console.log(response);
-        let errorMessages = '';
-        $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
-          console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-        })
-      },
-      complete: function () {
-        // $("#loading-bar-spinner").hide();
-        $("#storeCategoryBtn").prop('disabled', false);
-      },
-    })
-  });
-
-
-  $("#updateCategory").submit(function (e) {
-    e.preventDefault();
-    $(document).find("span.text-danger").remove();
-    var form = $('#updateCategory');
-    var formData = new FormData(form[0]);
-    formData.append('category_image', this.new_attachments)
-    var url = $('#updateCategory').attr('action');
-    $("#updateCategoryBtn").prop('disabled', true);
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: "json",
-      data: formData,
-      processData: false,
-      contentType: false,
-      // beforeSend: function () {
-      //   $('#loading-bar-spinner').show();
-      // },
-      success: function (response) {
-        console.log(response);
-        if (response.success == true) {
-          window.location = response.redirectUrl;
-        }
-      },
-      error: function (response) {
-        console.log(response);
-        let errorMessages = '';
-        $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
-          console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-        })
-      },
-      complete: function () {
-        // $("#loading-bar-spinner").hide();
-        $("#updateCategoryBtn").prop('disabled', false);
-      },
-    })
-  });
-
-
   $("#createSubCategory").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
@@ -302,7 +215,6 @@
       },
     })
   });
-
 
   $("#updateSubCategory").submit(function (e) {
     e.preventDefault();
@@ -468,11 +380,11 @@
   });
 
 
-  // Country Phone Input
-  var input = document.querySelector("#phone");
-  window.intlTelInput(input, {
-    initialCountry: "Au",
-  });
+//  Country Phone Input
+  // var input = document.querySelector("#phone");
+  // window.intlTelInput(input, {
+  //   initialCountry: "Au",
+  // });
 
 
   /**
@@ -495,10 +407,12 @@
     })
   }
 
-  //update status
+  /**
+   * update status of a record
+   * 
+   * */
   $(document).on('change click', '.record-status', function (event) {
     var action = $(this).attr("data-url");
-   
     var recordUid = $(this).attr("data-uid");
     var status = $(this).prop('checked');
     Swal.fire({
@@ -519,7 +433,7 @@
               status: status,
             },
             success: function (response) {
-                window.location.reload();
+              window.location.reload();
             },
             error: function (response) {
               let errorMessages = '';
@@ -530,9 +444,11 @@
               });
             },
             complete: function () {
+              // $('#pageloader').css('display', 'none');
             }
           });
         } else {
+          window.location.reload();
           return false;
         }
       });
