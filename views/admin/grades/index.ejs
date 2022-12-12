@@ -4,7 +4,7 @@
     <!-- page title starts -->
     <div class="page-title">
       <div class="title_left">
-        <!-- <h3>Grade</h3> -->
+        <!-- <h3>Grades</h3> -->
       </div>
 
       <!-- <div class="title_right">
@@ -65,7 +65,7 @@
                             </label>
                           </td>
                           <td>
-                            <%=grade.created_at.toDateString()%>
+                            <%=moment(grade.created_at).format('d-M-Y H:I:A')%>
                           </td>
                           <td>
                             <a class="btn btn-info m-1" href="/grades/edit/<%=grade.id%>" data-toggle="tooltip"
@@ -93,11 +93,6 @@
 </div>
 
 <script type="text/javascript">
-  // $('#toggle-trigger').bootstrapToggle('Active');
-
-  // $(function () {
-  //    $('#chkToggle2').bootstrapToggle() 
-  // });
 
   $(document).on('change click', '.record-status', function (event) {
     var action = $(this).attr("data-url");
@@ -136,7 +131,7 @@
             }
           });
         } else {
-          // $('table').DataTable().ajax.reload(null, false);
+          window.location.reload();
           return false;
         }
       });

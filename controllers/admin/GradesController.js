@@ -12,7 +12,7 @@ module.exports = {
 
 
 /**
- * Create Grade.
+ * list Grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -20,7 +20,7 @@ module.exports = {
 async function index(req, res) {
     try {
         let grades = await Grade.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/grades/index', { data: grades });
+        return res.render('../views/admin/grades/index', { data: grades,  moment: res.locals.moment });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -57,7 +57,7 @@ async function store(req, res) {
     try {
         let grade = await Grade.create(req.body);
         if (grade) {
-            res.status(200).json({ "success": true, "message": "grade is created successfully!", "redirectUrl": "/grades" });
+            res.status(200).json({ "success": true, "message": "Grade is created successfully!", "redirectUrl": "/grades" });
         }
     } catch (e) {
         console.log(e);
@@ -117,7 +117,7 @@ async function destroy(req, res) {
     try {
         let grade = await Grade.findByIdAndDelete(req.params.id);
         if (grade) {
-            req.flash('success', 'grade is deleted successfully!');
+            req.flash('success', 'Grade is deleted successfully!');
         }
         return res.redirect('/grades');
     } catch (e) {
@@ -129,7 +129,7 @@ async function destroy(req, res) {
 }
 
 
-/**
+/** 
  * update status of the Grade.
  * @param {*} req 
  * @param {*} res 
