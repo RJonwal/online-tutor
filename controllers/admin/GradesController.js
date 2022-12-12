@@ -12,7 +12,7 @@ module.exports = {
 
 
 /**
- * list Grade.
+ * list grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -30,7 +30,7 @@ async function index(req, res) {
 }
 
 /**
- * create Grade.
+ * create grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -48,7 +48,7 @@ async function create(req, res) {
 
 
 /**
- * store Grade.
+ * store grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -67,7 +67,7 @@ async function store(req, res) {
 
 
 /**
- * edit Grade.
+ * edit grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -87,7 +87,7 @@ async function edit(req, res) {
 }
 
 /**
- * update Grade.
+ * update grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -107,7 +107,7 @@ async function update(req, res) {
 }
 
 /**
- * delete Grade.
+ * delete grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -130,7 +130,7 @@ async function destroy(req, res) {
 
 
 /** 
- * update status of the Grade.
+ * update status of the grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 

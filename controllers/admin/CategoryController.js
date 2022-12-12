@@ -24,7 +24,7 @@ const slugify_options = {
 
 
 /**
- * list Category 
+ * list category 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -42,7 +42,7 @@ async function index(req, res) {
 }
 
 /**
- * create Category
+ * create category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -59,7 +59,7 @@ async function create(req, res) {
 }
 
 /**
- * store Category
+ * store category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -83,7 +83,7 @@ async function store(req, res) {
 }
 
 /**
- * edit Category
+ * edit category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -104,7 +104,7 @@ async function edit(req, res) {
 }
 
 /**
- * update Category
+ * update category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -191,7 +191,7 @@ async function update(req, res) {
 }
 
 /**
- * delete Category
+ * delete category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -222,7 +222,7 @@ async function destroy(req, res) {
 }
 
 /** 
- * update status of the Category.
+ * update status of the category.
  * @param {*} req 
  * @param {*} res 
  * @returns 
