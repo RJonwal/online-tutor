@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
     },
     title: {
-        type: Number,
+        type: String,
         default: '',
     },
     first_name: {
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     dial_code: {
         type: Number,
         minlength: 1,
-        maxlength: 15,
+        maxlength: 5,
         default: null
     },
     iso_code: {

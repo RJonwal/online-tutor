@@ -35,7 +35,9 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs });
+        let oids =  tutors[0].subject_ids;
+        let subject = await Category.find({ _id: {$in : oids}})
+        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs,subject:subject });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -130,8 +132,7 @@ async function edit(req, res) {
 async function update(req, res) {
     try {
         if (req.body.tutor_id && req.body.tutor_id != '') {
-            console.log(req.body);
-
+            console.log(req.body.subject_ids);
             let tutor = await User.find({ "_id": req.body.tutor_id, "role": 2 });
             if (tutor) {
                 tutorData = tutor[0];
@@ -160,15 +161,13 @@ async function update(req, res) {
                     req.body.profile_image = req.file.filename;
 
                     let tutorUpdated = await User.findByIdAndUpdate(req.body.tutor_id, req.body)
-
-
                 } else {
-
                     if (req.body.is_remove == 1) {
                         let tutorUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
                             $set:
                             {
-                                tutor_subject_ids: req.body.tutor_subject_ids,
+                                subject_ids: req.body.subject_ids,
+                                title: req.body.title,
                                 first_name: req.body.first_name,
                                 last_name: req.body.last_name,
                                 email: req.body.email,
@@ -186,7 +185,8 @@ async function update(req, res) {
                         let tutorUpdated = await User.updateOne({ "_id": req.body.tutor_id }, {
                             $set:
                             {
-                                tutor_subject_ids: req.body.tutor_subject_ids,
+                                subject_ids: req.body.subject_ids,
+                                title: req.body.title,
                                 first_name: req.body.first_name,
                                 last_name: req.body.last_name,
                                 email: req.body.email,

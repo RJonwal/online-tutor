@@ -1,4 +1,15 @@
 <div class="right_col" role="main">
+  <div class="">
+
+    <!-- page title starts -->
+    <div class="page-title">
+      <div class="title_left">
+        <!-- <h3>Category</h3> -->
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- page title end -->
+
     <!-- page content starts-->
     <div class="row main_row">
       <div class="x_panel form_panel">
@@ -13,16 +24,14 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <label class="col-form-label label-align" for="tutor_subject_ids">Subjects<span
+                      <label class="col-form-label label-align" for="subject_ids">Subjects<span
                           class="required">*</span>
                       </label>
-                      <select class="selectlink form-control" name="tutor_subject_ids" id="tutor_subject_ids" tabindex="-1"
+                      <select class="selectlink form-control" name="subject_ids" id="tutor_subject_ids" tabindex="-1"
                         multiple>
                         <option value="">Please Select Subjects </option>
                         <% let i=0; for(subject of subjects) { %>
-                          <option value="<%=subject.id%>" <%=data.first_name==subject.id ? 'selected' : '' %>>
-                            <%=subject.name%>
-                          </option>
+                          <option value="<%=subject.id%>" <% if (data.subject_ids.includes(subject.id)) { %> selected <% } %>><%=subject.name%></option>
                           <% } %>
                       </select>
                     </div>

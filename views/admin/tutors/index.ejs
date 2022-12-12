@@ -56,7 +56,7 @@
                   <th>Image</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <!-- <th>Subject</th> -->
+                  <th>Subject</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -85,10 +85,12 @@
                     <td>
                       <%=tutor.email %>
                     </td>
-                    <!-- <td>
-                      <%=tutor.subject_ids %>
+                    <td>
+                      <% for(sub of subject) {%>
+                        <%=sub.name + ','%>
+                      <%}%>
                     </td>
-             -->
+            
                     <td>
                       <label class="checkbox-inline">
                         <!-- <input type="checkbox" name="status" class="record-status"  data-toggle="toggle" data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger" data-url="/tutor/update-status" data-uid="<%=tutor.id%>" id="toggle-trigger" <%=tutor.status==1 ? 'checked' : '' %>>
