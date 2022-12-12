@@ -407,7 +407,7 @@ ul {
 
 .nav.side-menu>li.active>a {
     border: none;
-    /* background: var(--secondary); */
+    background: var(--secondary);
     color: #fff;
 }
 
@@ -2078,9 +2078,7 @@ span.total-count {
 .x_content .tutor_form .input-group .form-control{
     border-radius: 0px 5px 5px 0px;
 }
-/* .x_content .tutor_form .input-group .form-control {
-    padding-left: 52px;
-} */
+
 .x_content .tutor_form .form-control:focus{
     box-shadow: 5px 5px 16px rgb(0 29 61 / 13%) !important;
 }
