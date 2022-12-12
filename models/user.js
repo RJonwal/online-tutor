@@ -15,9 +15,21 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    dial_code: {
+        type: Number,
+        minlength: 1,
+        maxlength: 15,
+        default: null
+    },
+    iso_code: {
+        type: String,
+        minlength: 1,
+        maxlength: 5,
+        default: null
+    },
     phone: {
         type: Number,
-        minlength: 10,
+        minlength: 5,
         maxlength: 15,
         default: null
     },
