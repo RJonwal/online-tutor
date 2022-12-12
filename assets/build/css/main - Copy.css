@@ -498,8 +498,6 @@ ul {
 /* Footer */
 footer {
     padding: 15px 20px;
-    z-index: 0;
-    position: relative;
 }
 
 /* Footer */
@@ -1023,18 +1021,13 @@ span.total-count {
     text-align: center;
 }
 
-.right_col .form-wizard .form-design .drop-file .form-label,
-.x_content .drop-file label {
+.right_col .form-wizard .form-design .drop-file .form-label {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
-    text-align: center;
 }
-.x_content .drop-file{
-    text-align: center;
-}
-.right_col .form-wizard .form-design .drop-file .dropify-wrapper,
-.x_content .drop-file .dropify-wrapper {
+
+.right_col .form-wizard .form-design .drop-file .dropify-wrapper {
     border: 2px dashed #4A4674;
     border-radius: 10px;
     height: 250px;
@@ -1042,14 +1035,12 @@ span.total-count {
     margin: 0 auto;
 }
 
-.right_col .form-wizard .dropify-wrapper .dropify-message span.file-icon:before,
-.x_content .drop-file .dropify-wrapper .dropify-message span.file-icon:before {
+.right_col .form-wizard .dropify-wrapper .dropify-message span.file-icon:before {
     color: #4A4674;
     font-weight: 900;
 }
 
-.right_col .form-wizard .dropify-wrapper .dropify-message p,
-.x_content .drop-file .dropify-wrapper .dropify-message p{
+.right_col .form-wizard .dropify-wrapper .dropify-message p {
     color: var(--lightBlue);
     font-size: 12px;
     font-weight: 500;
@@ -2017,49 +2008,44 @@ span.total-count {
 }
 
 /* ............new css tutor create page.......... */
-.x_content .tutor_form .input-group-text {
+.x_content form#createTutor .input-group-text {
     border-radius: 5px 0 0 5px;
-    background-color: #001d3d;
-    border-color: #001d3d;
-    /* position: absolute;
+    background-color: #f8fafb;
+    position: absolute;
+    border-color: #f8fafb;
     left: 0;
     right: auto;
     top: 0;
-    bottom: 0; */
+    bottom: 0;
     z-index: 1;
 }
-.x_content .tutor_form input.form-control, .x_content .tutor_form select.form-control{
+.x_content form#createTutor input.form-control, .x_content form#createTutor select.form-control{
     height: 45px;
 }
-.x_content .tutor_form .form-control, 
-.x_content .tutor_form span.select2-selection.select2-selection--multiple{
-    box-shadow: 9px 2px 29px 0px rgb(0 29 61 / 9%);
+.x_content form#createTutor .form-control, 
+.x_content form#createTutor span.select2-selection.select2-selection--multiple{
+    box-shadow: 5px 5px 16px rgb(0 29 61 / 13%);
     background: #fff;
-    border: 1px solid #c5dae5;
+    border: 0;
     border-radius: 5px;
     font-size:13px;
 }
-.x_content .tutor_form .input-group .form-control{
-    border-radius: 0px 5px 5px 0px;
-}
-/* .x_content .tutor_form .input-group .form-control {
+.x_content form#createTutor .input-group .form-control {
     padding-left: 52px;
-} */
-.x_content .tutor_form .form-control:focus{
+}
+.x_content form#createTutor .form-control:focus{
     box-shadow: 5px 5px 16px rgb(0 29 61 / 13%) !important;
 }
-.x_content .tutor_form .dropify-wrapper {
+.x_content form#createTutor .dropify-wrapper {
     border: 2px dashed #D3E4EA;
     background: #fff !important;
     border-radius: 10px;
 }
 .x_content label {
     text-align: left;
-    font-size: 14px;
-    font-weight: 500;
     color: var(--dblue);
 }
-.form-control-feedback.right {
+.focus-input .form-control-feedback {
     margin-top: 12px; right:0px;
 }
 .cal_color_group input {
@@ -2094,7 +2080,7 @@ span.help-block{
     content: '';
     position: absolute;
     border-radius: 100%;
-    z-index: 0;
+    z-index: -1;
     overflow: hidden;
 }
 .select2-container .select2-search--inline .select2-search__field {
