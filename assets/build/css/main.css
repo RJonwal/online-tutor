@@ -7,6 +7,7 @@
     --green: #05EF63;
     --lightgray: #F8FAFB;
     --border-color: #D2D6E3;
+    --dgreen:#28A745;
 }
 
 body {
@@ -1707,8 +1708,43 @@ span.total-count {
 
 /* Main Content Css */
 
+.x_content table .checkbox label .toggle, .x_content table .checkbox-inline .toggle{
+    margin: 0;
+    position: relative;
+}
+.x_content table .checkbox-inline .btn{
+    border-radius: 30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 5px 12px;
+}
+.x_content table .checkbox-inline .btn.btn-info{
+    background: var(--dgreen);
+    border-color: var(--dgreen);
+}
+.x_content table .checkbox-inline .btn.btn-danger{
+    background: var(--secondary);
+    border-color: var(--secondary);
+    padding-left: 26px;
+}
+.x_content table .checkbox-inline .btn.toggle-off{
+    text-align: right;
+}
+.x_content table .checkbox-inline .toggle-handle{
+    background: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    top: 5px;
+    right: 13px;
+}
 
-
+.x_content table .checkbox-inline .btn-danger.off .toggle-group .toggle-handle{
+    left: 13px;
+}
 .mce-notification-warning * {
     display: none !important;
 }
