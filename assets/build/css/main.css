@@ -1863,6 +1863,9 @@ span.total-count {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+.form_panel .x_content .form-group{
+    margin-bottom: 15px;
+}
 .form_panel .x_content .input-group{
     flex-wrap: wrap;
     margin-bottom: 10px;
