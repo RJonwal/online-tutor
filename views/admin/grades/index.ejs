@@ -61,12 +61,8 @@
                           </td>
                           <td>
                             <label class="checkbox-inline">
-                              <input type="checkbox" name="status" class="record-status" checked data-toggle="toggle"
-                                data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
-                                data-url="/grades/update-status" data-uid="<%=grade.id%>" id="toggle-trigger"  >
+                              <input type="checkbox" name="status" class="record-status"  data-toggle="toggle" data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger" data-url="/grades/update-status" data-uid="<%=grade.id%>" id="toggle-trigger" <%=grade.status==1 ? 'checked' : '' %>>
                             </label>
-
-                            <%=grade.status==1 ? 'checked' : '' %>
                           </td>
                           <td>
                             <%=grade.created_at.toDateString()%>
@@ -77,8 +73,7 @@
 
                             <a href="javascript:void(0)" class="btn btn-info m-1"
                               onclick="confirmBeforeDeletion('/grades/destroy/<%=grade.id%>')"> <i class="fa fa-trash"
-                                style="color: #ffffff;" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                                title="Delete"></i></a>
+                                style="color: #ffffff;" data-toggle="tooltip" rel="tooltip" data-placement="top"title="Delete"></i></a>
                           </td>
                         </tr>
                         <% } %>
@@ -104,8 +99,6 @@
   //    $('#chkToggle2').bootstrapToggle() 
   // });
 
-
-
   $(document).on('change click', '.record-status', function (event) {
     var action = $(this).attr("data-url");
     var recordUid = $(this).attr("data-uid");
@@ -128,7 +121,7 @@
               status: status,
             },
             success: function (response) {
-              //  window.location.reload();
+                window.location.reload();
             },
             error: function (response) {
               let errorMessages = '';

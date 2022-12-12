@@ -53,8 +53,8 @@
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>Name</th>
                   <th>Image</th>
+                  <th>Name</th>
                   <th>Email</th>
                   <!-- <th>Subject</th> -->
                   <th>Status</th>
@@ -68,10 +68,6 @@
                       <%=++i%>
                     </td>
                     <td>
-                      <%= tutor.title == 1 ? 'Mrs. ' : 'Mr. ' %>
-                      <%=tutor.first_name+' '+tutor.last_name %>
-                    </td>
-                    <td>
                       <div class="avatar avatar-blue mr-3">
                         <% if (tutor.profile_image !='' &&
                           fs.existsSync("assets/ProfileImage/"+tutor.profile_image)) { %>
@@ -83,6 +79,10 @@
                       </div>
                     </td>
                     <td>
+                      <%= tutor.title == 1 ? 'Mrs. ' : 'Mr. ' %>
+                      <%=tutor.first_name+' '+tutor.last_name %>
+                    </td>
+                    <td>
                       <%=tutor.email %>
                     </td>
                     <!-- <td>
@@ -90,7 +90,9 @@
                     </td>
              -->
                     <td>
-                      <%= tutor.status==1 ? 'Active' : 'Deactive' %>
+                      <label class="checkbox-inline">
+                        <input type="checkbox" name="status" class="record-status"  data-toggle="toggle" data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger" data-url="/tutor/update-status" data-uid="<%=tutor.id%>" id="toggle-trigger" <%=tutor.status==1 ? 'checked' : '' %>>
+                      </label>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">

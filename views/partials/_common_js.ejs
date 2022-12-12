@@ -495,5 +495,47 @@
     })
   }
 
+  //update status
+  $(document).on('change click', '.record-status', function (event) {
+    var action = $(this).attr("data-url");
+   
+    var recordUid = $(this).attr("data-uid");
+    var status = $(this).prop('checked');
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to update status of this record?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: `Update`,
+    })
+      .then((result) => {
+        // $('#pageloader').css('display', 'flex');
+        if (!result.isDismissed) {
+          $.ajax({
+            type: "POST",
+            url: action,
+            data: {
+              uid: recordUid,
+              status: status,
+            },
+            success: function (response) {
+                window.location.reload();
+            },
+            error: function (response) {
+              let errorMessages = '';
+              $.each(response.responseJSON.errors, function (key, value) {
+                $.each(value, function (i, message) {
+                  errorMessages += '<li>' + message + '</li>';
+                });
+              });
+            },
+            complete: function () {
+            }
+          });
+        } else {
+          return false;
+        }
+      });
+  });
 
 </script>

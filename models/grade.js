@@ -7,7 +7,7 @@ const gradeSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
-        default: 1
+        default: ''
     },
     deleted_at: {
         type: Date,

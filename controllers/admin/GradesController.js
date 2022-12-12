@@ -138,7 +138,7 @@ async function destroy(req, res) {
 async function updateStatus(req, res) {
     try {
         if (req.body.uid && req.body.uid != '') {
-            let status = ((req.body.status) ? 1 : 0);
+            let status = ((req.body.status == 'true') ? '1' : '0');
             let grade = await Grade.findByIdAndUpdate(req.body.uid, { status: status });
             console.log(grade);
             res.status(200).json({ "success": true, "message": "Grade status is updated successfully!" });
