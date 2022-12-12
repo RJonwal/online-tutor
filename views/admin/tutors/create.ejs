@@ -1,29 +1,20 @@
 <div class="right_col" role="main">
-  <div class="">
     <!-- page content starts-->
     <div class="row main_row">
-      <div class="x_panel">
+      <div class="x_panel form_panel">
         <div class="x_title">
-          <!-- <h2>Add Tutor<small></small></h2> -->
-          <h3 class="title-text mb-0">Basic Information</h3>
-          <div class="clearfix"></div>
+          <h3 class="title-text">Create Tutor</h3>
         </div>
         <div class="x_content">
-          <br>
-        
-          
+          <form id="createTutor" action="./store" method="post" class="form-horizontal form-label-left tutor_form" enctype="multipart/form-data" autocomplete="off">
           <div class="row">
-            <div class="col-md-8">
-              <form id="createTutor" action="./store" method="post" class="form-horizontal form-label-left tutor_form"
-            enctype="multipart/form-data" autocomplete="off">
-          
+            <div class="col-md-8">          
             <div class="row">
               <div class="col-md-12">
-                <label class="col-form-label label-align" for="subject_ids">Subjects<span
-                  class="required">*</span>
-                </label>
-                <div class="input-group">
-                  
+                <div class="form-group">
+                  <label class="col-form-label label-align" for="subject_ids">Subjects<span
+                    class="required">*</span>
+                  </label>
                   <select class="form-control" name="subject_ids" id="subject_ids" tabindex="-1" multiple>
                     <% let i=0; for(subject of data) { %>
                       <option value="<%=subject.id%>">
@@ -34,137 +25,157 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <label class="col-form-label label-align" for="title">Title<span
-                  class="required">*</span>
-                </label>
-                <div class="form-group input-group">
-                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="title" id="title">
-                    <option value="0">Mr</option>
-                    <option value="1">Mrs</option>
-                  </select>
+                <div class="form-group">
+                  <label class="col-form-label label-align" for="title">Title<span
+                    class="required">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                    <select class="form-control" name="title" id="title">
+                      <option value="0">Mr</option>
+                      <option value="1">Mrs</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             
             <div class="col-md-6">
-              <label class="col-form-label label-align" for="first_name">First Name<span
-                  class="required">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
-                  id="first_name">
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="col-form-label label-align" for="last_name">Last Name<span
-                  class="required">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name">
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="col-form-label label-align" for="phone">Phone No.<span
-                  class="required">*</span>
-              </label>
               <div class="form-group">
-                <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone">
+                <label class="col-form-label label-align" for="first_name">First Name<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
+                    id="first_name">
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="col-form-label label-align" for="email">Email<span
-                  class="required">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="last_name">Last Name<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name">
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span
-                  class="required">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                <input type="password" name="password" class="form-control" placeholder="Enter Password.."
-                  id="password-field">
-                <span toggle="#password-field"
-                  class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+              <div class="form-group">
+                <label class="col-form-label label-align" for="phone">Phone No.<span
+                    class="required">*</span>
+                </label>
+                <div class="form-group">
+                  <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="email">Email<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                  <input type="password" name="password" class="form-control" placeholder="Enter Password.."
+                    id="password-field">
+                  <span toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+                </div>
               </div>
             </div>
 
             <div class="col-md-12">
-              <label class="col-form-label label-align" for="address">Address</span>
-              </label>
               <div class="form-group">
-                <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
-                  id="address"></textarea>
+                <label class="col-form-label label-align" for="address">Address</span>
+                </label>
+                <div class="form-group">
+                  <textarea name="address" rows="5" class="form-control" placeholder="Enter Address.."
+                    id="address"></textarea>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-12 form-group">
-              <label class="col-form-label label-align" for="note">Note</span>
-              </label>
+            <div class="col-md-12">
               <div class="form-group">
-                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.." id="note"></textarea>
+                <label class="col-form-label label-align" for="note">Note</span>
+                </label>
+                <div class="form-group">
+                  <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.." id="note"></textarea>
+                </div>
               </div>
             </div>
 
            
-            <div class="col-md-6  form-group">
-              <label class="col-form-label col-md-6 col-sm-3 label-align" for="calendar_color">Calendar Color
-              </label>
-              <div class="col-md-6 col-sm-6 cal_color_group">
-                <input type="color" name="calendar_color" class="form-control" placeholder="Enter Calendar Color.."
-                  id="calendar_color">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="d-md-flex align-items-center">
+                  <label class="col-form-label label-align flex-shrink-0 mr-3" for="calendar_color">Calendar Color
+                  </label>
+                  <div class="cal_color_group w-100">
+                    <input type="color" name="calendar_color" value="#F47817" class="form-control" placeholder="Enter Calendar Color.."
+                      id="calendar_color">
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-6  form-group">
-              <label class="col-form-label col-md-6 col-sm-3 label-align" for="status">Status<span
-                  class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 ">
-                <select class="form-control" name="status" id="status">
-                  <option value="1">Activate</option>
-                  <option value="0">Deactivate</option>
-                </select>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="d-md-flex align-items-center">
+                <label class="col-form-label label-align  flex-shrink-0 mr-3" for="status">Status<span
+                    class="required">*</span>
+                </label>
+                <div class="w-100">
+                  <select class="form-control" name="status" id="status">
+                    <option value="1">Activate</option>
+                    <option value="0">Deactivate</option>
+                  </select>
+                </div>
+                </div>
               </div>
             </div>
 
           </div>
-          
-          </form>
-            </div>
+          </div>
             <div class="col-md-4">
-              <div class="col-md-12 drop-file">
+              <div class="form-group drop-file">
                 <label class="col-form-label label-align" for="profile_image">Profile
                   Image
                 </label>
                 <div class="input-group">
-                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify"
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto"
                     data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M">
                 </div>
               </div>
             </div>
           </div>
-          <div class="clearfix"></div>
           <div class="ln_solid"></div>
-          <div class="form-group row">
-            <div class="col-md-9 col-sm-9  offset-md-3 text-right">
-              <button type="submit" id="storeTutorBtn" class="btn form-button theme-btn">Save</button>
-            </div>
+          <div class="text-right">
+            <button type="submit" id="storeTutorBtn" class="btn form-button theme-btn">Save</button>
           </div>
+        </form>
+         
         </div>
       </div>
     </div>
     <!-- page title end -->
-  </div>
 </div>
 
 
