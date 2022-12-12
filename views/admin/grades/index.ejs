@@ -65,7 +65,7 @@
                             </label>
                           </td>
                           <td>
-                            <%=grade.created_at.toDateString()%>
+                            <%=moment(grade.created_at).format('DD-MM-YYYY H:I:A')%>
                           </td>
                           <td>
                             <a class="btn btn-info m-1" href="/grades/edit/<%=grade.id%>" data-toggle="tooltip"
@@ -136,7 +136,7 @@
             }
           });
         } else {
-          // $('table').DataTable().ajax.reload(null, false);
+          window.location.reload();
           return false;
         }
       });

@@ -12,7 +12,7 @@ module.exports = {
 
 
 /**
- * Create Grade.
+ * list Grade.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -20,7 +20,7 @@ module.exports = {
 async function index(req, res) {
     try {
         let grades = await Grade.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/grades/index', { data: grades });
+        return res.render('../views/admin/grades/index', { data: grades,  moment: res.locals.moment });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -129,7 +129,7 @@ async function destroy(req, res) {
 }
 
 
-/**
+/** 
  * update status of the Grade.
  * @param {*} req 
  * @param {*} res 
