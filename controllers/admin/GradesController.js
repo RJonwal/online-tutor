@@ -57,7 +57,7 @@ async function store(req, res) {
     try {
         let grade = await Grade.create(req.body);
         if (grade) {
-            res.status(200).json({ "success": true, "message": "grade is created successfully!", "redirectUrl": "/grades" });
+            res.status(200).json({ "success": true, "message": "Grade is created successfully!", "redirectUrl": "/grades" });
         }
     } catch (e) {
         console.log(e);
@@ -117,7 +117,7 @@ async function destroy(req, res) {
     try {
         let grade = await Grade.findByIdAndDelete(req.params.id);
         if (grade) {
-            req.flash('success', 'grade is deleted successfully!');
+            req.flash('success', 'Grade is deleted successfully!');
         }
         return res.redirect('/grades');
     } catch (e) {
