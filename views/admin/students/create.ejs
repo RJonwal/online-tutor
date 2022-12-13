@@ -6,7 +6,7 @@
         <h3 class="title-text">Add Student</h3>
       </div>
       <div class="x_content">
-        <form id="createStudent" action="./store" method="post" class="form-horizontal form-label-left" enctype="multipart/form-data">
+        <form id="createStudent" action="./store" method="post" class="form-horizontal form-label-left"git >
           <div class="row">
             <div class="col-md-8">
               <div class="row">
@@ -164,7 +164,6 @@
     $(document).find("span.text-danger").remove();
     var form = $('#createStudent');
     var formData = new FormData(form[0]);
-    formData.append('profile_image', this.new_attachments)
     var url = $('#createStudent').attr('action');
     $("#storeStudentBtn").prop('disabled', true);
     $.ajax({
@@ -172,14 +171,12 @@
       url: url,
       dataType: "json",
       data: formData,
-      processData: false,
-      contentType: false,
       success: function (response) {
         console.log(response);
         if (response.success == true) {
           window.location = response.redirectUrl;
         }
-      }, 
+      },
       error: function (response) {
         console.log(response);
         let errorMessages = '';
@@ -187,13 +184,15 @@
           console.log(field_name);
           console.log(error);
           $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+          $("#storeCategoryBtn").prop('disabled', false);
+
         })
       },
       complete: function () {
         // $("#loading-bar-spinner").hide();
-        $("#storeStudentBtn").prop('disabled', false);
-      },
-    })
+        $("#storeCategoryBtn").prop('disabled', false);
+      }
+     })
   });
 
 // phone number validate start intlTelInput
