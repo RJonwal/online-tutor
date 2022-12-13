@@ -3,7 +3,7 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Add SubCategory</h3>
+        <h3 class="title-text">Add Sub Category</h3>
       </div>
       <div class="x_content">
         <form id="createSubCategory" action="./store" method="post" class="form-horizontal form-label-left">
@@ -28,13 +28,19 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="name">SubCategory Name<span
+                <label class="col-form-label label-align" for="name">Sub Category Name<span
                   class="required">*</span>
                 </label>
                 <div class="input-group">
                   <span class="input-group-text"><img src="/images/subcategory.svg" class="mCS_img_loaded"></span>
                   <input type="text" name="name" class="form-control" placeholder="Enter Category Name.." id="name">
                 </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="note">Note</span></label>
+                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.." id="note"></textarea>
               </div>
             </div>
             <div class="col-md-6">
@@ -49,12 +55,6 @@
                     <option value="0">Deactivate</option>
                   </select>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="note">Note</span></label>
-                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.." id="note"></textarea>
               </div>
             </div>
           </div> 

@@ -3,7 +3,7 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Edit SubCategory</h3>
+        <h3 class="title-text">Edit Sub Category</h3>
       </div>
       <div class="x_content">
         <form id="updateSubCategory" action="/subCategories/update" method="post"
@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="name">SubCategory Name<span
+                <label class="col-form-label label-align" for="name">Sub Category Name<span
                   class="required">*</span>
                 </label>
                 <div class="input-group">
@@ -38,6 +38,14 @@
                   <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
                   required="required" id="name" value="<%=data.name %>">
                 </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="note">Note</span>
+                </label>
+                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
+                id="note"><%=data.note %></textarea>
               </div>
             </div>
             <div class="col-md-6">
@@ -52,14 +60,6 @@
                     <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
                   </select>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="note">Note</span>
-                </label>
-                <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
-                id="note"><%=data.note %></textarea>
               </div>
             </div>
           </div>

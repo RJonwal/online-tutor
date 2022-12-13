@@ -3,7 +3,7 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Create Tutor</h3>
+        <h3 class="title-text">Add Tutor</h3>
       </div>
       <div class="x_content">
         <form id="createTutor" action="./store" method="post" class="form-horizontal form-label-left tutor_form" enctype="multipart/form-data" autocomplete="off">
@@ -95,8 +95,8 @@
               <label class="col-form-label label-align" for="subject_ids">Subject<span
                 class="required">*</span>
               </label>
-              <div class="input-group">
-                <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+              <div class="input-group flex-nowrap">
+                <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
                 <select class="form-control" name="subject_ids" id="subject_ids" tabindex="-1" multiple>
                   <% let i=0; for(subject of data) { %>
                     <option value="<%=subject.id%>">
@@ -111,8 +111,9 @@
             <div class="form-group">
                 <label class="col-form-label label-align" for="calendar_color">Calendar Color
                 </label>
-                <div class="cal_color_group w-100">
-                  <input type="text" name="calendar_color" value="#F47817" class="form-control" placeholder="Enter Calendar Color.."
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="calendar_color" class="form-control" placeholder="Enter Calendar Color.."
                     id="calendar_color">
                 </div>
             </div>

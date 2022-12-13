@@ -92,8 +92,9 @@ ul {
 
 /* Login CSS */
 .login{
-  background: var(--primary);
+  background: var(--primary) url(../../images/multi-object.svg) no-repeat right center / contain;
   height: 100%;
+  overflow: hidden;
 }
 .login-blocks{
     display: flex;
@@ -106,26 +107,14 @@ ul {
     padding: 30px;
 }
 .login-blocks .left-box{
-    position: relative;
-    z-index: 1;
     height: 100%;
+    background: url(../../images/loginimg.png) no-repeat center center / contain,  url(../../images/object1.svg) no-repeat left 10% top 35%, url(../../images/object2.svg) no-repeat right 30% bottom 10%, url(../../images/cricle-bg.svg) no-repeat left center / cover;
 }
-.login-blocks .left-box::after{
-    content: "";
-    background: #fff;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    border-radius: 50%;
-}
+
 .login-blocks .left-box img.logimg{
     width: 100%;
     height: auto;
+    margin-top:10%;
 }
 .login-blocks .login-form{
     max-width: 560px;
@@ -1897,8 +1886,42 @@ span.total-count {
     box-shadow: 9px 2px 29px 0px rgb(0 29 61 / 9%);
     background: #fff;
     border: 1px solid #c5dae5;
-    border-radius: 5px;
+    border-radius:0 5px 5px 0; 
     font-size:12px;
+    color: var(--dblue);
+}
+.form_panel .x_content textarea.form-control{
+    border-radius: 5px;
+}
+.form_panel .x_content .iti.iti--allow-dropdown{
+    border-radius: 5px;
+}
+.form_panel .x_content .iti.iti--allow-dropdown .form-control{
+    border-radius: 5px;
+}
+.form_panel .x_content .iti--separate-dial-code .iti__selected-flag{
+    background-color: var(--primary);
+    border-radius: 5px 0 0 5px;
+    color: #fff;
+}
+.form_panel .x_content .iti--separate-dial-code .iti__selected-flag .iti__arrow{
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+.form_panel .x_content .phone-group #error-msg{
+    color: #f00;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 5px;
+    display: block !important;
+}
+.form_panel .x_content .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice{
+    background-color: var(--exLightBlue);
+    border-radius: 3px;
+    color: var(--dblue);
+    margin-top: 6px;
+}
+.form_panel .x_content .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice .select2-selection__choice__remove{
     color: var(--dblue);
 }
 .form_panel .x_content .input-group .form-control{
@@ -1945,6 +1968,7 @@ span.total-count {
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
+
 .form_panel .x_content span.help-block{
     width: 100%;
     margin-top: 5px;
@@ -1981,7 +2005,27 @@ span.total-count {
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);
 }
 
-
+.card-block .st-card{
+    text-align: center;
+    border-right: 1px solid var(--border-color);
+    padding: 15px;
+}
+.card-block .col-sm-12.col-md-4:last-child .st-card{
+    border: none;
+}
+.card-block .st-card h4{
+    color: var(--dblue);
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
+.card-block .st-card p{
+    color: var(--exLightBlue);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+}
 
 .mce-notification-warning * {
     display: none !important;
@@ -2082,7 +2126,12 @@ span.total-count {
     .x_panel.form_panel{
         padding: 20px;
     }
-
+    .card-block .st-card{
+        margin-bottom: 20px;
+        border-right:none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
 }
 
 @media(max-width:575px) {
