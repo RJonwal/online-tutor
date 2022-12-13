@@ -10,20 +10,6 @@
         <div class="row">
           <div class="col-md-8">          
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="subject_ids">Subjects<span
-                  class="required">*</span>
-                </label>
-                <select class="form-control" name="subject_ids" id="subject_ids" tabindex="-1" multiple>
-                  <% let i=0; for(subject of data) { %>
-                    <option value="<%=subject.id%>">
-                      <%=subject.name%>
-                    </option>
-                    <% } %>
-                </select>
-              </div>
-            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="col-form-label label-align" for="title">Title<span
@@ -103,14 +89,17 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label class="col-form-label label-align" for="status">Status<span
-                  class="required">*</span>
+              <label class="col-form-label label-align" for="subject_ids">Subject<span
+                class="required">*</span>
               </label>
               <div class="input-group">
-                <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
-                <select class="form-control" name="status" id="status">
-                  <option value="1">Activate</option>
-                  <option value="0">Deactivate</option>
+                <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                <select class="form-control" name="subject_ids" id="subject_ids" tabindex="-1" multiple>
+                  <% let i=0; for(subject of data) { %>
+                    <option value="<%=subject.id%>">
+                      <%=subject.name%>
+                    </option>
+                    <% } %>
                 </select>
               </div>
             </div>
@@ -146,7 +135,20 @@
               </div>
             </div>
           </div>
-
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-form-label label-align" for="status">Status<span
+                  class="required">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
+                <select class="form-control" name="status" id="status">
+                  <option value="1">Activate</option>
+                  <option value="0">Deactivate</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
         </div>
           <div class="col-md-4">
