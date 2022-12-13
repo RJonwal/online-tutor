@@ -21,6 +21,7 @@
 
   <!-- Custom Theme Style -->
   <link href="/build/css/custom.min.css" rel="stylesheet">
+  <link href="/build/css/main.css" rel="stylesheet">
    <!--- notify CDN -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" />
 
@@ -28,35 +29,36 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 
-<body class="login">
-  <div>
+<body>
+  <div class="login">
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
-
-    <div class="login_wrapper">
-      <div class="animate form login_form">
-        <section class="login_content">
-          <form action="./sign-in" method="post">
-            <h1>Login Form</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Username" name="email" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Password" name="password" required="" />
-            </div>
-            <div class="row">
-              <div class="col-md-6 text-left">
-                <button type="submit" class="btn btn-primary">Login</button>
-              </div>
-              <div class="col-md-6 text-right">
-                <a class="reset_pass" href="./forget-password">Lost your password?</a>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-          </form>
-        </section>
+    <div class="login-blocks">
+      <div class="left-box">
+        <a href="javascript:void(0);" class="logo-top"><img src="/images/logo.svg"> <span>Pioneers Tutoring</span></a>
+        <img class="logimg" src="/images/loginimg.png" alt="img">
       </div>
+      <div class="login-form">
+        <form action="./sign-in" method="post">
+          <h1>Login Form</h1>
+          <div>
+            <input type="text" class="form-control" placeholder="Username" name="email" required="" />
+          </div>
+          <div>
+            <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="col-md-6 text-right">
+              <a class="reset_pass" href="./forget-password">Lost your password?</a>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </form>
     </div>
+    </div>  
   </div>
 </body>
 <script>

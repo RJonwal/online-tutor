@@ -1,67 +1,45 @@
 <div class="right_col" role="main">
-  <div class="">
-
-    <!-- page title starts -->
-    <div class="page-title">
-      <div class="title_left">
-        <!-- <h3>Grades</h3> -->
+  <!-- page content starts-->
+  <div class="row main_row">
+    <div class="x_panel form_panel">
+      <div class="x_title">
+        <h3 class="title-text">Add Grade</h3>
       </div>
-
-      <!-- <div class="title_right">
-                  <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search for...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                      </span>
-                    </div>
-                  </div>
-                </div> -->
-    </div>
-    <div class="clearfix"></div>
-    <!-- page title end -->
-
-    <div class="row">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Add Grade<small></small></h2>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <br>
-          <form id="storeGrade" action="./store" method="post" class="form-horizontal form-label-left">
-
-            <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Grade Name<span
+      <div class="x_content">
+        <form id="storeGrade" action="./store" method="post" class="form-horizontal form-label-left">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="name">Grade Name<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="status">Status<span
                   class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 ">
-                <input type="text" name="name" class="form-control" placeholder="Enter Name.." id="name">
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="status" id="status">
+                    <option value="1">Activate</option>
+                    <option value="0">Deactivate</option>
+                  </select>
+                </div>
               </div>
             </div>
+          </div> 
 
-            <div class="item form-group">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status<span
-                  class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 ">
-                <select class="form-control" name="status" id="status">
-                  <option value="1">Activate</option>
-                  <option value="0">Deactivate</option>
-
-                </select>
-              </div>
+          <div class="ln_solid"></div>
+            <div class="text-right">
+              <button type="submit" id="storeGradeBtn" class="btn theme-btn">Save</button>
             </div>
-
-            <div class="clearfix"></div>
-            <div class="ln_solid"></div>
-            <div class="form-group row">
-              <div class="col-md-9 col-sm-9  offset-md-3">
-                <button type="submit" id="storeGradeBtn" class="btn btn-success">Save</button>
-              </div>
-            </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>

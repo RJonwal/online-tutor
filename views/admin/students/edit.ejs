@@ -115,7 +115,7 @@
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="profile_image">Profile Image</label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify" <% if
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto" <% if
                   (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
                 data-default-file="/ProfileImage/<%=data.profile_image%>" <% }%>
                     data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"

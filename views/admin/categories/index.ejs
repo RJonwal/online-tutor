@@ -1,102 +1,113 @@
 <div class="right_col" role="main">
-  <div class="">
-
-    <!-- page title starts -->
-    <div class="page-title">
-      <div class="title_left">
-        <!-- <h3>Categories</h3> -->
-      </div>
-
-      <!-- <div class="title_right">
-                <div class="col-md-5 col-sm-5 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div> -->
-    </div>
-    <div class="clearfix"></div>
-    <!-- page title end -->
-
-    <!-- page content starts -->
-    <div class="row">
-      <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Category<small>list</small></h2>
-            <ul class="right-btns">
-              <li> <a href="./categories/create" class="btn theme-btn" rel="tooltip" data-placement="top" title="Add">+
-                  Add Category</a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card-box table-responsive">
-                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
-                    cellspacing="0" width="100%">
-                    <thead>
+  <!-- page content starts -->
+  <div class="card-block mb-30">
+    <h3 class="title-text">Filter Category</h3>
+    <ul class="filter-row">
+      <li class="filter-col">
+        <select class="selectlink form-control">
+          <option value="">Select tutor</option>
+          <option value="1">Andrew</option>
+          <option value="2">Bella</option>
+          <option value="3">Angel</option>
+          <option value="4">Tie</option>
+          <option value="5">Edword</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <select class="selectlink form-control">
+          <option value="">Select Status</option>
+          <option value="1">Active</option>
+          <option value="2">Deactive</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <select class="selectlink form-control">
+          <option value="">Select Grade</option>
+          <option value="1">English</option>
+          <option value="2">Class 2nd</option>
+          <option value="3">Class 3rd</option>
+          <option value="4">Class 4th</option>
+          <option value="5">Class 5th</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <button class="btn theme-btn">Filter Results</button>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h3 class="title-text">Category List</h3>
+          <ul class="right-btns">
+            <li> <a href="./categories/create" class="btn theme-btn" rel="tooltip" data-placement="top" title="Add">+ Add Category</a>
+            </li>
+          </ul>
+        </div>
+        <div class="x_content">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card-box table-responsive">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
+                  cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let i=0; for(category of data) { %>
                       <tr>
-                        <th>S.No</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% let i=0; for(category of data) { %>
-                        <tr>
-                          <td>
-                            <%=++i%>
-                          </td>
-                          <td>
-                            <div class="avatar avatar-blue mr-3">
-                              <% if (category.category_image !='' &&
-                                fs.existsSync("assets/CategoryImage/"+category.category_image)) { %>
-                                <img src="/CategoryImage/<%=category.category_image%>" data-lightbox="image_<%=category.id%>" alt="<%=category.name%>" />
-                                <% } else{ %>
-                                  <img src="/images/noImage.jpg" alt="no-image" />
-                                  <% } %>
-                            </div>
-                          </td>
-                          <td>
-                            <%=category.name%>
-                          </td>
-                          <td>
-                            <label class="checkbox-inline">
-                              <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
-                                data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
-                                data-url="/categories/update-status" data-uid="<%=category.id%>" id="toggle-trigger"
-                                <%=category.status==1 ? 'checked' : '' %>>
-                            </label>
-                          </td>
-                          <td>
-                            <a class="btn btn-info m-1" href="/categories/edit/<%=category.id%>" data-toggle="tooltip"
-                              rel="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                        <td>
+                          <%=++i%>
+                        </td>
+                        <td>
+                          <div class="avatar avatar-blue mr-3">
+                            <% if (category.category_image !='' &&
+                              fs.existsSync("assets/CategoryImage/"+category.category_image)) { %>
+                              <img src="/CategoryImage/<%=category.category_image%>" data-lightbox="image_<%=category.id%>" alt="<%=category.name%>" />
+                              <% } else{ %>
+                                <img src="/images/noImage.jpg" alt="no-image" />
+                                <% } %>
+                          </div>
+                        </td>
+                        <td>
+                          <%=category.name%>
+                        </td>
+                        <td>
+                          <label class="checkbox-inline">
+                            <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
+                              data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
+                              data-url="/categories/update-status" data-uid="<%=category.id%>" id="toggle-trigger"
+                              <%=category.status==1 ? 'checked' : '' %>>
+                          </label>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <a class="" href="/categories/edit/<%=category.id%>" data-toggle="tooltip"
+                              rel="tooltip" data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
 
-                            <a href="javascript:void(0)" class="btn btn-info m-1"
-                              onclick="confirmBeforeDeletion('/categories/destroy/<%=category.id%>')"> <i
-                                class="fa fa-trash" style="color: #ffffff;" data-toggle="tooltip" rel="tooltip"
-                                data-placement="top" title="Delete"></i></a>
-                          </td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                  </table>
-                </div>
+                            <a href="javascript:void(0)" class="ml-2"
+                              onclick="confirmBeforeDeletion('/categories/destroy/<%=category.id%>')"> <img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
+                              data-placement="top" title="Delete"></a>
+                          </div>
+                        </td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- page content end -->
   </div>
+  <!-- page content end -->
 </div>
 

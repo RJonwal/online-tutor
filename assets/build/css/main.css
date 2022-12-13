@@ -89,6 +89,24 @@ ul {
 :-moz-placeholder { /* Firefox 18- */
   color: var(--dblue) !important;
 }
+
+/* Login CSS */
+.login{
+  background: var(--primary);
+}
+.login-blocks{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.login-blocks .left-box img.logimg{
+    width: 100%;
+    height: auto;
+}
+
+/* Login CSS */
+
+
 /* Top Head */
 
 .main_container .top_nav {
@@ -428,7 +446,7 @@ ul {
 
 .nav.child_menu {
     background: var(--primary);
-    padding: 5px 0;
+    /* padding: 5px 0; */
 }
 
 .nav.side-menu>li .nav.child_menu a {
@@ -440,12 +458,12 @@ ul {
 }
 
 .nav-md ul.nav.child_menu li:before {
-    left: 24px;
+    left: 38px;
     border-radius: 2px;
-    margin-top: 13px;
+    margin-top: 12px;
     background: #697C90;
-    width: 9px;
-    height: 8.5px;
+    width: 4px;
+    height: 11px;
 }
 
 .nav-md ul.nav.child_menu li.current-page:before {
@@ -462,8 +480,8 @@ ul {
 }
 
 .nav-md ul.nav.child_menu li:after {
-    border-left: 1px solid #697C90;
-    left: 28px;
+    border-left: 1px solid #697c9078;
+    left: 40px;
 }
 
 .nav-sm .nav.side-menu>li .link-title {
@@ -1738,13 +1756,18 @@ span.total-count {
     margin: 0;
     position: relative;
 }
+.x_content table .checkbox-inline .toggle.btn{
+    height: 30px !important;
+    min-height: 30px !important;
+}
 .x_content table .checkbox-inline .btn{
     border-radius: 30px;
     color: #fff;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 400;
     cursor: pointer;
-    padding: 5px 12px;
+    padding: 3px 10px;
+    line-height: 22px;
 }
 .x_content table .checkbox-inline .btn.btn-info{
     background: var(--dgreen);
@@ -1758,11 +1781,14 @@ span.total-count {
 .x_content table .checkbox-inline .btn.toggle-off{
     text-align: right;
 }
+.x_content table .checkbox-inline .btn.toggle-on{
+    text-align: left;
+}
 .x_content table .checkbox-inline .toggle-handle{
     background: #fff;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     padding: 0;
     top: 5px;
     right: 13px;
@@ -1809,6 +1835,10 @@ span.total-count {
     border-color: var(--primary);
     z-index: 1;
 }
+.form_panel .x_content .input-group-text img{
+    width: 20px;
+    height: auto;
+}
 .form_panel .x_content  input.form-control, .form_panel .x_content  select.form-control{
     height: 45px;
 }
@@ -1847,6 +1877,7 @@ span.total-count {
     font-weight: 500;
     color: var(--dblue);
     padding: 0 0 5px;
+    margin-bottom: 0;
 }
 .form_panel .form-control-feedback.right {
     margin-top: 12px;
@@ -1858,6 +1889,7 @@ span.total-count {
 .form_panel .x_content .dropify-wrapper {
     border: 2px dashed var(--dblue);
     border-radius: 5px;
+    height: 200px;
 }
 .form_panel .x_content .dropify-wrapper.touch-fallback .dropify-message{
     -webkit-transform: translateY(-50%);
