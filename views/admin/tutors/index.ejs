@@ -79,24 +79,23 @@
                       </div>
                     </td>
                     <td>
-                      <%= tutor.title == 1 ? 'Mrs. ' : 'Mr. ' %>
+                      <%= tutor.title %>
                       <%=tutor.first_name+' '+tutor.last_name %>
                     </td>
                     <td>
                       <%=tutor.email %>
                     </td>
                     <td>
-                      <% for(sub of subject) {%>
-                        <%=sub.name + ','%>
-                      <%}%>
+                      <% for(sub of subject) { 
+                        if (tutor.subject_ids.includes(sub.id)) { %>
+                        <a href="#" class="badge badge-info"><%=sub.name%></a>
+                      <% } } %>
                     </td>
-            
                     <td>
                       <label class="checkbox-inline">
-                        <!-- <input type="checkbox" name="status" class="record-status"  data-toggle="toggle" data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger" data-url="/tutor/update-status" data-uid="<%=tutor.id%>" id="toggle-trigger" <%=tutor.status==1 ? 'checked' : '' %>>
-                        <input type="checkbox" name="status" class="record-status" checked data-toggle="toggle"
+                        <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
                           data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
-                          data-url="/tutors/update-status" data-uid="<%=tutor.id%>" id="toggle-trigger"  > -->
+                          data-url="/tutors/update-status" data-uid="<%=tutor.id%>" id="toggle-trigger"   <%=tutor.status==1 ? 'checked' : '' %>>
                       </label>
                     </td>
                     <td>

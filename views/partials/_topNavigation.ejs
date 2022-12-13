@@ -31,16 +31,13 @@
         <li class="nav-item dropdown open">
           <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
             data-toggle="dropdown" aria-expanded="false">
-            <% if(data.profile_image) { %>
-              <img src="/profileImage/<%=data.profile_image%>" alt="">
-            <% }else{ %> 
-              <img src="/images/img.jpg" alt="">
-            <%} %>
+            <img src="/images/img.jpg" alt="">
+           
           
             <span class="active-status"></span>
             <p>
               <span class="wel-text">Welcome</span>
-              <span class="name-text"><%=data.first_name+' '+data.last_name%></span>
+              <span class="name-text">Daniel Estasmos</span>
             </p>
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">

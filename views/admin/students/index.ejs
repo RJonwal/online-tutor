@@ -80,18 +80,21 @@
                                 <%=student.email%>
                               </td>
                             <td>
-                              <%= student.status==1 ? 'Active' : 'Deactive' %>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
+                                  data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
+                                  data-url="/students/update-status" data-uid="<%=student.id%>" id="toggle-trigger"
+                                  <%=student.status==1 ? 'checked' : '' %>>
+                              </label>
                             </td>
                             <td>
                               <div class="d-flex align-items-center">
                                 <a class="" href="/students/edit/<%=student.id%>" data-toggle="tooltip"
                                 rel="tooltip" data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
   
-                                <a class="ml-2" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                                title="Delete" style="cursor: pointer;"> <i class="fa fa-trash" style="color: #ffffff;"
-                                  data-toggle="confirmation" data-singleton="true"
-                                  data-title="Are You Sure Want To Delete?"
-                                  href="/students/destroy/<%=student.id%>"></i></a>
+                                <a href="javascript:void(0)" class="ml-2"
+                                onclick="confirmBeforeDeletion('/students/destroy/<%=student.id%>')"><img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
+                                data-placement="top" title="Delete"></a>
                                 </div>
                             </td>
                           </tr>

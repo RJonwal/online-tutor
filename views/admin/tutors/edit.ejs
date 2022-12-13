@@ -21,7 +21,7 @@
                       <option value="">Please Select Subjects </option>
                       <% let i=0; for(subject of subjects) { %>
                         <option value="<%=subject.id%>" <% if (data.subject_ids.includes(subject.id)) { %> selected <% } %>><%=subject.name%></option>
-                        <% } %>
+                      <% } %>
                     </select>
                   </div>
                 </div>
@@ -48,7 +48,7 @@
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
-                        required="required" id="first_name" value="<%=data.first_name %>">
+                       id="first_name" value="<%=data.first_name %>">
                     </div>
                   </div>
                 </div>
@@ -60,17 +60,18 @@
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."
-                        required="required" id="last_name" value="<%=data.last_name %>">
+                       id="last_name" value="<%=data.last_name %>">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
+                  <input type="hidden" name="iso_code" id="iso_code" value="<%=data.iso_code%>">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="phone">Phone No.<span
+                    <label class="col-form-label label-align" for="phone">Contact No.<span
                         class="required">*</span>
                     </label>
                     <div class="input-group">
-                      <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone">
+                      <input type="text" name="phone" value="<%=data.phone %>" class="form-control" id="phone">
                     </div>
                   </div>
                 </div>
@@ -81,15 +82,13 @@
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="email" class="form-control" placeholder="Enter Email Name.."
-                        required="required" id="email" value="<%=data.email %>">
+                      <input type="text" name="email" class="form-control" placeholder="Enter Email Name.." id="email" value="<%=data.email %>">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="password">Password<span
-                        class="required">*</span>
+                    <label class="col-form-label label-align" for="password">Password
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
@@ -118,8 +117,8 @@
                       <label class="col-form-label label-align" for="calendar_color">Calendar Color
                       </label>
                       <div class="cal_color_group w-100">
-                        <input type="color" value="#F47817" name="calendar_color" class="form-control" placeholder="Enter Calendar Color Name.."
-                        required="required" id="calendar_color" value="<%=data.calendar_color %>">
+                        <input type="text" value="#F47817" name="calendar_color" class="form-control" placeholder="Enter Calendar Color Name.."
+                         id="calendar_color" value="<%=data.calendar_color %>">
                       </div>
                   </div>
                 </div>
@@ -191,7 +190,6 @@
       //   $('#loading-bar-spinner').show();
       // },
       success: function (response) {
-        console.log(response);
         if (response.success == true) {
           window.location = response.redirectUrl;
         }
@@ -211,4 +209,84 @@
       },
     })
   });
+
+  /**
+  *  phone number validate start intlTelInput
+  */
+  var input = document.querySelector("#phone"),
+    errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+    result = document.querySelector("#error-msg");
+
+  window.addEventListener("load", function () {
+    errorMsg = document.querySelector("#error-msg");
+
+    function getIp(callback) {
+      fetch('https://ipinfo.io', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then((resp) => resp.json())
+        .catch(() => {
+          return {
+            country: '',
+          };
+        })
+        .then((resp) => callback(resp.country));
+    }
+    var iso_code = $("#iso_code").val();
+    iso_code = iso_code ? iso_code : 'in';
+    var iti = window.intlTelInput(input, {
+      initialCountry: iso_code,
+      separateDialCode: true,
+      formatOnDisplay: false
+    });
+
+
+    input.addEventListener('keyup', function () {
+      reset();
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          $("#updateSchoolBtn").prop('disabled', false);
+          $(input).addClass('is-valid');
+
+        } else {
+          $("#updateSchoolBtn").prop('disabled', true);
+          $(input).addClass('is-invalid');
+          var errorCode = iti.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          $(errorMsg).show();
+        }
+      }
+    });
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+    var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+    };
+    input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+        valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+    }, false);
+
+    input.addEventListener("focus", function () {
+      result.textContent = "";
+    }, false);
+
+    $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      console.log(countryData);
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+    });
+  });
+
 </script>

@@ -35,8 +35,8 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        let oids =  tutors[0].subject_ids;
-        let subject = await Category.find({ _id: {$in : oids}})
+        
+        let subject = await Category.find({});
         return res.render('../views/admin/tutors/index', { data: tutors, fs: fs,subject:subject });
     } catch {
         return res.status(500).json({
@@ -132,7 +132,6 @@ async function edit(req, res) {
 async function update(req, res) {
     try {
         if (req.body.tutor_id && req.body.tutor_id != '') {
-            console.log(req.body.subject_ids);
             let tutor = await User.find({ "_id": req.body.tutor_id, "role": 2 });
             if (tutor) {
                 tutorData = tutor[0];
@@ -252,7 +251,8 @@ async function destroy(req, res) {
 async function updateStatus(req, res) {
     try {
         if (req.body.uid && req.body.uid != '') {
-            let status = ((req.body.status) ? 1 : 0);
+           
+            let status = ((req.body.status=='true') ? '1' : '0');
             let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
             console.log(tutor);
             res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });

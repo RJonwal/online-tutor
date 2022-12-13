@@ -1,123 +1,35 @@
 const { body, validationResult } = require('express-validator');
-const User = require('../../models/user');
+// const User = require('../../models/user');
 
 var validateUser = () => [
-  body('title')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Title can not be empty!')
-    .bail()
-    .isBoolean()
-    .withMessage('Select a valid title!')
-    .bail(),
-  body('first_name')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('First Name can not be empty!')
-    .bail()
-    .isString()
-    .withMessage('First Name should be a valid string!')
-    .bail()
-    .isLength({ min: 1, max: 255 })
-    .withMessage('First Name length is should be in a valid range!')
-    .bail(),
-  body('last_name')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Last Name can not be empty!')
-    .bail()
-    .isString()
-    .withMessage('Last Name should be a valid string!')
-    .bail()
-    .isLength({ min: 1, max: 255 })
-    .withMessage('Last Name length is should be in a valid range!')
-    .bail(),
-  body('email')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Email can not be empty!')
-    .bail()
-    .isString()
-    .withMessage('Email should be a valid string!')
-    .bail()
-    .isEmail()
-    .withMessage('Input must be a valid email!')
-    .bail()
-    .custom((value, { req }) => {
-      console.log(value);
-      return User.find({ "email": value })
-        .then(user => {
-          console.log(user.length);
-          if (user.length) {
-            return Promise.reject('Email is already in use!');
-          }
-        })
-    })
-    .bail(),
-  body('password')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Password can not be empty!')
-    .bail()
-    .isString()
-    .withMessage('Password should be a valid string!')
-    .bail()
-    .isLength({ min: 8, max: 255 })
-    .withMessage('Password length is should be at least 8 characters!')
-    .bail(),
-  /*  body('address')
-     .trim()
-     .not()
-     .isEmpty()
-     .withMessage('Address can not be empty!')
-     .bail()
-     .isString()
-     .withMessage('Address should be a valid string!')
-     .bail()
-     .isLength({ min: 5, max: 1000 })
-     .withMessage('Address length is should be in a valid range!')
-     .bail(),
-   body('calendar_color')
-     .trim()
-     .not()
-     .isEmpty()
-     .withMessage('Calendar Color can not be empty!')
-     .bail()
-     .isString()
-     .withMessage('Calendar Color should be a valid string!')
-     .bail()
-     .isLength({ min: 6, max: 6 })
-     .withMessage('Calendar Color is should be in a valid range!')
-     .bail(),
-   body('calendar_color')
-     .trim()
-     .not()
-     .isEmpty()
-     .withMessage('Calendar Color can not be empty!')
-     .bail()
-     .isString()
-     .withMessage('Calendar Color should be a valid string!')
-     .bail()
-     .isLength({ min: 6, max: 6 })
-     .withMessage('Calendar Color is should be in a valid range!')
-     .bail(),
-   body('note')
-     .trim()
-     .not()
-     .isEmpty()
-     .withMessage('Address can not be empty!')
-     .bail()
-     .isString()
-     .withMessage('Address should be a valid string!')
-     .bail()
-     .isLength({ min: 5, max: 10000 })
-     .withMessage('Address length is should be in a valid range!')
-     .bail(), */
+  // body('name')
+  //   .trim()
+  //   .not()
+  //   .isEmpty()
+  //   .withMessage('Category Name can not be empty!')
+  //   .bail()
+  //   .isString()
+  //   .withMessage('Category Name should be a valid string!')
+  //   .bail()
+  //   .isLength({ min: 1, max: 1000 })
+  //   .withMessage('Category Name length is should be in a valid range!')
+  //   .bail()
+  //   .custom((value, { req }) => {
+  //     console.log(value);
+  //     return Category.find({ "name": value })
+  //       .then(category => {
+  //         console.log(category.length);
+  //         if (category.length) {
+  //           return Promise.reject('Category name is already in use!');
+  //         }
+  //       })
+  //   })
+  //   .bail(),
+  // body('note')
+  //   .optional({ checkFalsy: true })
+  //   .isString()
+  //   .withMessage('Note should be a valid string!')
+  //   .bail(),
   body('status')
     .not()
     .isEmpty()
