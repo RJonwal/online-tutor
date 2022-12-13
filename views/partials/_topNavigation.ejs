@@ -6,14 +6,14 @@
     </div>
     <nav class="nav navbar-nav">
       <ul class=" navbar-right">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
                 <button class="btn" type="button"><i class="fa fa-search"></i></button>
               </span>
           </div>
-          </li>
+          </li> -->
         <li class="nav-item dropdown open">
           <a href="javascript:;" class="message-drop" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell-o"></i>
@@ -31,19 +31,24 @@
         <li class="nav-item dropdown open">
           <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
             data-toggle="dropdown" aria-expanded="false">
-            <img src="/images/img.jpg" alt="">
+            <% if(data.profile_image) { %>
+              <img src="/profileImage/<%=data.profile_image%>" alt="">
+            <% }else{ %> 
+              <img src="/images/img.jpg" alt="">
+            <%} %>
+          
             <span class="active-status"></span>
             <p>
               <span class="wel-text">Welcome</span>
-              <span class="name-text">Daniel Estasmos</span>
+              <span class="name-text"><%=data.first_name+' '+data.last_name%></span>
             </p>
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="javascript:;"> Profile</a>
-            <a class="dropdown-item" href="javascript:;">
-              <!-- <span class="badge bg-red pull-right">50%</span> -->
+            <a class="dropdown-item" href="/profile"> Profile</a>
+            <!-- <a class="dropdown-item" href="javascript:;">
+              <span class="badge bg-red pull-right">50%</span>
               <span>Settings</span>
-            </a>
+            </a> -->
             <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
           </div>
         </li>

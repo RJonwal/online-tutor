@@ -1,6 +1,5 @@
 const { body, validationResult } = require('express-validator');
 const User = require('../../models/user');
-
 var validateUser = () => [
   body('first_name')
     .trim()

@@ -1,0 +1,155 @@
+<div class="right_col" role="main">
+    <!-- page content starts-->
+    <div class="row main_row">
+      <div class="x_panel form_panel">
+        <div class="x_title">
+          <h3 class="title-text">User Profile</h3>
+        </div>
+        <div class="x_content">
+          <form id="updateProfile" action="/updateProfile" method="post" class="form-horizontal form-label-left tutor_form" enctype="multipart/form-data" autocomplete="off">
+          <div class="row">
+            <div class="col-md-8">          
+            <div class="row">
+              <input type="hidden" name="user_id" value="<%=data.id %>">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="col-form-label label-align" for="title">Title<span
+                    class="required">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                    <select class="form-control" name="title" id="title">
+                      <option value="Mr">Mr</option>
+                      <option value="Mrs">Mrs</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="first_name">First Name<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
+                    id="first_name" value="<%=data.first_name%>">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="last_name">Last Name<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name" value="<%=data.last_name%>">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="phone">Phone No.<span
+                    class="required">*</span>
+                </label>
+                <div class="form-group">
+                  <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone" value="<%=data.phone%>">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="email">Email<span
+                    class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email" value="<%=data.email%>" disabled/> 
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span class="required">* </span>
+                </label>
+                <span style="font-size: 8px;">Leave blank If you don`t want to update password</span>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                  <input type="password" name="password" class="form-control" placeholder="Enter Password.." id="password-field" value="">
+                    
+                  <span toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          </div>
+            <div class="col-md-4">
+              <div class="form-group drop-file">
+                <label class="col-form-label label-align" for="profile_image">Profile Image</label>
+                <div class="input-group">
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto"
+                    <% if(data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
+                    data-default-file="/ProfileImage/<%=data.profile_image%>" <% }%>
+                        data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
+                        <% if (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %> value=" <%=data.profile_image %>" <% } else { %> value="" <% } %> >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+          <div class="text-right">
+            <button type="submit" id="updateProfileBtn" class="btn form-button theme-btn">Save</button>
+          </div>
+        </form>
+         
+        </div>
+      </div>
+    </div>
+    <!-- page title end -->
+</div>
+
+<script>
+$("#updateProfile").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var form = $('#updateProfile');
+    var formData = new FormData(form[0]);
+    formData.append('profile_image', this.new_attachments)
+    var url = $('#updateProfile').attr('action');
+    $("#updateProfileBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateProfileBtn").prop('disabled', false);
+      },
+    })
+});
+</script>

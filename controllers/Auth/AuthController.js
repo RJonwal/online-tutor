@@ -2,6 +2,8 @@ const User = require('../../models/user');
 const mail = require('../../config/mail');
 const randomstring = require("randomstring");
 const global = require("../../_helper/GlobalHelper");
+const fs = require('fs');
+
 module.exports = {
     login,
     signIn,
@@ -9,7 +11,9 @@ module.exports = {
     forgetPassword,
     forget,
     resetPassword,
-    verifyPassword
+    verifyPassword,
+    profile,
+    updateProfile
 };
 
 async function login(req, res) {
@@ -43,13 +47,6 @@ async function signIn(req, res) {
         });
     }
 }
-
-function logout(req, res) {
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-    });
-};
 
 function forgetPassword(req, res) {
     try {
@@ -127,3 +124,49 @@ async function verifyPassword(req, res) {
         });
     }
 }
+async function profile(req, res) {
+        let user = await res.locals.user;
+        return res.render('../views/auth/profile',{data:user,fs:fs});
+};
+async function updateProfile(req, res) {
+    if (req.body.user_id && req.body.user_id != '') {
+        let User_details = await User.find({ "_id": req.body.user_id });
+        if (User_details) {
+            if (req.file != undefined) {
+                userData = User_details[0];
+                let profileImage = userData.profile_image;
+                const filePath = './assets/profileImage/' + profileImage;
+                req.body.profile_image = req.file.filename;
+                if (profileImage != '') {
+                    fs.exists(filePath, function (exists) {
+                        if (exists) {
+                            fs.unlinkSync(filePath);
+                        } else {
+                            // console.log('File not found, so not deleting.');
+                        }
+                    });
+                }
+                req.body.profile_image = req.file.filename;
+            } else {
+
+                delete req.body.profile_image;
+            }
+            if(req.body.password){
+                let hashedPassword = global.securePassword(req.body.password);
+                req.body.password = hashedPassword;
+                let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body)
+            }else {
+                delete req.body.password; // delete password from body if dont want update
+                let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body)
+            }
+            req.flash('success', 'Profile updated successfully!');
+            res.status(200).json({ "success": true, "message": "Profile is updated successfully!", "redirectUrl": "/profile" });
+        }
+    }
+};
+function logout(req, res) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
+};
