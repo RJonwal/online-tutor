@@ -105,10 +105,9 @@
                         <img src="/images/edit.svg" alt="icon">
                         </a>
 
-                        <a class="ml-2" data-toggle="tooltip" rel="tooltip" data-placement="top"
-                          title="Delete" style="cursor: pointer;">
-                          <img src="/images/trash.svg" alt="icon" data-toggle="confirmation" data-singleton="true"
-                          data-title="Are You Sure Want To Delete?" href="/tutors/destroy/<%=tutor.id%>">
+                      <a href="javascript:void(0)" class="ml-2"
+                      onclick="confirmBeforeDeletion('/tutors/destroy/<%=tutor.id%>')"> <img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                      title="Delete"></a>
                         </a>
                       </div>
                     </td>
