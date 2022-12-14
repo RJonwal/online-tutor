@@ -5,7 +5,7 @@ const fs = require('fs');
 const multer = require('multer');
 
 const authController = require('../controllers/Auth/AuthController')
-
+var authRequest = require('../requests/Auth/ResetPassword');
 const storageProfileImg = multer.diskStorage({
     destination: (req, file, callback) => {
         const dir = './assets/ProfileImage/';
@@ -41,7 +41,7 @@ router.get('/logout', authController.logout);
 router.get('/forget-password', authController.forgetPassword);
 router.post('/forget', authController.forget);
 router.get('/reset-password', authController.resetPassword);
-router.post('/verify-password', authController.verifyPassword);
+router.post('/verify-password', authRequest,authController.verifyPassword);
 router.post('/sign-in', passport.authenticate('local', { failureRedirect: '/', failureFlash: true },), authController.signIn);
 
 module.exports = router;

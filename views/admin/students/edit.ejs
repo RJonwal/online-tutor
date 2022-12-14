@@ -58,7 +58,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="col-form-label label-align" for="gender">Gender</label>
-                    <div class="input-group">
+                    <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/gender.svg" class="mCS_img_loaded"></span>
                       <select class="form-control" name="gender" id="gender">
                         <option value="">Select Gender</option>
@@ -99,7 +99,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="col-form-label label-align" for="school">School</label>
-                    <div class="input-group">
+                    <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/school.svg" class="mCS_img_loaded"></span>
                       <select class="form-control" name="school_id" id="school_id">
                         <option value="">Select School</option>
@@ -130,7 +130,7 @@
                     <label class="col-form-label label-align" for="status">Status<span
                       class="required">*</span>
                   </label>
-                    <div class="input-group">
+                    <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
                       <select class="form-control" name="status" id="status">
                         <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
@@ -287,4 +287,13 @@
    });
 });
  // phone number validate end  
+ $("#gender").select2({
+  allowClear: false,
+});
+$("#school_id").select2({
+  allowClear: false,
+});
+$("#status").select2({
+  allowClear: false,
+});
 </script>

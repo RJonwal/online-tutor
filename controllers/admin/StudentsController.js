@@ -24,7 +24,13 @@ module.exports = {
 async function index(req, res) {
     try {
         let Students = await Student.find({ "role": 3 }).sort({ '_id': -1 });
-        return res.render('../views/admin/students/index', { data: Students });
+
+        let totalStudent  = await Student.find({ "role": 3 }).sort({ '_id': -1 }).count();
+        let activeStudent  = await Student.find({ $and: [ { "role": 3  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
+        let deactiveStudent  = await Student.find({ $and: [ { "role": 3  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
+
+        const studentObject = {'total':totalStudent,'active':activeStudent,'deactive':deactiveStudent}
+        return res.render('../views/admin/students/index', { data: Students,fs:fs,studentObject:studentObject });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -155,7 +161,18 @@ async function destroy(req, res) {
         let id = req.params.id;
         let StudentDeleted = await Student.findByIdAndDelete(id);
         if (StudentDeleted) {
-            req.flash('success', 'Student is deleted successfully !');
+            let studentImage = StudentDeleted.profile_image;
+            if (studentImage != '') {
+                const filePath = './assets/ProfileImage/' + studentImage;
+                fs.exists(filePath, function (exists) {
+                    if (exists) {
+                        fs.unlinkSync(filePath);
+                    } else {
+                        console.log('File not found, so not deleted.');
+                    }
+                });
+                req.flash('success', 'Tutor is deleted successfully!');
+            }
         }
         return res.redirect('/Students');
     } catch {

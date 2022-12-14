@@ -26,7 +26,7 @@ async function login(req, res) {
 
         //let userAdded = await User.create(obj);
         if (req.isAuthenticated()) {
-            return res.redirect('/schools');
+            return res.redirect('/courses');
         }
         return res.render('../views/auth/login', { layout: false });
     } catch {
@@ -40,7 +40,7 @@ async function signIn(req, res) {
     try {
 
         req.flash('success', 'User Login Successfully !');
-        return res.redirect('/schools');
+        return res.redirect('/courses');
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -104,24 +104,25 @@ async function resetPassword(req, res) {
 }
 async function verifyPassword(req, res) {
     try {
+        
         let result = req.body.token.trim();
         //let hash = req.body.password;
         let hash = global.securePassword(req.body.password);
         console.log(hash);
         if (req.body.password != req.body.confirm_password) {
-            req.flash('error', 'Confirm password and password not matched');
-            return res.redirect('/reset-password?token=' + result);
+            return res.status(500).json({ message: 'Something went wrong, please try again later.'
+            })
         }
         let tokenData = await User.findOne({ token: result });
         if (tokenData) {
             let updated = await User.findByIdAndUpdate(tokenData.id, { password: hash, token: '' });
         }
         req.flash('success', 'Password Changed Successfully');
-        return res.redirect('/');
+        res.status(200).json({ "success": true, "message": "Password Changed Successfully!", "redirectUrl": "/" });
     } catch (error) {
-        return res.json(500, {
-            message: 'Internal Server Error'
-        });
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 }
 async function profile(req, res) {

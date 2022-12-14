@@ -11,7 +11,7 @@ var validateUser = () => [
     .isString()
     .withMessage('First Name should be a valid string!')
     .bail()
-    .isLength({ min: 3, max: 255 })
+    .isLength({ min: 1, max: 1000 })
     .withMessage('First Name length is should be in a valid range!')
     .bail(),
   body('last_name')
@@ -23,7 +23,7 @@ var validateUser = () => [
     .isString()
     .withMessage('Last Name should be a valid string!')
     .bail()
-    .isLength({ min: 3, max: 255 })
+    .isLength({ min: 1, max: 1000 })
     .withMessage('Last Name length is should be in a valid range!')
     .bail(),
   body('email')
@@ -32,28 +32,54 @@ var validateUser = () => [
     .isEmpty()
     .withMessage('Email can not be empty!')
     .bail()
+    .isString()
+    .withMessage('Email should be a valid string!')
+    .bail()
     .isEmail()
-    .withMessage('Invalid email')
+    .withMessage('Input must be a valid email!')
     .bail()
     .custom((value, { req }) => {
-      console.log(value);
       return User.find({ "email": value })
-        .then(user => {
-          console.log(user.length);
-          if (user.length) {
+        .then(student => {
+          // console.log(student);
+          // console.log(student.length);
+          if (student.length) {
             return Promise.reject('Email is already in use!');
           }
         })
     })
-    .bail(),
-  body('status')
-    .not()
-    .isEmpty()
-    .withMessage('The status can not be empty!')
+  .bail(),
+  body('phone')
+    .not().isEmpty()
+    .isInt()
+    .withMessage('Phone no. should be valid number.')
+    .trim()
     .bail()
-    .isBoolean()
-    .withMessage('Please select a valid status!')
-    .bail(),
+    .custom((value, { req }) => {
+      console.log(value);
+      return User.find({ "dial_code": req.body.dial_code, "phone": value })
+        .then(student => {
+          // console.log(student);
+          // console.log(student.length);
+          if (student.length) {
+            return Promise.reject('Phone no. is already in use!');
+          }
+        })
+    })
+  .bail(),
+  body('note')
+  .optional({ checkFalsy: true })
+  .isString()
+  .withMessage('Note should be a valid string!')
+  .bail(),
+  body('status')
+  .not()
+  .isEmpty()
+  .withMessage('The status can not be empty!')
+  .bail()
+  .isBoolean()
+  .withMessage('Select a valid status!')
+  .bail(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty())

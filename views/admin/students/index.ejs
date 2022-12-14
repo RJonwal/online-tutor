@@ -3,19 +3,19 @@
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade1">3</span>
+            <span class="shade1"><%=studentObject.total%></span>
             <h3 class="title-text mb-0">Total Students</h3>
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade2">3</span>
+            <span class="shade2"><%=studentObject.active%></span>
             <h3 class="title-text mb-0">Active Students</h3>
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade3">0</span>
+            <span class="shade3"><%=studentObject.deactive%></span>
             <h3 class="title-text mb-0">Deactive Students</h3>
         </div>
     </div>
@@ -105,7 +105,7 @@
                           <%=student.first_name +' '+student.last_name %>
                         </td>
                         <td>
-                          <%=student.phone%>
+                          <%=student.phone ? student.dial_code+' '+student.phone: '' %>
                         </td>
                         <td>
                             <%=student.email%>
