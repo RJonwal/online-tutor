@@ -9,7 +9,6 @@ const tutorsController = require('../controllers/Admin/TutorsController')
 var storeTutorRequest = require('../requests/Tutor/StoreTutorRequest');
 var updateTutorRequest = require('../requests/Tutor/UpdateTutorRequest');
 
-
 const storageProfileImage = multer.diskStorage({
     destination: (req, file, callback) => {
         const dir = './assets/ProfileImage/';
@@ -37,7 +36,6 @@ var uploadProfileImage = multer({
         }
     }
 });
-
 
 router.get('/', passport.checkAuthentication, tutorsController.index);
 router.get('/create', passport.checkAuthentication, tutorsController.create);

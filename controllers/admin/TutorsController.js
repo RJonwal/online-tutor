@@ -27,7 +27,7 @@ const slugify_options = {
 
 
 /**
- * List Tutor 
+ * list tutor. 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -35,19 +35,19 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        
         let subject = await Category.find({});
-        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs,subject:subject });
-    } catch {
+        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs, subject: subject });
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 
 /**
- * create Tutor
+ * create tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -56,16 +56,17 @@ async function create(req, res) {
     try {
         let activeSubjects = await Category.find({ "status": 1 }).sort({ '_id': -1 });
         return res.render('../views/admin/tutors/create', { data: activeSubjects });
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 
 /**
- * store Tutor
+ * store tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -81,10 +82,10 @@ async function store(req, res) {
 
         // role for tutor
         req.body.role = 2;
-        if(req.body.password){
+        if (req.body.password) {
             let hash = global.securePassword(req.body.password);
             req.body.password = hash;
-        }else{
+        } else {
             delete req.body.password;
         }
         // console.log(req.body);
@@ -95,13 +96,15 @@ async function store(req, res) {
         }
     } catch (e) {
         console.log(e);
-        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 }
 
 
 /**
- * edit Tutor
+ * edit tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -111,20 +114,21 @@ async function edit(req, res) {
         let tutorId = req.params.id;
         let tutor = await User.find({ "_id": tutorId, "role": 2 });
         if (tutor) {
-            console.log(tutor);
+
             let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
             return res.render('../views/admin/tutors/edit', { data: tutor[0], subjects: activeCategories, fs: fs });
         }
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 
 /**
- * update Tutor
+ * update tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -205,13 +209,15 @@ async function update(req, res) {
         }
     } catch (e) {
         console.log(e);
-        return res.status(500).json({ "success": false, "message": "Something went wrong!" });
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 }
 
 
 /**
- * delete Tutor
+ * delete tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -220,30 +226,32 @@ async function destroy(req, res) {
     try {
         let id = req.params.id;
         let tutorDeleted = await User.findByIdAndDelete(id);
-        console.log(tutorDeleted);
         if (tutorDeleted) {
             let tutorImage = tutorDeleted.profile_image;
-            const filePath = './assets/ProfileImage/' + tutorImage;
-            fs.exists(filePath, function (exists) {
-                if (exists) {
-                    fs.unlinkSync(filePath);
-                } else {
-                    console.log('File not found, so not deleted.');
-                }
-            });
-            req.flash('success', 'Tutor is deleted successfully!');
+            if (tutorImage != '') {
+                const filePath = './assets/ProfileImage/' + tutorImage;
+                fs.exists(filePath, function (exists) {
+                    if (exists) {
+                        fs.unlinkSync(filePath);
+                    } else {
+                        console.log('File not found, so not deleted.');
+                    }
+                });
+                req.flash('success', 'Tutor is deleted successfully!');
+            }
         }
         return res.redirect('/tutors');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
- 
+
 /**
- * update status of the Grade.
+ * update status of the tutor.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -251,8 +259,8 @@ async function destroy(req, res) {
 async function updateStatus(req, res) {
     try {
         if (req.body.uid && req.body.uid != '') {
-           
-            let status = ((req.body.status=='true') ? '1' : '0');
+
+            let status = ((req.body.status == 'true') ? '1' : '0');
             let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
             console.log(tutor);
             res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });
