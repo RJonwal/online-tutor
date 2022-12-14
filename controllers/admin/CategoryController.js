@@ -235,7 +235,7 @@ async function updateStatus(req, res) {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
             let category = await Category.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(category);
+        
             res.status(200).json({ "success": true, "message": "Category status is updated successfully!" });
         }
     } catch (e) {

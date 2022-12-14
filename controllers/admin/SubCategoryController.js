@@ -168,7 +168,7 @@ async function updateStatus(req, res) {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
             let subCategory = await SubCategory.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(subCategory);
+         
             res.status(200).json({ "success": true, "message": "SubCategory status is updated successfully!" });
         }
     } catch (e) {
