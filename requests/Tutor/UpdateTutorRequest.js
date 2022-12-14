@@ -74,12 +74,12 @@ var validateUser = () => [
           }
         })
     }),
- // body('subject_ids')
-  // .trim()
-  // .not()
-  // .isEmpty()
-  // .withMessage('Subject can not be empty!')
-  // .bail(),
+    body('subject_ids')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Subject can not be empty!')
+    .bail(),
   body('address')
     .optional({ checkFalsy: true })
     .isString()
