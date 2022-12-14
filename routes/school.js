@@ -5,7 +5,7 @@ const schoolsController = require('../controllers/Admin/SchoolsController')
 
 var storeSchoolRequest = require('../requests/School/StoreSchoolRequest');
 var updateSchoolRequest = require('../requests/School/UpdateSchoolRequest');
-
+ 
 
 router.get('/', passport.checkAuthentication, schoolsController.index);
 router.get('/create', passport.checkAuthentication, schoolsController.create);
