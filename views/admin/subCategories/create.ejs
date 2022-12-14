@@ -3,20 +3,19 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Add Sub Category</h3>
+        <h3 class="title-text">Add SubCategory</h3>
       </div>
       <div class="x_content">
         <form id="createSubCategory" action="./store" method="post" class="form-horizontal form-label-left">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="category_id">Main Category<span
-                    class="required">*</span>
+                <label class="col-form-label label-align" for="category_id">MainCategory<span class="required">*</span>
                 </label>
-                <div class="input-group">
+                <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
-                  <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1">
-                    <option value="">Select Main Category</option>
+                  <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1" single>
+                    <option value="">Select MainCategory</option>
                     <% let i=0; for(category of data) { %>
                       <option value="<%=category.id%>">
                         <%=category.name%>
@@ -28,8 +27,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="name">Sub Category Name<span
-                  class="required">*</span>
+                <label class="col-form-label label-align" for="name">Sub Category Name<span class="required">*</span>
                 </label>
                 <div class="input-group">
                   <span class="input-group-text"><img src="/images/subcategory.svg" class="mCS_img_loaded"></span>
@@ -45,24 +43,23 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="status">Status<span
-                  class="required">*</span>
+                <label class="col-form-label label-align" for="status">Status<span class="required">*</span>
                 </label>
-                <div class="input-group">
+                <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="status" id="status">
+                  <select class="form-control" name="status" id="status" tabindex="-1" single>
                     <option value="1">Activate</option>
                     <option value="0">Deactivate</option>
                   </select>
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
 
           <div class="ln_solid"></div>
-            <div class="text-right">
-              <button type="submit" id="storeSubCategoryBtn" class="btn theme-btn form-button">Save</button>
-            </div>
+          <div class="text-right">
+            <button type="submit" id="storeSubCategoryBtn" class="btn theme-btn form-button">Save</button>
+          </div>
 
         </form>
       </div>
@@ -72,6 +69,18 @@
 </div>
 
 <script type="text/javascript">
+
+  $(document).ready(function () {
+    $("#category_id").select2({
+      placeholder: "Select MainCategory",
+      allowClear: false,
+    });
+
+    $("#status").select2({
+      allowClear: false,
+    });
+
+  });
 
   $("#createSubCategory").submit(function (e) {
     e.preventDefault();

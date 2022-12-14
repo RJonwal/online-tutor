@@ -35,9 +35,9 @@
                   <div class="form-group">
                     <label class="col-form-label label-align" for="status">Status<span class="required">*</span>
                     </label>
-                    <div class="input-group">
+                    <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="status" id="status">
+                      <select class="form-control" name="status" id="status" tabindex="-1" single>
                         <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
                         <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
                       </select>
@@ -78,6 +78,13 @@
 
 
 <script type="text/javascript">
+
+  $(document).ready(function () {
+    $("#status").select2({
+      allowClear: false,
+    });
+  });
+
   $("#updateCategory").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();

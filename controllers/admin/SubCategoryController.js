@@ -33,8 +33,9 @@ const slugify_options = {
  */
 async function index(req, res) {
     try {
+        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
         let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
-        return res.render('../views/admin/subCategories/index', { data: subCategories, fs: fs, moment: res.locals.moment });
+        return res.render('../views/admin/subCategories/index', { data: subCategories, Categories: activeCategories, fs: fs, moment: res.locals.moment });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -146,7 +147,7 @@ async function destroy(req, res) {
         let id = req.params.id;
         let subCategoryDeleted = await SubCategory.findByIdAndDelete(id);
         if (subCategoryDeleted) {
-            req.flash('success', 'SubCategory is deleted successfully !');
+            req.flash('success', 'SubCategory is deleted successfully!');
         }
         return res.redirect('/subCategories');
     } catch (e) {

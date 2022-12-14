@@ -5,8 +5,8 @@
     <ul class="filter-row">
       <li class="filter-col">
         <select class="form-control" id="category-name" tabindex="-1" single>
-          <option value="">Select Name</option>
-          <% let i=0; for(category of data) { %>
+          <option value="">Select Category</option>
+          <% for(category of data) { %>
             <option value="<%=category.id%>">
               <%=category.name%>
             </option>
@@ -53,10 +53,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% let j=0; for(category of data) { %>
+                    <% let i=0; for(category of data) { %>
                       <tr>
                         <td>
-                          <%=++j%>
+                          <%=++i%>
                         </td>
                         <td>
                             <% if (category.category_image !='' &&
@@ -108,7 +108,7 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $("#category-name").select2({
-      placeholder: "Select Name",
+      placeholder: "Select Category",
       allowClear: false,
     });
 
