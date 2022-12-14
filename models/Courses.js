@@ -12,7 +12,7 @@ const slugify_options = {
 
 
 const coursesSchema = new mongoose.Schema({
-    category_id: {
+    subject_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'categories',
         required: true,

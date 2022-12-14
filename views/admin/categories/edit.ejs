@@ -6,19 +6,20 @@
         <h3 class="title-text">Edit Category</h3>
       </div>
       <div class="x_content">
-        <form id="updateCategory" action="/categories/update" method="post" class="form-horizontal form-label-left" novalidate>
+        <form id="updateCategory" action="/categories/update" method="post" class="form-horizontal form-label-left"
+          novalidate>
           <input type="hidden" name="category_id" value="<%=data.id %>">
           <div class="row">
             <div class="col-md-8">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="name">Category Name<span
-                      class="required">*</span>
-                  </label>
+                    <label class="col-form-label label-align" for="name">Category Name<span class="required">*</span>
+                    </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="name" class="form-control" placeholder="Enter Category Name.." required="required" id="name" value="<%=data.name %>">
+                      <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
+                        required="required" id="name" value="<%=data.name %>">
                     </div>
                   </div>
                 </div>
@@ -27,14 +28,13 @@
                     <label class="col-form-label label-align" for="note">Note</span>
                     </label>
                     <textarea name="note" rows="5" class="form-control" placeholder="Enter Note.."
-                id="note"><%=data.note %></textarea>
+                      id="note"><%=data.note %></textarea>
                   </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="status">Status<span
-                      class="required">*</span>
-                  </label>
+                    <label class="col-form-label label-align" for="status">Status<span class="required">*</span>
+                    </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
                       <select class="form-control" name="status" id="status">
@@ -52,15 +52,15 @@
                   Image
                 </label>
                 <input type="file" name="category_image" id="category_image" class="form-control dropify h-auto" <% if
-                (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
-              data-default-file="/CategoryImage/<%=data.category_image%>" <% }%>
-                  data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
-                  <% if (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
-                    value=" <%=data.category_image %>" <% } else { %> value="" <% } %> >
+                  (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
+                data-default-file="/CategoryImage/<%=data.category_image%>" <% }%>
+                    data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
+                    <% if (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
+                      value=" <%=data.category_image %>" <% } else { %> value="" <% } %> >
               </div>
               <input type="hidden" name="is_remove" id="is_image_removed" value="0">
             </div>
-          </div>  
+          </div>
 
 
 

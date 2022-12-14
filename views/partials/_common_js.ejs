@@ -15,6 +15,13 @@
         input.attr("type", "password");
       }
     });
+
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+      'Width': 400,
+      'Height': 400,
+    })
   });
 
   $(document).ready(function () {
@@ -22,11 +29,6 @@
       tpl: {
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
       },
-    });
-
-    $('.dropify-clear').on('click', function () {
-      $('#is_image_removed').val('1');
-      $('.dropify').attr('required', true);
     });
   });
 
@@ -238,7 +240,7 @@
   });
 
 
-//  Country Phone Input
+  //  Country Phone Input
   // var input = document.querySelector("#phone");
   // window.intlTelInput(input, {
   //   initialCountry: "Au",

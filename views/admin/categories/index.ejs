@@ -4,30 +4,20 @@
     <h3 class="title-text">Filter Category</h3>
     <ul class="filter-row">
       <li class="filter-col">
-        <select class="selectlink form-control">
-          <option value="">Select tutor</option>
-          <option value="1">Andrew</option>
-          <option value="2">Bella</option>
-          <option value="3">Angel</option>
-          <option value="4">Tie</option>
-          <option value="5">Edword</option>
+        <select class="form-control" id="category-name" tabindex="-1" single>
+          <option value="">Select Name</option>
+          <% let i=0; for(category of data) { %>
+            <option value="<%=category.id%>">
+              <%=category.name%>
+            </option>
+            <% } %>
         </select>
       </li>
       <li class="filter-col">
-        <select class="selectlink form-control">
+        <select class="form-control" id="category-status" tabindex="-1" single>
           <option value="">Select Status</option>
           <option value="1">Active</option>
-          <option value="2">Deactive</option>
-        </select>
-      </li>
-      <li class="filter-col">
-        <select class="selectlink form-control">
-          <option value="">Select Grade</option>
-          <option value="1">English</option>
-          <option value="2">Class 2nd</option>
-          <option value="3">Class 3rd</option>
-          <option value="4">Class 4th</option>
-          <option value="5">Class 5th</option>
+          <option value="0">Deactive</option>
         </select>
       </li>
       <li class="filter-col">
@@ -41,7 +31,9 @@
         <div class="x_title">
           <h3 class="title-text">Main Categories List</h3>
           <ul class="right-btns">
-            <li> <a href="./categories/create" class="btn theme-btn" rel="tooltip" data-placement="top" title="Add">+ Add Category</a>
+            <li> <a href="./categories/create" class="btn theme-btn" data-toggle="tooltip" rel="tooltip"
+              data-placement="top" title="Add Category">+
+                Add Category</a>
             </li>
           </ul>
         </div>
@@ -61,20 +53,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% let i=0; for(category of data) { %>
+                    <% let j=0; for(category of data) { %>
                       <tr>
                         <td>
-                          <%=++i%>
+                          <%=++j%>
                         </td>
                         <td>
-                          <div class="avatar avatar-blue mr-3">
                             <% if (category.category_image !='' &&
                               fs.existsSync("assets/CategoryImage/"+category.category_image)) { %>
-                              <img src="/CategoryImage/<%=category.category_image%>" data-lightbox="image_<%=category.id%>" alt="<%=category.name%>" />
+                              <a href="/CategoryImage/<%=category.category_image%>"
+                                data-lightbox="image_<%=category.id%>"> <img
+                                  src="/CategoryImage/<%=category.category_image%>" alt="<%=category.name%>" class="img-thumbnail" /></a>
                               <% } else{ %>
-                                <img src="/images/noImage.jpg" alt="no-image" />
+                                <a href="/images/noImage.jpg" data-lightbox="image_007"> <img src="/images/noImage.jpg"
+                                    alt="no-image" class="img-thumbnail" /></a>
                                 <% } %>
-                          </div>
                         </td>
                         <td>
                           <%=category.name%>
@@ -89,12 +82,13 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                            <a class="" href="/categories/edit/<%=category.id%>" data-toggle="tooltip"
-                              rel="tooltip" data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
+                            <a class="" href="/categories/edit/<%=category.id%>" data-toggle="tooltip" rel="tooltip"
+                              data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
 
                             <a href="javascript:void(0)" class="ml-2"
-                              onclick="confirmBeforeDeletion('/categories/destroy/<%=category.id%>')"> <img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
-                              data-placement="top" title="Delete"></a>
+                              onclick="confirmBeforeDeletion('/categories/destroy/<%=category.id%>')"> <img
+                                src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
+                                data-placement="top" title="Delete"></a>
                           </div>
                         </td>
                       </tr>
@@ -111,3 +105,16 @@
   <!-- page content end -->
 </div>
 
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#category-name").select2({
+      placeholder: "Select Name",
+      allowClear: false,
+    });
+
+    $("#category-status").select2({
+      placeholder: "Select Status",
+      allowClear: false,
+    });
+  });
+</script>

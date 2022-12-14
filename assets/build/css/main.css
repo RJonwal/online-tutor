@@ -2350,3 +2350,11 @@ span.total-count {
     background-color: #038c00;
 }
 
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #f8fafc;
+    border: 1px solid #c4c9d0;
+    border-radius: 0.25rem;
+    width: 80px;
+    height: 50px;
+}

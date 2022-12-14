@@ -38,7 +38,7 @@ var validateUser = () => [
         .then(school => {
           console.log(school);
           if (school != null) {
-            return Promise.reject('School phone no. is already in use!');
+            return Promise.reject('Phone no. is already in use!');
           }
         })
     })

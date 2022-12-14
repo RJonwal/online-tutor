@@ -202,14 +202,17 @@ async function destroy(req, res) {
         let categoryDeleted = await Category.findByIdAndDelete(id);
         if (categoryDeleted) {
             let categoryImage = categoryDeleted.category_image;
-            const filePath = './assets/CategoryImage/' + categoryImage;
-            fs.exists(filePath, function (exists) {
-                if (exists) {
-                    fs.unlinkSync(filePath);
-                } else {
-                    console.log('File not found, so not deleted.');
-                }
-            });
+            if(categoryImage != ''){
+                const filePath = './assets/CategoryImage/' + categoryImage;
+                fs.exists(filePath, function (exists) {
+                    if (exists) {
+                        fs.unlinkSync(filePath);
+                    } else {
+                        console.log('File not found, so not deleted.');
+                    }
+                });
+            }
+            
             req.flash('success', 'Category is deleted successfully !');
         }
         return res.redirect('/categories');

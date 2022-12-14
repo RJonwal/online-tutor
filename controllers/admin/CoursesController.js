@@ -17,7 +17,7 @@ module.exports = {
 }
 
 /**
- * Create SubCategory 
+ * list courses. 
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -25,15 +25,16 @@ module.exports = {
 async function index(req, res) {
     try {
         return res.render('../views/admin/courses/myCourses');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 /**
- * create SubCategory
+ * create course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -41,32 +42,34 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         return res.render('../views/admin/courses/create');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 /**
- * add courses
+ * add course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
- async function addCourses(req, res) {
+async function addCourses(req, res) {
     try {
-        return res.render('../views/admin/courses/addCourses' );
-    } catch {
+        return res.render('../views/admin/courses/addCourses');
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 
 /**
- * store SubCategory
+ * store course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -77,7 +80,7 @@ async function store(req, res) {
 
 
 /**
- * edit SubCategory
+ * edit course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -88,7 +91,7 @@ async function edit(req, res) {
 
 
 /**
- * update SubCategory
+ * update course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -99,38 +102,41 @@ async function update(req, res) {
 
 
 /**
- * Preview Courses
+ * preview course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
- async function previewCourses(req, res) {
+async function previewCourses(req, res) {
     try {
         return res.render('../views/admin/courses/previewCourses');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
 
 /**
- * Preview Courses
+ * view course.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
- async function viewCourses(req, res) {
+async function viewCourses(req, res) {
     try {
         return res.render('../views/admin/courses/viewCourses');
-    } catch {
+    } catch (e) {
+        console.log(e);
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Something went wrong, please try again later.'
         })
     }
 }
+
 /**
- * delete SubCategory
+ * delete course
  * @param {*} req 
  * @param {*} res 
  * @returns 
