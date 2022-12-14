@@ -81,6 +81,7 @@
                   <thead>
                     <tr>
                       <th>S.No</th>
+                      <th>Image</th>
                       <th>Name</th>
                       <th>Contact No</th>
                       <th>Email</th>
@@ -93,6 +94,17 @@
                       <tr>
                         <td>
                           <%=++i%>
+                        </td>
+                        <td>
+                          <% if (student.profile_image !='' &&
+                          fs.existsSync("assets/ProfileImage/"+student.profile_image)) { %>
+                          <a href="/ProfileImage/<%=student.profile_image%>"
+                            data-lightbox="image_<%=student.id%>"> <img
+                              src="/ProfileImage/<%=student.profile_image%>" alt="<%=student.first_name+' '+student.last_name %>" class="img-thumbnail" /></a>
+                          <% } else{ %>
+                            <a href="/images/noImage.jpg" data-lightbox="image_007"> <img src="/images/noImage.jpg"
+                                alt="no-image" class="img-thumbnail" /></a>
+                            <% } %>
                         </td>
                         <td>
                           <%=student.first_name +' '+student.last_name %>

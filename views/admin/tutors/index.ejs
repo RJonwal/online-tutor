@@ -68,14 +68,15 @@
                       <%=++i%>
                     </td>
                     <td>
-                      <div class="avatar avatar-blue mr-3">
-                        <% if (tutor.profile_image !='' &&
-                          fs.existsSync("assets/ProfileImage/"+tutor.profile_image)) { %>
-                          <img src="/ProfileImage/<%=tutor.profile_image%>" alt="<%=tutor.first_name+' '+tutor.last_name%>" />
-                          <% } else{ %>
-                            <img src="/images/noImage.jpg" alt="no-image" />
-                            <% } %>
-                      </div>
+                      <% if (tutor.profile_image !='' &&
+                      fs.existsSync("assets/ProfileImage/"+tutor.profile_image)) { %>
+                      <a href="/ProfileImage/<%=tutor.profile_image%>"
+                        data-lightbox="image_<%=tutor.id%>"> <img
+                          src="/ProfileImage/<%=tutor.profile_image%>" alt="<%=tutor.first_name+' '+tutor.last_name %>" class="img-thumbnail" /></a>
+                      <% } else{ %>
+                        <a href="/images/noImage.jpg" data-lightbox="image_007"> <img src="/images/noImage.jpg"
+                            alt="no-image" class="img-thumbnail" /></a>
+                        <% } %>
                     </td>
                     <td>
                       <%= tutor.title %>

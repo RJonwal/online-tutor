@@ -50,7 +50,6 @@
                       <th>Contact No</th>
                       <th>Address</th>
                       <th>Status</th>
-                      <th>Created At</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -79,9 +78,6 @@
                               data-url="/schools/update-status" data-uid="<%=school.id%>" id="toggle-trigger"
                               <%=school.status==1 ? ' checked' : '' %>>
                             </label>
-                        </td>
-                        <td>
-                          <%=school.created_at.toDateString()%>
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
