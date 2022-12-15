@@ -128,7 +128,7 @@ async function verifyPassword(req, res) {
 async function profile(req, res) {
         let user = await res.locals.user;
         return res.render('../views/auth/profile',{data:user,fs:fs});
-};
+}; 
 async function updateProfile(req, res) {
     if (req.body.user_id && req.body.user_id != '') {
         let User_details = await User.find({ "_id": req.body.user_id });
@@ -149,18 +149,17 @@ async function updateProfile(req, res) {
                 }
                 req.body.profile_image = req.file.filename;
             } else {
-
                 delete req.body.profile_image;
             }
             if(req.body.password){
                 let hashedPassword = global.securePassword(req.body.password);
                 req.body.password = hashedPassword;
-                let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body)
+                let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body);
             }else {
                 delete req.body.password; // delete password from body if dont want update
                 let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body)
             }
-            req.flash('success', 'Profile updated successfully!');
+            req.flash('success', 'Profile is updated successfully!');
             res.status(200).json({ "success": true, "message": "Profile is updated successfully!", "redirectUrl": "/profile" });
         }
     }

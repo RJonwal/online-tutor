@@ -1,105 +1,112 @@
 <div class="right_col" role="main">
-    <!-- page content starts-->
-    <div class="row main_row">
-      <div class="x_panel form_panel">
-        <div class="x_title">
-          <h3 class="title-text">User Profile</h3>
-        </div>
-        <div class="x_content">
-          <form id="updateProfile" action="/updateProfile" method="post" class="form-horizontal form-label-left tutor_form" enctype="multipart/form-data" autocomplete="off">
+  <!-- page content starts-->
+  <div class="row main_row">
+    <div class="x_panel form_panel">
+      <div class="x_title">
+        <h3 class="title-text">User Profile</h3>
+      </div>
+      <div class="x_content">
+        <form id="updateProfile" action="/updateProfile" method="post"
+          class="form-horizontal form-label-left tutor_form" enctype="multipart/form-data" autocomplete="off">
           <div class="row">
-            <div class="col-md-8">          
-            <div class="row">
-              <input type="hidden" name="user_id" value="<%=data.id %>">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="col-form-label label-align" for="title">Title<span
-                    class="required">*</span>
-                  </label>
-                  <div class="input-group">
-                    <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                    <select class="form-control" name="title" id="title">
-                      <option value="Mr">Mr</option>
-                      <option value="Mrs">Mrs</option>
-                    </select>
+            <div class="col-md-8">
+              <div class="row">
+                <input type="hidden" name="user_id" value="<%=data.id %>">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="title">Title<span class="required">*</span>
+                    </label>
+                    <div class="input-group flex-nowrap">
+                      <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                      <select class="form-control" name="title" id="title" tabindex="-1" single>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="first_name">First Name<span class="required">*</span>
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                      <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
+                        id="first_name" value="<%=data.first_name%>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="last_name">Last Name<span class="required">*</span>
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                      <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."
+                        id="last_name" value="<%=data.last_name%>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="hidden" name="dial_code" id="dial_code">
+                    <input type="hidden" name="iso_code" id="iso_code">
+                    <label class="col-form-label label-align" for="phone">Contact No.
+                      <span class="required">*</span>
+                    </label>
+                    <div class="form-group">
+                      <input type="text" name="phone" class="form-control " id="phone" value="<%=data.phone %>">
+                      <span id="error-msg" class="hide"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="email">Email<span class="required">*</span>
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
+                      <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email"
+                        value="<%=data.email%>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span
+                        class="required">* </span>
+                    </label>
+                    <span style="font-size: 8px;">Leave blank If you don`t want to update password</span>
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                      <input type="password" name="password" class="form-control" placeholder="Enter Password.."
+                        id="password-field" value="">
+
+                      <span toggle="#password-field"
+                        class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+                    </div>
+
                   </div>
                 </div>
               </div>
-            
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="first_name">First Name<span
-                    class="required">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                  <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
-                    id="first_name" value="<%=data.first_name%>">
-                </div>
-              </div>
             </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="last_name">Last Name<span
-                    class="required">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                  <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name" value="<%=data.last_name%>">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="phone">Phone No.<span
-                    class="required">*</span>
-                </label>
-                <div class="form-group">
-                  <input type="text" name="phone" class="form-control " placeholder="Enter Phone No.." id="phone" value="<%=data.phone%>">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="email">Email<span
-                    class="required">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
-                  <input type="text" name="email" class="form-control" placeholder="Enter Email.." id="email" value="<%=data.email%>" disabled/> 
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span class="required">* </span>
-                </label>
-                <span style="font-size: 8px;">Leave blank If you don`t want to update password</span>
-                <div class="input-group">
-                  <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
-                  <input type="password" name="password" class="form-control" placeholder="Enter Password.." id="password-field" value="">
-                    
-                  <span toggle="#password-field"
-                    class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          </div>
             <div class="col-md-4">
               <div class="form-group drop-file">
                 <label class="col-form-label label-align" for="profile_image">Profile Image</label>
                 <div class="input-group">
-                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto"
-                    <% if(data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
-                    data-default-file="/ProfileImage/<%=data.profile_image%>" <% }%>
-                        data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
-                        <% if (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %> value=" <%=data.profile_image %>" <% } else { %> value="" <% } %> >
+                  <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto" <%
+                    if(data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
+                  data-default-file="/ProfileImage/<%=data.profile_image%>" <% }%>
+                      data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
+                      <% if (data.profile_image !='' && fs.existsSync("assets/ProfileImage/"+data.profile_image)) { %>
+                        value=" <%=data.profile_image %>" <% } else { %> value="" <% } %> >
                 </div>
               </div>
             </div>
@@ -109,15 +116,26 @@
             <button type="submit" id="updateProfileBtn" class="btn form-button theme-btn">Update</button>
           </div>
         </form>
-         
-        </div>
+
       </div>
     </div>
-    <!-- page title end -->
+  </div>
+  <!-- page title end -->
 </div>
 
 <script>
-$("#updateProfile").submit(function (e) {
+  $(document).ready(function () {
+
+    $("#title").select2({
+      allowClear: false,
+    });
+  });
+
+
+  /**
+   * updateProfile
+   */
+  $("#updateProfile").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
     var form = $('#updateProfile');
@@ -151,5 +169,86 @@ $("#updateProfile").submit(function (e) {
         $("#updateProfileBtn").prop('disabled', false);
       },
     })
-});
+  });
+
+
+  /**
+  *  phone number validate start intlTelInput
+  */
+  var input = document.querySelector("#phone"),
+    errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+    result = document.querySelector("#error-msg");
+
+  window.addEventListener("load", function () {
+    errorMsg = document.querySelector("#error-msg");
+
+    function getIp(callback) {
+      fetch('https://ipinfo.io', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then((resp) => resp.json())
+        .catch(() => {
+          return {
+            country: '',
+          };
+        })
+        .then((resp) => callback(resp.country));
+    }
+    var iso_code = $("#iso_code").val();
+    iso_code = iso_code ? iso_code : 'in';
+    var iti = window.intlTelInput(input, {
+      initialCountry: iso_code,
+      separateDialCode: true,
+      formatOnDisplay: false
+    });
+
+
+    input.addEventListener('keyup', function () {
+      reset();
+      $("#updateProfileBtn").prop('disabled', false);
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          $("#updateProfileBtn").prop('disabled', false);
+          $(input).addClass('is-valid');
+
+        } else {
+          $("#updateProfileBtn").prop('disabled', true);
+          $(input).addClass('is-invalid');
+          var errorCode = iti.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          $(errorMsg).show();
+        }
+      }
+    });
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+    var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+    };
+    input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+        valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+    }, false);
+
+    input.addEventListener("focus", function () {
+      result.textContent = "";
+    }, false);
+
+    $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      console.log(countryData);
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+    });
+  });
 </script>
