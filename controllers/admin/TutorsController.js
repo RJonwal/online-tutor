@@ -272,7 +272,7 @@ async function updateStatus(req, res) {
 
             let status = ((req.body.status == 'true') ? '1' : '0');
             let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(tutor);
+         
             res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });
         }
     } catch (e) {

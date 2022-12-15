@@ -12,19 +12,19 @@ const schoolsSchema = new mongoose.Schema({
     },
     dial_code: {
         type: Number,
-        minlength: 1,
+        // minlength: 1,
         maxlength: 5,
         default: null
     },
     iso_code: {
         type: String,
-        minlength: 1,
+        // minlength: 1,
         maxlength: 5,
         default: null
     },
     phone: {
         type: Number,
-        minlength: 5,
+        // minlength: 5,
         maxlength: 15,
         default: null
     },

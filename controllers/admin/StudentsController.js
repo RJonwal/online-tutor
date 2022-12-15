@@ -117,7 +117,7 @@ async function update(req, res) {
         if (req.body.student_id && req.body.student_id != '') {
             let Student_details = await Student.find({ "_id": req.body.student_id });
             if (Student_details) {
-                console.log(Student_details);
+              
                 studentData = Student_details[0];
                 let profileImage = studentData.profile_image;
                 const filePath = './assets/profileImage/' + profileImage;
@@ -136,7 +136,7 @@ async function update(req, res) {
                     let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
                 } else {
                     delete req.body.profile_image
-                    console.log(req.body.student_id);
+                    
                     let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
                 }
                 req.flash('success', 'Student is updated successfully!');
@@ -193,7 +193,7 @@ async function updateStatus(req, res) {
            
             let status = ((req.body.status=='true') ? '1' : '0');
             let tutor = await Student.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(tutor);
+          
             res.status(200).json({ "success": true, "message": "Student status is updated successfully!" });
         }
     } catch (e) {

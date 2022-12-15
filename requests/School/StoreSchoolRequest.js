@@ -53,6 +53,18 @@ var validateUser = () => [
     .bail()
     .isEmail()
     .withMessage('Input must be a valid email!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return School.find({ "email": value })
+        .then(school => {
+          console.log(school);
+          console.log(school.length);
+          if (school.length) {
+            return Promise.reject('Email is already use!');
+          }
+        })
+    })
     .bail(),
   body('address')
     .optional({ checkFalsy: true })

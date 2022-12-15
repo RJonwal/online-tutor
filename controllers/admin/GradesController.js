@@ -26,7 +26,7 @@ async function index(req, res) {
         let deactiveGrade  = await Grade.find( { "status": 0  }  ).sort({ '_id': -1 }).count();
 
         const gradeObject = {'total':totalGrade,'active':activeGrade,'deactive':deactiveGrade}
-        console.log(gradeObject);
+        
         return res.render('../views/admin/grades/index', { data: grades, moment: res.locals.moment,gradeObject:gradeObject });
         
     } catch (e) {
@@ -148,7 +148,7 @@ async function updateStatus(req, res) {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
             let grade = await Grade.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(grade);
+           
             res.status(200).json({ "success": true, "message": "Grade status is updated successfully!" });
         }
     } catch (e) {

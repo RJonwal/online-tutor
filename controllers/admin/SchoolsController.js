@@ -143,7 +143,7 @@ async function updateStatus(req, res) {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
             let school = await School.findByIdAndUpdate(req.body.uid, { status: status });
-            console.log(school);
+          
             res.status(200).json({ "success": true, "message": "School status is updated successfully!" });
         }
     } catch (e) {
