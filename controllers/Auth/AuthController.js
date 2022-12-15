@@ -133,6 +133,7 @@ async function updateProfile(req, res) {
     if (req.body.user_id && req.body.user_id != '') {
         let User_details = await User.find({ "_id": req.body.user_id });
         if (User_details) {
+            delete req.body.email;
             if (req.file != undefined) {
                 userData = User_details[0];
                 let profileImage = userData.profile_image;
