@@ -53,7 +53,7 @@ var validateUser = () => [
           // console.log(student);
           // console.log(student.length);
           if (student.length) {
-            return Promise.reject('Email is already in use!');
+            return Promise.reject('Email is already use!');
           }
         })
     })
@@ -71,7 +71,7 @@ var validateUser = () => [
           // console.log(student);
           // console.log(student.length);
           if (student.length) {
-            return Promise.reject('Phone no. is already in use!');
+            return Promise.reject('Phone no. is already use!');
           }
         })
     })

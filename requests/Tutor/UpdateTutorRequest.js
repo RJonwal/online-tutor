@@ -52,7 +52,7 @@ var validateUser = () => [
         .then(student => {
           console.log(student);
           if (student != null) {
-            return Promise.reject('Email is already in use!');
+            return Promise.reject('Email is already use!');
           }
         })
     })
@@ -70,7 +70,7 @@ var validateUser = () => [
         .then(student => {
           console.log(student);
           if (student != null) {
-            return Promise.reject('Phone no. is already in use!');
+            return Promise.reject('Phone no. is already use!');
           }
         })
     }),
