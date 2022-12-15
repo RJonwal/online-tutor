@@ -20,7 +20,14 @@ module.exports = {
 async function index(req, res) {
     try {
         let schools = await School.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/schools/index', { data: schools, moment: res.locals.moment });
+
+        let totalSchool  = await School.find({}).sort({ '_id': -1 }).count();
+        let activeSchool  = await School.find( { "status": 1  } ).sort({ '_id': -1 }).count();
+        let deactiveSchool  = await School.find( { "status": 0  }  ).sort({ '_id': -1 }).count();
+
+        const schoolObject = {'total':totalSchool,'active':activeSchool,'deactive':deactiveSchool}
+
+        return res.render('../views/admin/schools/index', { data: schools, moment: res.locals.moment ,schoolObject:schoolObject});
     } catch (e) {
         console.log(e);
         return res.status(500).json({

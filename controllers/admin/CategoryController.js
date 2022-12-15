@@ -32,7 +32,14 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let categories = await Category.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/categories/index', { data: categories, fs: fs, moment: res.locals.moment });
+
+        let totalCategory  = await Category.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeCategory  = await Category.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
+        let deactiveCategory = await Category.find({ "status": 0  } ).sort({ '_id': -1 }).count();
+
+        const CategoryObject = {'total':totalCategory,'active':activeCategory,'deactive':deactiveCategory}
+
+        return res.render('../views/admin/categories/index', { data: categories, fs: fs, moment: res.locals.moment,CategoryObject:CategoryObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({

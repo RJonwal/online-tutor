@@ -36,7 +36,14 @@ async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
         let subject = await Category.find({});
-        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs, subject: subject });
+
+        let totalTutor  = await User.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
+        let deactiveTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
+
+        const tutorObject = {'total':totalTutor,'active':activeTutor,'deactive':deactiveTutor}
+
+        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs, subject: subject,tutorObject:tutorObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -92,6 +99,7 @@ async function store(req, res) {
 
         let tutor = await User.create(req.body);
         if (tutor) {
+            req.flash('success', 'Tutor is Created successfully!');
             res.status(200).json({ "success": true, "message": "Tutor is created successfully!", "redirectUrl": "/tutors" });
         }
     } catch (e) {
@@ -135,6 +143,7 @@ async function edit(req, res) {
  */
 async function update(req, res) {
     try {
+        console.log(req.body.subject_ids);
         if (req.body.tutor_id && req.body.tutor_id != '') {
             let tutor = await User.find({ "_id": req.body.tutor_id, "role": 2 });
             if (tutor) {
@@ -203,7 +212,7 @@ async function update(req, res) {
                         })
                     }
                 }
-
+                req.flash('success', 'Tutor is updated successfully!');
                 res.status(200).json({ "success": true, "message": "Tutor is updated successfully!", "redirectUrl": "/tutors" });
             }
         }

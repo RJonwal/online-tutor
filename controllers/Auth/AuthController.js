@@ -61,6 +61,7 @@ function forgetPassword(req, res) {
 async function forget(req, res) {
     try {
         let user = await User.findOne({ email: req.body.email });
+        console.log(user);
         if (user) {
             const randomString = randomstring.generate();
             const url = global.baseUrl(req) + '/reset-password?token=' + randomString;
@@ -78,7 +79,7 @@ async function forget(req, res) {
                     return console.log(error);
                 }
                 req.flash('success', 'Mail Sent! Please check your mail');
-                return res.redirect('/forget-password');
+                res.status(200).json({ "success": true, "message": "Password Changed Successfully!", "redirectUrl": "/forget-password" });
             });
         } else {
             req.flash('error', 'Sorry! User Not Found');
@@ -86,9 +87,9 @@ async function forget(req, res) {
         }
 
     } catch {
-        return res.json(500, {
-            message: 'Internal Server Error'
-        });
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 };
 

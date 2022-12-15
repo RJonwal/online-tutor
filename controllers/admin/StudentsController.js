@@ -171,7 +171,7 @@ async function destroy(req, res) {
                         console.log('File not found, so not deleted.');
                     }
                 });
-                req.flash('success', 'Tutor is deleted successfully!');
+                req.flash('success', 'Student is deleted successfully!');
             }
         }
         return res.redirect('/Students');
@@ -194,7 +194,7 @@ async function updateStatus(req, res) {
             let status = ((req.body.status=='true') ? '1' : '0');
             let tutor = await Student.findByIdAndUpdate(req.body.uid, { status: status });
             console.log(tutor);
-            res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });
+            res.status(200).json({ "success": true, "message": "Student status is updated successfully!" });
         }
     } catch (e) {
         console.log(e);

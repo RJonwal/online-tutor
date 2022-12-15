@@ -35,7 +35,14 @@ async function index(req, res) {
     try {
         let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
         let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
-        return res.render('../views/admin/subCategories/index', { data: subCategories, Categories: activeCategories, fs: fs, moment: res.locals.moment });
+
+        let totalSubCategory  = await SubCategory.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeSubCategory  = await SubCategory.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
+        let deactiveSubCategory = await SubCategory.find({ "status": 0  } ).sort({ '_id': -1 }).count();
+
+        const SubCategoryObject = {'total':totalSubCategory,'active':activeSubCategory,'deactive':deactiveSubCategory}
+
+        return res.render('../views/admin/subCategories/index', { data: subCategories, Categories: activeCategories, fs: fs, moment: res.locals.moment,SubCategoryObject:SubCategoryObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({

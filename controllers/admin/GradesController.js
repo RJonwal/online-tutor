@@ -20,7 +20,15 @@ module.exports = {
 async function index(req, res) {
     try {
         let grades = await Grade.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/grades/index', { data: grades, moment: res.locals.moment });
+
+        let totalGrade  = await Grade.find({}).sort({ '_id': -1 }).count();
+        let activeGrade  = await Grade.find( { "status": 1  } ).sort({ '_id': -1 }).count();
+        let deactiveGrade  = await Grade.find( { "status": 0  }  ).sort({ '_id': -1 }).count();
+
+        const gradeObject = {'total':totalGrade,'active':activeGrade,'deactive':deactiveGrade}
+        console.log(gradeObject);
+        return res.render('../views/admin/grades/index', { data: grades, moment: res.locals.moment,gradeObject:gradeObject });
+        
     } catch (e) {
         console.log(e);
         return res.status(500).json({

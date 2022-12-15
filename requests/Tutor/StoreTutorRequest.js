@@ -76,10 +76,8 @@ var validateUser = () => [
         })
     })
     .bail(),
-  body('subject_ids')
-    .trim()
-    .not()
-    .isEmpty()
+    body('subject_ids')
+    .exists()
     .withMessage('Subject can not be empty!')
     .bail(),
   body('address')

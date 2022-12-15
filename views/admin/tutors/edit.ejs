@@ -55,7 +55,8 @@
                   <div class="form-group">
                     <input type="hidden" name="dial_code" id="dial_code">
                     <input type="hidden" name="iso_code" id="iso_code">
-                    <label class="col-form-label label-align" for="phone">Contact No.<span class="required">*</span>
+                    <label class="col-form-label label-align" for="phone">Contact No.
+                      <!-- <span class="required">*</span> -->
                     </label>
                     <div class="form-group">
                       <input type="text" name="phone" class="form-control " id="phone" value="<%=data.phone %>">
@@ -82,7 +83,7 @@
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
-                      <input type="password" name="password" class="form-control" placeholder="Enter Password Name.."
+                      <input type="password" name="password" class="form-control" placeholder="Update Password.."
                         id="password" value="">
                       <span toggle="#password-field"
                         class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
@@ -96,7 +97,7 @@
                     </label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                      <select class="selectlink form-control" name="subject_ids" id="subject_ids" tabindex="-1"
+                      <select class="form-control" name="subject_ids[]" id="subject_ids" 
                         multiple>
                         <option value="">Please Select Subjects </option>
                         <% let i=0; for(subject of subjects) { %>
@@ -215,7 +216,7 @@
     var formData = new FormData(form[0]);
     formData.append('profile_image', this.new_attachments)
     var url = $('#updateTutor').attr('action');
-    $("#updateTutorBtn").prop('disabled', true);
+    // $("#updateTutorBtn").prop('disabled', true);
     $.ajax({
       type: "POST",
       url: url,
