@@ -38,7 +38,6 @@ async function login(req, res) {
 
 async function signIn(req, res) {
     try {
-
         req.flash('success', 'User Login Successfully !');
         return res.redirect('/courses');
     } catch {

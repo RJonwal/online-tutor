@@ -163,6 +163,7 @@
 
     input.addEventListener('keyup', function () {
       reset();
+      $("#updateSchoolBtn").prop('disabled', false);
       if (input.value.trim()) {
         if (iti.isValidNumber()) {
           $("#updateSchoolBtn").prop('disabled', false);

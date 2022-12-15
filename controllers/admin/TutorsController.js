@@ -143,7 +143,6 @@ async function edit(req, res) {
  */
 async function update(req, res) {
     try {
-        console.log(req.body.subject_ids);
         if (req.body.tutor_id && req.body.tutor_id != '') {
             let tutor = await User.find({ "_id": req.body.tutor_id, "role": 2 });
             if (tutor) {
@@ -183,6 +182,7 @@ async function update(req, res) {
                                 first_name: req.body.first_name,
                                 last_name: req.body.last_name,
                                 email: req.body.email,
+                                phone: req.body.phone,
                                 password: req.body.password,
                                 address: req.body.address,
                                 calendar_color: req.body.calendar_color,
@@ -202,6 +202,7 @@ async function update(req, res) {
                                 first_name: req.body.first_name,
                                 last_name: req.body.last_name,
                                 email: req.body.email,
+                                phone: req.body.phone,
                                 password: req.body.password,
                                 address: req.body.address,
                                 calendar_color: req.body.calendar_color,
@@ -246,9 +247,9 @@ async function destroy(req, res) {
                         console.log('File not found, so not deleted.');
                     }
                 });
-                req.flash('success', 'Tutor is deleted successfully!');
             }
         }
+        req.flash('success', 'Tutor is deleted successfully!');
         return res.redirect('/tutors');
     } catch (e) {
         console.log(e);

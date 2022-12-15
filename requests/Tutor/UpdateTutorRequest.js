@@ -58,7 +58,7 @@ var validateUser = () => [
     })
     .bail(),
   body('phone')
-    .optional({ checkFalsy: true })
+    // .optional({ checkFalsy: true })
     .not().isEmpty()
     .isInt()
     .withMessage('Phone no. should be valid number.')

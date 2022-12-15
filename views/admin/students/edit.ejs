@@ -122,7 +122,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="col-form-label label-align" for="notes">Notes </label>
-                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"><%=data.notes %></textarea>
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"><%=data.note %></textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -243,13 +243,14 @@
 
    input.addEventListener('keyup', function () {
       reset();
+      $("#updateStudentBtn").prop('disabled', false);
       if (input.value.trim()) {
          if (iti.isValidNumber()) {
-            $("#storeStudentBtn").prop('disabled', false);
+            $("#updateStudentBtn").prop('disabled', false);
             $(input).addClass('is-valid');
 
          } else {
-            $("#storeStudentBtn").prop('disabled', true);
+            $("#updateStudentBtn").prop('disabled', true);
             $(input).addClass('is-invalid');
             var errorCode = iti.getValidationError();
             errorMsg.innerHTML = errorMap[errorCode];

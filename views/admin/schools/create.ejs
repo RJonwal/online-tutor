@@ -158,13 +158,14 @@
 
     input.addEventListener('keyup', function () {
       reset();
+      $("#storeSchoolBtn").prop('disabled', false);
       if (input.value.trim()) {
         if (iti.isValidNumber()) {
-          $("#storeStudentBtn").prop('disabled', false);
+          $("#storeSchoolBtn").prop('disabled', false);
           $(input).addClass('is-valid');
 
         } else {
-          $("#storeStudentBtn").prop('disabled', true);
+          $("#storeSchoolBtn").prop('disabled', true);
           $(input).addClass('is-invalid');
           var errorCode = iti.getValidationError();
           errorMsg.innerHTML = errorMap[errorCode];

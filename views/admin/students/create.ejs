@@ -228,6 +228,7 @@
 
    input.addEventListener('keyup', function () {
       reset();
+      $("#storeStudentBtn").prop('disabled', false);
       if (input.value.trim()) {
          if (iti.isValidNumber()) {
             $("#storeStudentBtn").prop('disabled', false);
