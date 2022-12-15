@@ -25,7 +25,7 @@
     <ul class="filter-row">
       <li class="filter-col">
         <select class="form-control" id="mainCategory" tabindex="-1" single>
-          <option value="">Select MainCategory</option>
+          <option value="">Select Main Category</option>
           <% for(category of Categories) { %>
             <option value="<%=category.id%>">
               <%=category.name%>
@@ -35,7 +35,7 @@
       </li>
       <li class="filter-col">
         <select class="form-control" id="subCategory" tabindex="-1" single>
-          <option value="">Select SubCategory</option>
+          <option value="">Select Sub Category</option>
           <% for(subCategory of data) { %>
             <option value="<%=subCategory.id%>">
               <%=subCategory.name%>
@@ -63,7 +63,7 @@
           <ul class="right-btns">
             <li> <a href="./subCategories/create" class="btn theme-btn" data-toggle="tooltip" rel="tooltip"
                 data-placement="top" title="Add SubCategory">+
-                Add SubCategory</a>
+                Add Sub Category</a>
             </li>
           </ul>
         </div>
@@ -88,7 +88,7 @@
                         <td>
                           <%=++i%>
                         </td>
-                        <td>
+                        <td class="text-capitalize">
                           <%=subCategory.name%>
                         </td>
                         <td>
@@ -131,11 +131,11 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $("#mainCategory").select2({
-      placeholder: "Select MainCategory",
+      placeholder: "Select Main Category",
       allowClear: false,
     });
     $("#subCategory").select2({
-      placeholder: "Select SubCategory",
+      placeholder: "Select Sub Category",
       allowClear: false,
     });
     $("#subCategory-status").select2({

@@ -1,4 +1,5 @@
 :root {
+    --body-bg:#f1f5f9;
     --primary: #001D3D;
     --secondary: #F47817;
     --dblue: #201B53;
@@ -13,7 +14,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--lightgray);
+    background: var(--body-bg);
     overflow-x: hidden;
     height: 100%;
 }
@@ -270,7 +271,10 @@ ul {
     box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
     transform: rotate(45deg);
 }
-
+.login-blocks .login-form .form-group .help-block{
+    margin-top: 5px;
+    display: block;
+}
 
 /* Login CSS */
 
@@ -355,7 +359,7 @@ ul {
 .site_title {
     font-size: 16px;
     font-weight: 500;
-    color: var(--dblue);
+    color: var(--dblue) !important;
     display: flex;
     align-items: center;
 }
@@ -704,7 +708,7 @@ footer {
 
 /* Main Content */
 body .container.body .right_col {
-    background: var(--lightgray);
+    background: var(--body-bg);
     padding: 10px 30px 30px 30px !important;
     overflow: hidden;
     /* min-height: auto !important; */
@@ -854,7 +858,9 @@ span.total-count {
 .select2-dropdown ::-webkit-scrollbar-thumb {
     border-radius: 10px;
 }
-
+.select2-container--default .select2-selection--single .select2-selection__placeholder{
+    color: var(--dblue);
+}
 .stcard-box {
     position: relative;
     display: flex;
@@ -1903,7 +1909,11 @@ span.total-count {
     padding: 10px 15px;
     color: var(--dblue);
 }
-
+.x_content table tbody td .subcat-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 .x_content table tbody td .badge-info{
     background: var(--dblue);
     font-weight: 500;
@@ -2071,7 +2081,8 @@ span.total-count {
     font-weight: 500;
     margin-top: 5px;
     position: absolute;
-    bottom: 0;
+    right: 20px;
+    top: 35px;
 }
 .form_panel .x_content .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice{
     background-color: var(--exLightBlue);
@@ -2174,7 +2185,11 @@ span.total-count {
 .form_panel .x_content .theme-btn:hover{
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);
 }
-
+.form_panel .x_content .theme-btn:disabled{
+    cursor: not-allowed;
+    background: var(--secondary);
+    opacity: .65;
+}
 
 .mce-notification-warning * {
     display: none !important;
@@ -2555,13 +2570,16 @@ span.total-count {
 }
 
 .img-thumbnail {
-    padding: 0.25rem;
-    background-color: #f8fafc;
-    border: 1px solid #c4c9d0;
-    border-radius: 0.25rem;
-    width: 80px;
+    padding: 0;
+    background-color: var(--lightgray);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 50px;
     height: 50px;
     object-fit: contain;
+}
+.lb-nav{
+    display: none !important;
 }
 .swal2-container .swal2-icon.swal2-question{
     border-color: var(--exLightBlue);

@@ -99,7 +99,7 @@
                             alt="no-image" class="img-thumbnail" /></a>
                         <% } %>
                     </td>
-                    <td>
+                    <td class="text-capitalize">
                       <%= tutor.title %>
                       <%=tutor.first_name+' '+tutor.last_name %>
                     </td>
@@ -107,10 +107,12 @@
                       <%=tutor.email %>
                     </td>
                     <td>
-                      <% for(sub of subject) { 
-                        if (tutor.subject_ids.includes(sub.id)) { %>
-                        <a href="#" class="badge badge-info"><%=sub.name%></a>
-                      <% } } %>
+                      <div class="subcat-info">
+                        <% for(sub of subject) { 
+                          if (tutor.subject_ids.includes(sub.id)) { %>
+                          <a href="#" class="badge badge-info"><%=sub.name%></a>
+                        <% } } %>
+                      </div>
                     </td>
                     <td>
                       <label class="checkbox-inline">
