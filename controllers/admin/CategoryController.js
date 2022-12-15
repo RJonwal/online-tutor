@@ -80,6 +80,7 @@ async function store(req, res) {
         }
 
         let category = await Category.create(req.body);
+        req.flash('success', 'Category created successfully!');
         if (category) {
             res.status(200).json({ "success": true, "message": "Category is created successfully!", "redirectUrl": "/categories" });
         }
@@ -185,7 +186,7 @@ async function update(req, res) {
                         })
                     }
                 }
-
+                req.flash('success', 'Category updated successfully!');
                 res.status(200).json({ "success": true, "message": "Category is updated successfully!", "redirectUrl": "/categories" });
             }
         }
