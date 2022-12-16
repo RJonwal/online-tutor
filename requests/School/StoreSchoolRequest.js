@@ -39,7 +39,7 @@ var validateUser = () => [
           console.log(school);
           console.log(school.length);
           if (school.length) {
-            return Promise.reject('Phone no. is already use!');
+            return Promise.reject('Phone no. is already in use!');
           }
         })
     })
@@ -61,7 +61,7 @@ var validateUser = () => [
           console.log(school);
           console.log(school.length);
           if (school.length) {
-            return Promise.reject('Email is already use!');
+            return Promise.reject('Email is already in use!');
           }
         })
     })

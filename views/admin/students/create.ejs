@@ -60,7 +60,7 @@
                     <label class="col-form-label label-align" for="gender">Gender</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/gender.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="gender" id="gender">
+                      <select class="form-control select2" name="gender" id="gender">
                         <option value="">Select Gender</option>
                         <option value="1">Male</option>
                         <option value="0">Female</option>
@@ -73,7 +73,7 @@
                     <label class="col-form-label label-align" for="birth_day">Birthday</label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
-                      <input type="date" name="birth_day" class="form-control " placeholder="Enter Skill Level.." id="birth_day">
+                      <input type="date" name="birth_day" class="form-control " id="birth_day">
                     </div>
                   </div>
                 </div>
@@ -89,10 +89,20 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="skill_level">Skill Level</label>
+                    <!-- <label class="col-form-label label-align" for="skill_level">Skill Level</label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="skill_level" class="form-control " placeholder="Enter Skill Level.." id="skill_level">
+                    </div> -->
+                    <label class="col-form-label label-align" for="grade">Grade</label>
+                    <div class="input-group flex-nowrap">
+                      <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
+                      <select class="form-control" name="grade" id="grade">
+                        <option value="">Select Grade</option>
+                        <% for(Grade of grade){%>
+                          <option value="<%=Grade.id%>"><%=Grade.name%></option>
+                        <%}%>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -101,7 +111,7 @@
                     <label class="col-form-label label-align" for="school">School</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/school.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="school_id" id="school_id">
+                      <select class="form-control select2" name="school_id" id="school_id">
                         <option value="">Select School</option>
                         <% for(school of data) { %>
                           <option value="<%=school.id%>"><%=school.name%></option>
@@ -131,7 +141,7 @@
                     </label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="status" id="status">
+                      <select class="form-control select2" name="status" id="status">
                         <option value="1">Activate</option>
                         <option value="0">Deactivate</option>
                       </select>
@@ -274,13 +284,8 @@
 });
  // phone number validate end   
 
-$("#gender").select2({
+$(".select2").select2({
   allowClear: false,
 });
-$("#school_id").select2({
-  allowClear: false,
-});
-$("#status").select2({
-  allowClear: false,
-});
+
 </script>

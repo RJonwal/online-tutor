@@ -74,7 +74,7 @@
                     <label class="col-form-label label-align" for="birth_day">Birthday</label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
-                      <input type="date" name="birth_day" class="form-control " placeholder="Enter Skill Level.." id="birth_day" value="<%=birth_day %>">
+                      <input type="date" name="birth_day" class="form-control " id="birth_day" value="<%=birth_day %>">
                     </div>
                   </div>
                 </div>
@@ -90,10 +90,20 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="skill_level">Skill Level</label>
-                    <div class="input-group">
+                    <!-- <label class="col-form-label label-align" for="skill_level">Skill Level</label> 
+                      <div class="input-group">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="skill_level"  value="<%=data.skill_level %>"  class="form-control " placeholder="Enter Skill Level.." id="skill_level">
+                    </div> -->
+                    <label class="col-form-label label-align" for="grade">Grade</label>
+                    <div class="input-group flex-nowrap">
+                      <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
+                      <select class="form-control" name="grade" id="grade">
+                        <option value="">Select Grade</option>
+                        <% for(Grade of grade){%>
+                          <option value="<%=Grade.id%>"><%=Grade.name%></option>
+                        <%}%>
+                      </select>
                     </div>
                   </div>
                 </div>

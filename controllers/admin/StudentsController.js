@@ -1,6 +1,8 @@
 
 const Student = require('../../models/user');
 const School = require('../../models/School');
+const Grade = require('../../models/Grade');
+
 const moment = require('moment');
 
 const fs = require('fs');
@@ -47,7 +49,8 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         let schools = await School.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/students/create', { data: schools });
+        let grade  = await Grade.find( { "status": 1  } );
+        return res.render('../views/admin/students/create', { data: schools,grade:grade });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -92,11 +95,12 @@ async function edit(req, res) {
     try {
         let StudentId = req.params.id;
         let schools = await School.find({ "status": 1 }).sort({ '_id': -1 });
+        let grade  = await Grade.find( { "status": 1  } );
         let student = await Student.find({ "_id": StudentId });
         let start_date = res.locals.moment(student[0].start_date).format('YYYY-MM-DD');
         let birth_day = res.locals.moment(student[0].birth_day).format('YYYY-MM-DD');
         if (student) {
-            return res.render('../views/admin/students/edit', { data: student[0], school_data: schools, start_date: start_date, birth_day: birth_day, fs: fs });
+            return res.render('../views/admin/students/edit', { data: student[0],grade:grade, school_data: schools, start_date: start_date, birth_day: birth_day, fs: fs });
         }
     } catch {
         return res.status(500).json({
