@@ -1,5 +1,5 @@
-const SubCategory = require('../../models/SubCategory');
-const Category = require('../../models/Category');
+const SubTopic = require('../../models/SubTopic');
+const Topic = require('../../models/Topic');
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify');
@@ -26,23 +26,23 @@ const slugify_options = {
 
 
 /**
- * list subCategory.
+ * list SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function index(req, res) {
     try {
-        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
-        let subCategories = await SubCategory.find({}).populate('category_id').sort({ '_id': -1 });
+        let activeTopic = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        let subTopic = await SubTopic.find({}).populate('topic_id').sort({ '_id': -1 });
+        console.log(subTopic);
+        let totalSubTopic  = await SubTopic.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeSubTopic  = await SubTopic.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
+        let deactiveSubTopic = await SubTopic.find({ "status": 0  } ).sort({ '_id': -1 }).count();
 
-        let totalSubCategory  = await SubCategory.find({ "role": 2 }).sort({ '_id': -1 }).count();
-        let activeSubCategory  = await SubCategory.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
-        let deactiveSubCategory = await SubCategory.find({ "status": 0  } ).sort({ '_id': -1 }).count();
+        const SubTopicObject = {'total':totalSubTopic,'active':activeSubTopic,'deactive':deactiveSubTopic}
 
-        const SubCategoryObject = {'total':totalSubCategory,'active':activeSubCategory,'deactive':deactiveSubCategory}
-
-        return res.render('../views/admin/subCategories/index', { data: subCategories, Categories: activeCategories, fs: fs, moment: res.locals.moment,SubCategoryObject:SubCategoryObject });
+        return res.render('../views/admin/subTopics/index', { data: subTopic, Topics: activeTopic, fs: fs, moment: res.locals.moment,SubTopicObject:SubTopicObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -52,15 +52,15 @@ async function index(req, res) {
 }
 
 /**
- * create subCategory.
+ * create SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function create(req, res) {
     try {
-        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/subCategories/create', { data: activeCategories });
+        let activeTopic = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/subTopics/create', { data: activeTopic });
     } catch (e) {
         return res.status(500).json({
             message: 'Something went wrong, please try again later.'
@@ -69,17 +69,17 @@ async function create(req, res) {
 }
 
 /**
- * store subCategory.
+ * store SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function store(req, res) {
     try {
-        let subCategory = await SubCategory.create(req.body);
-        req.flash('success', 'SubCategory created successfully!');
-        if (subCategory) {
-            res.status(200).json({ "success": true, "message": "SubCategory is created successfully!", "redirectUrl": "/subCategories" });
+        let subTopic = await SubTopic.create(req.body);
+        req.flash('success', 'SubTopic created successfully!');
+        if (subTopic) {
+            res.status(200).json({ "success": true, "message": "SubTopic is created successfully!", "redirectUrl": "/subTopics" });
         }
     } catch (e) {
         console.log(e);
@@ -88,18 +88,18 @@ async function store(req, res) {
 }
 
 /**
- * edit subCategory.
+ * edit SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function edit(req, res) {
     try {
-        let subCategoryId = req.params.id;
-        let subCategory = await SubCategory.find({ "_id": subCategoryId });
-        let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
-        if (subCategory) {
-            return res.render('../views/admin/subCategories/edit', { data: subCategory[0], allCategories: activeCategories, fs: fs });
+        let subTopicId = req.params.id;
+        let subTopic = await SubTopic.find({ "_id": subTopicId });
+        let activeTopic = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        if (subTopic) {
+            return res.render('../views/admin/subTopics/edit', { data: subTopic[0], allTopic: activeTopic, fs: fs });
         }
     } catch (e) {
         return res.status(500).json({
@@ -109,34 +109,34 @@ async function edit(req, res) {
 }
 
 /**
- * update subCategory.
+ * update SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function update(req, res) {
     try {
-        if (req.body.sub_category_Id && req.body.sub_category_Id != '') {
+        if (req.body.sub_topic_Id && req.body.sub_topic_Id != '') {
 
-            let subCategory = await SubCategory.find({ "_id": req.body.sub_category_Id });
-            if (subCategory) {
-                subCategoryData = subCategory[0];
+            let subTopic = await SubTopic.find({ "_id": req.body.sub_topic_Id });
+            if (subTopic) {
+                subTopicData = subTopic[0];
                 let slug = '';
                 slug = slugify(req.body.name, slugify_options);
 
-                let subCategoryUpdated = await SubCategory.updateOne({ "_id": req.body.sub_category_Id }, {
+                let subTopicUpdated = await SubTopic.updateOne({ "_id": req.body.sub_topic_Id }, {
                     $set:
                     {
                         name: req.body.name,
                         slug: slug,
-                        category_id: req.body.category_id,
+                        topic_id: req.body.topic_id,
                         note: req.body.note,
                         status: req.body.status
                     }
                 })
             }
-            req.flash('success', 'SubCategory updated successfully!');
-            res.status(200).json({ "success": true, "message": "SubCategory is updated successfully!", "redirectUrl": "/subCategories" });
+            req.flash('success', 'SubTopic updated successfully!');
+            res.status(200).json({ "success": true, "message": "SubTopic is updated successfully!", "redirectUrl": "/subTopics" });
         }
     } catch (e) {
         console.log(e);
@@ -145,7 +145,7 @@ async function update(req, res) {
 }
 
 /**
- * delete subCategory.
+ * delete SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -153,11 +153,11 @@ async function update(req, res) {
 async function destroy(req, res) {
     try {
         let id = req.params.id;
-        let subCategoryDeleted = await SubCategory.findByIdAndDelete(id);
-        if (subCategoryDeleted) {
-            req.flash('success', 'SubCategory is deleted successfully!');
+        let subTopicDeleted = await SubTopic.findByIdAndDelete(id);
+        if (subTopicDeleted) {
+            req.flash('success', 'SubTopic is deleted successfully!');
         }
-        return res.redirect('/subCategories');
+        return res.redirect('/subTopics');
     } catch (e) {
         return res.status(500).json({
             message: 'Something went wrong, please try again later.'
@@ -166,7 +166,7 @@ async function destroy(req, res) {
 }
 
 /** 
- * update status of the subCategory.
+ * update status of the SubTopic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -175,9 +175,9 @@ async function updateStatus(req, res) {
     try {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
-            let subCategory = await SubCategory.findByIdAndUpdate(req.body.uid, { status: status });
+            let subTopic = await SubTopic.findByIdAndUpdate(req.body.uid, { status: status });
          
-            res.status(200).json({ "success": true, "message": "SubCategory status is updated successfully!" });
+            res.status(200).json({ "success": true, "message": "SubTopic status is updated successfully!" });
         }
     } catch (e) {
         console.log(e);

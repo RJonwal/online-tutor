@@ -1,4 +1,5 @@
-const Topic = require('../../models/Category');
+const Topic = require('../../models/Topic');
+const SubTopic = require('../../models/SubTopic');
 const Grade = require('../../models/Grade');
 const fs = require('fs');
 let session = require('express-session');

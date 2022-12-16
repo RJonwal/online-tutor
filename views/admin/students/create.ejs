@@ -97,7 +97,7 @@
                     <label class="col-form-label label-align" for="grade">Grade</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="grade" id="grade">
+                      <select class="form-control select2" name="grade_id" id="grade_id">
                         <option value="">Select Grade</option>
                         <% for(Grade of grade){%>
                           <option value="<%=Grade.id%>"><%=Grade.name%></option>

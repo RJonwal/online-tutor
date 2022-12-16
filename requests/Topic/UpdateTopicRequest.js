@@ -1,26 +1,25 @@
 const { body, validationResult } = require('express-validator');
-const Category = require('../../models/Category');
+const Topic = require('../../models/Topic');
 
 var validateUser = () => [
   body('name')
     .trim()
     .not()
     .isEmpty()
-    .withMessage('Category Name can not be empty!')
+    .withMessage('Topic Name can not be empty!')
     .bail()
     .isString()
-    .withMessage('Category Name should be a valid string!')
+    .withMessage('Topic Name should be a valid string!')
     .bail()
     .isLength({ min: 1, max: 1000 })
-    .withMessage('Category Name length is should be in a valid range!')
+    .withMessage('Topic Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return Category.findOne({ "name": value, _id: { $ne: req.body.category_id } })
-        .then(category => {
-          console.log(category);
-          if (category != null) {
-            return Promise.reject('Category name is already in use!');
+      return Topic.findOne({ "name": value, _id: { $ne: req.body.topic_id } })
+        .then(topic => {
+          if (topic != null) {
+            return Promise.reject('Topic name is already in use!');
           }
         })
     })

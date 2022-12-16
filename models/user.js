@@ -95,10 +95,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    grade_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'grade',
+        default: null
+    },
     school_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'schools',
-        default: null
+        required: true,
     },
 
 }, {

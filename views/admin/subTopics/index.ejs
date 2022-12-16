@@ -3,38 +3,48 @@
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade1"><%=CategoryObject.total%></span>
-            <h3 class="title-text mb-0">Total Category</h3>
+            <span class="shade1"><%=SubTopicObject.total%></span>
+            <h3 class="title-text mb-0">Total Sub Topic</h3>
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade2"><%=CategoryObject.active%></span>
-            <h3 class="title-text mb-0">Active Category</h3>
+            <span class="shade2"><%=SubTopicObject.active%></span>
+            <h3 class="title-text mb-0">Active Sub Topic</h3>
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="stcard-box">
-            <span class="shade3"><%=CategoryObject.deactive%></span>
-            <h3 class="title-text mb-0">Deactive Category</h3>
+            <span class="shade3"><%=SubTopicObject.deactive%></span>
+            <h3 class="title-text mb-0">Deactive Sub Topic</h3>
         </div>
     </div>
   </div>
   <div class="card-block mb-30">
-    <h3 class="title-text">Filter Category</h3>
+    <h3 class="title-text">Filter Sub Topic</h3>
     <ul class="filter-row">
       <li class="filter-col">
-        <select class="form-control" id="category-name" tabindex="-1" single>
-          <option value="">Select Category</option>
-          <% for(category of data) { %>
-            <option value="<%=category.id%>">
-              <%=category.name%>
+        <select class="form-control" id="mainTopic" tabindex="-1" single>
+          <option value="">Select Main Topic</option>
+          <% for(topic of Topics) { %>
+            <option value="<%=topic.id%>">
+              <%=topic.name%>
             </option>
             <% } %>
         </select>
       </li>
       <li class="filter-col">
-        <select class="form-control" id="category-status" tabindex="-1" single>
+        <select class="form-control" id="subTopic" tabindex="-1" single>
+          <option value="">Select Sub Topic</option>
+          <% for(subTopic of data) { %>
+            <option value="<%=subTopic.id%>">
+              <%=subTopic.name%>
+            </option>
+            <% } %>
+        </select>
+      </li>
+      <li class="filter-col">
+        <select class="form-control" id="subTopic-status" tabindex="-1" single>
           <option value="">Select Status</option>
           <option value="1">Active</option>
           <option value="0">Deactive</option>
@@ -49,11 +59,11 @@
     <div class="col-md-12 col-sm-12">
       <div class="x_panel">
         <div class="x_title">
-          <h3 class="title-text">Main Categories List</h3>
+          <h3 class="title-text">Sub Topics List</h3>
           <ul class="right-btns">
-            <li> <a href="./categories/create" class="btn theme-btn" data-toggle="tooltip" rel="tooltip"
-              data-placement="top" title="Add Category">+
-                Add Category</a>
+            <li> <a href="./subTopics/create" class="btn theme-btn" data-toggle="tooltip" rel="tooltip"
+                data-placement="top" title="Add SubTopic">+
+                Add Sub Topic</a>
             </li>
           </ul>
         </div>
@@ -66,47 +76,40 @@
                   <thead>
                     <tr>
                       <th>S.No</th>
-                      <th>Image</th>
                       <th>Name</th>
+                      <th>Main Topic</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% let i=0; for(category of data) { %>
+                    <% let i=0; for(subTopic of data) { %>
                       <tr>
                         <td>
                           <%=++i%>
                         </td>
-                        <td>
-                            <% if (category.category_image !='' &&
-                              fs.existsSync("assets/CategoryImage/"+category.category_image)) { %>
-                              <a href="/CategoryImage/<%=category.category_image%>"
-                                data-lightbox="image_<%=category.id%>"> <img
-                                  src="/CategoryImage/<%=category.category_image%>" alt="<%=category.name%>" class="img-thumbnail" /></a>
-                              <% } else{ %>
-                                <a href="/images/noImage.jpg" data-lightbox="image_007"> <img src="/images/noImage.jpg"
-                                    alt="no-image" class="img-thumbnail" /></a>
-                                <% } %>
-                        </td>
                         <td class="text-capitalize">
-                          <%=category.name%>
+                          <%=subTopic.name%>
+                        </td>
+                        <td>
+                          <%=subTopic.topic_id.name%>
                         </td>
                         <td>
                           <label class="checkbox-inline">
                             <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
                               data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
-                              data-url="/categories/update-status" data-uid="<%=category.id%>" id="toggle-trigger"
-                              <%=category.status==1 ? 'checked' : '' %>>
+                              data-url="/subTopics/update-status" data-uid="<%=subTopic.id%>" id="toggle-trigger"
+                              <%=subTopic.status==1 ? 'checked' : '' %>>
                           </label>
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                            <a class="" href="/categories/edit/<%=category.id%>" data-toggle="tooltip" rel="tooltip"
-                              data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
+                            <a class="" href="/subTopics/edit/<%=subTopic.id%>" data-toggle="tooltip"
+                              rel="tooltip" data-placement="top" title="Edit"><img src="/images/edit.svg"
+                                alt="icon"></a>
 
                             <a href="javascript:void(0)" class="ml-2"
-                              onclick="confirmBeforeDeletion('/categories/destroy/<%=category.id%>')"> <img
+                              onclick="confirmBeforeDeletion('/subTopics/destroy/<%=subTopic.id%>')"> <img
                                 src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
                                 data-placement="top" title="Delete"></a>
                           </div>
@@ -127,12 +130,15 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $("#category-name").select2({
-      placeholder: "Select Category",
+    $("#mainTopic").select2({
+      placeholder: "Select Main Topic",
       allowClear: false,
     });
-
-    $("#category-status").select2({
+    $("#subTopic").select2({
+      placeholder: "Select Sub Topic",
+      allowClear: false,
+    });
+    $("#subTopic-status").select2({
       placeholder: "Select Status",
       allowClear: false,
     });

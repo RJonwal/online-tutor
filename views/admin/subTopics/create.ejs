@@ -3,22 +3,22 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Add Sub Category</h3>
+        <h3 class="title-text">Add Sub Topic</h3>
       </div>
       <div class="x_content">
-        <form id="createSubCategory" action="./store" method="post" class="form-horizontal form-label-left">
+        <form id="createSubTopic" action="./store" method="post" class="form-horizontal form-label-left">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="category_id">Main Category<span class="required">*</span>
+                <label class="col-form-label label-align" for="topic_id">Main Topic<span class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
-                  <select class="select2_single form-control" name="category_id" id="category_id" tabindex="-1" single>
-                    <option value="">Select Main Category</option>
-                    <% let i=0; for(category of data) { %>
-                      <option value="<%=category.id%>">
-                        <%=category.name%>
+                  <select class="select2_single form-control" name="topic_id" id="topic_id" tabindex="-1" single>
+                    <option value="">Select Main Topic</option>
+                    <% let i=0; for(topic of data) { %>
+                      <option value="<%=topic.id%>">
+                        <%=topic.name%>
                       </option>
                       <% } %>
                   </select>
@@ -27,11 +27,11 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label class="col-form-label label-align" for="name">Sub Category Name<span class="required">*</span>
+                <label class="col-form-label label-align" for="name">Sub Topic Name<span class="required">*</span>
                 </label>
                 <div class="input-group">
                   <span class="input-group-text"><img src="/images/subcategory.svg" class="mCS_img_loaded"></span>
-                  <input type="text" name="name" class="form-control" placeholder="Enter Category Name.." id="name">
+                  <input type="text" name="name" class="form-control" placeholder="Enter Sub Topic Name.." id="name">
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
 
           <div class="ln_solid"></div>
           <div class="text-right">
-            <button type="submit" id="storeSubCategoryBtn" class="btn theme-btn form-button">Save</button>
+            <button type="submit" id="storeSubTopicBtn" class="btn theme-btn form-button">Save</button>
           </div>
 
         </form>
@@ -71,8 +71,8 @@
 <script type="text/javascript">
 
   $(document).ready(function () {
-    $("#category_id").select2({
-      placeholder: "Select Main Category",
+    $("#topic_id").select2({
+      placeholder: "Select Main Topic",
       allowClear: false,
     });
 
@@ -82,12 +82,12 @@
 
   });
 
-  $("#createSubCategory").submit(function (e) {
+  $("#createSubTopic").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
-    var formData = $('#createSubCategory').serialize();
-    var url = $('#createSubCategory').attr('action');
-    $("#storeSubCategoryBtn").prop('disabled', true);
+    var formData = $('#createSubTopic').serialize();
+    var url = $('#createSubTopic').attr('action');
+    $("#storeSubTopicBtn").prop('disabled', true);
     $.ajax({
       type: "POST",
       url: url,
@@ -113,7 +113,7 @@
       },
       complete: function () {
         // $("#loading-bar-spinner").hide();
-        $("#storeSubCategoryBtn").prop('disabled', false);
+        $("#storeSubTopicBtn").prop('disabled', false);
       },
     })
   });

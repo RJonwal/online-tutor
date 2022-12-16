@@ -26,6 +26,12 @@ var validateUser = () => [
     .isLength({ min: 1, max: 1000 })
     .withMessage('Last Name length is should be in a valid range!')
     .bail(),
+    body('grade')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Grade can not be empty!')
+    .bail(),
   body('email')
     .trim()
     .not()

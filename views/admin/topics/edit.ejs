@@ -3,22 +3,22 @@
   <div class="row main_row">
     <div class="x_panel form_panel">
       <div class="x_title">
-        <h3 class="title-text">Edit Category</h3>
+        <h3 class="title-text">Edit Topic</h3>
       </div>
       <div class="x_content">
-        <form id="updateCategory" action="/categories/update" method="post" class="form-horizontal form-label-left"
+        <form id="updateTopic" action="/topics/update" method="post" class="form-horizontal form-label-left"
           novalidate>
-          <input type="hidden" name="category_id" value="<%=data.id %>">
+          <input type="hidden" name="topic_id" value="<%=data.id %>">
           <div class="row">
             <div class="col-md-8">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="name">Category Name<span class="required">*</span>
+                    <label class="col-form-label label-align" for="name">Topic Name<span class="required">*</span>
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="name" class="form-control" placeholder="Enter Category Name.."
+                      <input type="text" name="name" class="form-control" placeholder="Enter Topic Name.."
                         required="required" id="name" value="<%=data.name %>">
                     </div>
                   </div>
@@ -48,15 +48,15 @@
             </div>
             <div class="col-md-4">
               <div class="form-group drop-file">
-                <label class="col-form-label label-align" for="category_image">Featured
+                <label class="col-form-label label-align" for="topic_image">Featured
                   Image
                 </label>
-                <input type="file" name="category_image" id="category_image" class="form-control dropify h-auto" <% if
-                  (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
-                data-default-file="/CategoryImage/<%=data.category_image%>" <% }%>
+                <input type="file" name="topic_image" id="topic_image" class="form-control dropify h-auto" <% if
+                  (data.topic_image !='' && fs.existsSync("assets/TopicImage/"+data.topic_image)) { %>
+                data-default-file="/TopicImage/<%=data.topic_image%>" <% }%>
                     data-allowed-file-extensions="jpg png jpeg" data-max-file-size-preview="5M"
-                    <% if (data.category_image !='' && fs.existsSync("assets/CategoryImage/"+data.category_image)) { %>
-                      value=" <%=data.category_image %>" <% } else { %> value="" <% } %> >
+                    <% if (data.topic_image !='' && fs.existsSync("assets/TopicImage/"+data.topic_image)) { %>
+                      value=" <%=data.topic_image %>" <% } else { %> value="" <% } %> >
               </div>
               <input type="hidden" name="is_remove" id="is_image_removed" value="0">
             </div>
@@ -66,7 +66,7 @@
 
           <div class="ln_solid"></div>
           <div class="text-right">
-            <button type="submit" id="updateCategoryBtn" class="btn theme-btn form-button">Update</button>
+            <button type="submit" id="updateTopicBtn" class="btn theme-btn form-button">Update</button>
           </div>
 
         </form>
@@ -85,14 +85,14 @@
     });
   });
 
-  $("#updateCategory").submit(function (e) {
+  $("#updateTopic").submit(function (e) {
     e.preventDefault();
     $(document).find("span.text-danger").remove();
-    var form = $('#updateCategory');
+    var form = $('#updateTopic');
     var formData = new FormData(form[0]);
-    formData.append('category_image', this.new_attachments)
-    var url = $('#updateCategory').attr('action');
-    $("#updateCategoryBtn").prop('disabled', true);
+    formData.append('topic_image', this.new_attachments)
+    var url = $('#updateTopic').attr('action');
+    $("#updateTopicBtn").prop('disabled', true);
     $.ajax({
       type: "POST",
       url: url,
@@ -120,7 +120,7 @@
       },
       complete: function () {
         // $("#loading-bar-spinner").hide();
-        $("#updateCategoryBtn").prop('disabled', false);
+        $("#updateTopicBtn").prop('disabled', false);
       },
     })
   });

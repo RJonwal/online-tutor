@@ -1,25 +1,24 @@
 const { body, validationResult } = require('express-validator');
-const SubCategory = require('../../models/SubCategory');
-const Category = require('../../models/Category');
+const SubTopic = require('../../models/SubTopic');
+const Topic = require('../../models/Topic');
 
 var validateUser = () => [
-  body('category_id')
+  body('topic_id')
     .trim()
     .not()
     .isEmpty()
-    .withMessage('MainCategory is required!')
+    .withMessage('MainTopic is required!')
     .bail()
     .isString()
-    .withMessage('MainCategory should be a valid string!')
+    .withMessage('MainTopic should be a valid string!')
     .bail()
     .custom((value, { req }) => {
-      console.log(value);
-      return Category.find({ "_id": value })
+      return Topic.find({ "_id": value })
         .then(category => {
           console.log(category);
           console.log(category.length);
           if (category.length == 0) {
-            return Promise.reject('Select A Valid MainCategory!');
+            return Promise.reject('Select A Valid MainTopic!');
           }
         })
     })
@@ -28,21 +27,21 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('SubCategory Name can not be empty!')
+    .withMessage('SubTopic Name can not be empty!')
     .bail()
     .isString()
-    .withMessage('SubCategory Name should be a valid string!')
+    .withMessage('SubTopic Name should be a valid string!')
     .bail()
     .isLength({ min: 1, max: 1000 })
-    .withMessage('SubCategory Name length is should be in a valid range!')
+    .withMessage('SubTopic Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return SubCategory.findOne({ "name": value, _id: { $ne: req.body.sub_category_Id } })
-        .then(subCategory => {
-          console.log(subCategory);
-          if (subCategory != null) {
-            return Promise.reject('SubCategory name is already in use!');
+      return SubTopic.findOne({ "name": value, _id: { $ne: req.body.sub_topic_Id } })
+        .then(SubTopic => {
+          console.log(SubTopic);
+          if (SubTopic != null) {
+            return Promise.reject('SubTopic name is already in use!');
           }
         })
     })

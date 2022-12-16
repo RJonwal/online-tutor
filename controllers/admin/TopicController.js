@@ -1,4 +1,4 @@
-const Category = require('../../models/Category');
+const Topic = require('../../models/Topic');
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify');
@@ -24,22 +24,22 @@ const slugify_options = {
 
 
 /**
- * list category.
+ * list topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function index(req, res) {
     try {
-        let categories = await Category.find({}).sort({ '_id': -1 });
+        let topics = await Topic.find({}).sort({ '_id': -1 });
 
-        let totalCategory  = await Category.find({ "role": 2 }).sort({ '_id': -1 }).count();
-        let activeCategory  = await Category.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
-        let deactiveCategory = await Category.find({ "status": 0  } ).sort({ '_id': -1 }).count();
+        let totalTopic  = await Topic.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeTopic  = await Topic.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
+        let deactiveTopic = await Topic.find({ "status": 0  } ).sort({ '_id': -1 }).count();
 
-        const CategoryObject = {'total':totalCategory,'active':activeCategory,'deactive':deactiveCategory}
+        const TopicObject = {'total':totalTopic,'active':activeTopic,'deactive':deactiveTopic}
 
-        return res.render('../views/admin/categories/index', { data: categories, fs: fs, moment: res.locals.moment,CategoryObject:CategoryObject });
+        return res.render('../views/admin/topics/index', { data: topics, fs: fs, moment: res.locals.moment,TopicObject:TopicObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -49,14 +49,14 @@ async function index(req, res) {
 }
 
 /**
- * create category.
+ * create topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function create(req, res) {
     try {
-        return res.render('../views/admin/categories/create');
+        return res.render('../views/admin/topics/create');
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -66,23 +66,24 @@ async function create(req, res) {
 }
 
 /**
- * store category.
+ * store topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function store(req, res) {
     try {
+        console.log(req.body);
         if (req.file != undefined) {
-            req.body.category_image = req.file.filename;
+            req.body.topic_image = req.file.filename;
         } else {
-            req.body.category_image = '';
+            req.body.topic_image = '';
         }
 
-        let category = await Category.create(req.body);
-        req.flash('success', 'Category created successfully!');
-        if (category) {
-            res.status(200).json({ "success": true, "message": "Category is created successfully!", "redirectUrl": "/categories" });
+        let topic = await Topic.create(req.body);
+        req.flash('success', 'Topic created successfully!');
+        if (topic) {
+            res.status(200).json({ "success": true, "message": "Topic is created successfully!", "redirectUrl": "/topics" });
         }
     } catch (e) {
         console.log(e);
@@ -91,17 +92,17 @@ async function store(req, res) {
 }
 
 /**
- * edit category.
+ * edit topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function edit(req, res) {
     try {
-        let categoryId = req.params.id;
-        let category = await Category.find({ "_id": categoryId });
-        if (category) {
-            return res.render('../views/admin/categories/edit', { data: category[0], fs: fs });
+        let topicId = req.params.id;
+        let topic = await Topic.find({ "_id": topicId });
+        if (topic) {
+            return res.render('../views/admin/topics/edit', { data: topic[0], fs: fs });
         }
     } catch (e) {
         console.log(e);
@@ -112,26 +113,23 @@ async function edit(req, res) {
 }
 
 /**
- * update category.
+ * update topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function update(req, res) {
     try {
-        if (req.body.category_id && req.body.category_id != '') {
-
-            let category = await Category.find({ "_id": req.body.category_id });
-            if (category) {
-                categoryData = category[0];
-                let categoryImage = categoryData.category_image;
-                const filePath = './assets/CategoryImage/' + categoryImage;
-
+        if (req.body.topic_id && req.body.topic_id != '') {
+            let topic = await Topic.find({ "_id": req.body.topic_id });
+            if (topic) {
                 let slug = '';
                 req.body.slug = slugify(req.body.name, slugify_options);
-
                 if (req.file != undefined) {
-                    if (categoryImage != '') {
+                    topicData = topic[0];
+                    let topicImage = topicData.topic_image;
+                    const filePath = './assets/TopicImage/' + topicImage;
+                    if (topicImage != '') {
                         fs.exists(filePath, function (exists) {
                             if (exists) {
                                 fs.unlinkSync(filePath);
@@ -140,34 +138,34 @@ async function update(req, res) {
                             }
                         });
                     }
-
-                    req.body.category_image = req.file.filename;
-
-                    let categoryUpdated = await Category.findByIdAndUpdate(req.body.category_id, req.body)
+                    req.body.topic_image = req.file.filename;
+                    let topicUpdated = await Topic.findByIdAndUpdate(req.body.topic_id, req.body)
 
                 } else {
 
                     if (req.body.is_remove == 1) {
-                        let category = await Category.find({ "_id": req.body.category_id });
-                        categoryData = category[0];
-                        let categoryImage = categoryData.category_image;
-                        const filePath = './assets/CategoryImage/' + categoryImage;
+                        let topic = await Topic.find({ "_id": req.body.topic_id });
+                        if (req.file != undefined) {
+                            topicData = topic[0];
+                            let topicImage = topicData.topic_image;
+                            const filePath = './assets/TopicImage/' + TopicImage;
 
-                        if (categoryImage != '') {
-                            fs.exists(filePath, function (exists) {
-                                if (exists) {
-                                    fs.unlinkSync(filePath);
-                                } else {
-                                    // console.log('File not found, so not deleting.');
-                                }
-                            });
+                            if (topicImage != '') {
+                                fs.exists(filePath, function (exists) {
+                                    if (exists) {
+                                        fs.unlinkSync(filePath);
+                                    } else {
+                                        // console.log('File not found, so not deleting.');
+                                    }
+                                });
+                            }
                         }
-                        let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
+                        let TopicUpdated = await Topic.updateOne({ "_id": req.body.topic_id }, {
                             $set:
                             {
                                 name: req.body.name,
                                 slug: req.body.slug,
-                                category_image: '',
+                                topic_image: '',
                                 note: req.body.note,
                                 status: req.body.status
                             }
@@ -175,7 +173,7 @@ async function update(req, res) {
 
                     }
                     else {
-                        let categoryUpdated = await Category.updateOne({ "_id": req.body.category_id }, {
+                        let topicUpdated = await Topic.updateOne({ "_id": req.body.topic_id }, {
                             $set:
                             {
                                 name: req.body.name,
@@ -186,8 +184,8 @@ async function update(req, res) {
                         })
                     }
                 }
-                req.flash('success', 'Category updated successfully!');
-                res.status(200).json({ "success": true, "message": "Category is updated successfully!", "redirectUrl": "/categories" });
+                req.flash('success', 'Topic updated successfully!');
+                res.status(200).json({ "success": true, "message": "Topic is updated successfully!", "redirectUrl": "/topics" });
             }
         }
     } catch (e) {
@@ -199,7 +197,7 @@ async function update(req, res) {
 }
 
 /**
- * delete category.
+ * delete topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -207,11 +205,11 @@ async function update(req, res) {
 async function destroy(req, res) {
     try {
         let id = req.params.id;
-        let categoryDeleted = await Category.findByIdAndDelete(id);
-        if (categoryDeleted) {
-            let categoryImage = categoryDeleted.category_image;
-            if(categoryImage != ''){
-                const filePath = './assets/CategoryImage/' + categoryImage;
+        let topicDeleted = await Topic.findByIdAndDelete(id);
+        if (topicDeleted) {
+            let topicImage = topicDeleted.topic_image;
+            if(topicImage != ''){
+                const filePath = './assets/TopicImage/' + topicImage;
                 fs.exists(filePath, function (exists) {
                     if (exists) {
                         fs.unlinkSync(filePath);
@@ -221,9 +219,9 @@ async function destroy(req, res) {
                 });
             }
             
-            req.flash('success', 'Category is deleted successfully !');
+            req.flash('success', 'Topic is deleted successfully !');
         }
-        return res.redirect('/categories');
+        return res.redirect('/topics');
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -233,7 +231,7 @@ async function destroy(req, res) {
 }
 
 /** 
- * update status of the category.
+ * update status of the topic.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -242,9 +240,9 @@ async function updateStatus(req, res) {
     try {
         if (req.body.uid && req.body.uid != '') {
             let status = ((req.body.status == 'true') ? '1' : '0');
-            let category = await Category.findByIdAndUpdate(req.body.uid, { status: status });
+            let topic = await Topic.findByIdAndUpdate(req.body.uid, { status: status });
         
-            res.status(200).json({ "success": true, "message": "Category status is updated successfully!" });
+            res.status(200).json({ "success": true, "message": "Topic status is updated successfully!" });
         }
     } catch (e) {
         console.log(e);

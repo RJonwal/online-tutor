@@ -10,7 +10,8 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-const categoriesSchema = new mongoose.Schema({
+
+const subTopicsSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
@@ -20,9 +21,10 @@ const categoriesSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    category_image: {
-        type: String,
-        default: ''
+    topic_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'topics',
+        required: true,
     },
     note: {
         type: String,
@@ -42,17 +44,17 @@ const categoriesSchema = new mongoose.Schema({
     });
 
 
-categoriesSchema.pre("save", function (next) {
+subTopicsSchema.pre("save", function (next) {
     this.slug = slugify(this.name, slugify_options);
     next();
 });
 
 
-categoriesSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
-    this._update.slug = slugify(this.name, slugify_options);
+subTopicsSchema.pre('update,updateOne,updateMany,findByIdAndUpdate,findOneAndUpdate', function (next) {
+    this.update.slug = slugify(this.name, slugify_options);
     next();
 });
 
 
-const Category = mongoose.model('categories', categoriesSchema);
-module.exports = Category;
+const SubCategory = mongoose.model('subTopics', subTopicsSchema);
+module.exports = SubCategory;

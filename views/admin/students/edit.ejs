@@ -98,7 +98,7 @@
                     <label class="col-form-label label-align" for="grade">Grade</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="grade" id="grade">
+                      <select class="form-control select2" name="grade" id="grade">
                         <option value="">Select Grade</option>
                         <% for(Grade of grade){%>
                           <option value="<%=Grade.id%>"><%=Grade.name%></option>
@@ -306,6 +306,9 @@ $("#school_id").select2({
   allowClear: false,
 });
 $("#status").select2({
+  allowClear: false,
+});
+$(".select2").select2({
   allowClear: false,
 });
 </script>

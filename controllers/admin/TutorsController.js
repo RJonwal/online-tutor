@@ -1,5 +1,5 @@
 const User = require('../../models/user');
-const Category = require('../../models/Category');
+const Topic = require('../../models/Topic');
 const fs = require('fs');
 const global = require("../../_helper/GlobalHelper");
 
@@ -35,7 +35,7 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        let subject = await Category.find({});
+        let subject = await Topic.find({});
 
         let totalTutor  = await User.find({ "role": 2 }).sort({ '_id': -1 }).count();
         let activeTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
@@ -61,7 +61,7 @@ async function index(req, res) {
  */
 async function create(req, res) {
     try {
-        let activeSubjects = await Category.find({ "status": 1 }).sort({ '_id': -1 });
+        let activeSubjects = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
         return res.render('../views/admin/tutors/create', { data: activeSubjects });
     } catch (e) {
         console.log(e);
@@ -123,7 +123,7 @@ async function edit(req, res) {
         let tutor = await User.find({ "_id": tutorId, "role": 2 });
         if (tutor) {
 
-            let activeCategories = await Category.find({ "status": 1 }).sort({ '_id': -1 });
+            let activeCategories = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
             return res.render('../views/admin/tutors/edit', { data: tutor[0], subjects: activeCategories, fs: fs });
         }
     } catch (e) {

@@ -1,25 +1,25 @@
 const { body, validationResult } = require('express-validator');
-const SubCategory = require('../../models/SubCategory');
-const Category = require('../../models/Category');
+const SubTopic = require('../../models/SubTopic');
+const Topic = require('../../models/Topic');
 
 var validateUser = () => [
-  body('category_id')
+  body('topic_id')
     .trim()
     .not()
     .isEmpty()
-    .withMessage('MainCategory is required!')
+    .withMessage('MainTopic is required!')
     .bail()
     .isString()
-    .withMessage('MainCategory should be a valid string!')
+    .withMessage('MainTopic should be a valid string!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return Category.find({ "_id": value })
-        .then(category => {
-          console.log(category);
-          console.log(category.length);
-          if (category.length == 0) {
-            return Promise.reject('Select A Valid MainCategory!');
+      return Topic.find({ "_id": value })
+        .then(topic => {
+          console.log(topic);
+          console.log(topic.length);
+          if (topic.length == 0) {
+            return Promise.reject('Select A Valid MainTopic!');
           }
         })
     })
@@ -28,21 +28,21 @@ var validateUser = () => [
     .trim()
     .not()
     .isEmpty()
-    .withMessage('SubCategory Name can not be empty!')
+    .withMessage('SubTopic Name can not be empty!')
     .bail()
     .isString()
-    .withMessage('SubCategory Name should be a valid string!')
+    .withMessage('SubTopic Name should be a valid string!')
     .bail()
     .isLength({ min: 1, max: 1000 })
-    .withMessage('SubCategory Name length is should be in a valid range!')
+    .withMessage('SubTopic Name length is should be in a valid range!')
     .bail()
     .custom((value, { req }) => {
       console.log(value);
-      return SubCategory.find({ "name": value })
-        .then(subCategory => {
-          console.log(subCategory.length);
-          if (subCategory.length) {
-            return Promise.reject('SubCategory name is already in use!');
+      return SubTopic.find({ "name": value })
+        .then(SubTopic => {
+          console.log(SubTopic.length);
+          if (SubTopic.length) {
+            return Promise.reject('SubTopic name is already in use!');
           }
         })
     })
