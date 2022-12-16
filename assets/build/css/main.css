@@ -67,7 +67,9 @@ ul {
 .fn-12 {
     font-size: 12px;
 }
-
+.lightgray{
+    background: var(--lightgray);
+}
 .text-dblue {
     color: var(--dblue);
 }
@@ -552,6 +554,7 @@ ul {
     flex-grow: 1;
     color: #fff;
     text-align: right;
+    margin-right: 0;
 }
 
 .nav.side-menu>li:hover,
@@ -1655,7 +1658,19 @@ span.total-count {
 .courses-sidebar .link-tap-right li.active {
     background: #FAE4D2;
 }
-
+.yes_no_toggle{
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 10px;
+    font-size: 14px;
+    color: var(--dblue);
+    margin-bottom: 0;
+}
+.yes_no_toggle span{
+    margin-right: 8px;
+    display: inline-block;
+}
 /* Main Content */
 
 
@@ -1667,6 +1682,7 @@ span.total-count {
     padding: 20px;
     background: #fff;
     border-radius: 5px;
+    margin-bottom: 30px;
 }
 
 .practice-card .nav-pills {
@@ -1683,7 +1699,7 @@ span.total-count {
 
 .practice-card .nav-pills li a {
     color: var(--dblue);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     border-radius: 10px;
     padding: 12px 15px;
