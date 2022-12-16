@@ -11,8 +11,8 @@ const slugify_options = {
 }
 
 
-const coursesSchema = new mongoose.Schema({
-    subject_id: {
+const learningContentSchema = new mongoose.Schema({
+    topic_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'categories',
         required: true,
@@ -35,19 +35,15 @@ const coursesSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    cover_image: {
-        type: String,
-        default: ''
-    },
     thumbnail: {
         type: String,
         default: ''
     },
-    sections: {
-        type: ObjectId,
-        ref: 'sections',
-        required: true,
-    },
+    // sections: {
+    //     type: ObjectId,
+    //     ref: 'sections',
+    //     required: true,
+    // },
     status: {
         type: Number,
         default: 1
@@ -62,17 +58,17 @@ const coursesSchema = new mongoose.Schema({
     });
 
 
-coursesSchema.pre("save", function (next) {
+learningContentSchema.pre("save", function (next) {
     this.slug = slugify(this.name, slugify_options);
     next();
 });
 
 
-coursesSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
+learningContentSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
     this._update.slug = slugify(this.name, slugify_options);
     next();
 });
 
 
-const Course = mongoose.model('courses', coursesSchema);
-module.exports = Category;
+const LearningContent = mongoose.model('learningContents', learningContentSchema);
+module.exports = LearningContent;

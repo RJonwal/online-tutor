@@ -1,5 +1,6 @@
 <script>
   $(document).ready(function () {
+
     $('.dropify').dropify();
     $('.dropify-clear').on('click', function () {
       $('#is_image_removed').val('1');
@@ -24,59 +25,7 @@
     })
   });
 
-  $(document).ready(function () {
-    $('.select-cover').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
-      },
-    });
-  });
 
-  $(document).ready(function () {
-    $('.select-video').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Select your preferred video type. (.mp4, YouTube, Vimeo etc.)</h6></div>',
-      },
-    });
-
-    $('.dropify-clear').on('click', function () {
-      $('#is_image_removed').val('1');
-      $('.dropify').attr('required', true);
-    });
-  });
-
-  $(document).ready(function () {
-    $('.select-attachments').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
-      },
-    });
-
-    $('.dropify-clear').on('click', function () {
-      $('#is_image_removed').val('1');
-      $('.dropify').attr('required', true);
-    });
-  });
-
-  $(document).ready(function () {
-    $('.single-img').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><img src="/images/frame.svg" alt="img"> <p>Drag & Drop here</p><h6 class="mb-0 mt-1 fn-12 text-dblue">Select your preferred video type. (JPEG, PNG, SVG, etc.)</h6></div>',
-      },
-    });
-
-    $('.dropify-clear').on('click', function () {
-      $('#is_image_removed').val('1');
-      $('.dropify').attr('required', true);
-    });
-  });
-
-  $(".selectlink").select2({
-    placeholder: "Select",
-    allowClear: false,
-  });
-
-  
   <% if (flash.success && flash.success.length > 0) { %>
     new Noty({
       theme: 'relax',
@@ -97,159 +46,14 @@
     }).show();
 <% } %>
 
-    // for school update
-    $(".updateData").click(function () {
+  $(".updateData").click(function () {
       $('.modal').modal('show')
-    });
-  // $(".close").click(function(){
-  //   $('.modal').modal('hide')
-  // });
+  });
+
   $('[data-toggle=confirmation]').confirmation({
     rootSelector: '[data-toggle=confirmation]'
   });
 
-
-
-
-
-  // Editor
-  tinymce.init({
-    selector: '.editer',
-    height: 300,
-    menubar: false,
-    statusbar: false,
-    plugins: [
-      'advlist autolink lists link image charmap print preview anchor textcolor',
-      'searchreplace visualblocks code fullscreen',
-      'insertdatetime media table contextmenu paste code help wordcount'
-    ],
-    mobile: {
-      theme: 'mobile'
-    },
-    toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-  });
-
-
-  // Form Stepper 
-  jQuery(document).ready(function () {
-    // click on next button
-    jQuery('.form-wizard-next-btn').click(function () {
-      var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      var next = jQuery(this);
-      var nextWizardStep = true;
-      parentFieldset.find('.wizard-required').each(function () {
-        var thisValue = jQuery(this).val();
-
-        if (thisValue == "") {
-          jQuery(this).siblings(".wizard-form-error").slideDown();
-          nextWizardStep = false;
-        } else {
-          jQuery(this).siblings(".wizard-form-error").slideUp();
-        }
-      });
-      if (nextWizardStep) {
-        next.parents('.wizard-fieldset').removeClass("show", "400");
-        currentActiveStep.removeClass('active').addClass('activated').next().addClass('active', "400");
-        next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("show", "400");
-        jQuery(document).find('.wizard-fieldset').each(function () {
-          if (jQuery(this).hasClass('show')) {
-            var formAtrr = jQuery(this).attr('data-tab-content');
-            jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
-              if (jQuery(this).attr('data-attr') == formAtrr) {
-                jQuery(this).addClass('active');
-                var innerWidth = jQuery(this).innerWidth();
-                var position = jQuery(this).position();
-                jQuery(document).find('.form-wizard-step-move').css({
-                  "left": position.left,
-                  "width": innerWidth
-                });
-              } else {
-                jQuery(this).removeClass('active');
-              }
-            });
-          }
-        });
-      }
-    });
-    //click on previous button
-    jQuery('.form-wizard-previous-btn').click(function () {
-      var counter = parseInt(jQuery(".wizard-counter").text());;
-      var prev = jQuery(this);
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      prev.parents('.wizard-fieldset').removeClass("show", "400");
-      prev.parents('.wizard-fieldset').prev('.wizard-fieldset').addClass("show", "400");
-      currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active', "400");
-      jQuery(document).find('.wizard-fieldset').each(function () {
-        if (jQuery(this).hasClass('show')) {
-          var formAtrr = jQuery(this).attr('data-tab-content');
-          jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
-            if (jQuery(this).attr('data-attr') == formAtrr) {
-              jQuery(this).addClass('active');
-              var innerWidth = jQuery(this).innerWidth();
-              var position = jQuery(this).position();
-              jQuery(document).find('.form-wizard-step-move').css({
-                "left": position.left,
-                "width": innerWidth
-              });
-            } else {
-              jQuery(this).removeClass('active');
-            }
-          });
-        }
-      });
-    });
-    //click on form submit button
-    jQuery(document).on("click", ".form-wizard .form-wizard-submit", function () {
-      var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      parentFieldset.find('.wizard-required').each(function () {
-        var thisValue = jQuery(this).val();
-        if (thisValue == "") {
-          jQuery(this).siblings(".wizard-form-error").slideDown();
-        } else {
-          jQuery(this).siblings(".wizard-form-error").slideUp();
-        }
-      });
-    });
-    // focus on input field check empty or not
-    jQuery(".form-control").on('focus', function () {
-      var tmpThis = jQuery(this).val();
-      if (tmpThis == '') {
-        jQuery(this).parent().addClass("focus-input");
-      } else if (tmpThis != '') {
-        jQuery(this).parent().addClass("focus-input");
-      }
-    }).on('blur', function () {
-      var tmpThis = jQuery(this).val();
-      if (tmpThis == '') {
-        jQuery(this).parent().removeClass("focus-input");
-        jQuery(this).siblings('.wizard-form-error').slideDown("3000");
-      } else if (tmpThis != '') {
-        jQuery(this).parent().addClass("focus-input");
-        jQuery(this).siblings('.wizard-form-error').slideUp("3000");
-      }
-    });
-  });
-
-
-  $(document).ready(function () {
-    $("#chp_section").on('click', '.delete-btn', function () {
-      $(this).closest('.chp-add-section').remove();
-    });
-  });
-
-
-  //  Country Phone Input
-  // var input = document.querySelector("#phone");
-  // window.intlTelInput(input, {
-  //   initialCountry: "Au",
-  // });
-
-
-  // $('#phone').intlTelInput({
-  //     initialCountry: "Au",
-  // });
   /**
    * delete a record.
    * 

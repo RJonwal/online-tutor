@@ -26,7 +26,7 @@ async function login(req, res) {
 
         //let userAdded = await User.create(obj);
         if (req.isAuthenticated()) {
-            return res.redirect('/courses');
+            return res.redirect('/learning-content');
         }
         return res.render('../views/auth/login', { layout: false });
     } catch {
@@ -39,7 +39,7 @@ async function login(req, res) {
 async function signIn(req, res) {
     try {
         req.flash('success', 'User Login Successfully !');
-        return res.redirect('/courses');
+        return res.redirect('/learning-content');
     } catch {
         return res.json(500, {
             message: 'Internal Server Error'
@@ -104,13 +104,14 @@ async function resetPassword(req, res) {
 }
 async function verifyPassword(req, res) {
     try {
-        
+
         let result = req.body.token.trim();
         //let hash = req.body.password;
         let hash = global.securePassword(req.body.password);
         console.log(hash);
         if (req.body.password != req.body.confirm_password) {
-            return res.status(500).json({ message: 'Something went wrong, please try again later.'
+            return res.status(500).json({
+                message: 'Something went wrong, please try again later.'
             })
         }
         let tokenData = await User.findOne({ token: result });
@@ -126,9 +127,9 @@ async function verifyPassword(req, res) {
     }
 }
 async function profile(req, res) {
-        let user = await res.locals.user;
-        return res.render('../views/auth/profile',{data:user,fs:fs});
-}; 
+    let user = await res.locals.user;
+    return res.render('../views/auth/profile', { data: user, fs: fs });
+};
 async function updateProfile(req, res) {
     if (req.body.user_id && req.body.user_id != '') {
         let User_details = await User.find({ "_id": req.body.user_id });
@@ -152,11 +153,11 @@ async function updateProfile(req, res) {
             } else {
                 delete req.body.profile_image;
             }
-            if(req.body.password){
+            if (req.body.password) {
                 let hashedPassword = global.securePassword(req.body.password);
                 req.body.password = hashedPassword;
                 let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body);
-            }else {
+            } else {
                 delete req.body.password; // delete password from body if dont want update
                 let UpdateUser = await User.findByIdAndUpdate(req.body.user_id, req.body)
             }

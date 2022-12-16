@@ -33,4 +33,4 @@ sectionsSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', functi
 
 
 const section = mongoose.model('sections', sectionsSchema);
-module.exports = Category;
+module.exports = Section;

@@ -1,5 +1,5 @@
-const SubCategory = require('../../models/SubCategory');
-const Category = require('../../models/Category');
+const Topic = require('../../models/Category');
+const Grade = require('../../models/Grade');
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify')
@@ -7,24 +7,25 @@ var slugify = require('slugify')
 module.exports = {
     index,
     create,
-    addCourses,
     store,
     edit,
     update,
+    destroy,
     previewCourses,
     viewCourses,
-    destroy,
 }
 
 /**
- * list courses. 
+ * list learningContent. 
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function index(req, res) {
     try {
-        return res.render('../views/admin/courses/myCourses');
+        let topics = await Topic.find({}).sort({ '_id': -1 });
+        let grades = await Grade.find({}).sort({ '_id': -1 });
+        return res.render('../views/admin/learningContent/index', { topics: topics, grades: grades });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -34,31 +35,16 @@ async function index(req, res) {
 }
 
 /**
- * create course.
+ * create content.
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function create(req, res) {
     try {
-        return res.render('../views/admin/courses/create');
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            message: 'Something went wrong, please try again later.'
-        })
-    }
-}
-
-/**
- * add course.
- * @param {*} req 
- * @param {*} res 
- * @returns 
- */
-async function addCourses(req, res) {
-    try {
-        return res.render('../views/admin/courses/addCourses');
+        let activeTopics = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        let activeGrades = await Grade.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/learningContent/create', { topics: activeTopics, grades: activeGrades });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -69,7 +55,7 @@ async function addCourses(req, res) {
 
 
 /**
- * store course.
+ * store learningContent.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -80,7 +66,7 @@ async function store(req, res) {
 
 
 /**
- * edit course.
+ * edit learningContent.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -91,7 +77,7 @@ async function edit(req, res) {
 
 
 /**
- * update course.
+ * update learningContent.
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -102,41 +88,7 @@ async function update(req, res) {
 
 
 /**
- * preview course.
- * @param {*} req 
- * @param {*} res 
- * @returns 
- */
-async function previewCourses(req, res) {
-    try {
-        return res.render('../views/admin/courses/previewCourses');
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            message: 'Something went wrong, please try again later.'
-        })
-    }
-}
-
-/**
- * view course.
- * @param {*} req 
- * @param {*} res 
- * @returns 
- */
-async function viewCourses(req, res) {
-    try {
-        return res.render('../views/admin/courses/viewCourses');
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            message: 'Something went wrong, please try again later.'
-        })
-    }
-}
-
-/**
- * delete course
+ * delete learningContent
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -144,5 +96,41 @@ async function viewCourses(req, res) {
 async function destroy(req, res) {
 
 }
+
+
+/**
+ * preview learningContent.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function previewCourses(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/previewCourses');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * view learningContent.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function viewCourses(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/viewCourses');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
 
 
