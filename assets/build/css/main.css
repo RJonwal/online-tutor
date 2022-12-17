@@ -12,6 +12,7 @@
     --hgreen:#006729;
     --dorange:#F45624;
     --red:#FF3418;
+    --skyblue:#2B99FF;
 }
 
 body {
@@ -108,7 +109,12 @@ ul {
 .text-dblue {
     color: var(--dblue);
 }
-
+.text-secondary{
+    color: var(--secondary);
+}
+.text-sky{
+    color: var(--skyblue);
+}
 .fn-w600 {
     font-weight: 600;
 }
@@ -1367,12 +1373,33 @@ span.total-count {
 .right_col .form-wizard .success-box .theme-btn i {
     font-weight: 100;
 }
-
+.right_col .form-wizard .add-more-section{
+    background: var(--lightgray);
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+.right_col .form-wizard .add-more-section .theme-btn{
+    padding: 10px 15px;
+}
+.right_col .form-wizard .add-more-section .theme-btn img{
+    filter: brightness(0) invert(1);
+}
+.right_col .form-wizard .content-section{
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+.right_col .form-wizard .content-section+.content-section{
+    margin-top: 20px;
+}
 .right_col .form-wizard .accordion>.card {
     border: 1px solid #D2D6E3;
     border-radius: 5px;
     background: var(--lightgray);
-    margin-bottom: 30px;
+}
+.right_col .form-wizard .accordion>.card+.card{
+    margin-top: 10px;
 }
 
 .right_col .form-wizard .accordion .card>.card-header {
@@ -1380,24 +1407,40 @@ span.total-count {
     margin: 0;
     border: none;
     border-radius: 0;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .right_col .form-wizard .accordion .card>.card-header .left-heading {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--dblue);
 }
-
-.right_col .form-wizard .accordion .card>.collapse>.card-body {
-    margin: 0 20px;
-    padding: 20px 0;
+.right_col .form-wizard .accordion .card>.card-header .left-heading img{
+    width: 42px;
+    height: 42px;
+}
+.right_col .form-wizard .accordion .card>.card-header .right-icons img {
+    width: 18px;
+}
+.right_col .form-wizard .accordion .card .card-body {
+    margin: 0 10px;
+    padding: 15px 0;
     border-top: 1px solid #D2D6E3;
 }
-
+.right_col .form-wizard .editable-heading{
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dblue);
+    width: 100px;
+}
 .right_col .form-wizard .accordion .chp-add-section {
     border: 1px solid #D2D6E3;
     background: #fff;
@@ -1413,11 +1456,11 @@ span.total-count {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 20px;
+    padding:15px 10px;
 }
 
 .right_col .form-wizard .accordion .chp-add-section .chp-heading .chp-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--dblue);
     margin-right: 10px;
@@ -1428,7 +1471,9 @@ span.total-count {
     align-items: center;
     flex-shrink: 0;
 }
-
+.right_col .form-wizard .accordion .chp-add-section .chp-heading .right-icons img {
+    width: 18px;
+}
 .right_col .form-wizard .accordion .chp-add-section .card-body {
     border-top: 1px solid #D2D6E3;
 }
@@ -1447,7 +1492,7 @@ span.total-count {
     background: var(--lightgray);
     border-radius: 5px;
     padding: 10px 15px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--dblue);
 }
@@ -1837,6 +1882,9 @@ span.total-count {
     color: #fff;
     background: var(--secondary);
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);  
+}
+.add_option_block{
+    margin-top: 30px;
 }
 .add_option_block .form-btn{
     margin-top: 30px;
@@ -2865,7 +2913,7 @@ span.total-count {
         width: 14px;
     }
 
-    .right_col .form-wizard .accordion .card>.card-header .right-icons img.mr-2 {
+    .right_col .form-wizard .accordion .card>.card-header .right-icons img.mr-1 {
         margin-right: 3px !important;
     }
 
@@ -2891,7 +2939,7 @@ span.total-count {
         width: 14px;
     }
 
-    .right_col .form-wizard .accordion .chp-add-section .chp-heading .right-icons img.mr-2 {
+    .right_col .form-wizard .accordion .chp-add-section .chp-heading .right-icons img.mr-1 {
         margin-right: 3px !important;
     }
 
@@ -2933,6 +2981,9 @@ span.total-count {
     }
     .add_option_form .btn-group .option-check-btn .check-label {
         font-size: 10px;
+    }
+    .right_col .form-wizard .add-more-section{
+        width: 100% !important;
     }
 
 }

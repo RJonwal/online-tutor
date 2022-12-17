@@ -9,5 +9,6 @@ router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
+router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 
 module.exports = router;

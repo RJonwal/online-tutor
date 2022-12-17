@@ -14,6 +14,7 @@ module.exports = {
     destroy,
     previewCourses,
     viewCourses,
+    singleSelectText,
 }
 
 /**
@@ -125,6 +126,24 @@ async function previewCourses(req, res) {
 async function viewCourses(req, res) {
     try {
         return res.render('../views/admin/learningContent/viewCourses');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+
+/**
+ * signle Select Text
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function singleSelectText(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/singleSelectText');
     } catch (e) {
         console.log(e);
         return res.status(500).json({
