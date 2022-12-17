@@ -129,21 +129,21 @@
                 src="/images/addcircle.svg" alt="img"> Add
               Section</a>
           </div>
-          <div data-repeater-list="group-a">
+          <div data-repeater-list="outer-list">
             <div data-repeater-item>
               <div class="content-section mt-4">
                 <div class="text-right">
                   <a class="delete-section-btn" data-repeater-delete href="javascript:void(0);"><img
                     src="/images/trash.svg" alt="img"> <span class="text-title">Delete Section</span></a>
                 </div>
-                <div class="accordion" id="section1">
+                <div class="accordion inner-repeater" id="section1">
                   <div class="card">
                     <div class="card-header">
                       <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img">
                         <input class="editable-heading" type="text" value="Lessons">
                       </div>
                       <div class="right-icons">
-                        <a href="javascript:void(0);"><img class="mr-1" src="/images/addcircle.svg" alt="img"></a>
+                        <a href="javascript:void(0);" data-repeater-create><img class="mr-1" src="/images/addcircle.svg" alt="img"></a>
                         <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg" alt="img"></a>
                         <a href="javascript:void(0);"><img class="mr-1" src="/images/trash.svg" alt="img"></a>
                         <a href="javascript:void(0);"><img class="mr-1" src="/images/edit.svg" alt="img"></a>
@@ -154,154 +154,159 @@
                       </div>
                     </div>
                     <div id="lessons" class="collapse show" data-parent="#section1">
-                      <div class="card-body">
-                        <div class="accordion" id="chp_section">
-                          <div class="chp-add-section">
-                            <div class="chp-heading">
-                              <div class="chp-title">
-                                <img class="mr-1" src="/images/video1.svg" alt="img">
-                                English Developing People, Leading Teams & Managing Processes
-                              </div>
-                              <div class="right-icons">
-                                <a href="/learning-content/viewCourses"><img class="mr-2" src="/images/eye.svg"
-                                    alt="img"></a>
-                                <a href="#panel1" aria-expanded="false" data-toggle="collapse" data-target="#panel1"
-                                  aria-controls="panel1">
-                                  <img class="mr-2" src="/images/edit.svg" alt="img">
-                                </a>
-                                <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
-                                    alt="img"></a>
-                              </div>
-                            </div>
-                            <div class="collapse" id="panel1" data-parent="#chp_section">
+                        <div data-repeater-list="inner-list">
+                          <div data-repeater-item>
                               <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                  <h3 class="title-text mb-0">Edit Lecture</h3>
-                                  <a data-toggle="collapse" href="#panel1" aria-expanded="false"><img
-                                      src="/images/close.svg" alt="img"></a>
-                                </div>
-                                <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                  <li class="nav-item">
-                                    <a class="nav-link active" id="pills-basic-tab" data-toggle="pill"
-                                      href="#pills-basic" role="tab" aria-controls="pills-basic"
-                                      aria-selected="true"><img class="mr-1" src="/images/basic.svg" alt="img">
-                                      Basic</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video"
-                                      role="tab" aria-controls="pills-video" aria-selected="false"><img class="mr-1"
-                                        src="/images/video1.svg" alt="img"> Video</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" id="pills-attachments-tab" data-toggle="pill"
-                                      href="#pills-attachments" role="tab" aria-controls="pills-attachments"
-                                      aria-selected="false"><img class="mr-1" src="/images/link.svg" alt="img">
-                                      Attachments</a>
-                                  </li>
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent">
-                                  <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
-                                    aria-labelledby="pills-basic-tab">
-                                    <div class="row">
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Title</label>
-                                          <input class="form-control" type="text"
-                                            value="English Developing People, Leading Teams & Managing Processes">
-                                        </div>
+                                <div class="accordion" id="chp_section">
+                                  <div class="chp-add-section">
+                                    <div class="chp-heading">
+                                      <div class="chp-title">
+                                        <img class="mr-1" src="/images/video1.svg" alt="img">
+                                        English Developing People, Leading Teams & Managing Processes
                                       </div>
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Duration</label>
-                                          <input class="form-control" type="time"
-                                            value="">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label class="form-label">Description</label>
-                                          <textarea class="editer"></textarea>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12 text-right">
-                                        <button class="btn theme-btn" type="button"><img class="mr-1"
-                                            src="/images/save.svg" alt="img"> Save</button>
+                                      <div class="right-icons">
+                                        <a href="/learning-content/viewCourses"><img class="mr-2" src="/images/eye.svg"
+                                            alt="img"></a>
+                                        <a href="#panel1" aria-expanded="false" data-toggle="collapse" data-target="#panel1"
+                                          aria-controls="panel1">
+                                          <img class="mr-2" src="/images/edit.svg" alt="img">
+                                        </a>
+                                        <a class="delete-btn" href="javascript:void(0);" data-repeater-delete><img src="/images/trash.svg"
+                                            alt="img"></a>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="pills-video" role="tabpanel"
-                                    aria-labelledby="pills-video-tab">
-                                    <div class="row">
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Video URL</label>
-                                          <input class="form-control" type="text" value="Enter your URL">
+                                    <div class="collapse" id="panel1" data-parent="#chp_section">
+                                      <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                          <h3 class="title-text mb-0">Edit Lecture</h3>
+                                          <a data-toggle="collapse" href="#panel1" aria-expanded="false"><img
+                                              src="/images/close.svg" alt="img"></a>
                                         </div>
-                                      </div>
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Duration</label>
-                                          <input class="form-control" type="time"
-                                            value="">
+                                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                          <li class="nav-item">
+                                            <a class="nav-link active" id="pills-basic-tab" data-toggle="pill"
+                                              href="#pills-basic" role="tab" aria-controls="pills-basic"
+                                              aria-selected="true"><img class="mr-1" src="/images/basic.svg" alt="img">
+                                              Basic</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video"
+                                              role="tab" aria-controls="pills-video" aria-selected="false"><img class="mr-1"
+                                                src="/images/video1.svg" alt="img"> Video</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="pills-attachments-tab" data-toggle="pill"
+                                              href="#pills-attachments" role="tab" aria-controls="pills-attachments"
+                                              aria-selected="false"><img class="mr-1" src="/images/link.svg" alt="img">
+                                              Attachments</a>
+                                          </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                          <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
+                                            aria-labelledby="pills-basic-tab">
+                                            <div class="row">
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Title</label>
+                                                  <input class="form-control" type="text"
+                                                    value="English Developing People, Leading Teams & Managing Processes">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Duration</label>
+                                                  <input class="form-control" type="time"
+                                                    value="">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label class="form-label">Description</label>
+                                                  <textarea class="editer"></textarea>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 text-right">
+                                                <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                    src="/images/save.svg" alt="img"> Save</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane fade" id="pills-video" role="tabpanel"
+                                            aria-labelledby="pills-video-tab">
+                                            <div class="row">
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Video URL</label>
+                                                  <input class="form-control" type="text" value="Enter your URL">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Duration</label>
+                                                  <input class="form-control" type="time"
+                                                    value="">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="spacer">OR</div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label class="form-label">Upload Video</label>
+                                                  <input type="file" name="cover_image" id="cover_image"
+                                                    class="form-control select-video h-auto"
+                                                    data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 text-right">
+                                                <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                    src="/images/save.svg" alt="img"> Save</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane fade" id="pills-attachments" role="tabpanel"
+                                            aria-labelledby="pills-attachments-tab">
+                                            <div class="row">
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Course title</label>
+                                                  <input class="form-control" type="text" value="Enter your title">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 col-md-6">
+                                                <div class="form-group">
+                                                  <label class="form-label">Duration</label>
+                                                  <input class="form-control" type="time"
+                                                    value="">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="spacer">OR</div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label class="form-label">Upload Attachments</label>
+                                                  <input type="file" name="cover_image" id="cover_image"
+                                                    class="form-control select-attachments h-auto"
+                                                    data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 text-right">
+                                                <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                    src="/images/save.svg" alt="img"> Save</button>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="spacer">OR</div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label class="form-label">Upload Video</label>
-                                          <input type="file" name="cover_image" id="cover_image"
-                                            class="form-control select-video h-auto"
-                                            data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12 text-right">
-                                        <button class="btn theme-btn" type="button"><img class="mr-1"
-                                            src="/images/save.svg" alt="img"> Save</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="pills-attachments" role="tabpanel"
-                                    aria-labelledby="pills-attachments-tab">
-                                    <div class="row">
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Course title</label>
-                                          <input class="form-control" type="text" value="Enter your title">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12 col-md-6">
-                                        <div class="form-group">
-                                          <label class="form-label">Duration</label>
-                                          <input class="form-control" type="time"
-                                            value="">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="spacer">OR</div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label class="form-label">Upload Attachments</label>
-                                          <input type="file" name="cover_image" id="cover_image"
-                                            class="form-control select-attachments h-auto"
-                                            data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12 text-right">
-                                        <button class="btn theme-btn" type="button"><img class="mr-1"
-                                            src="/images/save.svg" alt="img"> Save</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
                           </div>
                         </div>
-                      </div>
                     </div>
+                    
                   </div>
 
                   <div class="card">
@@ -799,7 +804,28 @@
 
 
 
-  $(document).ready(function () {
+  var $repeater = $('.repeater').repeater({
+    repeaters: [{
+        selector: '.inner-repeater',
+        // repeaters: [{ 
+        //     selector: '.deep-inner-repeater' 
+        // }]
+    }]
+});
+
+$repeater.setList([
+    {
+        'inner-list': [
+          {},
+          {}
+        ]
+    },
+]);
+
+
+
+
+  /*$(document).ready(function () {
     $('.repeater').repeater({
       // (Optional)
       // start with an empty list of repeaters. Set your first (and only)
@@ -844,5 +870,5 @@
       // defaults to false.
       isFirstItemUndeletable: true
     })
-  });
+  });*/
 </script>
