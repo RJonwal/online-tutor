@@ -123,7 +123,7 @@
       <!-- Step2-->
       <fieldset class="wizard-fieldset">
         <div class='repeater'>
-          <div class="add-more-section d-flex align-items-center justify-content-between mb-4">
+          <div class="add-more-section d-flex align-items-center justify-content-between">
             <h3 class="title-text mb-0">Add Content</h3>
             <a class="theme-btn add-section" data-repeater-create href="javascript:void(0);"><img
                 src="/images/addcircle.svg" alt="img"> Add
@@ -131,13 +131,11 @@
           </div>
           <div data-repeater-list="group-a">
             <div data-repeater-item>
-              <div class="add-more-section d-flex align-items-center justify-content-between mb-4">
-                <a class="theme-btn add-section" data-repeater-delete href="javascript:void(0);"><img
-                    src="/images/addcircle.svg" alt="img"> Delete
-                  Section</a>
-              </div>
-
-              <div class="content-section repeater">
+              <div class="content-section mt-4">
+                <div class="text-right">
+                  <a class="delete-section-btn" data-repeater-delete href="javascript:void(0);"><img
+                    src="/images/trash.svg" alt="img"> <span class="text-title">Delete Section</span></a>
+                </div>
                 <div class="accordion" id="section1">
                   <div class="card">
                     <div class="card-header">
@@ -205,11 +203,18 @@
                                   <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
                                     aria-labelledby="pills-basic-tab">
                                     <div class="row">
-                                      <div class="col-sm-12">
+                                      <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                           <label class="form-label">Title</label>
                                           <input class="form-control" type="text"
                                             value="English Developing People, Leading Teams & Managing Processes">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                          <label class="form-label">Duration</label>
+                                          <input class="form-control" type="time"
+                                            value="">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -227,10 +232,17 @@
                                   <div class="tab-pane fade" id="pills-video" role="tabpanel"
                                     aria-labelledby="pills-video-tab">
                                     <div class="row">
-                                      <div class="col-sm-12">
+                                      <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                           <label class="form-label">Video URL</label>
                                           <input class="form-control" type="text" value="Enter your URL">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                          <label class="form-label">Duration</label>
+                                          <input class="form-control" type="time"
+                                            value="">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -253,10 +265,17 @@
                                   <div class="tab-pane fade" id="pills-attachments" role="tabpanel"
                                     aria-labelledby="pills-attachments-tab">
                                     <div class="row">
-                                      <div class="col-sm-12">
+                                      <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                           <label class="form-label">Course title</label>
                                           <input class="form-control" type="text" value="Enter your title">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6">
+                                        <div class="form-group">
+                                          <label class="form-label">Duration</label>
+                                          <input class="form-control" type="time"
+                                            value="">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -340,6 +359,11 @@
                                     <label class="form-label">Practice Question</label>
                                     <input class="form-control" type="text"
                                       placeholder="Dose John go to the Zoo on Monday?">
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="form-label">Duration</label>
+                                    <input class="form-control" type="time"
+                                      value="">
                                   </div>
                                   <div class="form-group mb-0">
                                     <label class="form-label">Discription</label>

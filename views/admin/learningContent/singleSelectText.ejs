@@ -10,53 +10,20 @@
       <div class="slideshow">
         <div class="item">
           <div class="row">    
-              <div class="col-sm-12 col-md-7">
-                  <h3>English Developing People, Leading Teams & Managing Processes</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </div>
-              <div class="col-sm-12 col-md-5">
-                  <img src="/images/course-thumb.jpg" class="img-fluid w-100">
-              </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="row">
-              <div class="col-sm-12 col-md-7">
-                  <h3>English Developing People, Leading Teams & Managing Processes</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </div>
-              <div class="col-sm-12 col-md-5">
-                  <img src="/images/course-thumb.jpg" class="img-fluid w-100">
-              </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="row">
-              <div class="col-sm-12 col-md-7">
-                  <h3>English Developing People, Leading Teams & Managing Processes</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </div>
-              <div class="col-sm-12 col-md-5">
-                  <img src="/images/course-thumb.jpg" class="img-fluid w-100">
-              </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="row">
-              <div class="col-sm-12 col-md-7">
-                  <h3>English Developing People, Leading Teams & Managing Processes</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </div>
-              <div class="col-sm-12 col-md-5">
-                  <img src="/images/course-thumb.jpg" class="img-fluid w-100">
+              <div class="col-sm-12">
+                
+    <p class="questions" id="question1">
+      1- Quien es el único jugador de futbol argentino que tiene una serie en Netflix?</p>
+    <input type="radio" name="answer1" value="wrong">Diego Maradona
+    <input type="radio" name="answer1" value="correct">Carlos Tevez
+    <input type="radio" name="answer1" value="wrong">Lionel Messi
+    <hr>
+
+    <button class="submit" onclick="return getResults();" type="submit">
+      Comprueba tus respuestas</button>
+
+  <h2 id="results-h">Resultados</h2>
+  <p id="results"></p>
               </div>
           </div>
         </div>
@@ -69,7 +36,7 @@
             </div>
         </li>
         <li class="next"><a href="javascript:void(0);" class="theme-btn">Next</a></li>
-    </ul>
+      </ul>
     </div>
 </div>
 
@@ -123,4 +90,42 @@ function sliderInit() {
 };
 
 sliderInit();
+
+
+function getResults() {
+  //CORRECT ANSWERS
+  var amountCorrect = 0;
+
+// LOOP FOR GOING THROUGH ALL QUESTIONS
+  for(var i = 1; i <= 5; i++) {
+    var radiosName = document.getElementsByName('answer'+i);
+//LOOP FOR CHECKING ANSWERS INSIDE EACH RADIO
+    for(var j = 0; j < radiosName.length; j++) {
+      var radiosValue = radiosName[j];
+      if(radiosValue.value == "correct" && radiosValue.checked) {
+        amountCorrect++;
+        radiosValue.style.color = "green";
+      }
+    }
+  }
+  //COLOR CHANGE
+  if (radiosValue.checked) {
+     if (radiosValue.value == "correct") {
+       amountCorrect++;
+       radiosValue.nextSibling.style.color = "green";
+     } else {
+       radiosValue.nextSibling.style.color = "red";
+     }
+  }
+  else {
+   radiosValue.nextSibling.style.color = "";  // back to default
+  }
+
+//PRINT RESULTS
+document.getElementById('results').innerHTML =
+"Respuestas correctas " + amountCorrect;
+
+
+
+}
 </script>
