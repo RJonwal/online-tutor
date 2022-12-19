@@ -1453,6 +1453,9 @@ span.total-count {
     padding: 15px 0;
     border-top: 1px solid #D2D6E3;
 }
+.right_col .form-wizard .repeat-block+.repeat-block {
+    margin-top: 10px;
+}
 .right_col .form-wizard .editable-heading{
     background: none;
     border: none;
@@ -2648,8 +2651,11 @@ span.total-count {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 15px;
+    margin-top: 30px;
 }
-
+.que-block .image-question li{
+    flex: 1;
+}
 
 
 /* .que-block .was-validated :invalid~.label-radio {
