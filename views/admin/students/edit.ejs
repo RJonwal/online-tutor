@@ -101,7 +101,7 @@
                       <select class="form-control select2" name="grade_id" id="grade_id">
                         <option value="">Select Grade</option>
                         <% for(Grade of grade){%>
-                          <option value="<%=Grade.id%>"><%=Grade.name%></option>
+                          <option value="<%=Grade.id%>" <%=data.grade_id==Grade.id ? 'selected' : '' %>><%=Grade.name%></option>
                         <%}%>
                       </select>
                     </div>
