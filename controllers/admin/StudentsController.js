@@ -1,5 +1,5 @@
 
-const Student = require('../../models/user');
+const User = require('../../models/user');
 const School = require('../../models/School');
 const Grade = require('../../models/Grade');
 
@@ -14,6 +14,7 @@ module.exports = {
     edit,
     update,
     destroy,
+    datatable,
     updateStatus
 }
 
@@ -25,14 +26,15 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        let Students = await Student.find({ "role": 3 }).sort({ '_id': -1 });
+        let student = await User.find({ "role": 3 }).sort({ first_name: 1 });      
+        let grade = await Grade.find({ "status": 1  }).sort({ 'name': 1 });
 
-        let totalStudent  = await Student.find({ "role": 3 }).sort({ '_id': -1 }).count();
-        let activeStudent  = await Student.find({ $and: [ { "role": 3  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
-        let deactiveStudent  = await Student.find({ $and: [ { "role": 3  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
-
+        let totalStudent  = await User.find({ "role": 3 }).sort({ '_id': -1 }).count();
+        let activeStudent  = await User.find({ $and: [ { "role": 3  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
+        let deactiveStudent  = await User.find({ $and: [ { "role": 3  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
         const studentObject = {'total':totalStudent,'active':activeStudent,'deactive':deactiveStudent}
-        return res.render('../views/admin/students/index', { data: Students,fs:fs,studentObject:studentObject });
+
+        return res.render('../views/admin/students/index', { fs:fs,studentObject:studentObject,students:student,grade,grade });
     } catch {
         return res.status(500).json({
             message: 'Internal Server Error'
@@ -40,6 +42,70 @@ async function index(req, res) {
     }
 }
 
+async function datatable(req,res){
+    var searchStr = req.body.search.value;
+    const custum_filter = [];
+    flag = false;
+    // if(req.body.id !=''){
+    //     flag = true;
+    //     custum_filter.push({'_id':req.body.id});
+    // }
+    // if(req.body.grade !=''){
+    //     custum_filter.push({'grade':req.body.grade});
+    // }
+    // if(req.body.status !=''){
+    //     custum_filter.push({'status':req.body.status});
+    // }
+    // if(flag){
+    //     cusfilter = { $or:custum_filter};
+    // }
+    var obj  = {};
+   // create object for filtering data
+    if(req.body.id){
+        obj["_id"] = req.body.id;
+    }
+    if(req.body.grade){
+        obj["grade_id"] = req.body.grade;
+    }
+    if(req.body.status){
+        obj["status"] = req.body.status;
+    }
+
+    if(req.body.search.value){
+            var regex = new RegExp(req.body.search.value, "i")
+            searchStr = { $or: [{'first_name': regex },{'email': regex},{'phone':regex}] };
+    }
+    else{
+        searchStr={};
+    }
+    console.log(obj);
+    const filter = ['profile_image','first_name','dial_code','email','status'];
+    const colomn_name = filter[req.body.order[0].column];
+    const order_by =req.body.order[0].dir;
+    var recordsTotal = 0;
+    var recordsFiltered=0;
+    User.count({ "role": 3  }, function(err, c) {
+        recordsTotal=c;
+        User.count({ $and: [ { "role": 3  },obj, searchStr ] }, function(err, c) {
+            recordsFiltered=c;
+            User.find({ $and: [ { "role": 3  },obj,searchStr ] }, '_id profile_image email first_name last_name dial_code phone status',{'skip': Number( req.body.start), 'limit': Number(req.body.length) }, function (err, results) {
+                if (err) {
+                    console.log('error while getting results'+err);
+                    return;
+                }
+                var data = JSON.stringify({
+                    "draw": req.body.draw,
+                    "recordsFiltered": recordsFiltered,
+                    "recordsTotal": recordsTotal,
+                    "data": results
+                });
+                return res.send(data);
+            }).populate('grade_id').sort({[colomn_name]:order_by});
+        });
+    });
+    ;
+    // datatable end
+}
 /**
  * create Student
  * @param {*} req 
@@ -73,7 +139,7 @@ async function store(req, res) {
         }
         // set role for students
         req.body.role = 3;
-        let student = await Student.create(req.body);
+        let student = await User.create(req.body);
         if (student) {
             req.flash('success', 'Student is created successfully!');
             res.status(200).json({ "success": true, "message": "Student is created successfully!", "redirectUrl": "/Students" });
@@ -96,7 +162,7 @@ async function edit(req, res) {
         let StudentId = req.params.id;
         let schools = await School.find({ "status": 1 }).sort({ '_id': -1 });
         let grade  = await Grade.find( { "status": 1  } );
-        let student = await Student.find({ "_id": StudentId });
+        let student = await User.find({ "_id": StudentId });
         let start_date = res.locals.moment(student[0].start_date).format('YYYY-MM-DD');
         let birth_day = res.locals.moment(student[0].birth_day).format('YYYY-MM-DD');
         if (student) {
@@ -118,8 +184,9 @@ async function edit(req, res) {
  */
 async function update(req, res) {
     try {
+        console.log(req.body);
         if (req.body.student_id && req.body.student_id != '') {
-            let Student_details = await Student.find({ "_id": req.body.student_id });
+            let Student_details = await User.find({"_id": req.body.student_id });
             if (Student_details) {
               
                 studentData = Student_details[0];
@@ -137,11 +204,11 @@ async function update(req, res) {
                         });
                     }
                     req.body.profile_image = req.file.filename;
-                    let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
+                    let student = await User.findByIdAndUpdate(req.body.student_id, req.body)
                 } else {
                     delete req.body.profile_image
                     
-                    let student = await Student.findByIdAndUpdate(req.body.student_id, req.body)
+                    let student = await User.findByIdAndUpdate(req.body.student_id, req.body)
                 }
                 req.flash('success', 'Student is updated successfully!');
                 res.status(200).json({ "success": true, "message": "Student is updated successfully!", "redirectUrl": "/Students" });
@@ -163,7 +230,7 @@ async function update(req, res) {
 async function destroy(req, res) {
     try {
         let id = req.params.id;
-        let StudentDeleted = await Student.findByIdAndDelete(id);
+        let StudentDeleted = await User.findByIdAndDelete(id);
         if (StudentDeleted) {
             let studentImage = StudentDeleted.profile_image;
             if (studentImage != '') {
@@ -196,8 +263,7 @@ async function updateStatus(req, res) {
         if (req.body.uid && req.body.uid != '') {
            
             let status = ((req.body.status=='true') ? '1' : '0');
-            let tutor = await Student.findByIdAndUpdate(req.body.uid, { status: status });
-          
+            let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
             res.status(200).json({ "success": true, "message": "Student status is updated successfully!" });
         }
     } catch (e) {

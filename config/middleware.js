@@ -6,8 +6,11 @@ module.exports.setFlash = function(req, res, next){
     }
     next();
 };
-
 module.exports.dateFormate = function(req, res, next){
     res.locals.moment = moment;
     next();
+}
+module.exports.loggedInUserDetails = function(req, res, next){
+        global.user_detail = res.locals.user;
+        next();
 }

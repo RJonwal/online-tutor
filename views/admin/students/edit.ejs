@@ -61,7 +61,7 @@
                     <label class="col-form-label label-align" for="gender">Gender</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/gender.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="gender" id="gender">
+                      <select class="form-control select2" name="gender" >
                         <option value="">Select Gender</option>
                         <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Male</option>
                         <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Female</option>
@@ -95,10 +95,10 @@
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="skill_level"  value="<%=data.skill_level %>"  class="form-control " placeholder="Enter Skill Level.." id="skill_level">
                     </div> -->
-                    <label class="col-form-label label-align" for="grade">Grade</label>
+                    <label class="col-form-label label-align" for="grade_id">Grade</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control select2" name="grade" id="grade">
+                      <select class="form-control select2" name="grade_id" id="grade_id">
                         <option value="">Select Grade</option>
                         <% for(Grade of grade){%>
                           <option value="<%=Grade.id%>"><%=Grade.name%></option>
@@ -112,7 +112,7 @@
                     <label class="col-form-label label-align" for="school">School</label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/school.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="school_id" id="school_id">
+                      <select class="form-control select2" name="school_id" >
                         <option value="">Select School</option>
                         <% for(school of school_data) { %>
                           <option value="<%=school.id%>" <%=data.school_id==school.id ? 'selected' : '' %>><%=school.name%></option>
@@ -143,7 +143,7 @@
                   </label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/status.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="status" id="status">
+                      <select class="form-control select2" name="status" id="status">
                         <option value="1" <%=data.status=='1' ? 'selected' : '' %>>Active</option>
                         <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
                       </select>
@@ -299,15 +299,6 @@
    });
 });
  // phone number validate end  
- $("#gender").select2({
-  allowClear: false,
-});
-$("#school_id").select2({
-  allowClear: false,
-});
-$("#status").select2({
-  allowClear: false,
-});
 $(".select2").select2({
   allowClear: false,
 });

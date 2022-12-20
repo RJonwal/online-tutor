@@ -48,6 +48,7 @@ app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(customMware.setFlash);
 app.use(customMware.dateFormate);
+app.use(customMware.loggedInUserDetails);
 
 // use express router
 app.use('/', require('./routes'));

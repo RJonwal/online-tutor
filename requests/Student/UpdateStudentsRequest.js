@@ -26,7 +26,7 @@ var validateUser = () => [
     .isLength({ min: 1, max: 1000 })
     .withMessage('Last Name length is should be in a valid range!')
     .bail(),
-    body('grade')
+    body('grade_id')
     .trim()
     .not()
     .isEmpty()
@@ -61,7 +61,7 @@ var validateUser = () => [
     .trim()
     .bail()
     .custom((value, { req }) => {
-      console.log(value);
+      console.log(req.body.student_id);
       return User.findOne({ "dial_code": req.body.dial_code, "phone": value, _id: { $ne: req.body.student_id } })
         .then(student => {
           console.log(student);

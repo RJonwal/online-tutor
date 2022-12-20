@@ -2159,7 +2159,7 @@ span.total-count {
 
 .x_content div.dataTables_wrapper div.dataTables_paginate .pagination li:hover {
     background: var(--dblue);
-    border: 1px solid var(--dblue);
+    /* border: 1px solid var(--dblue); */
 }
 
 .x_content div.dataTables_wrapper div.dataTables_paginate .pagination li:hover:after {
@@ -3225,4 +3225,8 @@ span.total-count {
     background-color: #d70b0b;
     height: 1px;
     width: 100%;
+}
+.x_content div.dataTables_wrapper div.dataTables_paginate .pagination .paginate_button.active a {
+    color: rgb(255, 255, 255);
+    background-color: rgb(244, 120, 23) !important;
 }

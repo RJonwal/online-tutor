@@ -96,6 +96,7 @@
     $(document).find("span.text-danger").remove();
 
     var formData = $('#updateSchool').serialize();
+    console.log(formData);
     var url = $('#updateSchool').attr('action');
     $("#updateSchoolBtn").prop('disabled', true);
     $.ajax({

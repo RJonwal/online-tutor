@@ -7,11 +7,19 @@
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="/images/img.jpg" alt="..." class="img-circle profile_img">
+        <img src="<%=user_detail.profile_image !='' ? '/ProfileImage/'+user_detail.profile_image:'/images/noImage.jpg'%>" alt="..." class="img-circle profile_img">
       </div>
       <div class="profile_info">
-        <span>Welcome</span>
-        <h2>Daniel Estasmos</h2>
+        <h2><%=user_detail.first_name !='' ? user_detail.first_name+' '+user_detail.last_name : '' %></h2>
+        <span>
+          <% if(user_detail.role ==1){ %>
+            Admin
+          <% }else if(user_detail.role == 2) { %>
+            Tutor
+          <% }else { %>
+            Student
+          <% } %>
+        </span>
       </div>
     </div>
 
@@ -61,11 +69,11 @@
           </li>
 
           <li>
-            <a><span class="icon"><img src="/images/categories.svg"></span> <span class="link-title">Topic</span>
+            <a><span class="icon"><img src="/images/categories.svg"></span> <span class="link-title">Topics</span>
               <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="/topics">Main Topic</a></li>
-              <li><a href="/subTopics">Sub Topic</a></li>
+              <li><a href="/topics">Main Topics</a></li>
+              <li><a href="/subTopics">Sub Topics</a></li>
             </ul>
           </li>
 

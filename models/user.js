@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     dial_code: {
-        type: Number,
+        type: String,
         minlength: 1,
         maxlength: 5,
         default: null
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         default: null
     },
     phone: {
-        type: Number,
+        type: String,
         minlength: 5,
         maxlength: 15,
         default: null
@@ -97,13 +97,13 @@ const userSchema = new mongoose.Schema({
     },
     grade_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'grade',
+        ref: 'grades',
         default: null
     },
     school_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'schools',
-        required: true,
+        default: null
     },
 
 }, {
