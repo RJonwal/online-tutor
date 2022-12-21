@@ -8,6 +8,7 @@ var slugify = require('slugify');
 
 module.exports = {
     index,
+    dataTable,
     create,
     store,
     edit,
@@ -52,6 +53,49 @@ async function index(req, res) {
     }
 }
 
+/**
+ * dataTable
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function dataTable(req, res) {
+    var searchStr = req.body.search.value;
+    var obj = {};
+
+    if (req.body.id) {
+        obj["_id"] = req.body.id;
+    }
+    if (req.body.tutor_subjects) {
+        obj["tutor_subjects"] = req.body.tutor_subjects;
+    }
+    if (req.body.status) {
+        obj["status"] = req.body.status;
+    }
+    if (req.body.search.value) {
+        var regex = new RegExp(req.body.search.value, "i")
+        searchStr = { $or: [{ 'first_name': regex }, { 'email': regex }, { 'phone': regex }] };
+    }
+    else {
+        searchStr = {};
+    }
+
+    const filter = ['name', 'email', 'dial_code','address', 'status'];
+    const column_name = filter[req.body.order[0].column];
+    const order_by = req.body.order[0].dir;
+    var recordsTotal = 0;
+    var recordsFiltered = 0;
+    let subject = await Topic.find({});
+    recordsTotal    = await User.count({ "role": 2 });
+    recordsFiltered = await  User.count({ $and: [{ "role": 2 }, obj, searchStr] });
+    let results     = await  User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
+    var data = JSON.stringify({
+        "draw": req.body.draw,
+        "recordsFiltered": recordsFiltered,
+        "recordsTotal": recordsTotal,
+        "data": results
+    });
+    return res.send(data);
+}
 
 /**
  * create tutor.

@@ -23,7 +23,7 @@ const schoolsSchema = new mongoose.Schema({
         default: null
     },
     phone: {
-        type: Number,
+        type: String,
         // minlength: 5,
         maxlength: 15,
         default: null

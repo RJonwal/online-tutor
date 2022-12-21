@@ -32,7 +32,7 @@
       <li class="filter-col">
         <select class="form-control select2" id="school" tabindex="-1" single>
           <option value="">Select School</option>
-          <% for(school of data) { %>
+          <% for(school of schools) { %>
             <option value="<%=school.id%>">
               <%=school.name%>
             </option>
@@ -71,7 +71,7 @@
                   width="100%">
                   <thead>
                     <tr>
-                      <th>S.No</th>
+                      <!-- <th>S.No</th> -->
                       <th>School Name</th>
                       <th>Email</th>
                       <th>Contact No</th>
@@ -81,44 +81,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% let i=0; for(school of data) { %>
-                      <tr>
-                        <td>
-                          <%=++i%>
-                        </td>
-                        <td>
-                          <%=school.name%>
-                        </td>
-                        <td>
-                          <%=school.email%>
-                        </td>
-                        <td>
-                          <%=school.phone ? '+' +school.dial_code+' '+school.phone: '' %>
-                        </td>
-                        <td>
-                          <%=school.address%>
-                        </td>
-                        <td>
-                          <label class="checkbox-inline">
-                            <input type="checkbox" name="status" class="record-status" data-toggle="toggle"
-                              data-on="Active" data-off="Deactive" data-onstyle="info" data-offstyle="danger"
-                              data-url="/schools/update-status" data-uid="<%=school.id%>" id="toggle-trigger"
-                              <%=school.status==1 ? ' checked' : '' %>>
-                            </label>
-                        </td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <a class="" href="/schools/edit/<%=school.id%>" data-toggle="tooltip" rel="tooltip"
-                              data-placement="top" title="Edit"><img src="/images/edit.svg" alt="icon"></a>
-
-                            <a href="javascript:void(0)" class="ml-2"
-                              onclick="confirmBeforeDeletion('/schools/destroy/<%=school.id%>')"><img
-                                src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip"
-                                data-placement="top" title="Delete"></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <% } %>
                   </tbody>
                 </table>
               </div>
@@ -130,19 +92,4 @@
   </div>
   <!-- page content end -->
 </div>
-
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("#school").select2({
-      placeholder: "Select School",
-      allowClear: false,
-    });
-    $("#status").select2({
-      placeholder: "Select Status",
-      allowClear: false,
-    });
-
-    dataTable();
-  });
-</script>
+<%- include('./script'); %>

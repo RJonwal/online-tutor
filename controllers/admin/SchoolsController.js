@@ -20,15 +20,14 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        let schools = await School.find({}).sort({ '_id': -1 });
-
+        let schools = await School.find({ "status": 1  }).sort({ '_id': -1 }); 
         let totalSchool  = await School.find({}).sort({ '_id': -1 }).count();
         let activeSchool  = await School.find( { "status": 1  } ).sort({ '_id': -1 }).count();
         let deactiveSchool  = await School.find( { "status": 0  }  ).sort({ '_id': -1 }).count();
 
         const schoolObject = {'total':totalSchool,'active':activeSchool,'deactive':deactiveSchool}
 
-        return res.render('../views/admin/schools/index', { data: schools, moment: res.locals.moment ,schoolObject:schoolObject});
+        return res.render('../views/admin/schools/index', { schools: schools ,schoolObject:schoolObject});
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -45,50 +44,36 @@ async function index(req, res) {
  */
 async function dataTable(req, res) {
     var searchStr = req.body.search.value;
-    flag = false;
     var obj = {};
-
     if (req.body.id) {
         obj["_id"] = req.body.id;
-    }
-    if (req.body.grade) {
-        obj["grade_id"] = req.body.grade;
     }
     if (req.body.status) {
         obj["status"] = req.body.status;
     }
     if (req.body.search.value) {
         var regex = new RegExp(req.body.search.value, "i")
-        searchStr = { $or: [{ 'first_name': regex }, { 'email': regex }, { 'phone': regex }] };
+        searchStr = { $or: [{ 'name': regex }, { 'email': regex }, { 'phone': regex },{ 'address': regex }] };
     }
     else {
         searchStr = {};
     }
 
-    const filter = ['profile_image', 'first_name', 'dial_code', 'email', 'status'];
+    const filter = ['name',  'email', 'dial_code','address','status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
     var recordsTotal = 0;
     var recordsFiltered = 0;
-    User.count({ "role": 3 }, function (err, c) {
-        recordsTotal = c;
-        User.count({ $and: [{ "role": 3 }, obj, searchStr] }, function (err, c) {
-            recordsFiltered = c;
-            User.find({ $and: [{ "role": 3 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }, function (err, results) {
-                if (err) {
-                    console.log('error while getting results' + err);
-                    return;
-                }
-                var data = JSON.stringify({
-                    "draw": req.body.draw,
-                    "recordsFiltered": recordsFiltered,
-                    "recordsTotal": recordsTotal,
-                    "data": results
-                });
-                return res.send(data);
-            }).populate('grade_id').sort({ [column_name]: order_by });
-        });
+    recordsTotal    = await School.count({ "role": 3 });
+    recordsFiltered = await  School.count({ $and: [{ "role": 3 }, obj, searchStr] });
+    let results     = await  School.find({ $and: [{ "role": 3 }, obj, searchStr] }, '_id name email dial_code phone address status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
+    var data = JSON.stringify({
+        "draw": req.body.draw,
+        "recordsFiltered": recordsFiltered,
+        "recordsTotal": recordsTotal,
+        "data": results
     });
+    return res.send(data);
 }
 
 

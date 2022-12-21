@@ -8,6 +8,7 @@ var storeGradeRequest = require('../requests/Grade/StoreGradeRequest');
 var updateGradeRequest = require('../requests/Grade/UpdateGradeRequest');
 
 router.get('/', passport.checkAuthentication, gradesController.index);
+router.post('/dataTable', passport.checkAuthentication, gradesController.dataTable);
 router.get('/create', passport.checkAuthentication, gradesController.create);
 router.post('/store', passport.checkAuthentication, storeGradeRequest, gradesController.store);
 router.get('/edit/:id', passport.checkAuthentication, gradesController.edit);

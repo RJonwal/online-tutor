@@ -8,12 +8,12 @@ let session = require('express-session');
 
 module.exports = {
     index,
+    dataTable,
     create,
     store,
     edit,
     update,
     destroy,
-    dataTable,
     updateStatus
 }
 
@@ -50,9 +50,7 @@ async function index(req, res) {
  */
 async function dataTable(req, res) {
     var searchStr = req.body.search.value;
-    flag = false;
     var obj = {};
-
     if (req.body.id) {
         obj["_id"] = req.body.id;
     }

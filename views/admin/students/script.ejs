@@ -1,0 +1,433 @@
+ <script>
+/**
+ * index page script
+ * @script start 
+ */
+    $(document).ready(function () {
+      dataTable();
+    });
+  
+    $(".filter").click(function () {
+      let student = $('#student').val();
+      let grade = $('#grade').val();
+      let status = $('#status').val(); 
+      dataTable(student, grade, status);
+    }); 
+    
+    $(".reset").click(function () {
+      $(".select2").val(null).trigger("change");
+      dataTable();
+    });
+    
+    function dataTable(student = '', grade = '', status = '') {
+      $("#studentTable").dataTable().fnDestroy()
+  
+        var studentTable = $('#studentTable').DataTable({
+        "paging": true, 
+        "pageLength": 10,
+        "processing": true,
+        "serverSide": true, 
+        "order": [[1, 'asc']],
+        dom: "Bfltip",
+            buttons: {
+              buttons: [
+                    { extend: "excel" },
+                    {
+                      extend: "pdfHtml5",
+                      orientation: "landscape",
+                      pageSize: "A0",
+                      title: "Users List PDF",
+                      exportOptions: {
+                        modifier: {
+                          page: "current",
+                        },
+                      },
+                    },
+                  ],
+            },
+            buttons: [
+              {
+                  extend: 'collection',
+                  text: 'Select Option',
+                  className: 'btn-default-option',
+                  autoClose: true,
+                  buttons: [
+                              { 
+                                text: 'Excel',
+                                extend: 'excelHtml5',
+                                className: 'btn-default',
+                                title: 'Student Lists',
+                                exportOptions: {
+                                  columns: [1, 3, 4 ]
+                                },
+                              },
+                              { 
+                                extend: 'pdfHtml5',
+                                className: 'btn-default',
+                                title: 'Student Lists',
+                                exportOptions: {
+                                  columns: [1, 3, 4 ]
+                                },
+                                customize: function(doc) {
+                                  doc.styles.tableHeader.alignment = 'left';
+                                  doc.content[1].margin = [ 20, 0, 20, 0 ],
+                                  doc.styles.tableBodyOdd.padding = 20; 
+                                  doc.styles.tableBodyEven.alignment = 'left'; 
+                                  doc.content[1].table.widths = [ '33%', '33%','33%' ],
+  
+                                  objLayout = {};
+                                  // Horizontal line thickness
+                                  objLayout['hLineWidth'] = function(i) { return 0; };
+                                  // Vertikal line thickness
+                                  objLayout['vLineWidth'] = function(i) { return 0; };
+                                  // Horizontal line color
+                                  objLayout['hLineColor'] = function(i) { return '#aaa'; };
+                                  // Left padding of the cell
+                                  objLayout['padding'] = function(i) { return 5; };
+                                  // Right padding of the cell
+                                  objLayout['paddingRight'] = function(i) { return 5; };
+                                   // Left padding of the cell
+                                   objLayout['paddingTop'] = function(i) { return 10; };
+                                  // Right padding of the cell
+                                  objLayout['paddingBottom'] = function(i) { return 10; };
+                                  // Inject the object in the document
+                                  doc.content[1].layout = objLayout;  
+                                }  
+                              },
+                            ],
+                  fade: true,
+              }
+            ],
+        'ajax':
+        {
+          'url': '/Students/dataTable',
+          'type': 'POST',
+          'data': {
+            "id": student,
+            "grade": grade,
+            "status": status
+          },
+        }, 
+        'columns': [
+          {
+              data: "profile_image",
+              "render": function (data, type, row) {
+                if (row.profile_image) {
+                return `<a href="/ProfileImage/${row.profile_image}"
+                    data-lightbox="image_${row._id}"> <img src="/ProfileImage/${row.profile_image}"
+                      alt="${row.first_name}+' '+${row.last_name}" class="img-thumbnail" /></a>`;
+                } else {
+                return `<a href="/images/noImage.png" data-lightbox="image_"> <img src="/images/noImage.jpg"
+                        alt="default" class="img-thumbnail" /></a>`;
+                }
+              }
+          },
+          {
+            data: "first_name",
+            "render": function (data, type, row) {
+              return row.first_name + ' ' + row.last_name;
+            }
+          },
+          {
+            data: "grade_id",
+            "render": function (data, type, row) {
+              return row.grade_id ? row.grade_id.name : '';
+            }
+          },
+          {
+            data: "phone",
+            "render": function (data, type, row) {
+              return row.phone ? '+' + row.dial_code + ' ' + row.phone : '';
+            }
+          },
+          {
+            'data': 'email',
+            'name': 'email',
+            "defaultContent": "",
+          },
+          {
+            data: "status",
+            "render": function (data, type, row) {
+              return ` <label class="checkbox-inline">
+                      <input type="checkbox" name="status" class="record-status" data-toggle="toggle" data-on="Active"
+                        data-off="Deactive" data-onstyle="info" data-offstyle="danger" data-url="/students/update-status"
+                        data-uid="${row._id}" id="toggle-trigger" ${row.status ? 'checked' : ''}>
+                    </label>`;
+            }
+          },
+          {
+            data: "",
+            "render": function (data, type, row) {
+              return `<div class="d-flex align-items-center">
+                      <a class="" href="/students/edit/${row._id}" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                        title="Edit"><img src="/images/edit.svg" alt="icon"></a>
+  
+                      <a href="javascript:void(0)" class="ml-2"
+                        onclick="confirmBeforeDeletion('/students/destroy/${row._id}')"><img src="/images/trash.svg"
+                          alt="icon" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Delete"></a>
+                    </div>`;
+            }
+          }
+        ],
+        'columnDefs': [{
+          'targets': [0, 6], /* column index */
+          'orderable': false, /* true or false */
+        }],
+  
+      });
+    }
+/*-----------------index page script end -----------------------*/
+
+/**
+ * create page script
+ * @script start 
+ */
+
+ $("#createStudent").submit(function (e) {
+    e.preventDefault();
+    $(document).find("span.text-danger").remove();
+    var form = $('#createStudent');
+    var formData = new FormData(form[0]);
+    var url = $('#createStudent').attr('action');
+    //$("#storeStudentBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+         // $("#storeCategoryBtn").prop('disabled', false);
+
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        //$("#storeCategoryBtn").prop('disabled', false);
+      }
+     })
+  });
+
+// phone number validate start intlTelInput
+  var input = document.querySelector("#phone"),
+  errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+  result = document.querySelector("#error-msg");
+  
+  window.addEventListener("load", function () {
+  errorMsg = document.querySelector("#error-msg");
+
+   function getIp(callback) {
+      fetch('https://ipinfo.io', {
+            headers: {
+               'Accept': 'application/json'
+            }
+         })
+         .then((resp) => resp.json())
+         .catch(() => {
+            return {
+               country: '',
+            };
+         })
+         .then((resp) => callback(resp.country));
+   }
+
+   var iti = window.intlTelInput(input, {
+      initialCountry: "In",
+      separateDialCode: true
+   });
+
+
+   input.addEventListener('keyup', function () {
+      reset();
+      $("#storeStudentBtn").prop('disabled', false);
+      if (input.value.trim()) {
+         if (iti.isValidNumber()) {
+            $("#storeStudentBtn").prop('disabled', false);
+            $(input).addClass('is-valid');
+         } else {
+            $("#storeStudentBtn").prop('disabled', true);
+            $(input).addClass('is-invalid');
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            $(errorMsg).show();
+         }
+      }
+   });
+   input.addEventListener('change', reset);
+   input.addEventListener('keyup', reset);
+
+   var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+
+   };
+   input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+         valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+   }, false);
+
+   input.addEventListener("focus", function () {
+      result.textContent = "";
+   }, false);
+
+   $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+   });
+});
+
+/*-----------------create page script end -----------------------*/
+
+/**
+ * edit page script
+ * @script start 
+ */
+
+ $("#updateStudent").submit(function (e) {
+    e.preventDefault();
+    // var iti = window.intlTelInputGlobals.getInstance(input);
+    // var countryData = iti.getSelectedCountryData();
+    // var dialCode = countryData.dialCode;
+    // $('#dial_code').val(dialCode); // update country code
+
+    $(document).find("span.text-danger").remove();
+    var form = $('#updateStudent');
+  
+    var formData = new FormData(form[0]);
+    formData.append('profile_image', this.new_attachments)
+    var url = $('#updateStudent').attr('action');
+    console.log(formData);
+    $("#updateStudentBtn").prop('disabled', true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+          window.location = response.redirectUrl;
+        }
+      }, 
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        $("#updateStudentBtn").prop('disabled', false);
+      },
+    })
+  });
+
+// phone number validate start intlTelInput
+  var input = document.querySelector("#phone"),
+  errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"],
+  result = document.querySelector("#error-msg");
+  
+  window.addEventListener("load", function () {
+  errorMsg = document.querySelector("#error-msg");
+
+   function getIp(callback) {
+      fetch('https://ipinfo.io', {
+            headers: {
+               'Accept': 'application/json'
+            }
+         })
+         .then((resp) => resp.json())
+         .catch(() => {
+            return {
+               country: '',
+            };
+         })
+         .then((resp) => callback(resp.country));
+   }
+   var iso_code = $("#iso_code").val();
+   iso_code = iso_code ? iso_code:'in';
+   var iti = window.intlTelInput(input, {
+      initialCountry: iso_code,
+      separateDialCode: true,
+      formatOnDisplay: false
+   });
+
+
+   input.addEventListener('keyup', function () {
+      reset();
+      $("#updateStudentBtn").prop('disabled', false);
+      if (input.value.trim()) {
+         if (iti.isValidNumber()) {
+            $("#updateStudentBtn").prop('disabled', false);
+            $(input).addClass('is-valid');
+
+         } else {
+            $("#updateStudentBtn").prop('disabled', true);
+            $(input).addClass('is-invalid');
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            $(errorMsg).show();
+         }
+      }
+   });
+   input.addEventListener('change', reset);
+   input.addEventListener('keyup', reset);
+
+   var reset = function () {
+      $(input).removeClass('is-invalid');
+      errorMsg.innerHTML = "";
+      $(errorMsg).hide();
+   };
+   input.addEventListener('keyup', function (e) {
+      e.preventDefault();
+      var num = iti.getNumber(),
+      valid = iti.isValidNumber();
+      //result.textContent = "Number: " + num + ", valid: " + valid;
+   }, false);
+
+   input.addEventListener("focus", function () {
+      result.textContent = "";
+   }, false);
+
+   $(input).on("focusout", function (e, countryData) {
+      var intlNumber = iti.getNumber();
+      var countryData = iti.getSelectedCountryData();
+      console.log(countryData);
+      var dialCode = countryData.dialCode;
+      var iso2 = countryData.iso2;
+      $('#dial_code').val(dialCode); // update country code
+      $('#iso_code').val(iso2); // update iso code
+   });
+});
+
+/*-----------------edit page script end -----------------------*/ 
+
+/*------------ common for all files------------*/
+$(".select2").select2({
+  allowClear: false,
+});
+</script>
