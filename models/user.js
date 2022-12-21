@@ -93,7 +93,8 @@ const userSchema = new mongoose.Schema({
     },
     referrer: {
         type: String,
-        default: ''
+        default: 
+        ''
     },
     grade_id: {
         type: mongoose.Schema.Types.ObjectId,

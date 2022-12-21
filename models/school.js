@@ -8,7 +8,7 @@ const schoolsSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        default: ''
+        default: null
     },
     dial_code: {
         type: Number,
@@ -30,7 +30,7 @@ const schoolsSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        default: ''
+        default: null
     },
     status: {
         type: Number,

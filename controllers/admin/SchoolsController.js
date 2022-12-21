@@ -3,6 +3,7 @@ let session = require('express-session');
 
 module.exports = {
     index,
+    dataTable,
     create,
     store,
     edit,
@@ -35,6 +36,61 @@ async function index(req, res) {
         })
     }
 }
+
+
+/**
+ * dataTable
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function dataTable(req, res) {
+    var searchStr = req.body.search.value;
+    flag = false;
+    var obj = {};
+
+    if (req.body.id) {
+        obj["_id"] = req.body.id;
+    }
+    if (req.body.grade) {
+        obj["grade_id"] = req.body.grade;
+    }
+    if (req.body.status) {
+        obj["status"] = req.body.status;
+    }
+    if (req.body.search.value) {
+        var regex = new RegExp(req.body.search.value, "i")
+        searchStr = { $or: [{ 'first_name': regex }, { 'email': regex }, { 'phone': regex }] };
+    }
+    else {
+        searchStr = {};
+    }
+
+    const filter = ['profile_image', 'first_name', 'dial_code', 'email', 'status'];
+    const column_name = filter[req.body.order[0].column];
+    const order_by = req.body.order[0].dir;
+    var recordsTotal = 0;
+    var recordsFiltered = 0;
+    User.count({ "role": 3 }, function (err, c) {
+        recordsTotal = c;
+        User.count({ $and: [{ "role": 3 }, obj, searchStr] }, function (err, c) {
+            recordsFiltered = c;
+            User.find({ $and: [{ "role": 3 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }, function (err, results) {
+                if (err) {
+                    console.log('error while getting results' + err);
+                    return;
+                }
+                var data = JSON.stringify({
+                    "draw": req.body.draw,
+                    "recordsFiltered": recordsFiltered,
+                    "recordsTotal": recordsTotal,
+                    "data": results
+                });
+                return res.send(data);
+            }).populate('grade_id').sort({ [column_name]: order_by });
+        });
+    });
+}
+
 
 /**
  * create school.

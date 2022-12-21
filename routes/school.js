@@ -5,9 +5,10 @@ const schoolsController = require('../controllers/Admin/SchoolsController')
 
 var storeSchoolRequest = require('../requests/School/StoreSchoolRequest');
 var updateSchoolRequest = require('../requests/School/UpdateSchoolRequest');
- 
+
 
 router.get('/', passport.checkAuthentication, schoolsController.index);
+router.post('/dataTable', passport.checkAuthentication, schoolsController.dataTable);
 router.get('/create', passport.checkAuthentication, schoolsController.create);
 router.post('/store', passport.checkAuthentication, storeSchoolRequest, schoolsController.store);
 router.get('/edit/:id', passport.checkAuthentication, schoolsController.edit);
