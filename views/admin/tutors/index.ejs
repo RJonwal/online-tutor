@@ -34,13 +34,12 @@
         </select>
       </li>
       <li class="filter-col">
-        <select class="form-control select2" id="tutor-subjects" tabindex="-1" single>
-          <option value="">Select Subject</option>
-          <option value="1">English</option>
-          <option value="2">Class 2nd</option>
-          <option value="3">Class 3rd</option>
-          <option value="4">Class 4th</option>
-          <option value="5">Class 5th</option>
+        <select class="form-control" id="tutor-subjects" tabindex="-1" multiple>
+            <% for(sub of subject) { %>
+            <option value="<%=tutor.id%>">
+              <%=sub.name %>
+            </option>
+            <% } %>
         </select>
       </li>
       <li class="filter-col">
@@ -99,6 +98,10 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $(".select2").select2({
+      allowClear: false,
+    });
+    $("#tutor-subjects").select2({
+      placeholder:'Select Subject',
       allowClear: false,
     });
   });
@@ -251,7 +254,12 @@
           {
             data: "subject_ids",
             "render": function (data, type, row) {
-              return '';
+              var html =`<div class="subcat-info">`;
+              for(subject of data){
+                html +=`<a href="#" class="badge badge-info">${subject.name}</a>`;
+              } 
+              html +=`</div>`;
+              return html;
             }
           },
           {

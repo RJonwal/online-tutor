@@ -36,8 +36,7 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        let subject = await Topic.find({});
-
+        let subject = await Topic.find({"status": 1});
         let totalTutor  = await User.find({ "role": 2 }).sort({ '_id': -1 }).count();
         let activeTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
         let deactiveTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
@@ -65,7 +64,9 @@ async function dataTable(req, res) {
     if (req.body.id) {
         obj["_id"] = req.body.id;
     }
+
     if (req.body.tutor_subjects) {
+        // { quantity: { $in: req.body.tutor_subjects } }
         obj["tutor_subjects"] = req.body.tutor_subjects;
     }
     if (req.body.status) {
@@ -78,7 +79,6 @@ async function dataTable(req, res) {
     else {
         searchStr = {};
     }
-
     const filter = ['name', 'email', 'dial_code','address', 'status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
@@ -87,7 +87,7 @@ async function dataTable(req, res) {
     let subject = await Topic.find({});
     recordsTotal    = await User.count({ "role": 2 });
     recordsFiltered = await  User.count({ $and: [{ "role": 2 }, obj, searchStr] });
-    let results     = await  User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
+    let results     = await  User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).populate('subject_ids').sort({ [column_name]: order_by });
     var data = JSON.stringify({
         "draw": req.body.draw,
         "recordsFiltered": recordsFiltered,
@@ -166,7 +166,6 @@ async function edit(req, res) {
         let tutorId = req.params.id;
         let tutor = await User.find({ "_id": tutorId, "role": 2 });
         if (tutor) {
-
             let activeCategories = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
             return res.render('../views/admin/tutors/edit', { data: tutor[0], subjects: activeCategories, fs: fs });
         }

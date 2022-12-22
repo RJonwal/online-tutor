@@ -110,7 +110,9 @@
     dataTable();
   });
   
+
   function dataTable(grade_name = '', status = '') {
+    $.fn.dataTable.moment('DD:MM:YYYY HH:mm a');    
     $("#gradeTable").dataTable().fnDestroy()
       var gradeTable = $('#gradeTable').DataTable({
       "paging": true, 
@@ -139,7 +141,15 @@
                         </label>`;
                 }
             },
-            { data: "created_at",'name': 'created_at',},
+            { 
+              data: "created_at",
+              "render": function (data, type, row) {
+                if (data !== null) {
+                var wrapper = moment(new Date(data));
+                  return wrapper.format("DD MMM YYYY");
+                }
+              }
+            },
             {
               data: "",
               "render": function (data, type, row) {
@@ -160,4 +170,5 @@
           }],
     });
   }
+ 
 </script>

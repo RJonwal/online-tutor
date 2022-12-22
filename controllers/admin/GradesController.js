@@ -60,7 +60,6 @@ async function dataTable(req, res) {
     else {
         searchStr = {};
     }
-
     const filter = ['name', 'status','created_at'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;

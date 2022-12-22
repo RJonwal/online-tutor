@@ -72,11 +72,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    subject_ids: {
-        type: Array,
+    // subject_ids: {
+    //     type: Array,
+    //     default: null
+    // },
+    subject_ids: [{
+        type: 'ObjectId',
+        ref: 'topics',
         default: null
-    },
-
+    }],
     /**
      * extra field for student student start
      */
