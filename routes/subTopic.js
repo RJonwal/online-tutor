@@ -9,6 +9,7 @@ var updateSubCategoryRequest = require('../requests/SubTopic/UpdateSubTopicReque
 
 
 router.get('/', passport.checkAuthentication, subTopicController.index);
+router.post('/dataTable', passport.checkAuthentication, subTopicController.dataTable);
 router.get('/create', passport.checkAuthentication, subTopicController.create);
 router.post('/store', passport.checkAuthentication, storeSubCategoryRequest, subTopicController.store);
 router.get('/edit/:id', passport.checkAuthentication, subTopicController.edit);

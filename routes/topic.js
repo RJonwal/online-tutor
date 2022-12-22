@@ -38,6 +38,7 @@ var uploadTopicImage = multer({
 });
 
 router.get('/', passport.checkAuthentication, topicController.index);
+router.post('/dataTable', passport.checkAuthentication, topicController.dataTable);
 router.get('/create', passport.checkAuthentication, topicController.create);
 router.post('/store', passport.checkAuthentication, uploadTopicImage.single('topic_image'), storeTopicRequest, topicController.store);
 router.get('/edit/:id', passport.checkAuthentication, topicController.edit);

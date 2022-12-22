@@ -7,6 +7,7 @@ var slugify = require('slugify');
 
 module.exports = {
     index,
+    dataTable,
     create,
     store,
     edit,
@@ -49,6 +50,48 @@ async function index(req, res) {
             message: 'Something went wrong, please try again later.'
         })
     }
+}
+
+/**
+ * dataTable
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function dataTable(req, res) {
+    var searchStr = req.body.search.value;
+    var obj = {};
+    if (req.body.sub_topic) {
+        obj["_id"] = req.body.sub_topic;
+    }
+    if (req.body.main_topic) {
+        obj["topic_id"] = req.body.main_topic;
+    }
+    if (req.body.status) {
+        obj["status"] = req.body.status;
+    }
+    if (req.body.search.value) {
+        var regex = new RegExp(req.body.search.value, "i")
+        searchStr = { $or: [{ 'name': regex }] };
+    }
+    else {
+        searchStr = {};
+    }
+    console.log(obj);
+    const filter = ['name','topic_id','status'];
+    const column_name = filter[req.body.order[0].column];
+    const order_by = req.body.order[0].dir;
+    var recordsTotal = 0;
+    var recordsFiltered = 0;
+    recordsTotal    = await SubTopic.count({});
+    recordsFiltered = await SubTopic.count({ $and: [obj, searchStr] });
+    let results     = await SubTopic.find({ $and: [obj, searchStr] }, '_id  name topic_id status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).populate('topic_id').sort({ [column_name]: order_by });
+    var data = JSON.stringify({
+        "draw": req.body.draw,
+        "recordsFiltered": recordsFiltered,
+        "recordsTotal": recordsTotal,
+        "data": results
+    });
+    return res.send(data);
 }
 
 /**

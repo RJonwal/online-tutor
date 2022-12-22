@@ -79,6 +79,7 @@ async function dataTable(req, res) {
     else {
         searchStr = {};
     }
+
     const filter = ['name', 'email', 'dial_code','address', 'status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;

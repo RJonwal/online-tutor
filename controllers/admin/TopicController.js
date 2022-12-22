@@ -74,7 +74,6 @@ async function create(req, res) {
  */
 async function store(req, res) {
     try {
-        console.log(req.body);
         if (req.file != undefined) {
             req.body.topic_image = req.file.filename;
         } else {
@@ -220,15 +219,14 @@ async function dataTable(req, res) {
         searchStr = {};
     }
 
-    const filter = ['name', 'email', 'dial_code','address', 'status'];
+    const filter = ['','name','status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
     var recordsTotal = 0;
     var recordsFiltered = 0;
-    let subject = await Topic.find({});
-    recordsTotal    = await User.count({ "role": 2 });
-    recordsFiltered = await  User.count({ $and: [{ "role": 2 }, obj, searchStr] });
-    let results     = await  User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
+    recordsTotal    = await Topic.count({});
+    recordsFiltered = await Topic.count({ $and: [obj, searchStr] });
+    let results     = await Topic.find({ $and: [obj, searchStr] }, '_id topic_image name status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
     var data = JSON.stringify({
         "draw": req.body.draw,
         "recordsFiltered": recordsFiltered,
