@@ -2,6 +2,7 @@ const User = require('../../models/user');
 const Topic = require('../../models/Topic');
 const fs = require('fs');
 const global = require("../../_helper/GlobalHelper");
+const mongoose = require('mongoose');
 
 let session = require('express-session');
 var slugify = require('slugify');
@@ -36,14 +37,14 @@ const slugify_options = {
 async function index(req, res) {
     try {
         let tutors = await User.find({ "role": 2 }).sort({ '_id': -1 });
-        let subject = await Topic.find({"status": 1});
-        let totalTutor  = await User.find({ "role": 2 }).sort({ '_id': -1 }).count();
-        let activeTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 1  } ] } ).sort({ '_id': -1 }).count();
-        let deactiveTutor  = await User.find({ $and: [ { "role": 2  }, { "status": 0  } ] } ).sort({ '_id': -1 }).count();
+        let subject = await Topic.find({ "status": 1 });
+        let totalTutor = await User.find({ "role": 2 }).sort({ '_id': -1 }).count();
+        let activeTutor = await User.find({ $and: [{ "role": 2 }, { "status": 1 }] }).sort({ '_id': -1 }).count();
+        let deactiveTutor = await User.find({ $and: [{ "role": 2 }, { "status": 0 }] }).sort({ '_id': -1 }).count();
 
-        const tutorObject = {'total':totalTutor,'active':activeTutor,'deactive':deactiveTutor}
+        const tutorObject = { 'total': totalTutor, 'active': activeTutor, 'deactive': deactiveTutor }
 
-        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs, subject: subject,tutorObject:tutorObject });
+        return res.render('../views/admin/tutors/index', { data: tutors, fs: fs, subject: subject, tutorObject: tutorObject });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -60,14 +61,18 @@ async function index(req, res) {
 async function dataTable(req, res) {
     var searchStr = req.body.search.value;
     var obj = {};
-
+    var subject_ids = [];
     if (req.body.id) {
         obj["_id"] = req.body.id;
     }
 
     if (req.body.tutor_subjects) {
         // { quantity: { $in: req.body.tutor_subjects } }
-        obj["tutor_subjects"] = req.body.tutor_subjects;
+        let tutor_subject_ids = req.body.tutor_subjects;
+        subject_ids = tutor_subject_ids.map(function (element) {
+            return mongoose.Types.ObjectId(element)
+        }, this);
+        obj["subject_ids"] = { $in: subject_ids };
     }
     if (req.body.status) {
         obj["status"] = req.body.status;
@@ -80,15 +85,16 @@ async function dataTable(req, res) {
         searchStr = {};
     }
 
-    const filter = ['name', 'email', 'dial_code','address', 'status'];
+
+    const filter = ['name', 'email', 'dial_code', 'address', 'status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
     var recordsTotal = 0;
     var recordsFiltered = 0;
     let subject = await Topic.find({});
-    recordsTotal    = await User.count({ "role": 2 });
-    recordsFiltered = await  User.count({ $and: [{ "role": 2 }, obj, searchStr] });
-    let results     = await  User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).populate('subject_ids').sort({ [column_name]: order_by });
+    recordsTotal = await User.count({ "role": 2 });
+    recordsFiltered = await User.count({ $and: [{ "role": 2 }, obj, searchStr] });
+    let results = await User.find({ $and: [{ "role": 2 }, obj, searchStr] }, '_id profile_image email first_name last_name dial_code phone subject_ids status', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).populate('subject_ids').sort({ [column_name]: order_by });
     var data = JSON.stringify({
         "draw": req.body.draw,
         "recordsFiltered": recordsFiltered,
@@ -316,7 +322,7 @@ async function updateStatus(req, res) {
 
             let status = ((req.body.status == 'true') ? '1' : '0');
             let tutor = await User.findByIdAndUpdate(req.body.uid, { status: status });
-         
+
             res.status(200).json({ "success": true, "message": "Tutor status is updated successfully!" });
         }
     } catch (e) {
