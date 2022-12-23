@@ -8,6 +8,7 @@ var slugify = require('slugify')
 module.exports = {
     index,
     create,
+    createOld,
     store,
     edit,
     update,
@@ -15,6 +16,11 @@ module.exports = {
     previewCourses,
     viewCourses,
     singleSelectText,
+    singleSelectImage,
+    singleSelectWithImage,
+    multipleSelectImage,
+    multipleSelectWithImage,
+    multipleSelectText,
 }
 
 /**
@@ -45,8 +51,9 @@ async function index(req, res) {
 async function create(req, res) {
     try {
         let activeTopics = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        let activeSubTopics = await SubTopic.find({ "status": 1 }).sort({ '_id': -1 });
         let activeGrades = await Grade.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/learningContent/create', { topics: activeTopics, grades: activeGrades });
+        return res.render('../views/admin/learningContent/create', { topics: activeTopics, grades: activeGrades, subTopics:activeSubTopics });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -152,5 +159,108 @@ async function singleSelectText(req, res) {
     }
 }
 
+/**
+ * signle Select Image
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function singleSelectImage(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/singleSelectImage');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
 
+/**
+ * signle Select With Image
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function singleSelectWithImage(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/singleSelectWithImage');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * Multiple Select Image
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function multipleSelectImage(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/multipleSelectImage');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * Multiple Select With Image
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function multipleSelectWithImage(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/multipleSelectWithImage');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * Multiple Select Text
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function multipleSelectText(req, res) {
+    try {
+        return res.render('../views/admin/learningContent/multipleSelectText');
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * Multiple Select Text
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function createOld(req, res) {
+    try {
+        let activeTopics = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
+        let activeSubTopics = await SubTopic.find({ "status": 1 }).sort({ '_id': -1 });
+        let activeGrades = await Grade.find({ "status": 1 }).sort({ '_id': -1 });
+        return res.render('../views/admin/learningContent/createOld', { topics: activeTopics, grades: activeGrades, subTopics:activeSubTopics });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
 
