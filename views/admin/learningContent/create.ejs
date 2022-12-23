@@ -55,8 +55,8 @@
             <div class="form-group">
               <label class="form-label" for="title">Title<span class="required">*</span>
               </label>
-              <input type="text" name="title" class="form-control wizard-required" value="Unit 1 - Biodiversity and the Interconnectedness of Life" placeholder="Enter Title"
-                id="title">
+              <input type="text" name="title" class="form-control wizard-required"
+                value="Unit 1 - Biodiversity and the Interconnectedness of Life" placeholder="Enter Title" id="title">
               <div class="wizard-form-error"></div>
             </div>
           </div>
@@ -97,7 +97,7 @@
             <div class="form-group">
               <label class="form-label" for="topic">Sub Topic<span class="required">*</span>
               </label>
-              <select class="form-control wizard-required" name="subTopic_id" id="subTopic_id" tabindex="-1" single>
+              <select class="form-control wizard-required" name="subTopic_id" id="subTopics" tabindex="-1" single>
                 <option value="">Select Sub Topic</option>
                 <% for(subTopic of subTopics) { %>
                   <option value="<%=subTopic.id%>">
@@ -139,226 +139,272 @@
 
       <!-- Step2-->
       <fieldset class="wizard-fieldset">
-        <div class='repeater'>
+        <div class="repeater">
           <div class="add-more-section d-flex align-items-center justify-content-between">
             <h3 class="title-text mb-0">Add Lesson</h3>
-            <a class="theme-btn add-section" data-repeater-create href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Add Lesson"><img
-                src="/images/addcircle.svg" alt="img"></a>
+            <a class="theme-btn add-section" href="javascript:void(0);" data-repeater-create data-toggle="tooltip"
+              rel="tooltip" data-placement="top" title="Add Lesson"><img src="/images/addcircle.svg" alt="img"></a>
           </div>
+
           <div data-repeater-list="outer-list">
             <div data-repeater-item>
               <div class="content-section mt-4">
-                <div class="accordion inner-repeater" id="section1">
+                <div class="lesson" id="accordion">
                   <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" id="heading-1">
                       <div class="left-heading">
                         <img class="mr-2" src="/images/lessons.svg" alt="img">
                         <input class="editable-heading" type="text" value="New Lesson" placeholder="New Lesson">
                       </div>
                       <div class="right-icons">
-                        <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Preview"><img class="mr-1" src="/images/eye.svg" alt="img"></a>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#lessons" aria-expanded="true" aria-controls="lessons" class="edit-lesson"><img class="mr-1" src="/images/edit.svg" alt="img"  data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit"></a>
-                        <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Delete" data-repeater-delete><img class="mr-1" src="/images/trash.svg" alt="img"></a>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#lessons" aria-expanded="true" aria-controls="lessons">
+                        <a href="javascript:void(0);" class="lesson-preview" data-toggle="tooltip" rel="tooltip"
+                          data-placement="top" title="Preview"><img class="mr-1" src="/images/eye.svg" alt="img"></a>
+                        <a href="javascript:void(0);" class="lesson-edit">
+                          <img class="mr-1" src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip"
+                            data-placement="top" title="Edit"></a>
+                        <a href="javascript:void(0);" class="lesson-delete" data-repeater-delete><img class="mr-1"
+                            src="/images/trash.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                            title="Delete"></a>
+                        <a href="javascript:void(0);"
+                        data-toggle="collapse" data-target="#lessons-1" aria-expanded="true"
+                          aria-controls="lessons"
+                          
+                          data-toggle="collapse" href="#lesson-1" aria-expanded="true" aria-controls="lesson-1"  >
                           <img src="/images/arrowdown.svg" alt="img">
                         </a>
                       </div>
                     </div>
-                    <div id="lessons" class="collapse show" data-parent="#section1">
+
+                    <div id="lesson-1" class="collapse show" data-parent="#accordion" aria-labelledby="heading-1">
                       <div class="card-body">
-                        <div class="accordion" id="slides">
+                        <!--slides start-->
+                        <div class="inner-repeater slide accordion" id="accordion-1">
                           <div class="chp-add-section">
-                            <div class="chp-heading">
+                            <div class="chp-heading" id="heading-1-1">
                               <div class="chp-title text-truncate">
                                 <img class="mr-1" src="/images/slides.svg" alt="img">
                                 Information Slides
                               </div>
                               <div class="right-icons">
-                                <a class="" href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Add Slide"><img class="mr-2"
-                                  src="/images/addcircle.svg" alt="img"></a>
-                                <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                                <a href="#slidePanel" aria-expanded="false" data-toggle="collapse" data-target="#slidePanel" aria-controls="slidePanel">
-                                  <img class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit">
-                                </a>
-                                <a href="#slidePanel" aria-expanded="false" data-toggle="collapse" data-target="#slidePanel" aria-controls="slidePanel">
+                                <a href="javascript:void(0);" class="informationSlide-add" data-repeater-create
+                                  data-toggle="tooltip" rel="tooltip" data-placement="top" title="Add Slide"><img
+                                    class="mr-2" src="/images/addcircle.svg" alt="img"></a>
+                                <a href="javascript:void(0);" class="informationSlide-preview" data-toggle="tooltip"
+                                  rel="tooltip" data-placement="top" title="Preview All"><img class="mr-2"
+                                    src="/images/eye.svg" alt="img"></a>
+                                <a href="#slideAccordion" class="collapsed"  data-toggle="collapse"
+                                  aria-expanded="false" data-target="#slideAccordion" aria-controls="slideAccordion">
                                   <img src="/images/arrowdown.svg" alt="img">
                                 </a>
+
+class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1"
+id="collapse-1-1" class="collapse" data-parent="#accordion-1" aria-labelledby="heading-1-1"
+
                               </div>
                             </div>
-                            <div class="collapse" id="slidePanel" data-parent="#slides">
+
+                            <div class="collapse" id="slideAccordion">
                               <div class="card-body">
-                                <div class="chp-add-section">
-                                  <div class="chp-heading">
-                                    <div class="chp-title text-truncate">
-                                      <img class="mr-1" src="/images/basic.svg" alt="img">
-                                      Introduction: Biodiversity 1
-                                    </div>
-                                    <div class="right-icons">
-                                      <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Preview"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                                      <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
-                                        data-target="#add_option2" aria-controls="add_option2"><img class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit">
-                                      </a>
-                                      <a class="delete-btn" href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Delete"><img src="/images/trash.svg" alt="img"></a>
-                                    </div>
-                                  </div>
-                              
-                                  <div class="collapse" id="add_option2">
-                                    <div class="card-body">
-                                      <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h3 class="title-text mb-0">Edit Lecture</h3>
-                                        <a data-toggle="collapse" href="#add_option2" aria-expanded="false"><img
-                                            src="/images/close.svg" alt="img"></a>
-                                      </div>
-                                      <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                        <li class="nav-item">
-                                          <a class="nav-link active" id="pills-basic-tab" data-toggle="pill"
-                                            href="#pills-basic" role="tab" aria-controls="pills-basic"
-                                            aria-selected="true"><img class="mr-1" src="/images/basic.svg" alt="img">
-                                            Basic</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video"
-                                            role="tab" aria-controls="pills-video" aria-selected="false"><img class="mr-1"
-                                              src="/images/video1.svg" alt="img"> Video</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" id="pills-attachments-tab" data-toggle="pill"
-                                            href="#pills-attachments" role="tab" aria-controls="pills-attachments"
-                                            aria-selected="false"><img class="mr-1" src="/images/link.svg" alt="img">
-                                            Attachments</a>
-                                        </li>
-                                      </ul>
-                                      <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
-                                          aria-labelledby="pills-basic-tab">
-                                          <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="title">Title<span class="required">*</span>
-                                                </label>
-                                                <input type="text" name="title" class="form-control wizard-required"
-                                                  placeholder="Enter title.." id="title">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="duration">Duration<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <input type="time" name="duration" class="form-control wizard-required"
-                                                  placeholder="Enter duration.." id="duration">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                              <div class="form-group">
-                                                <label class="form-label" for="description">Description<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <textarea name="description" rows="5"
-                                                  class="form-control editer wizard-required"
-                                                  placeholder="Enter short description.." id="description"></textarea>
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 text-right">
-                                              <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                  src="/images/save.svg" alt="img"> Save</button>
-                                            </div>
-                                          </div>
+                                <div data-repeater-list="inner-list">
+                                  <div data-repeater-item>
+                                    <div class="chp-add-section mt-2">
+                                      <div class="chp-heading">
+                                        <div class="chp-title text-truncate">
+                                          <img class="mr-1" src="/images/basic.svg" alt="img">
+                                          Introduction: Biodiversity 1
                                         </div>
-                                        <div class="tab-pane fade" id="pills-video" role="tabpanel"
-                                          aria-labelledby="pills-video-tab">
-                                          <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="videoUrl">Video URL<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <input type="text" name="videoUrl" class="form-control wizard-required"
-                                                  placeholder="Enter videoUrl.." id="videoUrl">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="duration">Duration<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <input type="time" name="duration" class="form-control wizard-required"
-                                                  placeholder="Enter duration.." id="duration">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                              <div class="spacer">OR</div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                              <div class="form-group">
-                                                <label class="form-label" for="video">Upload Video<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <input type="file" name="video" id="video" class="form-control select-video h-auto"
-                                                  data-allowed-file-extensions="mp4 webm" data-max-file-size-preview="5M">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 text-right">
-                                              <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                  src="/images/save.svg" alt="img"> Save</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-attachments" role="tabpanel"
-                                          aria-labelledby="pills-attachments-tab">
-                                          <div class="row">
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="title">Title<span class="required">*</span>
-                                                </label>
-                                                <input type="text" name="title" class="form-control wizard-required"
-                                                  placeholder="Enter title.." id="title">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="form-group">
-                                                <label class="form-label" for="duration">Duration<span
-                                                    class="required">*</span>
-                                                </label>
-                                                <input type="time" name="duration" class="form-control wizard-required"
-                                                  placeholder="Enter duration.." id="duration">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                              <div class="spacer">OR</div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                              <div class="form-group">
-                                                <label class="form-label">Upload Attachments</label>
-                                                <input type="file" name="cover_image" id="cover_image"
-                                                  class="form-control select-attachments h-auto"
-                                                  data-allowed-file-extensions="pdf" data-max-file-size-preview="5M">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 text-right">
-                                              <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                  src="/images/save.svg" alt="img"> Save</button>
-                                            </div>
-                                          </div>
+                                        <div class="right-icons">
+                                          <a href="javascript:void(0);" class="slide-preview" data-toggle="tooltip"
+                                            rel="tooltip" data-placement="top" title="Preview"><img class="mr-2"
+                                              src="/images/eye.svg" alt="img"></a>
+                                          <a href="javascript:void(0);" class="slide-expand" aria-expanded="false"
+                                            data-toggle="collapse" data-target="#add_option2"
+                                            aria-controls="add_option2"><img class="mr-2" src="/images/edit.svg"
+                                              alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                              title="Edit">
+                                          </a>
+                                          <a href="javascript:void(0);" class="slide-delete" data-repeater-delete><img
+                                              src="/images/trash.svg" alt="img" data-toggle="tooltip" rel="tooltip"
+                                              data-placement="top" title="Delete"></a>
                                         </div>
                                       </div>
+
+                                      <div class="collapse" id="add_option2">
+                                        <div class="card-body">
+                                          <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <h3 class="title-text mb-0">Lecture Details</h3>
+                                            <a data-toggle="collapse" href="#add_option2" aria-expanded="false"><img
+                                                src="/images/close.svg" alt="img"></a>
+                                          </div>
+                                          <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                              <a class="nav-link active" id="pills-basic-tab" data-toggle="pill"
+                                                href="#pills-basic" role="tab" aria-controls="pills-basic"
+                                                aria-selected="true"><img class="mr-1" src="/images/basic.svg"
+                                                  alt="img">
+                                                Basic</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" id="pills-video-tab" data-toggle="pill"
+                                                href="#pills-video" role="tab" aria-controls="pills-video"
+                                                aria-selected="false"><img class="mr-1" src="/images/video1.svg"
+                                                  alt="img"> Video</a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a class="nav-link" id="pills-attachments-tab" data-toggle="pill"
+                                                href="#pills-attachments" role="tab" aria-controls="pills-attachments"
+                                                aria-selected="false"><img class="mr-1" src="/images/link.svg"
+                                                  alt="img">
+                                                Attachments</a>
+                                            </li>
+                                          </ul>
+                                          <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
+                                              aria-labelledby="pills-basic-tab">
+                                              <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="title">Title<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="text" name="title" class=" form-control"
+                                                      placeholder="Enter title.." id="title">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="duration">Duration<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="time" name="duration" class="form-control"
+                                                      placeholder="Enter duration.." id="duration">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="description">Description<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <textarea name="description" rows="5" class="form-control editer"
+                                                      placeholder="Enter short description.."
+                                                      id="description"></textarea>
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 text-right">
+                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                      src="/images/save.svg" alt="img"> Save</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-video" role="tabpanel"
+                                              aria-labelledby="pills-video-tab">
+                                              <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="videoUrl">Video URL<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="text" name="videoUrl" class="form-control"
+                                                      placeholder="Enter videoUrl.." id="videoUrl">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="duration">Duration<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="time" name="duration" class="form-control"
+                                                      placeholder="Enter duration.." id="duration">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                  <div class="spacer">OR</div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="video">Upload Video<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="file" name="video" id="video"
+                                                      class="form-control select-video h-auto"
+                                                      data-allowed-file-extensions="mp4 webm"
+                                                      data-max-file-size-preview="5M">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 text-right">
+                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                      src="/images/save.svg" alt="img"> Save</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-attachments" role="tabpanel"
+                                              aria-labelledby="pills-attachments-tab">
+                                              <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="title">Title<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="text" name="title" class="form-control"
+                                                      placeholder="Enter title.." id="title">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="duration">Duration<span
+                                                        class="required">*</span>
+                                                    </label>
+                                                    <input type="time" name="duration" class="form-control"
+                                                      placeholder="Enter duration.." id="duration">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                  <div class="spacer">OR</div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                  <div class="form-group">
+                                                    <label class="form-label">Upload Attachments</label>
+                                                    <input type="file" name="cover_image" id="cover_image"
+                                                      class="form-control select-attachments h-auto"
+                                                      data-allowed-file-extensions="pdf"
+                                                      data-max-file-size-preview="5M">
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-12 text-right">
+                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
+                                                      src="/images/save.svg" alt="img"> Save</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
                                     </div>
                                   </div>
                                 </div>
-                                
                               </div>
                             </div>
+
                           </div>
                         </div>
-                        <div class="accordion" id="practice">
+                        <!--slides end-->
+
+                        <div class="practice accordion" id="practice">
                           <div class="chp-add-section">
                             <div class="chp-heading">
                               <div class="left-heading"> <img class="mr-2" src="/images/practice1.svg" alt="img"><input
                                   class="editable-heading" type="text" value="Practices"></div>
                               <div class="right-icons">
-                                <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel" aria-expanded="false" aria-controls="practicePanel"><img class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel" aria-expanded="false" aria-controls="practicePanel"><img src="/images/arrowdown.svg" alt="img">
+                                <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                  title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel"
+                                  aria-expanded="false" aria-controls="practicePanel"><img class="mr-2"
+                                    src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip"
+                                    data-placement="top" title="Edit"></a>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel"
+                                  aria-expanded="false" aria-controls="practicePanel"><img src="/images/arrowdown.svg"
+                                    alt="img">
                                 </a>
                               </div>
                             </div>
@@ -370,22 +416,25 @@
                                     <li class="nav-item">
                                       <a class="nav-link active" id="pills-single-sel-tab" data-toggle="pill"
                                         href="#pills-single-sel" role="tab" aria-controls="pills-single-sel"
-                                        aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single Select</a>
+                                        aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single
+                                        Select</a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill" href="#pills-multi-sel"
-                                        role="tab" aria-controls="pills-multi-sel" aria-selected="false"><img
-                                          src="/images/multi-sel.svg" alt="img"> Multiple Selects</a>
+                                      <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill"
+                                        href="#pills-multi-sel" role="tab" aria-controls="pills-multi-sel"
+                                        aria-selected="false"><img src="/images/multi-sel.svg" alt="img"> Multiple
+                                        Selects</a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link" id="pills-type-text-tab" data-toggle="pill" href="#pills-type-text"
-                                        role="tab" aria-controls="pills-type-text" aria-selected="false"><img
-                                          src="/images/type-text.svg" alt="img"> Type Text</a>
+                                      <a class="nav-link" id="pills-type-text-tab" data-toggle="pill"
+                                        href="#pills-type-text" role="tab" aria-controls="pills-type-text"
+                                        aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type Text</a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill" href="#pills-drag-drop"
-                                        role="tab" aria-controls="pills-drag-drop" aria-selected="false"><img
-                                          src="/images/drag-drop.svg" alt="img"> Drag & Drop</a>
+                                      <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill"
+                                        href="#pills-drag-drop" role="tab" aria-controls="pills-drag-drop"
+                                        aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag &
+                                        Drop</a>
                                     </li>
                                   </ul>
                                   <div class="tab-content" id="pills-tabContent">
@@ -396,7 +445,8 @@
                                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                           <div class="form-group">
                                             <input type="file" name="" id="" class="form-control single-img h-auto"
-                                              data-allowed-file-extensions="jpg jpeg png svg" data-max-file-size-preview="5M">
+                                              data-allowed-file-extensions="jpg jpeg png svg"
+                                              data-max-file-size-preview="5M">
                                           </div>
                                         </div>
                                         <div class="col-sm-12 col-md-8 col-lg-9">
@@ -417,10 +467,11 @@
                                       </div>
                                       <div class="spacer2"></div>
                                       <div class="w-50 mx-auto add-more-section mb-30">
-                                        <a class="add-section theme-btn w-100 text-center" href="javascript:void(0);"><img
-                                            src="/images/addcircle.svg" alt="img"> Add Options</a>
+                                        <a class="add-section theme-btn w-100 text-center"
+                                          href="javascript:void(0);"><img src="/images/addcircle.svg" alt="img"> Add
+                                          Options</a>
                                       </div>
-                                      <div class="accordion" id="que_option">
+                                      <div class="quiz accordion" id="que_option">
                                         <div class="chp-add-section">
                                           <div class="chp-heading lightgray">
                                             <div class="chp-title text-truncate">
@@ -432,19 +483,21 @@
                                                 data-target="#add_option1" aria-controls="add_option1">
                                                 <img class="mr-1" src="/images/edit.svg" alt="img">
                                               </a>
-                                              <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
-                                                  alt="img"></a>
+                                              <a class="delete-btn" href="javascript:void(0);"><img
+                                                  src="/images/trash.svg" alt="img"></a>
                                               <label class="yes_no_toggle">
                                                 <span>Correct Answer ?</span>
-                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No"
-                                                  data-onstyle="success" data-offstyle="danger">
+                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                  data-off="No" data-onstyle="success" data-offstyle="danger">
                                               </label>
                                             </div>
                                           </div>
                                           <div class="collapse" id="add_option1" data-parent="#que_option">
-                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
+                                              life
                                               accusamus
-                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                              skateboard
                                               dolor.
                                             </div>
                                           </div>
@@ -460,15 +513,17 @@
                                                 data-target="#add_option2" aria-controls="add_option2">
                                                 <img class="mr-1" src="/images/edit.svg" alt="img">
                                               </a>
-                                              <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
-                                                  alt="img"></a>
+                                              <a class="delete-btn" href="javascript:void(0);"><img
+                                                  src="/images/trash.svg" alt="img"></a>
                                             </div>
                                           </div>
-                        
+
                                           <div class="collapse" id="add_option2" data-parent="#que_option">
-                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
+                                              life
                                               accusamus
-                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                              skateboard
                                               dolor.
                                             </div>
                                           </div>
@@ -505,7 +560,8 @@
                                                         <label class="check-label" for="btn-check-1">Text</label>
                                                       </div>
                                                       <div class="option-check-btn">
-                                                        <input type="checkbox" class="btn-check" id="btn-check-2" checked>
+                                                        <input type="checkbox" class="btn-check" id="btn-check-2"
+                                                          checked>
                                                         <label class="check-label" for="btn-check-2">Image</label>
                                                       </div>
                                                       <div class="option-check-btn">
@@ -513,7 +569,7 @@
                                                         <label class="check-label" for="btn-check-3">Both</label>
                                                       </div>
                                                     </div>
-                        
+
                                                   </div>
                                                   <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
                                                     <div class="yes_no_toggle justify-content-xl-end">
@@ -541,7 +597,7 @@
                                       aria-labelledby="pills-drag-drop-tab">Drag & Drop</div>
                                   </div>
                                 </div>
-                                <div class="accordion" id="que_section">
+                                <div class="option accordion" id="que_section">
                                   <div class="chp-add-section">
                                     <div class="chp-heading">
                                       <div class="chp-title text-truncate">
@@ -549,19 +605,22 @@
                                         Other Practice Question
                                       </div>
                                       <div class="right-icons">
-                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg" alt="img"></a>
+                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg"
+                                            alt="img"></a>
                                         <a href="#que_panel1" aria-expanded="false" data-toggle="collapse"
                                           data-target="#que_panel1" aria-controls="que_panel1">
                                           <img class="mr-1" src="/images/edit.svg" alt="img">
                                         </a>
-                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
+                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
+                                            alt="img"></a>
                                       </div>
                                     </div>
                                     <div class="collapse" id="que_panel1" data-parent="#que_section">
                                       <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
                                         accusamus
                                         terry
-                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.</div>
+                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="chp-add-section">
@@ -571,44 +630,53 @@
                                         Other Practice Question
                                       </div>
                                       <div class="right-icons">
-                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg" alt="img"></a>
+                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg"
+                                            alt="img"></a>
                                         <a href="#que_panel2" aria-expanded="false" data-toggle="collapse"
                                           data-target="#que_panel2" aria-controls="que_panel2">
                                           <img class="mr-1" src="/images/edit.svg" alt="img">
                                         </a>
-                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg" alt="img"></a>
+                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
+                                            alt="img"></a>
                                       </div>
                                     </div>
-                        
+
                                     <div class="collapse" id="que_panel2" data-parent="#que_section">
                                       <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
                                         accusamus
                                         terry
-                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.</div>
+                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
+                                      </div>
                                     </div>
                                   </div>
-                        
+
                                 </div>
                               </div>
                             </div>
+                          </div>
                         </div>
-                        </div>
-                        <div class="accordion" id="challenges">
+                        <div class="challenge accordion" id="challenges">
                           <div class="chp-add-section">
                             <div class="chp-heading">
-                              <div class="left-heading"> <img class="mr-2" src="/images/challenges1.svg" alt="img"><input
-                                  class="editable-heading" type="text" value="Challenges"></div>
+                              <div class="left-heading"> <img class="mr-2" src="/images/challenges1.svg"
+                                  alt="img"><input class="editable-heading" type="text" value="Challenges"></div>
                               <div class="right-icons">
-                                <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#challengesPanel" aria-expanded="false" aria-controls="challengesPanel"><img class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Edit"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#challengesPanel" aria-expanded="false" aria-controls="challengesPanel">
+                                <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                  title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#challengesPanel"
+                                  aria-expanded="false" aria-controls="challengesPanel"><img class="mr-2"
+                                    src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip"
+                                    data-placement="top" title="Edit"></a>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#challengesPanel"
+                                  aria-expanded="false" aria-controls="challengesPanel">
                                   <img src="/images/arrowdown.svg" alt="img">
                                 </a>
                               </div>
                             </div>
                             <div id="challengesPanel" class="collapse" data-parent="#challenges">
                               <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid.
                                 3
                                 wolf
                                 moon officia aute, non cupidatat skateboard dolor.
@@ -616,17 +684,16 @@
                             </div>
                           </div>
                         </div>
+
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
+
         <div class="form-group mb-0 mt-4 clearfix">
           <a href="javascript:void(0);" class="form-wizard-previous-btn theme-btn float-left">Previous</a>
           <a href="javascript:void(0);" class="form-wizard-next-btn theme-btn float-right">Add</a>
@@ -654,238 +721,4 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
-<script type="text/javascript">
-
-  $(document).ready(function () {
-
-    $("#topics").select2({
-      placeholder: "Select Topic",
-      allowClear: false,
-    });
-
-    $("#grades").select2({
-      placeholder: "Select Grade",
-      allowClear: false,
-    });
-
-    $('#thumbnail').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
-      },
-    });
-
-    $('.select-video').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Select your preferred video type. (.mp4, YouTube, Vimeo etc.)</h6></div>',
-      },
-    });
-
-    $('.select-attachments').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
-      },
-    });
-
-    $('.single-img').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><img src="/images/frame.svg" alt="img"> <p>Drag & Drop here</p><h6 class="mb-0 mt-1 fn-12 text-dblue">Select your preferred video type. (JPEG, PNG, SVG, etc.)</h6></div>',
-      },
-    });
-
-    // tinyMce Editor
-    tinymce.init({
-      selector: '.editer',
-      height: 300,
-      menubar: false,
-      statusbar: false,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor textcolor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code help wordcount'
-      ],
-      mobile: {
-        theme: 'mobile'
-      },
-      toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-    });
-
-  });
-
-  // $(document).ready(function () {
-  //   $("#chp_section").on('click', '.delete-btn', function () {
-  //     $(this).closest('.chp-add-section').remove();
-  //   });
-  // });
-
-  // Form Stepper 
-  jQuery(document).ready(function () {
-    // click on next button
-    jQuery('.form-wizard-next-btn').click(function () {
-      var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      var next = jQuery(this);
-      var nextWizardStep = true;
-      parentFieldset.find('.wizard-required').each(function () {
-        var thisValue = jQuery(this).val();
-        var thisType = jQuery(this).attr("type");
-
-        if (thisValue == "") {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
-          }
-          jQuery(this).siblings(".wizard-form-error").slideDown();
-          nextWizardStep = false;
-        }
-        else {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
-          }
-          jQuery(this).siblings(".wizard-form-error").slideUp();
-        }
-      });
-      if (nextWizardStep) {
-        next.parents('.wizard-fieldset').removeClass("show", "400");
-        currentActiveStep.removeClass('active').addClass('activated').next().addClass('active', "400");
-        next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("show", "400");
-        jQuery(document).find('.wizard-fieldset').each(function () {
-          if (jQuery(this).hasClass('show')) {
-            var formAtrr = jQuery(this).attr('data-tab-content');
-            jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
-              if (jQuery(this).attr('data-attr') == formAtrr) {
-                jQuery(this).addClass('active');
-                var innerWidth = jQuery(this).innerWidth();
-                var position = jQuery(this).position();
-                jQuery(document).find('.form-wizard-step-move').css({ "left": position.left, "width": innerWidth });
-              } else {
-                jQuery(this).removeClass('active');
-              }
-            });
-          }
-        });
-      }
-    });
-    //click on previous button
-
-    //click on previous button
-    jQuery('.form-wizard-previous-btn').click(function () {
-      var counter = parseInt(jQuery(".wizard-counter").text());;
-      var prev = jQuery(this);
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      prev.parents('.wizard-fieldset').removeClass("show", "400");
-      prev.parents('.wizard-fieldset').prev('.wizard-fieldset').addClass("show", "400");
-      currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active', "400");
-      jQuery(document).find('.wizard-fieldset').each(function () {
-        if (jQuery(this).hasClass('show')) {
-          var formAtrr = jQuery(this).attr('data-tab-content');
-          jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
-            if (jQuery(this).attr('data-attr') == formAtrr) {
-              jQuery(this).addClass('active');
-              var innerWidth = jQuery(this).innerWidth();
-              var position = jQuery(this).position();
-              jQuery(document).find('.form-wizard-step-move').css({ "left": position.left, "width": innerWidth });
-            } else {
-              jQuery(this).removeClass('active');
-            }
-          });
-        }
-      });
-    });
-    //click on form submit button
-    jQuery(document).on("click", ".form-wizard .form-wizard-submit", function () {
-      var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-      var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-      parentFieldset.find('.wizard-required').each(function () {
-        var thisValue = jQuery(this).val();
-        var thisType = jQuery(this).attr("type");
-
-        if (thisValue == "") {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
-          }
-          jQuery(this).siblings(".wizard-form-error").slideDown();
-        }
-        else {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
-          }
-          jQuery(this).siblings(".wizard-form-error").slideUp();
-        }
-      });
-    });
-    // focus on input field check empty or not
-    jQuery(".form-control").on('focus', function () {
-      var tmpThis = jQuery(this).val();
-      if (tmpThis == '') {
-        jQuery(this).parent().addClass("focus-input");
-      }
-      else if (tmpThis != '') {
-        jQuery(this).parent().addClass("focus-input");
-      }
-    }).on('blur', function () {
-      var tmpThis = jQuery(this).val();
-      var tmpType = jQuery(this).attr("type");
-
-      if (tmpThis == '') {
-        if (tmpType == 'file') {
-          jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
-        }
-        jQuery(this).parent().removeClass("focus-input");
-        jQuery(this).siblings('.wizard-form-error').slideDown("3000");
-      }
-      else if (tmpThis != '') {
-        if (tmpType == 'file') {
-          jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
-        }
-        jQuery(this).parent().addClass("focus-input");
-        jQuery(this).siblings('.wizard-form-error').slideUp("3000");
-      }
-    });
-  });
-
-
-  $(document).on("click", ".edit-lesson", function () {
-    $(this).closest('.card-header').find('.editable-heading').focus();
-    // var url = $(this).attr('data-url');
-  });
-
-  $(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-  });
-  
-
-  var $repeater = $('.repeater').repeater({
-    initEmpty: false,
-    show: function () {
-      $(this).slideDown();
-    },
-    hide: function (deleteElement) {
-      if (confirm("Are you sure you want to delete this element?")) {
-        $(this).slideUp(deleteElement);
-      }
-    },
-    ready: function (setIndexes) {
-      // $dragAndDrop.on('drop', setIndexes);
-    },
-    isFirstItemUndeletable: true,
-
-    repeaters: [{
-      selector: '.inner-repeater',
-      // repeaters: [{ 
-      //     selector: '.deep-inner-repeater' 
-      // }]
-    }]
-    
-  });
-
-  $repeater.setList([
-    {
-      'inner-list': [
-        {},
-        {}
-      ]
-    },
-  ]);
-
-
-
-</script>
+<%- include('./form_script'); %>
