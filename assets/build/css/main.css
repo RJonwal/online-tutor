@@ -1506,7 +1506,7 @@ span.total-count {
     margin-top: 10px;
 }
 .right_col .form-wizard .accordion+.accordion{
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .right_col .form-wizard .accordion .card>.card-header {
     background: var(--lightgray);
