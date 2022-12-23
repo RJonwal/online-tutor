@@ -68,7 +68,7 @@ async function dataTable(req, res) {
         searchStr = {};
     }
 
-    const filter = ['profile_image', 'first_name', 'dial_code', 'email', 'status'];
+    const filter = ['profile_image', 'first_name', 'dial_code','grade_id','email', 'status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
     var recordsTotal = 0;

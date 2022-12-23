@@ -10,6 +10,7 @@ router.get('/create', passport.checkAuthentication, learningContentController.cr
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
+router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);

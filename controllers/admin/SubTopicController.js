@@ -36,7 +36,6 @@ async function index(req, res) {
     try {
         let activeTopic = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
         let subTopic = await SubTopic.find({}).populate('topic_id').sort({ '_id': -1 });
-        console.log(subTopic);
         let totalSubTopic  = await SubTopic.find({ "role": 2 }).sort({ '_id': -1 }).count();
         let activeSubTopic  = await SubTopic.find({ "status": 1  }  ).sort({ '_id': -1 }).count();
         let deactiveSubTopic = await SubTopic.find({ "status": 0  } ).sort({ '_id': -1 }).count();
@@ -71,12 +70,11 @@ async function dataTable(req, res) {
     }
     if (req.body.search.value) {
         var regex = new RegExp(req.body.search.value, "i")
-        searchStr = { $or: [{ 'name': regex }] };
+        searchStr = { $or: [{ 'name': regex}] };
     }
     else {
         searchStr = {};
     }
-    console.log(obj);
     const filter = ['name','topic_id','status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;

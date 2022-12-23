@@ -55,19 +55,20 @@ async function dataTable(req, res) {
     }
     if (req.body.search.value) {
         var regex = new RegExp(req.body.search.value, "i")
-        searchStr = { $or: [{ 'name': regex }, { 'email': regex }, { 'phone': regex },{ 'address': regex }] };
+        searchStr = { $or: [{ 'name': regex }] };
     }
     else {
         searchStr = {};
     }
+    console.log(searchStr);
     const filter = ['name', 'status','created_at'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
     var recordsTotal = 0;
     var recordsFiltered = 0;
     recordsTotal    = await Grade.count({});
-    recordsFiltered = await Grade.count({ $and: [obj, searchStr] });
-    let results     = await Grade.find({ $and: [obj, searchStr] }, '_id name status created_at', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
+    recordsFiltered = await Grade.count({ $and: [searchStr, obj] });
+    let results     = await Grade.find({ $and: [searchStr, obj] }, '_id name status created_at', { 'skip': Number(req.body.start), 'limit': Number(req.body.length) }).sort({ [column_name]: order_by });
     var data = JSON.stringify({
         "draw": req.body.draw,
         "recordsFiltered": recordsFiltered,

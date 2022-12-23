@@ -58,10 +58,11 @@ async function dataTable(req, res) {
     else {
         searchStr = {};
     }
-
+    console.log(searchStr);
     const filter = ['name',  'email', 'dial_code','address','status'];
     const column_name = filter[req.body.order[0].column];
     const order_by = req.body.order[0].dir;
+    console.log(column_name,order_by);
     var recordsTotal = 0;
     var recordsFiltered = 0;
     recordsTotal    = await School.count({ "role": 3 });

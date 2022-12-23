@@ -213,7 +213,7 @@ async function dataTable(req, res) {
     }
     if (req.body.search.value) {
         var regex = new RegExp(req.body.search.value, "i")
-        searchStr = { $or: [{ 'first_name': regex }, { 'email': regex }, { 'phone': regex }] };
+        searchStr = { $or: [{ 'name': regex }] };
     }
     else {
         searchStr = {};

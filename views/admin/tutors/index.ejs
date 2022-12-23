@@ -118,7 +118,9 @@
     }); 
     
     $(".reset").click(function () {
-      $(".select2").val(null).trigger("change");
+      $("#tutor-name").val(null).trigger("change");
+      $("#tutor-subjects").val(null).trigger("change");
+      $("#status").val(null).trigger("change");
       dataTable();
     });
     

@@ -7,6 +7,7 @@ var slugify = require('slugify')
 
 module.exports = {
     index,
+    renderSubtopic,
     create,
     createOld,
     store,
@@ -34,6 +35,24 @@ async function index(req, res) {
         let topics = await Topic.find({}).sort({ '_id': -1 });
         let grades = await Grade.find({}).sort({ '_id': -1 });
         return res.render('../views/admin/learningContent/index', { topics: topics, grades: grades });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * list learningContent. 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function renderSubtopic(req, res) {
+    try {
+        let subTopics = await SubTopic.find({topic_id:req.body.id}).sort({ 'name': 1 });
+        return res.send(subTopics);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

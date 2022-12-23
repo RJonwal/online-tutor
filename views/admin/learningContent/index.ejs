@@ -40,6 +40,11 @@
                 </select>
             </li>
             <li class="filter-col">
+                <select class="form-control" id="subTopic" tabindex="-1" single>
+                   
+                </select>
+            </li>
+            <li class="filter-col">
                 <select class="form-control" id="grades" tabindex="-1" single>
                     <option value="">Select Grade</option>
                     <% for(grade of grades) { %>
@@ -252,20 +257,46 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        $("#topics").select2({
-            placeholder: "Select Topic",
-            allowClear: false,
-        });
-
-        $("#grades").select2({
-            placeholder: "Select Grade",
-            allowClear: false,
-        });
-        $("#status").select2({
-            placeholder: "Select Status",
-            allowClear: false,
-        });
+    $("#topics").select2({
+        placeholder: "Select Topic",
+        allowClear: false,
     });
+    $("#subTopic").select2({
+        placeholder: "Select Sub Topic",
+        allowClear: false,
+    });
+    $("#grades").select2({
+        placeholder: "Select Grade",
+        allowClear: false,
+    });
+    $("#status").select2({
+        placeholder: "Select Status",
+        allowClear: false,
+    });
+    
+    $('#topics').change(function(){
+        let topicId = $(this).val();
+        loadSubTopic(topicId);
+    })
+});
+
+
+function loadSubTopic(topicId){
+    $.ajax({
+        type: "POST",
+        url: '/learning-content/renderSubtopic',
+        data: {
+            id: topicId,
+        },
+        success: function (response) {
+            $('#subTopic').empty();
+            for(res of response){
+                var newOption = new Option(res.name, res._id, false, false);
+                $('#subTopic').append(newOption).trigger('change');
+            }
+        },
+    });
+}
 </script>
