@@ -6,32 +6,35 @@ const bcrypt = require("bcryptjs");
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
-    }, function (req,email, password, done) {
-        User.findOne({email: email}, function(err, user){
-            if (err){
-                req.flash('error', err);
-                return done(err);
-            }
-            if(!user){
-                req.flash('error','Incorrect Usernam or Password !');
+}, function (req, email, password, done) {
+    User.findOne({ email: email }, function (err, user) {
+        if (err) {
+            req.flash('error', err);
+            return done(err);
+        }
+        if (!user) {
+            req.flash('error', 'Incorrect Username  or Password !');
+            return done(null, false);
+        }
+        bcrypt.compare(password, user.password, function (err, isMatch) {
+            if (err) { console.log(err) }
+            console.log('match ', isMatch);
+            if (!isMatch) {
+                req.flash('error', 'Incorrect Username or Password !');
                 return done(null, false);
+            } else if (user.status == 0) {
+                req.flash('error', 'Your account is deactivated!');
+                return done(null, false);
+            } else {
+                return done(null, user);
             }
-            bcrypt.compare(password,user.password, function(err, isMatch) {
-                if (err) { console.log(err) }
-                console.log('match ',isMatch);
-                if(!isMatch){
-                    req.flash('error','Incorrect Usernam or Password !');
-                    return done(null, false);
-                }else {
-                    return done(null, user);
-                }
-              });
-            // if (!user || user.password != password){
-            //     req.flash('error','Incorrect Usernam or Password !');
-            //     return done(null, false);
-            // }
         });
-    }
+        // if (!user || user.password != password){
+        //     req.flash('error','Incorrect Username or Password !');
+        //     return done(null, false);
+        // }
+    });
+}
 ));
 
 //serialise the user
