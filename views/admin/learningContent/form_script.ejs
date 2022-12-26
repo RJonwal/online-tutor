@@ -204,10 +204,12 @@
     $('#slideAccordion').addClass('show');
   });
 
-  // $(document).on("click", ".slide-form-expand", function () {
-  //   $(this).closest('.collapse').toggle();
-  // });
-
+  $(document).on("click", ".slide-form-expand", function () {
+    $('.slide-container').removeClass('show');
+    let classes = $(this).attr('aria-controls');
+    $('#'+classes).addClass('show');
+  });
+  
 
   var $repeater = $('.repeater').repeater({
     initEmpty: false,
@@ -226,6 +228,20 @@
 
     repeaters: [{
       selector: '.inner-repeater',
+      show: function () {
+        var index = $($(this),'.wizards-div"').index();
+        var newSlide = 'slide-'+index;
+        $(this).find('.slide-container').attr('id',newSlide);
+        $(this).find('.close-slide').attr('href','#'+newSlide);
+        $(this).find('.slide-form-expand').attr('data-target','#'+newSlide).attr('aria-controls',newSlide);
+        
+        $(this).slideDown();
+      },
+      hide: function (deleteElement) {
+        if (confirm("Are you sure you want to delete this element?")) {
+          $(this).slideUp(deleteElement);
+        }
+      }
       // repeaters: [{ 
       //     selector: '.deep-inner-repeater' 
       // }]

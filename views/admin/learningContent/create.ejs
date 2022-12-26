@@ -193,8 +193,8 @@
 
                             <div class="collapse" id="slideAccordion">
                               <div class="card-body">
-                                <div data-repeater-list="inner-list">
-                                  <div data-repeater-item>
+                                <div id="wizard" data-repeater-list="inner-list">
+                                  <div class="wizards-div" data-repeater-item>
                                     <div class="chp-add-section mt-2">
                                       <div class="chp-heading">
                                         <div class="chp-title text-truncate">
@@ -206,7 +206,7 @@
                                             rel="tooltip" data-placement="top" title="Preview"><img class="mr-2"
                                               src="/images/eye.svg" alt="img"></a>
                                           <a href="javascript:void(0);" class="slide-form-expand" data-toggle="collapse"
-                                            data-target="#slide-1" aria-expanded="false" aria-controls="slide-1"><img
+                                            data-target="#slide-0" aria-expanded="false" aria-controls="slide-0"><img
                                               class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip"
                                               rel="tooltip" data-placement="top" title="Edit">
                                           </a>
@@ -217,11 +217,11 @@
                                         </div>
                                       </div>
 
-                                      <div class="collapse" id="slide-1">
+                                      <div class="collapse slide-container" id="slide-0">
                                         <div class="card-body">
                                           <div class="d-flex align-items-center justify-content-between mb-4">
                                             <h3 class="title-text mb-0">Lecture Details</h3>
-                                            <a data-toggle="collapse" href="#add_option2" aria-expanded="false"><img
+                                            <a data-toggle="collapse" href="#slide-0" aria-expanded="false" class="close-slide"><img
                                                 src="/images/close.svg" alt="img"></a>
                                           </div>
                                           <ul class="nav nav-pills" id="pills-tab" role="tablist">
