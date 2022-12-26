@@ -149,9 +149,9 @@
           <div data-repeater-list="outer-list">
             <div data-repeater-item>
               <div class="content-section mt-4">
-                <div class="lesson accordion" id="accordion">
+                <div class="lesson accordion" id="lesson-accordion">
                   <div class="card">
-                    <div class="card-header" id="heading-1">
+                    <div class="card-header" role="tab" id="heading-1">
                       <div class="left-heading">
                         <img class="mr-2" src="/images/lessons.svg" alt="img">
                         <input class="editable-heading" type="text" value="New Lesson" placeholder="New Lesson">
@@ -165,22 +165,20 @@
                         <a href="javascript:void(0);" class="lesson-delete" data-repeater-delete><img class="mr-1"
                             src="/images/trash.svg" alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top"
                             title="Delete"></a>
-                        <a href="javascript:void(0);"
-                        data-toggle="collapse" data-target="#lessons-1" aria-expanded="true"
-                          aria-controls="lessons"
-                          
-                          data-toggle="collapse" href="#lesson-1" aria-expanded="true" aria-controls="lesson-1"  >
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#lesson-1"
+                          aria-expanded="true" aria-controls="lesson-1">
                           <img src="/images/arrowdown.svg" alt="img">
                         </a>
                       </div>
                     </div>
 
-                    <div id="lesson-1" class="collapse show" data-parent="#accordion" aria-labelledby="heading-1">
+                    <div id="lesson-1" class="collapse show" data-parent="#lesson-accordion"
+                      aria-labelledby="heading-1">
                       <div class="card-body">
                         <!--slides start-->
-                        <div class="inner-repeater slide accordion" id="accordion-1">
+                        <div class="inner-repeater slide accordion" id="slide-accordion">
                           <div class="chp-add-section">
-                            <div class="chp-heading" id="heading-1-1">
+                            <div class="chp-heading" role="tab" id="heading-1-1">
                               <div class="chp-title text-truncate">
                                 <img class="mr-1" src="/images/slides.svg" alt="img">
                                 Information Slides
@@ -192,8 +190,8 @@
                                 <a href="javascript:void(0);" class="informationSlide-preview" data-toggle="tooltip"
                                   rel="tooltip" data-placement="top" title="Preview All"><img class="mr-2"
                                     src="/images/eye.svg" alt="img"></a>
-                                <a href="#slideAccordion" class="collapsed"  data-toggle="collapse"
-                                  aria-expanded="false" data-target="#slideAccordion" aria-controls="slideAccordion">
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#slideAccordion"
+                                  aria-expanded="false" aria-controls="slideAccordion">
                                   <img src="/images/arrowdown.svg" alt="img">
                                 </a>
                               </div>
@@ -386,6 +384,7 @@
                         </div>
                         <!--slides end-->
 
+                        <!-- practices start -->
                         <div class="practice accordion" id="practice">
                           <div class="chp-add-section">
                             <div class="chp-heading">
@@ -651,6 +650,9 @@
                             </div>
                           </div>
                         </div>
+                        <!-- practices end -->
+
+                        <!-- challenges start -->
                         <div class="challenge accordion" id="challenges">
                           <div class="chp-add-section">
                             <div class="chp-heading">
@@ -680,6 +682,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- challenges end -->
 
                       </div>
                     </div>
