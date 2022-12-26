@@ -62,7 +62,8 @@
                 </select>
             </li>
             <li class="filter-col">
-                <button class="btn theme-btn">Filter Results</button>
+                <button class="btn theme-btn filter">Filter</button>
+                <button class="btn theme-btn reset">Reset</button>
             </li>
         </ul>
     </div>
@@ -275,7 +276,13 @@ $(document).ready(function () {
         placeholder: "Select Status",
         allowClear: false,
     });
-    
+    $(".reset").click(function () {
+        $("#topics").val(null).trigger("change");
+        $('#subTopic').empty();
+        $("#grades").val(null).trigger("change");
+        $("#status").val(null).trigger("change");
+        
+    });
     $('#topics').change(function(){
         let topicId = $(this).val();
         loadSubTopic(topicId);

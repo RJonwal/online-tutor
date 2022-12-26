@@ -32,6 +32,7 @@
               <span class="icon"><img src="/images/dashboard.svg"></span> <span class="link-title">Dashboard</span>
             </a>
           </li> -->
+          <%if(user_detail.role ==1) { %>
           <li>
             <a><span class="icon"><img src="/images/tutor.svg"></span> <span class="link-title">Tutors</span> <span
                 class="fa fa-chevron-down"></span></a>
@@ -40,7 +41,7 @@
               <li><a href="/tutors/create">Add</a></li>
             </ul>
           </li>
-
+          <% } if(user_detail.role !=3) { %>
           <li>
             <a><span class="icon"><img src="/images/student.svg"></span> <span class="link-title">Students</span> <span
                 class="fa fa-chevron-down"></span></a>
@@ -49,7 +50,7 @@
               <li><a href="/students/create">Add</a></li>
             </ul>
           </li>
-
+          <% } if(user_detail.role ==1) { %>
           <li>
             <a><span class="icon"><img src="/images/school.svg"></span> <span class="link-title">Schools</span> <span
                 class="fa fa-chevron-down"></span></a>
@@ -76,7 +77,7 @@
               <li><a href="/subTopics">Sub Topics</a></li>
             </ul>
           </li>
-
+          <% } if(user_detail.role ==1 || user_detail.role ==2) { %>
           <li>
             <a><span class="icon"><img src="/images/courses.svg"></span> <span class="link-title">Learning
                 Content</span> <span class="fa fa-chevron-down"></span></a>
@@ -86,19 +87,19 @@
               <li><a href="/learning-content/createOld">Old Content</a></li>
             </ul>
           </li>
-
           <li>
             <a href="javascript:void(0);">
               <span class="icon"><img src="/images/assessment.svg"></span> <span class="link-title">Assessments</span>
             </a>
           </li>
-
+          <% } %>
+          <% if(user_detail.role !=1) { %>
           <li>
             <a href="javascript:void(0);">
               <span class="icon"><img src="/images/assignment.svg"></span> <span class="link-title">Assignments</span>
             </a>
           </li>
-
+          <% } %>
         </ul>
       </div>
 

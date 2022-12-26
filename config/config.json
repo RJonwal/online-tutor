@@ -1,0 +1,66 @@
+{
+    "permission": {
+      "roles": [
+        {
+          "role": "admin",
+          "permissions": [
+            "addTutor",
+            "listTutor",
+            "editTutor",
+            "removeTutor",
+            "addStudent",
+            "listStudent",
+            "editStudent",
+            "removeStudent",
+            "addSchool",
+            "listSchool",
+            "editSchool",
+            "removeSchool",
+            "addGrade",
+            "listGrade",
+            "editGrade",
+            "removeGrade",
+            "addGrade",
+            "listGrade",
+            "editGrade",
+            "removeGrade",
+            "addTopic",
+            "listTopic",
+            "editTopic",
+            "removeTopic",
+            "addSubTopic",
+            "listSubTopic",
+            "editSubTopic",
+            "removeSubTopic",
+            "addLearningContent",
+            "listLearningContent",
+            "editLearningContent",
+            "removeLearningContent"
+          ]
+        },
+        {
+          "role": "tutor",
+          "permissions": [
+            "addStudent",
+            "listStudent",
+            "editStudent",
+            "removeStudent",
+            "addLearningContent",
+            "listLearningContent",
+            "editLearningContent",
+            "removeLearningContent",
+            "assignments",
+            "assessments"
+          ]
+        },
+        {
+          "role": "students",
+          "permissions": [
+            "listLearningContent",
+            "assignments"
+          ]
+        }
+      ]
+
+    }
+}

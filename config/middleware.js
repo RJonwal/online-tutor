@@ -14,3 +14,7 @@ module.exports.loggedInUserDetails = function(req, res, next){
         global.user_detail = res.locals.user;
         next();
 }
+module.exports.permission = function(req, res, next){
+    
+    next();
+}

@@ -49,6 +49,7 @@ app.use(flash());
 app.use(customMware.setFlash);
 app.use(customMware.dateFormate);
 app.use(customMware.loggedInUserDetails);
+app.use(customMware.permission);
 
 // use express router
 app.use('/', require('./routes'));
