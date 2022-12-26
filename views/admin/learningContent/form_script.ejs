@@ -239,4 +239,25 @@
     // }
   ]);
 
+
+  function loadSubTopic(topicId){
+    $.ajax({
+        type: "POST",
+        url: '/learning-content/renderSubtopic',
+        data: {
+            id: topicId,
+        },
+        success: function (response) {
+            $('#subTopics').empty();
+            for(res of response){
+                var newOption = new Option(res.name, res._id, false, false);
+                $('#subTopics').append(newOption).trigger('change');
+            }
+        },
+    });
+  }
+$('#topics').change(function(){
+    let topicId = $(this).val();
+    loadSubTopic(topicId);
+})
 </script>

@@ -98,12 +98,7 @@
               <label class="form-label" for="topic">Sub Topic<span class="required">*</span>
               </label>
               <select class="form-control wizard-required" name="subTopic_id" id="subTopics" tabindex="-1" single>
-                <option value="">Select Sub Topic</option>
-                <% for(subTopic of subTopics) { %>
-                  <option value="<%=subTopic.id%>">
-                    <%=subTopic.name%>
-                  </option>
-                  <% } %>
+               
               </select>
               <div class="wizard-form-error"></div>
             </div>
