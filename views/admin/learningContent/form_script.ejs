@@ -203,7 +203,7 @@
   $(document).on("click", ".lesson-expand", function () {
     let dataTarget = $(this).attr('data-target');
     $('.lesson-container').removeClass('show');
-    $(dataTarget).toggleClass('show');
+    //$(dataTarget).toggleClass('show');
   });
 
   $(document).on("click", ".informationSlide-add", function () {
@@ -213,7 +213,7 @@
   $(document).on("click", ".slide-form-expand", function () {
     $('.slide-container').removeClass('show');
     let classes = $(this).attr('aria-controls');
-    $('#' + classes).addClass('show');
+    //$('#' + classes).addClass('show');
   });
 
 
@@ -222,14 +222,11 @@
     show: function () {
       var index = $($(this), '.main-wizards-div"').index();
       var newLesson = 'lesson-' + index;
-      console.log(newLesson);
       $(this).find('.lesson-container').attr('id', newLesson);
       $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
-      console.log('main');
-      console.log(deleteElement);
       if (confirm("Are you sure you want to delete this element?")) {
         $(this).slideUp(deleteElement);
       }
@@ -247,7 +244,6 @@
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
         $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
-
         $(this).slideDown();
       },
       hide: function (deleteElement) {
