@@ -288,8 +288,7 @@
   })
 
   $('#createContent').submit(function (e) {
-      console.log('case2');
-        e.preventDefault();
+      e.preventDefault();
       var form = $('#createContent');
       var formData = new FormData(form[0]);
       console.log(Array.from(formData));
