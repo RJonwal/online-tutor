@@ -283,6 +283,39 @@
     // }
   ]);
 
+  $('.submitbtn').click(function(){
+    $('#createContent').submit();
+  })
 
-
+  $('#createContent').submit(function (e) {
+      console.log('case2');
+        e.preventDefault();
+      var formData = new FormData(this);
+     // formData.append('thumbnail', $('#thumbnail')[0]);
+      // formData.append('fname',$('#fname').val());
+      // formData.append('lname',$('#lname').val());
+      // formData.append('phoneno',$('#phoneno').val());
+      // formData.append('address',$('#address').val());
+      //var formData1 = $('.repeater').repeaterVal();
+      //formData.append('data',JSON.stringig(formData1));
+      console.log(formData);
+    
+      var url = $('#createContent').attr('action');
+      $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: {
+          'data':'form_value'
+        },
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          console.log(response);
+          if (response.success == true) {
+            window.location = response.redirectUrl;
+          }
+        },
+      })
+    })
 </script>

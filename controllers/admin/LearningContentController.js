@@ -89,7 +89,12 @@ async function create(req, res) {
  * @returns 
  */
 async function store(req, res) {
+    try{
+        console.log('learning form');
+        console.log(req.body);
+    }catch (e){
 
+    }
 }
 
 

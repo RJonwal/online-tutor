@@ -7,6 +7,7 @@ const learningContentController = require('../controllers/Admin/LearningContentC
 
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
+router.post('/store', passport.checkAuthentication, learningContentController.store);
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
