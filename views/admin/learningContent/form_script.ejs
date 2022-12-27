@@ -290,26 +290,15 @@
   $('#createContent').submit(function (e) {
       console.log('case2');
         e.preventDefault();
-      var formData = new FormData(this);
-     // formData.append('thumbnail', $('#thumbnail')[0]);
-      // formData.append('fname',$('#fname').val());
-      // formData.append('lname',$('#lname').val());
-      // formData.append('phoneno',$('#phoneno').val());
-      // formData.append('address',$('#address').val());
-      //var formData1 = $('.repeater').repeaterVal();
-      //formData.append('data',JSON.stringig(formData1));
-      console.log(formData);
-    
+      var form = $('#createContent');
+      var formData = new FormData(form[0]);
+      console.log(Array.from(formData));
       var url = $('#createContent').attr('action');
       $.ajax({
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: {
-          'data':'form_value'
-        },
-        processData: false,
-        contentType: false,
+      type: "POST",
+      url: url,
+      data: JSON.stringify(Array.from(formData)),
+      contentType: "application/json; charset=utf-8",
         success: function (response) {
           console.log(response);
           if (response.success == true) {
