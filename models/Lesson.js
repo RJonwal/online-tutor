@@ -10,23 +10,39 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
+var slideSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        default: 'null'
+    },
+    duration: {
+        type: Number,
+        default: 'null'
+    },
+    basic: [{
+        description: {
+            type: String,
+            default: 'null'
+        },
+    }],
+    video: [{
+        video_url: {
+            type: String,
+            default: 'null'
+        },
+        video: {
+            type: String,
+            default: 'null'
+        }
+    }],
+    attachments: {
+        type: Array,
+        default: 'null',
+    }
+});
 
-const learningContentSchema = new mongoose.Schema({
-    grade_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'grades',
-        required: true,
-    },
-    topic_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'topics',
-        required: true,
-    },
-    sub_topic_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'subTopics',
-        required: true,
-    },
+
+const lessonSchema = new mongoose.Schema({
     title: {
         type: String,
         unique: true,
@@ -36,23 +52,9 @@ const learningContentSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    short_description: {
-        type: String,
-        default: null,
-    },
-    thumbnail: {
-        type: String,
-        default: null
-    },
-    lesson_ids: [{
-        type: 'ObjectId',
-        ref: 'lessons',
-        default: null
+    slides: [{
+        slideSchema
     }],
-    status: {
-        type: Number,
-        default: 1
-    },
     deleted_at: {
         type: Date,
         default: null
@@ -62,18 +64,15 @@ const learningContentSchema = new mongoose.Schema({
         timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
     });
 
-
-learningContentSchema.pre("save", function (next) {
+lessonSchema.pre("save", function (next) {
     this.slug = slugify(this.name, slugify_options);
     next();
 });
 
-
-learningContentSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
+lessonSchema.pre('update,updateOne,findByIdAndUpdate,findOneAndUpdate', function (next) {
     this._update.slug = slugify(this.name, slugify_options);
     next();
 });
 
-
-const LearningContent = mongoose.model('learningContents', learningContentSchema);
-module.exports = LearningContent;
+const Lesson = mongoose.model('lessons', lessonSchema);
+module.exports = Lesson;
