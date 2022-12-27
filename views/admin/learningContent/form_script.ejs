@@ -240,6 +240,8 @@
       var newLesson = 'lesson-' + index;
       $(this).find('.lesson-container').attr('id', newLesson);
       $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
+
+      $(this).find(".wizard").attr("parent-id",index);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
@@ -257,9 +259,24 @@
       show: function () {
         var index = $($(this), '.wizards-div"').index();
         var newSlide = 'slide-' + index;
+
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
         $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
+
+        // add unique id for tab
+        // for pill basic
+        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-'+index);
+        $(this).find('#pills-basic-0').attr('id', 'pills-basic-'+index);
+
+        //for pills video
+        $(this).find('#pills-video-tab').attr('href', '#pills-video-'+index);
+        $(this).find('#pills-video-0').attr('id', 'pills-video-'+index);
+
+        //for pills attachment
+        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-'+index);
+        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-'+index);
+
         $(this).slideDown();
       },
       hide: function (deleteElement) {
@@ -306,4 +323,7 @@
         },
       })
     })
+  $('.tab_btn').click(function(){
+    $('.dropify').dropify();
+  })  
 </script>
