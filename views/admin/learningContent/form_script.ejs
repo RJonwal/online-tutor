@@ -60,11 +60,27 @@
 
   });
 
-  // $(document).ready(function () {
-  //   $("#chp_section").on('click', '.delete-btn', function () {
-  //     $(this).closest('.chp-add-section').remove();
-  //   });
-  // });
+  function loadSubTopic(topicId) {
+    $.ajax({
+      type: "POST",
+      url: '/learning-content/renderSubtopic',
+      data: {
+        id: topicId,
+      },
+      success: function (response) {
+        $('#subTopics').empty();
+        for (res of response) {
+          var newOption = new Option(res.name, res._id, false, false);
+          $('#subTopics').append(newOption).trigger('change');
+        }
+      },
+    });
+  }
+  $('#topics').change(function () {
+    let topicId = $(this).val();
+    loadSubTopic(topicId);
+  })
+
 
   // Form Stepper 
   jQuery(document).ready(function () {
@@ -213,7 +229,7 @@
   $(document).on("click", ".slide-form-expand", function () {
     $('.slide-container').removeClass('show');
     let classes = $(this).attr('aria-controls');
-    //$('#' + classes).addClass('show');
+    // $('#' + classes).addClass('show');
   });
 
 
@@ -268,24 +284,5 @@
   ]);
 
 
-  function loadSubTopic(topicId) {
-    $.ajax({
-      type: "POST",
-      url: '/learning-content/renderSubtopic',
-      data: {
-        id: topicId,
-      },
-      success: function (response) {
-        $('#subTopics').empty();
-        for (res of response) {
-          var newOption = new Option(res.name, res._id, false, false);
-          $('#subTopics').append(newOption).trigger('change');
-        }
-      },
-    });
-  }
-  $('#topics').change(function () {
-    let topicId = $(this).val();
-    loadSubTopic(topicId);
-  })
+
 </script>
