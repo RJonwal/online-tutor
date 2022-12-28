@@ -23,17 +23,7 @@
       },
     });
 
-    $('.select-video').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Select your preferred video type. (.mp4, YouTube, Vimeo etc.)</h6></div>',
-      },
-    });
 
-    $('.select-attachments').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
-      },
-    });
 
     $('.single-img').dropify({
       tpl: {
@@ -45,25 +35,47 @@
       $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     });
 
-    // tinyMce Editor
-    tinymce.init({
-      selector: '.editer',
-      height: 300,
-      menubar: false,
-      statusbar: false,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor textcolor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code help wordcount'
-      ],
-      mobile: {
-        theme: 'mobile'
-      },
-      toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-    });
+
 
   });
 
+  function dropify(){
+    $('.select-video').dropify({
+      tpl: {
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Select your preferred video type. (.mp4, YouTube, Vimeo etc.)</h6></div>',
+      },
+    });
+
+    $('.select-attachments').dropify({
+      tpl: {
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
+      },
+    });
+  }
+  function inti_editor(){
+    tinymce.init({
+        selector: '.editer',
+        height: 300,
+        menubar: false,
+        statusbar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor textcolor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        mobile: {
+          theme: 'mobile'
+        },
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+      });
+
+      $('#thumbnail').dropify({
+      tpl: {
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
+      },
+    });
+  }
+  
   function loadSubTopic(topicId) {
     $.ajax({
       type: "POST",
@@ -247,6 +259,13 @@
       $(this).find('.close-slide').attr('href', '#' + newSlide);
       $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
 
+      // add unique id for tiny editor
+      $(this).find('#description-0').attr('id', 'description-' + index + '-0');
+
+      //add unique id for tiny editor
+      //let editorClass = 'description-'+ index + '-0';
+      inti_editor();
+      dropify();
       // add unique id for tab
       // for pill basic
       $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + index + '-0');
@@ -288,7 +307,12 @@
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
         $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
-
+        
+        //add unique id for tiny editor
+        $(this).find('#description-0').attr('id', 'description-' +parentIndex + '-'+index);
+        //let editorClass = 'description-'+ parentIndex + '-'+index;
+        inti_editor();
+        dropify();
         // add unique id for tab
         // for pill basic
         $(this).find('#pills-basic-tab').attr('href', '#pills-basic-'+ parentIndex + '-' + index);
@@ -354,4 +378,13 @@
   $('.tab_btn').click(function () {
     $('.dropify').dropify();
   })  
+
+  $(document).on('click','.save-lecture-details',function(){
+    $(this).parents().find('.slide-container').removeClass('show');
+    let title = $(this).parents('.slide-container').find('#title').val();
+
+    $(this).parents('.wizards-div').find('.heading-title').html(title);
+   //console.log($(this).parents('.slide-container').find('#title').val())
+    
+  })
 </script>

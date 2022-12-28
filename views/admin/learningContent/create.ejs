@@ -139,7 +139,7 @@
           <div class="add-more-section d-flex align-items-center justify-content-between">
             <h3 class="title-text mb-0">Add Lesson</h3>
             <a class="theme-btn add-section" href="javascript:void(0);" data-repeater-create data-toggle="tooltip"
-              rel="tooltip" data-placement="top" title="Add Lesson"><img src="/images/addcircle.svg" alt="img"></a>
+              rel="tooltip" data-placement="top" title="Add Lesson"><img src="/images/addcircle.svg" alt="img" onclick="tinyeditor()"></a>
           </div>
 
           <div class="parent-div" data-repeater-list="outer-list">
@@ -200,7 +200,7 @@
                                       <div class="chp-heading">
                                         <div class="chp-title text-truncate">
                                           <img class="mr-1" src="/images/basic.svg" alt="img">
-                                          Introduction: Biodiversity 1
+                                          <span class="heading-title"> Introduction: Biodiversity 1</span>
                                         </div>
                                         <div class="right-icons">
                                           <a href="javascript:void(0);" class="slide-form-preview" data-toggle="tooltip"
@@ -225,7 +225,7 @@
                                             <a data-toggle="collapse" href="#slide-0" aria-expanded="false"
                                             class="close-slide"><img src="/images/close.svg" alt="img"></a>
                                           </div>
-                                          <div class="d-flex align-items-center justify-content-between mb-4">
+                                          <div class="row">
                                             <div class="col-sm-12 col-md-6">
                                               <div class="form-group">
                                                 <label class="form-label" for="title">Title<span
@@ -279,12 +279,8 @@
                                                     </label>
                                                     <textarea name="description" rows="5" class="form-control editer"
                                                       placeholder="Enter short description.."
-                                                      id="description"></textarea>
+                                                      id="description-0"></textarea>
                                                   </div>
-                                                </div>
-                                                <div class="col-sm-12 text-right">
-                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                      src="/images/save.svg" alt="img"> Save</button>
                                                 </div>
                                               </div>
                                             </div>
@@ -323,10 +319,6 @@
                                                       data-max-file-size-preview="5M">
                                                   </div>
                                                 </div>
-                                                <div class="col-sm-12 text-right">
-                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                      src="/images/save.svg" alt="img"> Save</button>
-                                                </div>
                                               </div>
                                             </div>
                                             <div class="tab-pane fade" id="pills-attachments-0" role="tabpanel"
@@ -362,11 +354,11 @@
                                                       data-max-file-size-preview="5M">
                                                   </div>
                                                 </div>
-                                                <div class="col-sm-12 text-right">
-                                                  <button class="btn theme-btn" type="button"><img class="mr-1"
-                                                      src="/images/save.svg" alt="img"> Save</button>
-                                                </div>
                                               </div>
+                                            </div>
+                                            <div class="col-sm-12 text-right mb-3">
+                                                  <button class="btn theme-btn save-lecture-details" type="button"><img class="mr-1"
+                                                      src="/images/save.svg" alt="img"> Save</button>
                                             </div>
                                           </div>
                                         </div>
