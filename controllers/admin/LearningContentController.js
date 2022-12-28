@@ -51,7 +51,7 @@ async function index(req, res) {
  */
 async function renderSubtopic(req, res) {
     try {
-        let subTopics = await SubTopic.find({topic_id:req.body.id}).sort({ 'name': 1 });
+        let subTopics = await SubTopic.find({ topic_id: req.body.id }).sort({ 'name': 1 });
         return res.send(subTopics);
     } catch (e) {
         console.log(e);
@@ -72,7 +72,7 @@ async function create(req, res) {
         let activeTopics = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
         let activeSubTopics = await SubTopic.find({ "status": 1 }).sort({ '_id': -1 });
         let activeGrades = await Grade.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/learningContent/create', { topics: activeTopics, grades: activeGrades, subTopics:activeSubTopics });
+        return res.render('../views/admin/learningContent/create', { topics: activeTopics, grades: activeGrades, subTopics: activeSubTopics });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -284,7 +284,7 @@ async function createOld(req, res) {
         let activeTopics = await Topic.find({ "status": 1 }).sort({ '_id': -1 });
         let activeSubTopics = await SubTopic.find({ "status": 1 }).sort({ '_id': -1 });
         let activeGrades = await Grade.find({ "status": 1 }).sort({ '_id': -1 });
-        return res.render('../views/admin/learningContent/createOld', { topics: activeTopics, grades: activeGrades, subTopics:activeSubTopics });
+        return res.render('../views/admin/learningContent/createOld', { topics: activeTopics, grades: activeGrades, subTopics: activeSubTopics });
     } catch (e) {
         console.log(e);
         return res.status(500).json({

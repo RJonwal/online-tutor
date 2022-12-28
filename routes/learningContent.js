@@ -1,11 +1,10 @@
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 const passport = require('passport');
 const fs = require('fs');
-var multer = require('multer');
 
 const learningContentController = require('../controllers/Admin/LearningContentController')
-
 
 const storageContentImg = multer.diskStorage({
     destination: (req, file, callback) => {

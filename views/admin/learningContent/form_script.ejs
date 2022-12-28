@@ -39,7 +39,7 @@
 
   });
 
-  function dropify(){
+  function dropify() {
     $('.select-video').dropify({
       tpl: {
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Select your preferred video type. (.mp4, YouTube, Vimeo etc.)</h6></div>',
@@ -52,30 +52,30 @@
       },
     });
   }
-  function inti_editor(){
+  function inti_editor() {
     tinymce.init({
-        selector: '.editer',
-        height: 300,
-        menubar: false,
-        statusbar: false,
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor textcolor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table contextmenu paste code help wordcount'
-        ],
-        mobile: {
-          theme: 'mobile'
-        },
-        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-      });
+      selector: '.editer',
+      height: 300,
+      menubar: false,
+      statusbar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor textcolor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code help wordcount'
+      ],
+      mobile: {
+        theme: 'mobile'
+      },
+      toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+    });
 
-      $('#thumbnail').dropify({
+    $('#thumbnail').dropify({
       tpl: {
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
       },
     });
   }
-  
+
   function loadSubTopic(topicId) {
     $.ajax({
       type: "POST",
@@ -97,6 +97,9 @@
     loadSubTopic(topicId);
   })
 
+  $('.tab_btn').click(function () {
+    $('.dropify').dropify();
+  })
 
   // Form Stepper 
   jQuery(document).ready(function () {
@@ -247,6 +250,19 @@
     // $('#' + classes).addClass('show');
   });
 
+  $('.tab_btn').click(function () {
+    $('.dropify').dropify();
+  })
+
+  $(document).on('click', '.save-lecture-details', function () {
+    $(this).parents().find('.slide-container').removeClass('show');
+    let title = $(this).parents('.slide-container').find('#title').val();
+
+    $(this).parents('.wizards-div').find('.heading-title').html(title);
+    //console.log($(this).parents('.slide-container').find('#title').val())
+  });
+
+
 
   var $repeater = $('.repeater').repeater({
     initEmpty: false,
@@ -307,15 +323,15 @@
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
         $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
-        
+
         //add unique id for tiny editor
-        $(this).find('#description-0').attr('id', 'description-' +parentIndex + '-'+index);
+        $(this).find('#description-0').attr('id', 'description-' + parentIndex + '-' + index);
         //let editorClass = 'description-'+ parentIndex + '-'+index;
         inti_editor();
         dropify();
         // add unique id for tab
         // for pill basic
-        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-'+ parentIndex + '-' + index);
+        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + parentIndex + '-' + index);
         $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + parentIndex + '-' + index);
 
         //for pills video
@@ -359,6 +375,16 @@
     var url = $('#createContent').attr('action');
     console.log(url);
 
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0] + ' - ' + pair[1]);
+    // }
+    // formData.append('file', $('input[type=file]')[0].files[0]);
+    // var data = Array.from(formData.entries()).reduce((memo, [key, value]) => ({
+    //   [key]: value,
+    // }), {});
+    // data: JSON.stringify(Object.fromEntries(formData)),
+
+
     $.ajax({
       type: "POST",
       url: url,
@@ -369,7 +395,7 @@
       success: function (response) {
         console.log(response);
         if (response.success == true) {
-         // window.location = response.redirectUrl;
+          // window.location = response.redirectUrl;
         }
       },
       error: function (response) {
@@ -379,7 +405,7 @@
           console.log(field_name);
           console.log(error);
           $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-         // $("#storeCategoryBtn").prop('disabled', false);
+          // $("#storeCategoryBtn").prop('disabled', false);
 
         })
       },
@@ -388,30 +414,9 @@
         //$("#storeCategoryBtn").prop('disabled', false);
       }
     })
+  });
 
-    /*     $.ajax({
-          type: "POST",
-          url: url,
-          data: JSON.stringify(Array.from(formData)),
-          contentType: "application/json; charset=utf-8",
-          success: function (response) {
-            console.log(response);
-            if (response.success == true) {
-              window.location = response.redirectUrl;
-            }
-          },
-        }) */
-  })
-  $('.tab_btn').click(function () {
-    $('.dropify').dropify();
-  })  
 
-  $(document).on('click','.save-lecture-details',function(){
-    $(this).parents().find('.slide-container').removeClass('show');
-    let title = $(this).parents('.slide-container').find('#title').val();
 
-    $(this).parents('.wizards-div').find('.heading-title').html(title);
-   //console.log($(this).parents('.slide-container').find('#title').val())
-    
-  })
+
 </script>
