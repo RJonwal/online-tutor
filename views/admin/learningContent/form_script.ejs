@@ -224,7 +224,9 @@
   });
 
   $(document).on("click", ".informationSlide-add", function () {
-    $('#slideAccordion').addClass('show');
+    console.log('showdata');
+    $(this).parents().find('#slideAccordion').show();
+    console.log($(this).parents().find('#slideAccordion'));
   });
 
   $(document).on("click", ".slide-form-expand", function () {
@@ -262,7 +264,7 @@
       $(this).find('.lesson-container').attr('id', newLesson);
       $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
 
-      $(this).find(".wizard").attr("parent-id", index);
+      $(this).find("#wizard").attr("data-parent-index", index);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
@@ -281,6 +283,7 @@
         var index = $($(this), '.wizards-div"').index();
         let parentIndex = $(this).parents('#wizard:last-child').attr('data-parent-index');
         var newSlide = 'slide-' + parentIndex + '-' + index;
+
         //Do something with name and value...
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
@@ -288,22 +291,20 @@
 
         // add unique id for tab
         // for pill basic
-        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + index);
-        $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + index);
+        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-'+ parentIndex + '-' + index);
+        $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + parentIndex + '-' + index);
 
         //for pills video
-        $(this).find('#pills-video-tab').attr('href', '#pills-video-' + index);
-        $(this).find('#pills-video-0').attr('id', 'pills-video-' + index);
+        $(this).find('#pills-video-tab').attr('href', '#pills-video-' + parentIndex + '-' + index);
+        $(this).find('#pills-video-0').attr('id', 'pills-video-' + parentIndex + '-' + index);
 
         //for pills attachment
-        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + index);
-        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + index);
+        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + parentIndex + '-' + index);
+        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + parentIndex + '-' + index);
 
         $(this).slideDown();
       },
       hide: function (deleteElement) {
-        console.log('inner');
-        console.log(deleteElement);
         $(this).slideUp(deleteElement);
         // if (confirm("Are you sure you want to delete this element?")) {
         //   $(this).slideUp(deleteElement);
