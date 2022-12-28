@@ -238,6 +238,26 @@
     initEmpty: false,
     show: function () {
       var index = $($(this), '.main-wizards-div"').index();
+
+      var newSlide = 'slide-' + index + '-0';
+      //Do something with name and value...
+      $(this).find('.slide-container').attr('id', newSlide);
+      $(this).find('.close-slide').attr('href', '#' + newSlide);
+      $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
+
+      // add unique id for tab
+      // for pill basic
+      $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + index + '-0');
+      $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + index + '-0');
+
+      //for pills video
+      $(this).find('#pills-video-tab').attr('href', '#pills-video-' + index + '-0');
+      $(this).find('#pills-video-0').attr('id', 'pills-video-' + index + '-0');
+
+      //for pills attachment
+      $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + index + '-0');
+      $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + index + '-0');
+
       var newLesson = 'lesson-' + index;
       $(this).find('.lesson-container').attr('id', newLesson);
       $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
@@ -259,8 +279,9 @@
       selector: '.inner-repeater',
       show: function () {
         var index = $($(this), '.wizards-div"').index();
-        var newSlide = 'slide-' + index;
-
+        let parentIndex = $(this).parents('#wizard:last-child').attr('data-parent-index');
+        var newSlide = 'slide-' + parentIndex + '-' + index;
+        //Do something with name and value...
         $(this).find('.slide-container').attr('id', newSlide);
         $(this).find('.close-slide').attr('href', '#' + newSlide);
         $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
