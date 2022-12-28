@@ -41,6 +41,10 @@
       },
     });
 
+    $(document).ready(function () {
+      $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    });
+
     // tinyMce Editor
     tinymce.init({
       selector: '.editer',
@@ -207,9 +211,6 @@
     });
   });
 
-  $(document).ready(function () {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-  });
 
 
   $(document).on("click", ".lesson-edit", function () {
@@ -241,7 +242,7 @@
       $(this).find('.lesson-container').attr('id', newLesson);
       $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
 
-      $(this).find(".wizard").attr("parent-id",index);
+      $(this).find(".wizard").attr("parent-id", index);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
@@ -266,16 +267,16 @@
 
         // add unique id for tab
         // for pill basic
-        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-'+index);
-        $(this).find('#pills-basic-0').attr('id', 'pills-basic-'+index);
+        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + index);
+        $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + index);
 
         //for pills video
-        $(this).find('#pills-video-tab').attr('href', '#pills-video-'+index);
-        $(this).find('#pills-video-0').attr('id', 'pills-video-'+index);
+        $(this).find('#pills-video-tab').attr('href', '#pills-video-' + index);
+        $(this).find('#pills-video-0').attr('id', 'pills-video-' + index);
 
         //for pills attachment
-        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-'+index);
-        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-'+index);
+        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + index);
+        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + index);
 
         $(this).slideDown();
       },
@@ -300,30 +301,35 @@
     // }
   ]);
 
-  $('.submitbtn').click(function(){
+  $('.submitbtn').click(function () {
     $('#createContent').submit();
   })
 
-  $('#createContent').submit(function (e) {
-      e.preventDefault();
-      var form = $('#createContent');
-      var formData = new FormData(form[0]);
-      console.log(Array.from(formData));
-      var url = $('#createContent').attr('action');
-      $.ajax({
-      type: "POST",
-      url: url,
-      data: JSON.stringify(Array.from(formData)),
-      contentType: "application/json; charset=utf-8",
-        success: function (response) {
-          console.log(response);
-          if (response.success == true) {
-            window.location = response.redirectUrl;
-          }
-        },
-      })
-    })
-  $('.tab_btn').click(function(){
+  $("#createContent").submit(function (e) {
+    e.preventDefault();
+    var formData = $('#createContent').serialize();
+    console.log(formData);
+    var url = $('#createContent').attr('action');
+    console.log(url);
+
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}, ${pair[1]}`);
+    }
+
+    /*     $.ajax({
+          type: "POST",
+          url: url,
+          data: JSON.stringify(Array.from(formData)),
+          contentType: "application/json; charset=utf-8",
+          success: function (response) {
+            console.log(response);
+            if (response.success == true) {
+              window.location = response.redirectUrl;
+            }
+          },
+        }) */
+  })
+  $('.tab_btn').click(function () {
     $('.dropify').dropify();
   })  
 </script>
