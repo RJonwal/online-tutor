@@ -353,14 +353,41 @@
 
   $("#createContent").submit(function (e) {
     e.preventDefault();
-    var formData = $('#createContent').serialize();
-    console.log(formData);
+    var form = $('#createContent');
+    var formData = new FormData(form[0]);
+    formData.append('thumbnail', this.new_attachments)
     var url = $('#createContent').attr('action');
     console.log(url);
 
-    for (const pair of formData.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
-    }
+    $.ajax({
+      type: "POST",
+      url: url,
+      dataType: "json",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (response.success == true) {
+         // window.location = response.redirectUrl;
+        }
+      },
+      error: function (response) {
+        console.log(response);
+        let errorMessages = '';
+        $.each(response.responseJSON.errors, function (field_name, error) {
+          console.log(field_name);
+          console.log(error);
+          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+         // $("#storeCategoryBtn").prop('disabled', false);
+
+        })
+      },
+      complete: function () {
+        // $("#loading-bar-spinner").hide();
+        //$("#storeCategoryBtn").prop('disabled', false);
+      }
+    })
 
     /*     $.ajax({
           type: "POST",

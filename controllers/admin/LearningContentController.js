@@ -90,8 +90,13 @@ async function create(req, res) {
  */
 async function store(req, res) {
     try{
-        console.log('learning form');
         console.log(req.body);
+        console.log('learning form');
+        let innerList = req.body['outer-list'];
+        // for(test of innerList){
+        //     console.log(test);
+        // }
+        //console.log(req.files);
     }catch (e){
 
     }
