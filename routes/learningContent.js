@@ -12,6 +12,24 @@ const storageContentImg = multer.diskStorage({
         if (!fs.existsSync(dir)) {
             fs.mkdir(dir, err => callback(err, dir));
         }
+        let i=1;
+        if(req.body['outer-list']){
+            let dir1 = './assets/LearningContent/lession-'+i;
+            let dir2 = './assets/LearningContent/lession-'+i+'/lession-name';
+            if (!fs.existsSync(dir1)) {
+                fs.mkdir(dir1, err => callback(err, dir1));
+            }
+            if (!fs.existsSync(dir2)) {
+                fs.mkdir(dir2, err => callback(err, dir2));
+            }
+            for(filesData of req.body['outer-list']){
+                let dir3 = './assets/LearningContent/lession-'+i+'/lession-name/'+'slide';
+                if (!fs.existsSync(dir3)) {
+                    fs.mkdir(dir3, err => callback(err, dir3));
+                }
+                console.log(filesData);
+            }
+        }
         callback(null, dir);
     },
     filename: (req, file, callback) => {
@@ -20,10 +38,19 @@ const storageContentImg = multer.diskStorage({
         callback(null, newFileName);
     }
 });
-
+console.log('case1');
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
+       
+        
+        // if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        //     callback(null, true);
+        // }
+        // else {
+        //     callback(null, false);
+        //     return callback(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        // }
         callback(null, true);
     }
 });
