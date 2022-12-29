@@ -10,63 +10,33 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-/* var slideSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        default: 'null'
-    },
-    duration: {
-        type: Number,
-        default: 'null'
-    },
-    basic: [{
-        description: {
-            type: String,
-            default: 'null'
-        },
-    }],
-    video: [{
-        video_url: {
-            type: String,
-            default: 'null'
-        },
-        video: {
-            type: String,
-            default: 'null'
-        }
-    }],
-    attachments: {
-        type: Array,
-        default: 'null',
-    }
-});
- */
-var slideSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        default: 'null'
-    },
-    duration: {
-        type: Number,
-        default: 'null'
-    },
-    description: {
-        type: String,
-        default: 'null'
-    },
-    video_url: {
-        type: String,
-        default: 'null'
-    },
-    video: {
-        type: String,
-        default: 'null'
-    },
-    attachments: {
-        type: Array,
-        default: 'null',
-    }
-});
+
+// var slideSchema = new mongoose.Schema({
+//     title: {
+//         type: String,
+//         default: 'null'
+//     },
+//     duration: {
+//         type: Number,
+//         default: 'null'
+//     },
+//     description: {
+//         type: String,
+//         default: 'null'
+//     },
+//     video_url: {
+//         type: String,
+//         default: 'null'
+//     },
+//     video: {
+//         type: String,
+//         default: 'null'
+//     },
+//     attachments: {
+//         type: Array,
+//         default: 'null',
+//     }
+// });
 
 const lessonSchema = new mongoose.Schema({
     title: {
@@ -79,7 +49,30 @@ const lessonSchema = new mongoose.Schema({
         unique: true,
     },
     slides: [{
-        slideSchema
+        title: {
+            type: String,
+            default: 'null'
+        },
+        duration: {
+            type: String,
+            default: 'null'
+        },
+        description: {
+            type: String,
+            default: 'null'
+        },
+        video_url: {
+            type: String,
+            default: 'null'
+        },
+        video: {
+            type: String,
+            default: 'null'
+        },
+        attachments: {
+            type: Array,
+            default: 'null',
+        }
     }],
     deleted_at: {
         type: Date,

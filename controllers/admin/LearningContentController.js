@@ -6,6 +6,7 @@ let session = require('express-session');
 var slugify = require('slugify')
 
 const LearningContent = require('../../models/LearningContent');
+const Lesson = require('../../models/Lesson');
 
 module.exports = {
     index,
@@ -101,8 +102,44 @@ async function store(req, res) {
             });
         }
 
-        // console.log(req.body);
-       
+
+        let innerList = req.body['outer-list'];
+        let i = 0;
+        var myLessons = [];
+        var slides = [];
+
+        for (lessons of innerList) {
+            let j = 0;
+            for (content of lessons['inner-list']) {
+                var slide = {};
+                img = fileNames[i];
+                let values = Object.values(img);
+
+                slide = {};
+                slide['title'] = content.title;
+                slide['duration'] = content.duration;
+                slide['description'] = content.description;
+                slide['video_url'] = content.video_url;
+                // slide['video'] = content.video;
+                // slide['attachments'] = content.attachments;
+
+                slides.push(slide);
+                j++;
+            }
+
+            console.log(slides)
+            var myLesson = {
+                title: lessons.lesson_name,
+                slides: slides,
+            };
+
+            let lesson = await Lesson.create(myLesson);
+            myLessons.push(lesson._id);
+            var slides = [];
+            i++;
+        }
+        console.log(myLessons)
+
         req.body.thumbnail = fileNames[0].thumbnail;
 
         var myContent = {
@@ -112,50 +149,15 @@ async function store(req, res) {
             title: req.body.title,
             short_description: req.body.short_description,
             thumbnail: req.body.thumbnail,
+            lesson_ids :myLessons,
         };
 
-        let innerList = req.body['outer-list'];
-        let i = 0;
-        console.log(fileNames);
-        for (lessons of innerList) {
-            // console.log(lessons);
-            let j = 0;
-            for (content of lessons['inner-list']) {
-                
-                console.log(i,j);
-                img = fileNames[0];
-                 console.log(img);
-                // console.log(content);
-                j++;
-            }
-            i++;
-            // myLesson= {
-            //     title: item.lesson_name,
-            // }
+        let learningContent = await LearningContent.create(myContent);
+        console.log(learningContent);
+        if (learningContent) {
+            req.flash('success', 'learningContent is Created successfully!');
+            res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
         }
-
-        [
-            { thumbnail: '1672308432111image_2022_11_22t10_22_01_264z.png' },
-            {
-              'outer-list[0][inner-list][0][cover_image]': '1672308432134gautam-kumar-cv.pdf'
-            },
-            {
-              'outer-list[1][inner-list][0][cover_image]': '1672308432137gautam-kumar-cv.pdf'
-            },
-            {
-              'outer-list[1][inner-list][1][cover_image]': '1672308432158gautam-kumar-cv.pdf'
-            }
-          ]
-
-        // let learningContent = await LearningContent.create(myContent);
-        // if(learningContent){
-
-        // }
-        // console.log(learningContent);
-        // if (learningContent) {
-        //     req.flash('success', 'learningContent is Created successfully!');
-        //     res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
-        // }
     } catch (e) {
         console.log(e);
         return res.status(500).json({
