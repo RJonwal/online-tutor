@@ -24,24 +24,14 @@ const storageContentImg = multer.diskStorage({
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-            callback(null, true);
-        }
-        else {
-            callback(null, false);
-            return callback(new Error('Only .png, .jpg and .jpeg format allowed!'));
-        }
+        callback(null, true);
     }
 });
 
 
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
-router.post('/store', passport.checkAuthentication, uploadContentImgImage.fields(
-    [{ 
-        name: 'thumbnail', maxCount: 1, 
-    }]
-),learningContentController.store);
+router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(),learningContentController.store);
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
