@@ -29,12 +29,12 @@ const learningContentSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        unique: true,
+        // unique: true,
         required: true,
     },
     slug: {
         type: String,
-        unique: true,
+        // unique: true,
     },
     short_description: {
         type: String,
@@ -64,7 +64,7 @@ const learningContentSchema = new mongoose.Schema({
 
 
 learningContentSchema.pre("save", function (next) {
-    this.slug = slugify(this.name, slugify_options);
+    this.slug = slugify(this.title, slugify_options);
     next();
 });
 

@@ -10,7 +10,7 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-var slideSchema = new mongoose.Schema({
+/* var slideSchema = new mongoose.Schema({
     title: {
         type: String,
         default: 'null'
@@ -40,7 +40,33 @@ var slideSchema = new mongoose.Schema({
         default: 'null',
     }
 });
-
+ */
+var slideSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        default: 'null'
+    },
+    duration: {
+        type: Number,
+        default: 'null'
+    },
+    description: {
+        type: String,
+        default: 'null'
+    },
+    video_url: {
+        type: String,
+        default: 'null'
+    },
+    video: {
+        type: String,
+        default: 'null'
+    },
+    attachments: {
+        type: Array,
+        default: 'null',
+    }
+});
 
 const lessonSchema = new mongoose.Schema({
     title: {
@@ -65,7 +91,7 @@ const lessonSchema = new mongoose.Schema({
     });
 
 lessonSchema.pre("save", function (next) {
-    this.slug = slugify(this.name, slugify_options);
+    this.slug = slugify(this.title, slugify_options);
     next();
 });
 

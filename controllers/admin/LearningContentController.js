@@ -5,6 +5,8 @@ const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify')
 
+const LearningContent = require('../../models/LearningContent');
+
 module.exports = {
     index,
     renderSubtopic,
@@ -89,17 +91,76 @@ async function create(req, res) {
  * @returns 
  */
 async function store(req, res) {
-    try{
-        console.log(req.body);
-        console.log(req.files);
-        console.log('learning form');
-        let innerList = req.body['outer-list'];
-        for(test of innerList){
-            console.log(test);
+    try {
+        var fileNames;
+        if (req.files != undefined) {
+            fileNames = req.files.map(function (file) {
+                return {
+                    [file.fieldname]: file.filename,
+                };
+            });
         }
-        
-    }catch (e){
 
+        // console.log(req.body);
+       
+        req.body.thumbnail = fileNames[0].thumbnail;
+
+        var myContent = {
+            grade_id: req.body.grade_id,
+            topic_id: req.body.topic_id,
+            sub_topic_id: req.body.sub_topic_id,
+            title: req.body.title,
+            short_description: req.body.short_description,
+            thumbnail: req.body.thumbnail,
+        };
+
+        let innerList = req.body['outer-list'];
+        let i = 0;
+        console.log(fileNames);
+        for (lessons of innerList) {
+            // console.log(lessons);
+            let j = 0;
+            for (content of lessons['inner-list']) {
+                
+                console.log(i,j);
+                img = fileNames[1];
+                console.log(img['outer-list'][0]['inner-list'][0]['cover_image']);
+                // console.log(content);
+                j++;
+            }
+            i++;
+            // myLesson= {
+            //     title: item.lesson_name,
+            // }
+        }
+
+        [
+            { thumbnail: '1672308432111image_2022_11_22t10_22_01_264z.png' },
+            {
+              'outer-list[0][inner-list][0][cover_image]': '1672308432134gautam-kumar-cv.pdf'
+            },
+            {
+              'outer-list[1][inner-list][0][cover_image]': '1672308432137gautam-kumar-cv.pdf'
+            },
+            {
+              'outer-list[1][inner-list][1][cover_image]': '1672308432158gautam-kumar-cv.pdf'
+            }
+          ]
+
+        // let learningContent = await LearningContent.create(myContent);
+        // if(learningContent){
+
+        // }
+        // console.log(learningContent);
+        // if (learningContent) {
+        //     req.flash('success', 'learningContent is Created successfully!');
+        //     res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
+        // }
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
     }
 }
 
