@@ -123,8 +123,8 @@ async function store(req, res) {
             for (content of lessons['inner-list']) {
                 
                 console.log(i,j);
-                img = fileNames[1];
-                console.log(img['outer-list'][0]['inner-list'][0]['cover_image']);
+                img = fileNames[0];
+                 console.log(img);
                 // console.log(content);
                 j++;
             }

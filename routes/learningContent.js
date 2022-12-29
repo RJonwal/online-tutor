@@ -12,22 +12,40 @@ const storageContentImg = multer.diskStorage({
         if (!fs.existsSync(dir)) {
             fs.mkdir(dir, err => callback(err, dir));
         }
-        let i=1;
-        if(req.body['outer-list']){
-            let dir1 = './assets/LearningContent/lession-'+i;
-            let dir2 = './assets/LearningContent/lession-'+i+'/lession-name';
-            if (!fs.existsSync(dir1)) {
-                fs.mkdir(dir1, err => callback(err, dir1));
-            }
-            if (!fs.existsSync(dir2)) {
-                fs.mkdir(dir2, err => callback(err, dir2));
-            }
-            for(filesData of req.body['outer-list']){
-                let dir3 = './assets/LearningContent/lession-'+i+'/lession-name/'+'slide';
-                if (!fs.existsSync(dir3)) {
-                    fs.mkdir(dir3, err => callback(err, dir3));
+
+        const myContent = './assets/LearningContent/' + req.body.title;
+        if (!fs.existsSync(myContent)) {
+            fs.mkdir(myContent, err => callback(err, myContent));
+        }
+
+        let i = 1;
+        if (req.body['outer-list']) {
+
+            for (lessons of req.body['outer-list']) {
+                let lesson_name = myContent + '/' + lessons.lesson_name;
+                if (!fs.existsSync(lesson_name)) {
+                    fs.mkdir(lesson_name, err => callback(err, lesson_name));
                 }
-                console.log(filesData);
+                for (content of lessons['inner-list']) {
+                    let slides = lesson_name + '/slides';
+                    let practices = lesson_name + '/practices';
+                    let challenges = lesson_name + '/challenges';
+
+                    if (!fs.existsSync(slides)) {
+                        fs.mkdir(slides, err => callback(err, slides));
+                    }
+                    if (!fs.existsSync(practices)) {
+                        fs.mkdir(practices, err => callback(err, practices));
+                    }
+                    if (!fs.existsSync(challenges)) {
+                        fs.mkdir(challenges, err => callback(err, challenges));
+                    }
+
+                }
+                // let dir3 = './assets/LearningContent/Lession-' + i + '/' + 'Information Slide';
+                // if (!fs.existsSync(dir3)) {
+                //     fs.mkdir(dir3, err => callback(err, dir3));
+                // }
             }
         }
         callback(null, dir);
@@ -42,8 +60,8 @@ console.log('case1');
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
-       
-        
+
+
         // if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         //     callback(null, true);
         // }
@@ -58,7 +76,7 @@ var uploadContentImgImage = multer({
 
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
-router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(),learningContentController.store);
+router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(), learningContentController.store);
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
