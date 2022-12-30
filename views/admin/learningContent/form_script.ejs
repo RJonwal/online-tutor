@@ -19,7 +19,7 @@
 
     $('#thumbnail').dropify({
       tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPG, JPEG, PNG</h6></div>',
       },
     });
 
@@ -371,6 +371,8 @@
     e.preventDefault();
     var form = $('#createContent');
     var formData = new FormData(form[0]);
+    // var myContent = tinymce.get("description-1-0").getContent();
+    // console.log(myContent); return false ;
     formData.append('thumbnail', this.new_attachments)
     var url = $('#createContent').attr('action');
     console.log(url);

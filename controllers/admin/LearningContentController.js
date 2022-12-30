@@ -65,16 +65,14 @@ async function index(req, res) {
 async function listing(req, res) {
     var obj = {};
     var showEntries = req.body.showEntries;
+    var offset = req.body.offset;
+    console.log(offset);
     var currentPage = req.body.currentPage;
     var searchStr = req.body.search;
-
-    console.log(showEntries);
-    console.log(currentPage);
-
     if (req.body.grade) {
         obj["grade_id"] = req.body.grade;
     }
-    if (req.body.main_topic) {
+    if (req.body.topic) {
         obj["topic_id"] = req.body.topic;
     }
     if (req.body.subTopic) {
@@ -90,6 +88,7 @@ async function listing(req, res) {
     else {
         searchStr = {};
     }
+    console.log(req.body.search);
 
     var recordsTotal = 0;
     var recordsFiltered = 0;
@@ -99,7 +98,7 @@ async function listing(req, res) {
     recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
     totalNoOfPages = Math.ceil(recordsTotal / showEntries);
 
-    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(0), 'limit': Number(10) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
+    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(parseInt(offset)), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
 
     // console.log("recordsTotal => " + recordsTotal);
     // console.log("recordsFiltered => " + recordsFiltered);
@@ -131,7 +130,6 @@ async function listing(req, res) {
         course = `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">2.3hr</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="javascript:void(0);">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
         courses.push(course);
         totalSlides = 0;
-
     }
 
     var data = JSON.stringify({
@@ -200,44 +198,50 @@ async function store(req, res) {
             });
         }
 
-
         let innerList = req.body['outer-list'];
         let i = 0;
         var myLessons = [];
         var slides = [];
-
+        let index = 0;
         for (lessons of innerList) {
             let j = 0;
             for (content of lessons['inner-list']) {
                 var slide = {};
-                // img = fileNames[i];
+                // img = fileNames[j];
                 // let values = Object.values(img);
-
+                var video ='';
+                var attachment='';
+                for(files of fileNames){
+                    let keys = Object.keys(files);
+                    let values = Object.values(files);
+                    if(keys == `outer-list[${i}][inner-list][${j}][slide_video]`){
+                        video = values[0];
+                    }
+                    if(keys == `outer-list[${i}][inner-list][${j}][slide_attachments]`){
+                        attachment = values;
+                    }
+                }
+                //console.log(video[0],attachment);
                 slide = {};
-                slide['title'] = content.title;
-                slide['duration'] = content.duration;
-                slide['description'] = content.description;
-                slide['video_url'] = content.video_url;
-                // slide['video'] = content.video;
-                // slide['attachments'] = content.attachments;
+                slide['title'] = content.slide_title;
+                slide['duration'] = content.slide_duration;
+                slide['description'] = content.slide_description; // ??
+                slide['video_url'] = content.slide_video_url;
+                slide['video'] = video;
+                slide['attachments'] = attachment;
 
                 slides.push(slide);
                 j++;
             }
-
-            console.log(slides)
             var myLesson = {
                 title: lessons.lesson_name,
                 slides: slides,
             };
-
             let lesson = await Lesson.create(myLesson);
             myLessons.push(lesson._id);
             var slides = [];
             i++;
         }
-        console.log(myLessons)
-
         req.body.thumbnail = fileNames[0].thumbnail;
 
         var myContent = {
@@ -251,7 +255,6 @@ async function store(req, res) {
         };
 
         let learningContent = await LearningContent.create(myContent);
-        console.log(learningContent);
         if (learningContent) {
             req.flash('success', 'learningContent is Created successfully!');
             res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });

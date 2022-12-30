@@ -85,7 +85,7 @@
             <div class="col-sm-12 col-md-8 align-self-center">
                 <div class="course-pagination">
                     <div class="input-group my-3 m-md-0 input-search">
-                        <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Search..." onkeyup="getContent('','','','',this.value.trim())">
                         <span class="input-group-btn">
                             <button class="btn" type="button"><i class="fa fa-search"></i></button>
                         </span>
@@ -93,11 +93,11 @@
                     <ul class="pagination mb-0 justify-content-end">
                         <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">3</span> of <span id="totalRecords">3</span></li>
                         <li class="page-item">
-                            <a class="page-link prev" href="#"><i class="fa fa-angle-left"></i></a>
+                            <a class="page-link paging" data-type="prev" href="#" ><i class="fa fa-angle-left"></i></a>
                         </li>
                         <li class="page-item current"><a class="page-link" href="#">1</a></li>
                         <li class="page-item">
-                            <a class="page-link next" href="#"><i class="fa fa-angle-right"></i></a>
+                            <a class="page-link paging" data-type="next" href="#"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -136,7 +136,28 @@
             let topic = $('#topics').val();
             let subTopic = $('#subTopics').val();
             let status = $('#status').val();
-            dataTable(grade, topic, subTopic, status);
+            getContent(grade, topic, subTopic, status);
+        });
+
+        // pagination
+        $(".paging").click(function () {
+            let grade = $('#grades').val();
+            let topic = $('#topics').val();
+            let subTopic = $('#subTopics').val();
+            let status = $('#status').val();
+            let type = $(this).data('type');
+            let currentpage = $('.current a').html();
+            let offset;
+            if(type == 'next'){
+                offset = parseInt(currentpage);
+               $('.current a').html(parseInt(currentpage)+1);
+            }
+            if(type == 'prev'){
+                offset = parseInt(currentpage);
+               $('.current a').html((currentpage==1) ? '1' : parseInt(currentpage)-1);
+            }
+            console.log('sdsd',offset);
+            getContent(grade, topic, subTopic, status, currentPage = 2, showEntries = 0, '', offset);
         });
 
     });
@@ -172,7 +193,8 @@
     /**
      * dataTable
      * */
-    function getContent(showEntries = 10, currentPage = 1, grade = '', topic = '', subTopic = '', status = '', search='') {
+    function getContent(grade = '', topic = '', subTopic = '', status = '', search='', currentPage = 1,showEntries = 1, offset =0) {
+       console.log(search);
         $('.course-list').empty();
         $.ajax({
             type: "POST",
@@ -184,15 +206,14 @@
                 topic: topic,
                 subTopic: subTopic,
                 status: status,
+                offset:offset,
                 search: search,
             },
             success: function (response) {
-                console.log(response);
                 const res = JSON.parse(response);
                 console.log(res.recordsFiltered);
                 console.log(res.recordsTotal);
                 console.log(res.totalNoOfPages);
-                console.log(res.data);        
                 
                 $('.total-count').html('Total Content : '+ res.recordsTotal);
                 $('#totalRecordsOfCurrentPage').html(res.recordsFiltered);
@@ -200,11 +221,16 @@
 
                 $('#totalNoOfPages').html(res.totalNoOfPages);
                 $('#currentPage').html(res.currentPage);
-
-                $('.course-list').append(res.courses.join('\n'));
+                if(res.courses.length<1){
+                    $('.course-list').html('No Data Found.');
+                }else {
+                    $('.course-list').append(res.courses.join('\n'));
+                }
+              
                 
             },
         });
     }
+
 
 </script>
