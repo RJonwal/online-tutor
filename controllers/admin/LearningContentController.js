@@ -112,8 +112,8 @@ async function store(req, res) {
             let j = 0;
             for (content of lessons['inner-list']) {
                 var slide = {};
-                img = fileNames[i];
-                let values = Object.values(img);
+                // img = fileNames[i];
+                // let values = Object.values(img);
 
                 slide = {};
                 slide['title'] = content.title;
