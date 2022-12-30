@@ -1,15 +1,16 @@
 const Topic = require('../../models/Topic');
 const SubTopic = require('../../models/SubTopic');
 const Grade = require('../../models/Grade');
+const LearningContent = require('../../models/LearningContent');
+const Lesson = require('../../models/Lesson');
+
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify')
 
-const LearningContent = require('../../models/LearningContent');
-const Lesson = require('../../models/Lesson');
-
 module.exports = {
     index,
+    listing,
     renderSubtopic,
     create,
     createOld,
@@ -35,15 +36,113 @@ module.exports = {
  */
 async function index(req, res) {
     try {
-        let topics = await Topic.find({}).sort({ '_id': -1 });
-        let grades = await Grade.find({}).sort({ '_id': -1 });
-        return res.render('../views/admin/learningContent/index', { topics: topics, grades: grades });
+        let topics = await Topic.find({}).sort({ 'name': 1 });
+        let grades = await Grade.find({}).sort({ 'name': 1 });
+
+
+        let learningContents = await LearningContent.find({ "status": 1 }).sort({ '_id': -1 });
+
+        let totalLearningContent = await LearningContent.find({}).sort({ '_id': -1 }).count();
+        let activeLearningContent = await LearningContent.find({ "status": 1 }).sort({ '_id': -1 }).count();
+        let deactiveLearningContent = await LearningContent.find({ "status": 0 }).sort({ '_id': -1 }).count();
+        const learningContentObject = { 'total': totalLearningContent, 'active': activeLearningContent, 'deactive': deactiveLearningContent }
+
+
+        return res.render('../views/admin/learningContent/index', { topics: topics, grades: grades, learningContentObject: learningContentObject, learningContents: learningContents });
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             message: 'Something went wrong, please try again later.'
         })
     }
+}
+
+/**
+ * listing
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function listing(req, res) {
+    var obj = {};
+    var showEntries = req.body.showEntries;
+    var currentPage = req.body.currentPage;
+    var searchStr = req.body.search;
+
+    console.log(showEntries);
+    console.log(currentPage);
+
+    if (req.body.grade) {
+        obj["grade_id"] = req.body.grade;
+    }
+    if (req.body.main_topic) {
+        obj["topic_id"] = req.body.topic;
+    }
+    if (req.body.subTopic) {
+        obj["sub_topic_id"] = req.body.subTopic;
+    }
+    if (req.body.status) {
+        obj["status"] = req.body.status;
+    }
+    if (req.body.search) {
+        var regex = new RegExp(req.body.search, "i")
+        searchStr = { $or: [{ 'title': regex }] };
+    }
+    else {
+        searchStr = {};
+    }
+
+    var recordsTotal = 0;
+    var recordsFiltered = 0;
+    var totalNoOfPages = 0;
+
+    recordsTotal = await LearningContent.count();
+    recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
+    totalNoOfPages = Math.ceil(recordsTotal / showEntries);
+
+    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(0), 'limit': Number(10) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
+
+    // console.log("recordsTotal => " + recordsTotal);
+    // console.log("recordsFiltered => " + recordsFiltered);
+    // console.log("totalNoOfPages => " + totalNoOfPages);
+
+    // console.log(results);
+
+    var courses = [];
+
+    for (content of results) {
+        let contentStatus = (content.status == 1 ? 'Active' : 'Deactive');
+        let statusClass = (content.status == 1 ? 'status-active' : 'status-deactive');
+        let lessons_ids = content.lesson_ids;
+        let totalSlides = 0;
+        let Durations = 0;
+        let courseImage = '';
+
+        for (lessons of lessons_ids) {
+            totalSlides+=lessons.slides.length;  
+        }
+
+        // if(content.thumbnail)
+        // if (content.thumbnail !='' && fs.existsSync("assets/LearningContent/"+content.title)) { 
+            courseImage = "assets/LearningContent/"+content.title+"/"+content.thumbnail;
+        // }else{
+            courseImage = "/images/course-thumb.jpg";
+        // }
+        
+        course = `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">2.3hr</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="javascript:void(0);">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
+        courses.push(course);
+        totalSlides = 0;
+
+    }
+
+    var data = JSON.stringify({
+        "recordsTotal": recordsTotal,
+        "recordsFiltered": recordsFiltered,
+        "totalNoOfPages": totalNoOfPages,
+        "currentPage": currentPage,
+        "courses": courses
+    });
+
+    return res.send(data);
 }
 
 /**
@@ -83,7 +182,6 @@ async function create(req, res) {
         })
     }
 }
-
 
 /**
  * store learningContent.
@@ -149,7 +247,7 @@ async function store(req, res) {
             title: req.body.title,
             short_description: req.body.short_description,
             thumbnail: req.body.thumbnail,
-            lesson_ids :myLessons,
+            lesson_ids: myLessons,
         };
 
         let learningContent = await LearningContent.create(myContent);
@@ -166,7 +264,6 @@ async function store(req, res) {
     }
 }
 
-
 /**
  * edit learningContent.
  * @param {*} req 
@@ -176,7 +273,6 @@ async function store(req, res) {
 async function edit(req, res) {
 
 }
-
 
 /**
  * update learningContent.
@@ -188,7 +284,6 @@ async function update(req, res) {
 
 }
 
-
 /**
  * delete learningContent
  * @param {*} req 
@@ -198,7 +293,6 @@ async function update(req, res) {
 async function destroy(req, res) {
 
 }
-
 
 /**
  * preview learningContent.

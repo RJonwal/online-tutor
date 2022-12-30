@@ -41,12 +41,12 @@ const slugify_options = {
 const lessonSchema = new mongoose.Schema({
     title: {
         type: String,
-        unique: true,
+        // unique: true,
         required: true,
     },
     slug: {
         type: String,
-        unique: true,
+        // unique: true,
     },
     slides: [{
         title: {

@@ -2,19 +2,25 @@
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-3">
             <div class="stcard-box">
-                <span class="shade1">35</span>
+                <span class="shade1">
+                    <%=learningContentObject.total%>
+                </span>
                 <h3 class="title-text mb-0">Total Content</h3>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-3">
             <div class="stcard-box">
-                <span class="shade2">30</span>
+                <span class="shade2">
+                    <%=learningContentObject.active%>
+                </span>
                 <h3 class="title-text mb-0">Active Content</h3>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-3">
             <div class="stcard-box">
-                <span class="shade3">02</span>
+                <span class="shade3">
+                    <%=learningContentObject.deactive%>
+                </span>
                 <h3 class="title-text mb-0">Deactive Content</h3>
             </div>
         </div>
@@ -25,13 +31,23 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card-block mb-30">
-        <h3 class="title-text">Filter Content</h3>
+        <h3 class="title-text">Filter Grades</h3>
         <ul class="filter-row">
             <li class="filter-col">
-                <select class="form-control" id="topics" tabindex="-1" single>
-                    <option value="">Select Topic</option>
+                <select class="form-control select2" id="grades" tabindex="-1" single>
+                    <option value="">Select Grade</option>
+                    <% for(grades of grades) { %>
+                        <option value="<%=grades.id%>">
+                            <%=grades.name%>
+                        </option>
+                        <% } %>
+                </select>
+            </li>
+            <li class="filter-col">
+                <select class="form-control select2" id="topics" tabindex="-1" single>
+                    <option value="">Select Main Topic</option>
                     <% for(topic of topics) { %>
                         <option value="<%=topic.id%>">
                             <%=topic.name%>
@@ -40,22 +56,12 @@
                 </select>
             </li>
             <li class="filter-col">
-                <select class="form-control" id="subTopic" tabindex="-1" single>
-                   
+                <select class="form-control select2" id="subTopics" tabindex="-1" single>
+                    <option value="">Select Sub Topic</option>
                 </select>
             </li>
             <li class="filter-col">
-                <select class="form-control" id="grades" tabindex="-1" single>
-                    <option value="">Select Grade</option>
-                    <% for(grade of grades) { %>
-                        <option value="<%=grade.id%>">
-                            <%=grade.name%>
-                        </option>
-                        <% } %>
-                </select>
-            </li>
-            <li class="filter-col">
-                <select class="form-control" id="status" tabindex="-1" single>
+                <select class="form-control select2" id="status" tabindex="-1" single>
                     <option value="">Select Status</option>
                     <option value="1">Active</option>
                     <option value="0">Deactive</option>
@@ -69,241 +75,136 @@
     </div>
 
     <div class="card-block text-center text-md-left">
+
         <div class="row">
             <div class="col-sm-12 col-md-4 align-self-center">
-                <h3 class="title-text mb-0">My Content <span class="total-count">Total Content : 3</span></h3>
+                <h3 class="title-text mb-0">My Content <span class="total-count">Total Content :
+                        <%=learningContentObject.total%>
+                    </span></h3>
             </div>
             <div class="col-sm-12 col-md-8 align-self-center">
                 <div class="course-pagination">
                     <div class="input-group my-3 m-md-0 input-search">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn" type="button"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                     <ul class="pagination mb-0 justify-content-end">
-                        <li><span class="showing-item">Showing 3 of 3</span></li>
+                        <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">3</span> of <span id="totalRecords">3</span></li>
                         <li class="page-item">
                             <a class="page-link prev" href="#"><i class="fa fa-angle-left"></i></a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item current"><a class="page-link" href="#">1</a></li>
                         <li class="page-item">
                             <a class="page-link next" href="#"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12" id="myContent">
                 <ul class="course-list">
-                    <li>
-                        <div class="course-thumb">
-                            <img src="/images/course-thumb.jpg">
-                        </div>
-                        <div class="course-description">
-                            <div class="top-dis">
-                                <h3 class="title-text">Early Reading Program</h3>
-                                <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
-                            </div>
-                            <div class="course-detail">
-                                <div class="detail-col">
-                                    <p class="p-light">Category</p>
-                                    <p class="p-dark">English</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Lesson</p>
-                                    <p class="p-dark">05</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Slides</p>
-                                    <p class="p-dark">20</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Practice</p>
-                                    <p class="p-dark">15</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Challenges</p>
-                                    <p class="p-dark">10</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Duration</p>
-                                    <p class="p-dark">2.3hr</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Status</p>
-                                    <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <img src="/images/menu-dot.svg" alt="Menu">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="javascript:void(0);">View</a>
-                                <a href="javascript:void(0);">Edit</a>
-                                <a class="text-danger" href="javascript:void(0);">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="course-thumb">
-                            <img src="/images/course-thumb.jpg">
-                        </div>
-                        <div class="course-description">
-                            <div class="top-dis">
-                                <h3 class="title-text">Early Reading Worksheets</h3>
-                                <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
-                            </div>
-                            <div class="course-detail">
-                                <div class="detail-col">
-                                    <p class="p-light">Category</p>
-                                    <p class="p-dark">English</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Lesson</p>
-                                    <p class="p-dark">05</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Slides</p>
-                                    <p class="p-dark">20</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Practice</p>
-                                    <p class="p-dark">15</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Challenges</p>
-                                    <p class="p-dark">10</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Duration</p>
-                                    <p class="p-dark">2.3hr</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Status</p>
-                                    <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <img src="/images/menu-dot.svg" alt="Menu">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="javascript:void(0);">View</a>
-                                <a href="javascript:void(0);">Edit</a>
-                                <a class="text-danger" href="javascript:void(0);">Delete</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="course-thumb">
-                            <img src="/images/course-thumb.jpg">
-                        </div>
-                        <div class="course-description">
-                            <div class="top-dis">
-                                <h3 class="title-text">Spelling and Vocabulary</h3>
-                                <p>Lorem ipsum dolor sit amet secteturAmet eu id sed nibh pellentesque.</p>
-                            </div>
-                            <div class="course-detail">
-                                <div class="detail-col">
-                                    <p class="p-light">Category</p>
-                                    <p class="p-dark">English</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Lesson</p>
-                                    <p class="p-dark">05</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Slides</p>
-                                    <p class="p-dark">20</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Practice</p>
-                                    <p class="p-dark">15</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Challenges</p>
-                                    <p class="p-dark">10</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Duration</p>
-                                    <p class="p-dark">2.3hr</p>
-                                </div>
-                                <div class="detail-col">
-                                    <p class="p-light">Status</p>
-                                    <p class="p-dark"><a class="status-active" href="javascript:void(0);">Active</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <img src="/images/menu-dot.svg" alt="Menu">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="javascript:void(0);">View</a>
-                                <a href="javascript:void(0);">Edit</a>
-                                <a class="text-danger" href="javascript:void(0);">Delete</a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
+
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
+    $(document).ready(function () {
+        $(".select2").select2({
+            allowClear: false,
+        });
 
-    $("#topics").select2({
-        placeholder: "Select Topic",
-        allowClear: false,
+        getContent();
+
+        $('#topics').change(function () {
+            let topicId = $(this).val();
+            loadSubTopic(topicId);
+        })
+
+        $(".reset").click(function () {
+            $("#grades").val(null).trigger("change");
+            $("#topics").val(null).trigger("change");
+            $('#subTopics').empty();
+            $("#status").val(null).trigger("change");
+        });
+
+        $(".filter").click(function () {
+            let grade = $('#grades').val();
+            let topic = $('#topics').val();
+            let subTopic = $('#subTopics').val();
+            let status = $('#status').val();
+            dataTable(grade, topic, subTopic, status);
+        });
+
     });
-    $("#subTopic").select2({
-        placeholder: "Select Sub Topic",
-        allowClear: false,
-    });
-    $("#grades").select2({
-        placeholder: "Select Grade",
-        allowClear: false,
-    });
-    $("#status").select2({
-        placeholder: "Select Status",
-        allowClear: false,
-    });
-    $(".reset").click(function () {
-        $("#topics").val(null).trigger("change");
-        $('#subTopic').empty();
-        $("#grades").val(null).trigger("change");
-        $("#status").val(null).trigger("change");
-        
-    });
-    $('#topics').change(function(){
-        let topicId = $(this).val();
-        loadSubTopic(topicId);
-    })
-});
+
+    /**
+     * loadSubTopic
+     * */
+    function loadSubTopic(topicId) {
+        $.ajax({
+            type: "POST",
+            url: '/learning-content/renderSubtopic',
+            data: {
+                id: topicId,
+            },
+            success: function (response) {
+                $('#subTopics').empty();
+                console.log(response.length);
+                if (response.length > 0) {
+                    var newOption = new Option("Select Sub Topic", "", false, false);
+                    $('#subTopics').append(newOption).trigger('change');
+                    for (res of response) {
+                        newOption = new Option(res.name, res._id, false, false);
+                        $('#subTopics').append(newOption).trigger('change');
+                    }
+                } else {
+                    $('#subTopics').html('No results found.').trigger('change');
+                }
+            },
+        });
+    }
 
 
-function loadSubTopic(topicId){
-    $.ajax({
-        type: "POST",
-        url: '/learning-content/renderSubtopic',
-        data: {
-            id: topicId,
-        },
-        success: function (response) {
-            $('#subTopic').empty();
-            for(res of response){
-                var newOption = new Option(res.name, res._id, false, false);
-                $('#subTopic').append(newOption).trigger('change');
-            }
-        },
-    });
-}
+    /**
+     * dataTable
+     * */
+    function getContent(showEntries = 10, currentPage = 1, grade = '', topic = '', subTopic = '', status = '', search='') {
+        $('.course-list').empty();
+        $.ajax({
+            type: "POST",
+            url: '/learning-content/listing',
+            data: {
+                showEntries: showEntries,
+                currentPage: currentPage,
+                grade: grade,
+                topic: topic,
+                subTopic: subTopic,
+                status: status,
+                search: search,
+            },
+            success: function (response) {
+                console.log(response);
+                const res = JSON.parse(response);
+                console.log(res.recordsFiltered);
+                console.log(res.recordsTotal);
+                console.log(res.totalNoOfPages);
+                console.log(res.data);        
+                
+                $('.total-count').html('Total Content : '+ res.recordsTotal);
+                $('#totalRecordsOfCurrentPage').html(res.recordsFiltered);
+                $('#totalRecords').html(res.recordsTotal);
+
+                $('#totalNoOfPages').html(res.totalNoOfPages);
+                $('#currentPage').html(res.currentPage);
+
+                $('.course-list').append(res.courses.join('\n'));
+                
+            },
+        });
+    }
+
 </script>

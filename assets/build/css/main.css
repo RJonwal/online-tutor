@@ -1163,6 +1163,16 @@ span.total-count {
     border-radius: 3px;
 }
 
+.course-list .course-description .course-detail .detail-col .status-deactive {
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 400;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
 .course-list .course-description p {
     font-size: 12px;
     font-weight: 400;

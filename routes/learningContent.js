@@ -48,6 +48,7 @@ const storageContentImg = multer.diskStorage({
         callback(null, newFileName);
     }
 });
+
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
@@ -68,10 +69,12 @@ var uploadContentImgImage = multer({
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
 router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(), learningContentController.store);
+router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
+router.post('/listing', passport.checkAuthentication, learningContentController.listing);
+
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
-router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
