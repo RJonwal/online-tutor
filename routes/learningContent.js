@@ -17,15 +17,13 @@ const storageContentImg = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        const newFileName = Date.now() + fileName;
+        const newFileName = Date.now() +'-'+fileName;
         callback(null, newFileName);
     }
 });
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
-
-
         // if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         //     callback(null, true);
         // }
@@ -37,13 +35,12 @@ var uploadContentImgImage = multer({
     }
 });
 
-
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
 router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(), learningContentController.store);
 router.post('/listing', passport.checkAuthentication, learningContentController.listing);
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
-router.get('/viewCourses', passport.checkAuthentication, learningContentController.viewCourses);
+router.get('/viewCourses/:id', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
 router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);

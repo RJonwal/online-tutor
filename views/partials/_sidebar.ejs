@@ -102,40 +102,40 @@
           <% } %>
         </ul>
       </div>
-
-    
-      <!-- <div class="courses-sidebar">
-        <a href="" class="back-course"><img class="mr-2" src="/images/arrow-left.svg" alt="img"> Courses List</a>
-        <div class="accordion" id="section1">
+      
+      <div class="courses-sidebar">
+        <a href="/learning-content" class="back-course"><img class="mr-2" src="/images/arrow-left.svg" alt="img"> Courses List</a>
+        <div class="accordion" id="lesson-accordion">
           <div class="card">
-          <div class="card-header collapsed" data-toggle="collapse" data-target="#lessons" aria-expanded="true" aria-controls="lessons">
-            <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img"> Lessons</div>
-            <div class="right-icons"><img src="/images/arrowdown.svg" alt="img"></div>
-          </div> 
-          <div id="lessons" class="collapse show" data-parent="#section1">
-            <ul class="slide-action">
-              <li class="active">
-                <a href="#" data-slide="1">English Developing People, Leading
-                Teams & Managing Processes</a>
-              </li> 
-              <li> 
-                <a href="#" data-slide="2">English Developing People, Leading
-                Teams & Managing Processes</a>
-              </li> 
-              <li> 
-                <a href="#" data-slide="3">English Developing People, Leading
-                Teams & Managing Processes</a>
-              </li>
-              <li>  
-                <a href="#" data-slide="4">English Developing People, Leading
-                Teams & Managing Processes</a>
-              </li>
-              </ul>
-          </div> 
+            <% let i = 0; for(lessons of learningContent) { i++ %>
+              <div class="card-header collapsed" data-toggle="collapse" data-target="#lessons-<%=i%>" aria-expanded="true" aria-controls="lessons-<%=i%>">
+                <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img"> 
+                  <span style="font-size: 15px;"><%=lessons.title%></span>
+                </div>
+                <div class="right-icons"><img src="/images/arrowdown.svg" alt="img"></div>
+              </div> 
+              <div id="lessons-<%=i%>" class="collapse" data-parent="#lesson-accordion">
+                <div class="accordion" id="slide-accordion">
+                  <div class="card-header collapsed" data-toggle="collapse" data-target="#slideAccordion"
+                  aria-expanded="false" aria-controls="slideAccordion">
+                    <div class="slide-heading">Information Slides</div>
+                    <div class="right-icons"><img src="/images/arrowdown.svg" alt="img"></div>
+                  </div> 
+                  <div class="collapse" id="slideAccordion">
+                    <ul class="slide-action">
+                      <% let slideIndex = 0; for(slide of lessons.slides) { slideIndex++ %>
+                      <li class="active">
+                        <a href="#" data-slide="<%=slideIndex%>"><%=slide.title%></a>
+                      </li> 
+                      <%  } %>
+                    </ul>
+                  </div>
+                </div>
+              </div> 
+            <% } %>
           </div>
-          
         </div> 
-      </div> -->
+      </div>
 
 
 

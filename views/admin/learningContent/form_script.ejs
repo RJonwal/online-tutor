@@ -67,6 +67,15 @@
         theme: 'mobile'
       },
       toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+      
+      setup: function (editor) {
+        editor.on("init", function () {
+          // this.setContent(
+          //   "The init function knows on which editor its called - this is for " +
+          //   editor.id
+          // );
+        });
+      },
     });
 
     $('#thumbnail').dropify({
@@ -369,8 +378,10 @@
 
   $("#createContent").submit(function (e) {
     e.preventDefault();
+    tinymce.triggerSave();
     var form = $('#createContent');
     var formData = new FormData(form[0]);
+    
     // var myContent = tinymce.get("description-1-0").getContent();
     // console.log(myContent); return false ;
     formData.append('thumbnail', this.new_attachments)

@@ -12,9 +12,9 @@ module.exports.dateFormate = function(req, res, next){
 }
 module.exports.loggedInUserDetails = function(req, res, next){
         global.user_detail = res.locals.user;
+        global.learningContent = [];
         next();
 }
 module.exports.permission = function(req, res, next){
-    
     next();
 }

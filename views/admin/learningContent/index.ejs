@@ -74,8 +74,9 @@
         </ul>
     </div>
 
-    <div class="card-block text-center text-md-left">
 
+    <div class="card-block text-center text-md-left">
+       
         <div class="row">
             <div class="col-sm-12 col-md-4 align-self-center">
                 <h3 class="title-text mb-0">My Content <span class="total-count">Total Content :
@@ -103,7 +104,11 @@
                 </div>
             </div>
             <div class="col-sm-12" id="myContent">
+                <div class="loader" style="display:block;">
+                    <%- include('../../partials/_loader'); %>
+                </div>
                 <ul class="course-list">
+
                 </ul>
             </div>
 
@@ -198,6 +203,7 @@
      * */
     function getContent(grade = '', topic = '', subTopic = '', status = '', search='', currentPage = 1,showEntries = 1, offset=0) {
         $('.course-list').empty();
+        $('.loader').show();
         $.ajax({
             type: "POST",
             url: '/learning-content/listing',
@@ -213,7 +219,7 @@
             },
             success: function (response) {
                 const res = JSON.parse(response);
-                console.log(res);
+                $('.loader').hide();
                 $('.total-count').html('Total Content : '+ res.recordsTotal);
                 $('#totalRecordsOfCurrentPage').html(res.currentPage);
                 $('#totalRecords').html((res.totalNoOfPages==0)? 1: res.totalNoOfPages);
@@ -225,7 +231,6 @@
                 }else {
                     $('.course-list').html(res.courses);
                 }
-
                 //deactive next prev buttion on pagination
                 $('.previous-btn').css('pointer-events','all');
                 $('.next-btn').css('pointer-events','all');

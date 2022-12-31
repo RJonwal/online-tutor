@@ -90,7 +90,6 @@ async function listing(req, res) {
     else {
         searchStr = {};
     }
-    console.log(obj);
     var recordsTotal = 0;
     var recordsFiltered = 0;
     var totalNoOfPages = 0;
@@ -99,8 +98,7 @@ async function listing(req, res) {
     recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
     totalNoOfPages = Math.ceil(recordsFiltered / showEntries);
 
-    console.log(offset,showEntries);
-    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
+    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids').sort({created_at : -1});
     //console.log(results);
     // console.log("recordsTotal => " + recordsTotal);
     // console.log("recordsFiltered => " + recordsFiltered);
@@ -126,15 +124,12 @@ async function listing(req, res) {
             }
         }
         var totalDuration = globalHelper.calculateDuration(durations);
-        // if(content.thumbnail)
-        // if (content.thumbnail !='' && fs.existsSync("assets/LearningContent/"+content.title)) { 
-            courseImage = "assets/LearningContent/"+content.title+"/"+content.thumbnail;
-        // }else{
+         if (content.thumbnail !='' && fs.existsSync("assets/LearningContent/")) { 
+            courseImage = "/LearningContent/"+content.thumbnail;
+         }else{
             courseImage = "/images/course-thumb.jpg";
-        // }
-        
-        course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="javascript:void(0);">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
-
+         }
+        course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="/learning-content/viewCourses/${content.id}">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
         totalSlides = 0;
         totalDuration = 0;
     }
@@ -330,7 +325,16 @@ async function previewCourses(req, res) {
  */
 async function viewCourses(req, res) {
     try {
-        return res.render('../views/admin/learningContent/viewCourses');
+        let courseId = req.params.id;
+        let results = await LearningContent.find({ "_id": courseId }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
+        let durations = [];
+        let totalSlides = 0;
+        let i =0;
+        global.learningContent =results[0].lesson_ids;
+        var totalDuration = globalHelper.calculateDuration(durations);
+        if(results){
+            return res.render('../views/admin/learningContent/viewCourses',{content:results[0].lesson_ids[0],fs:fs,totalDuration:totalDuration});
+        }
     } catch (e) {
         console.log(e);
         return res.status(500).json({
