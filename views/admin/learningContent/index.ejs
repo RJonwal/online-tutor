@@ -129,6 +129,7 @@
             $("#topics").val(null).trigger("change");
             $('#subTopics').empty();
             $("#status").val(null).trigger("change");
+            getContent();
         });
 
         $(".filter").click(function () {
@@ -215,7 +216,7 @@
                 console.log(res);
                 $('.total-count').html('Total Content : '+ res.recordsTotal);
                 $('#totalRecordsOfCurrentPage').html(res.currentPage);
-                $('#totalRecords').html(res.totalNoOfPages);
+                $('#totalRecords').html((res.totalNoOfPages==0)? 1: res.totalNoOfPages);
                 //$('#totalRecords').html(res.recordsFiltered);
                 //$('#totalNoOfPages').html(res.totalNoOfPages);
                 $('.current a').html(res.currentPage);

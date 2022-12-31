@@ -90,6 +90,7 @@ async function listing(req, res) {
     else {
         searchStr = {};
     }
+    console.log(obj);
     var recordsTotal = 0;
     var recordsFiltered = 0;
     var totalNoOfPages = 0;
