@@ -3,6 +3,9 @@ const SubTopic = require('../../models/SubTopic');
 const Grade = require('../../models/Grade');
 const LearningContent = require('../../models/LearningContent');
 const Lesson = require('../../models/Lesson');
+const globalHelper = require('../../_helper/GlobalHelper');
+
+
 
 const fs = require('fs');
 let session = require('express-session');
@@ -66,7 +69,6 @@ async function listing(req, res) {
     var obj = {};
     var showEntries = req.body.showEntries;
     var offset = parseInt(req.body.offset);
-    console.log(offset);
     var currentPage = req.body.currentPage;
     var searchStr = req.body.search;
     if (req.body.grade) {
@@ -94,9 +96,9 @@ async function listing(req, res) {
 
     recordsTotal = await LearningContent.count();
     recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
-    totalNoOfPages = Math.ceil(recordsTotal / showEntries);
-    console.log('loaded');
-    console.log(obj,searchStr,showEntries,offset)
+    totalNoOfPages = Math.ceil(recordsFiltered / showEntries);
+
+    console.log(offset,showEntries);
     let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
     //console.log(results);
     // console.log("recordsTotal => " + recordsTotal);
@@ -106,19 +108,23 @@ async function listing(req, res) {
     // console.log(results);
 
     var courses = [];
-
+    let course = '';
     for (content of results) {
         let contentStatus = (content.status == 1 ? 'Active' : 'Deactive');
         let statusClass = (content.status == 1 ? 'status-active' : 'status-deactive');
         let lessons_ids = content.lesson_ids;
         let totalSlides = 0;
-        let Durations = 0;
+        let durations = [];
         let courseImage = '';
-
+        let i =0;
         for (lessons of lessons_ids) {
-            totalSlides+=lessons.slides.length;  
+            totalSlides += lessons.slides.length;
+            for (slide of lessons.slides) {
+                durations[i] = slide.duration;
+                i++;
+            }
         }
-
+        var totalDuration = globalHelper.calculateDuration(durations);
         // if(content.thumbnail)
         // if (content.thumbnail !='' && fs.existsSync("assets/LearningContent/"+content.title)) { 
             courseImage = "assets/LearningContent/"+content.title+"/"+content.thumbnail;
@@ -126,9 +132,10 @@ async function listing(req, res) {
             courseImage = "/images/course-thumb.jpg";
         // }
         
-        course = `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">2.3hr</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="javascript:void(0);">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
-        courses.push(course);
+        course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="javascript:void(0);">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);">Delete</a></div></div></li>`;
+
         totalSlides = 0;
+        totalDuration = 0;
     }
 
     var data = JSON.stringify({
@@ -136,7 +143,8 @@ async function listing(req, res) {
         "recordsFiltered": recordsFiltered,
         "totalNoOfPages": totalNoOfPages,
         "currentPage": currentPage,
-        "courses": courses
+        "courses": course,
+        "result":results.length,
     });
 
     return res.send(data);

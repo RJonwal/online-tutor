@@ -92,11 +92,11 @@
                     </div>
                     <ul class="pagination mb-0 justify-content-end">
                         <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">1</span> of <span id="totalRecords">2</span></li>
-                        <li class="page-item">
+                        <li class="page-item previous-btn">
                             <a class="page-link paging" data-type="prev"><i class="fa fa-angle-left"></i></a>
                         </li>
                         <li class="page-item current"><a class="page-link">1</a></li>
-                        <li class="page-item">
+                        <li class="page-item next-btn">
                             <a class="page-link paging" data-type="next"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
@@ -145,23 +145,21 @@
             let topic = $('#topics').val();
             let subTopic = $('#subTopics').val();
             let status = $('#status').val();
+            let search = $('#search').val();
             let type = $(this).data('type');
             let currentpage = $('.current a').html();
             let totalPage = $('#totalRecords').text();
-            let offset;
             if(type == 'next'){
                 page_no = (currentpage==totalPage) ? totalPage : parseInt(currentpage)+1;
-                offset = (currentpage==totalPage) ? currentpage-1 : parseInt(currentpage);
-               $('.current a').html(page_no);
+               //$('.current a').html(page_no);
                $('#totalRecordsOfCurrentPage').html(page_no);
             }
             if(type == 'prev'){
-                offset = parseInt(currentpage)-1;
                 page_no = (currentpage==1) ? '1' : parseInt(currentpage)-1;
-               $('.current a').html(page_no);
+               //$('.current a').html(page_no);
                $('#totalRecordsOfCurrentPage').html(page_no);
             }
-            getContent(grade, topic, subTopic, status, '',currentPage = page_no, showEntries = 1, offset);
+            getContent(grade, topic, subTopic, status, search,currentPage = page_no, showEntries = 1, page_no-1);
         });
 
     });
@@ -214,22 +212,28 @@
             },
             success: function (response) {
                 const res = JSON.parse(response);
-                console.log(res.recordsFiltered);
-                console.log(res.recordsTotal);
-                console.log(res.totalNoOfPages);
-                
+                console.log(res);
                 $('.total-count').html('Total Content : '+ res.recordsTotal);
-                //$('#totalRecordsOfCurrentPage').html(res.recordsFiltered);
-                $('#totalRecords').html(res.recordsTotal);
-
-                $('#totalNoOfPages').html(res.totalNoOfPages);
-                $('#currentPage').html(res.currentPage);
+                $('#totalRecordsOfCurrentPage').html(res.currentPage);
+                $('#totalRecords').html(res.totalNoOfPages);
+                //$('#totalRecords').html(res.recordsFiltered);
+                //$('#totalNoOfPages').html(res.totalNoOfPages);
+                $('.current a').html(res.currentPage);
                 if(res.courses.length<1){
                     $('.course-list').html('No Data Found.');
                 }else {
-                    $('.course-list').append(res.courses.join('\n'));
+                    $('.course-list').html(res.courses);
                 }
-              
+
+                //deactive next prev buttion on pagination
+                $('.previous-btn').css('pointer-events','all');
+                $('.next-btn').css('pointer-events','all');
+                if(res.currentPage==1){
+                    $('.previous-btn').css('pointer-events','none');
+                }
+                if(res.currentPage==res.totalNoOfPages){
+                    $('.next-btn').css('pointer-events','none');
+                }
                 
             },
         });
