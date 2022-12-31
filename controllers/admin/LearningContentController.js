@@ -65,7 +65,7 @@ async function index(req, res) {
 async function listing(req, res) {
     var obj = {};
     var showEntries = req.body.showEntries;
-    var offset = req.body.offset;
+    var offset = parseInt(req.body.offset);
     console.log(offset);
     var currentPage = req.body.currentPage;
     var searchStr = req.body.search;
@@ -88,8 +88,6 @@ async function listing(req, res) {
     else {
         searchStr = {};
     }
-    console.log(req.body.search);
-
     var recordsTotal = 0;
     var recordsFiltered = 0;
     var totalNoOfPages = 0;
@@ -97,9 +95,10 @@ async function listing(req, res) {
     recordsTotal = await LearningContent.count();
     recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
     totalNoOfPages = Math.ceil(recordsTotal / showEntries);
-
-    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(parseInt(offset)), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
-
+    console.log('loaded');
+    console.log(obj,searchStr,showEntries,offset)
+    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
+    //console.log(results);
     // console.log("recordsTotal => " + recordsTotal);
     // console.log("recordsFiltered => " + recordsFiltered);
     // console.log("totalNoOfPages => " + totalNoOfPages);

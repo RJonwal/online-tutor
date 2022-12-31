@@ -91,13 +91,13 @@
                         </span>
                     </div>
                     <ul class="pagination mb-0 justify-content-end">
-                        <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">3</span> of <span id="totalRecords">3</span></li>
+                        <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">1</span> of <span id="totalRecords">2</span></li>
                         <li class="page-item">
-                            <a class="page-link paging" data-type="prev" href="#" ><i class="fa fa-angle-left"></i></a>
+                            <a class="page-link paging" data-type="prev"><i class="fa fa-angle-left"></i></a>
                         </li>
-                        <li class="page-item current"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item current"><a class="page-link">1</a></li>
                         <li class="page-item">
-                            <a class="page-link paging" data-type="next" href="#"><i class="fa fa-angle-right"></i></a>
+                            <a class="page-link paging" data-type="next"><i class="fa fa-angle-right"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -147,17 +147,21 @@
             let status = $('#status').val();
             let type = $(this).data('type');
             let currentpage = $('.current a').html();
+            let totalPage = $('#totalRecords').text();
             let offset;
             if(type == 'next'){
-                offset = parseInt(currentpage);
-               $('.current a').html(parseInt(currentpage)+1);
+                page_no = (currentpage==totalPage) ? totalPage : parseInt(currentpage)+1;
+                offset = (currentpage==totalPage) ? currentpage-1 : parseInt(currentpage);
+               $('.current a').html(page_no);
+               $('#totalRecordsOfCurrentPage').html(page_no);
             }
             if(type == 'prev'){
-                offset = parseInt(currentpage);
-               $('.current a').html((currentpage==1) ? '1' : parseInt(currentpage)-1);
+                offset = parseInt(currentpage)-1;
+                page_no = (currentpage==1) ? '1' : parseInt(currentpage)-1;
+               $('.current a').html(page_no);
+               $('#totalRecordsOfCurrentPage').html(page_no);
             }
-            console.log('sdsd',offset);
-            getContent(grade, topic, subTopic, status, currentPage = 2, showEntries = 0, '', offset);
+            getContent(grade, topic, subTopic, status, '',currentPage = page_no, showEntries = 1, offset);
         });
 
     });
@@ -193,8 +197,7 @@
     /**
      * dataTable
      * */
-    function getContent(grade = '', topic = '', subTopic = '', status = '', search='', currentPage = 1,showEntries = 1, offset =0) {
-       console.log(search);
+    function getContent(grade = '', topic = '', subTopic = '', status = '', search='', currentPage = 1,showEntries = 1, offset=0) {
         $('.course-list').empty();
         $.ajax({
             type: "POST",
@@ -216,7 +219,7 @@
                 console.log(res.totalNoOfPages);
                 
                 $('.total-count').html('Total Content : '+ res.recordsTotal);
-                $('#totalRecordsOfCurrentPage').html(res.recordsFiltered);
+                //$('#totalRecordsOfCurrentPage').html(res.recordsFiltered);
                 $('#totalRecords').html(res.recordsTotal);
 
                 $('#totalNoOfPages').html(res.totalNoOfPages);
