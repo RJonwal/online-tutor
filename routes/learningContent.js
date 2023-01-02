@@ -42,6 +42,7 @@ router.post('/listing', passport.checkAuthentication, learningContentController.
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses/:id', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
+router.get('/destroy/:id', passport.checkAuthentication, learningContentController.destroy);
 router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);
