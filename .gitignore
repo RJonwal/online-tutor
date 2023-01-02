@@ -1,2 +1,7 @@
 /node_modules
-/asset/LearningContent
+/assets/LearningContent    
+/assets/LearningContent/* 
+/assets/ProfileImage    
+/assets/ProfileImage/* 
+/assets/TopicImage    
+/assets/TopicImage/* 
