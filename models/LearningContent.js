@@ -25,6 +25,7 @@ const learningContentSchema = new mongoose.Schema({
     sub_topic_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'subTopics',
+        default: null,   
         transform: sub_topic_id => sub_topic_id == null ? '' : sub_topic_id
     },
     title: {
