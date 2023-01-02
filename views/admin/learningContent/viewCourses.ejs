@@ -18,14 +18,16 @@
   <div class="card-block mb-30">
     
     <div class="tab-content">
-      <div class="slide-duration">
-        <h3 class="title-text mb-0">Total Duration</h3>
-        <span class="the-timer"><i class="fa fa-clock-o mr-1"></i>2:00 hrs</span>
-      </div>
       <div class="tab-pane fade show active" id="chp1" role="tabpanel" aria-labelledby="chp1-tab">
         <div class="slideshow">
           <% for(slides of content.slides){ %>
           <div class="item">
+            <div class="row">
+              <div class="slide-duration">
+                <h3 class="title-text mb-0">Total Duration </h3>
+                <span class="the-timer"><i class="fa fa-clock-o"></i> <%=slides.duration%> hrs</span>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-12 col-md-7">
                 <h3><%=slides.title%></h3>
@@ -34,21 +36,22 @@
                   <h3 class="title-text mb-3">Attachment</h3>
                   <div class="row">
                     <div class="col-sm-12 col-md-4">
-                      <a class="attch-items" href="/images/lesson01.pdf" target="_blank">Lesson 01</a>
+                      <% if(slides.attachments) { %>
+                      <a class="attch-items" href="/LearningContent/<%=slides.attachments%>" target="_blank">Lesson 01</a>
+                      <% } %>
                     </div>
                   </div>
                 </div>
               </div>
+              
+              <% if (slides.video !='') {  %>
               <div class="col-sm-12 col-md-5">
                 <div class="preview-thumb">
-                  <% if (slides.video !='') {  %>
-                    <img src="/LearningContent/<%=slides.video%>" class="img-fluid w-100">
-                  <% }else{ %>
-                    <img src="/images/course-thumb.jpg" class="img-fluid w-100">
-                  <% } %>
-                 
+                  <video width="320" height="240" loop autoplay muted controls>
+                    <source src="/LearningContent/<%=slides.video%>" type="video/mp4">
                 </div>
               </div>
+              <% } %>
             </div>
           </div>
           <% } %>

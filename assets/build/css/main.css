@@ -1941,6 +1941,7 @@ span.total-count {
     max-width: 300px;
     background: var(--lightgray);
     border-radius: 0 0 5px 5px;
+    margin-top:14px;
 }
 .slide-duration .the-timer{
     margin-left: 10px;
