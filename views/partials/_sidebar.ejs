@@ -77,22 +77,27 @@
               <li><a href="/subTopics">Sub Topics</a></li>
             </ul>
           </li>
-          <% } if(user_detail.role ==1 || user_detail.role ==2) { %>
+          <% }%>
           <li>
             <a><span class="icon"><img src="/images/courses.svg"></span> <span class="link-title">Learning
                 Content</span> <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="/learning-content">Content List</a></li>
+              <% if(user_detail.role ==1 || user_detail.role ==2) { %>
               <li><a href="/learning-content/create">Add Content</a></li>
+              <% } %>
               <!-- <li><a href="/learning-content/createOld">Old Content</a></li> -->
             </ul>
           </li>
+          
+          <% if(user_detail.role !=3) { %>
           <li>
             <a href="javascript:void(0);">
               <span class="icon"><img src="/images/assessment.svg"></span> <span class="link-title">Assessments</span>
             </a>
           </li>
           <% } %>
+
           <% if(user_detail.role !=1) { %>
           <li>
             <a href="javascript:void(0);">
