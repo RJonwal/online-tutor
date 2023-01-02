@@ -108,7 +108,7 @@
         <div class="accordion" id="lesson-accordion">
           <div class="card">
             <% let i = 0; for(lessons of learningContent) { i++ %>
-              <div class="card-header collapsed" data-toggle="collapse" data-target="#lessons-<%=i%>" aria-expanded="true" aria-controls="lessons-<%=i%>">
+              <div class="card-header collapsed slider-menu" data-toggle="collapse" data-target="#lessons-<%=i%>" aria-expanded="true" data-id="<%=lessons.id%>" aria-controls="lessons-<%=i%>">
                 <div class="left-heading"><img class="mr-2" src="/images/lessons.svg" alt="img"> 
                   <span style="font-size: 15px;"><%=lessons.title%></span>
                 </div>
@@ -122,7 +122,7 @@
                     <div class="right-icons"><img src="/images/arrowdown.svg" alt="img"></div>
                   </div> 
                   <div class="collapse" id="slideAccordion">
-                    <ul class="slide-action">
+                    <ul class=" slide-action">
                       <% let slideIndex = 0; for(slide of lessons.slides) { slideIndex++ %>
                       <li class="active">
                         <a href="#" data-slide="<%=slideIndex%>"><%=slide.title%></a>
