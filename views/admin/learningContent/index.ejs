@@ -85,13 +85,15 @@
             <div class="col-sm-12 col-md-8 align-self-center">
                 <div class="course-pagination">
                     <div class="input-group my-3 m-md-0 input-search">
-                        <input type="text" name="search" id="search" class="form-control" placeholder="Search..." onkeyup="getContent('','','','',this.value.trim())">
+                        <input type="text" name="search" id="search" class="form-control" placeholder="Search..."
+                            onkeyup="getContent('','','','',this.value.trim())">
                         <span class="input-group-btn">
                             <button class="btn" type="button"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                     <ul class="pagination mb-0 justify-content-end">
-                        <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">1</span> of <span id="totalRecords">2</span></li>
+                        <li><span class="showing-item">Showing <span id="totalRecordsOfCurrentPage">1</span> of <span
+                                    id="totalRecords">2</span></li>
                         <li class="page-item previous-btn">
                             <a class="page-link paging" data-type="prev"><i class="fa fa-angle-left"></i></a>
                         </li>
@@ -154,17 +156,17 @@
             let type = $(this).data('type');
             let currentpage = $('.current a').html();
             let totalPage = $('#totalRecords').text();
-            if(type == 'next'){
-                page_no = (currentpage==totalPage) ? totalPage : parseInt(currentpage)+1;
-               //$('.current a').html(page_no);
-               $('#totalRecordsOfCurrentPage').html(page_no);
+            if (type == 'next') {
+                page_no = (currentpage == totalPage) ? totalPage : parseInt(currentpage) + 1;
+                //$('.current a').html(page_no);
+                $('#totalRecordsOfCurrentPage').html(page_no);
             }
-            if(type == 'prev'){
-                page_no = (currentpage==1) ? '1' : parseInt(currentpage)-1;
-               //$('.current a').html(page_no);
-               $('#totalRecordsOfCurrentPage').html(page_no);
+            if (type == 'prev') {
+                page_no = (currentpage == 1) ? '1' : parseInt(currentpage) - 1;
+                //$('.current a').html(page_no);
+                $('#totalRecordsOfCurrentPage').html(page_no);
             }
-            getContent(grade, topic, subTopic, status, search,currentPage = page_no, showEntries = 1, page_no-1);
+            getContent(grade, topic, subTopic, status, search, currentPage = page_no, showEntries = 1, page_no - 1);
         });
 
     });
@@ -200,7 +202,7 @@
     /**
      * dataTable
      * */
-    function getContent(grade = '', topic = '', subTopic = '', status = '', search='', currentPage = 1,showEntries = 1, offset=0) {
+    function getContent(grade = '', topic = '', subTopic = '', status = '', search = '', currentPage = 1, showEntries = 1, offset = 0) {
         $('.course-list').empty();
         $('.loader').show();
         $.ajax({
@@ -213,33 +215,33 @@
                 topic: topic,
                 subTopic: subTopic,
                 status: status,
-                offset:offset,
+                offset: offset,
                 search: search,
             },
             success: function (response) {
                 const res = JSON.parse(response);
                 $('.loader').hide();
-                $('.total-count').html('Total Content : '+ res.recordsTotal);
+                $('.total-count').html('Total Content : ' + res.recordsTotal);
                 $('#totalRecordsOfCurrentPage').html(res.currentPage);
-                $('#totalRecords').html((res.totalNoOfPages==0)? 1: res.totalNoOfPages);
+                $('#totalRecords').html((res.totalNoOfPages == 0) ? 1 : res.totalNoOfPages);
                 //$('#totalRecords').html(res.recordsFiltered);
                 //$('#totalNoOfPages').html(res.totalNoOfPages);
                 $('.current a').html(res.currentPage);
-                if(res.courses.length<1){
+                if (res.courses.length < 1) {
                     $('.course-list').html('No Data Found.');
-                }else {
+                } else {
                     $('.course-list').html(res.courses);
                 }
                 //deactive next prev buttion on pagination
-                $('.previous-btn').css('pointer-events','all');
-                $('.next-btn').css('pointer-events','all');
-                if(res.currentPage==1){
-                    $('.previous-btn').css('pointer-events','none');
+                $('.previous-btn').css('pointer-events', 'all');
+                $('.next-btn').css('pointer-events', 'all');
+                if (res.currentPage == 1) {
+                    $('.previous-btn').css('pointer-events', 'none');
                 }
-                if(res.currentPage==res.totalNoOfPages){
-                    $('.next-btn').css('pointer-events','none');
+                if (res.currentPage == res.totalNoOfPages) {
+                    $('.next-btn').css('pointer-events', 'none');
                 }
-                
+
             },
         });
     }

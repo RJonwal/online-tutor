@@ -98,7 +98,7 @@ async function listing(req, res) {
     recordsFiltered = await LearningContent.count({ $and: [obj, searchStr] });
     totalNoOfPages = Math.ceil(recordsFiltered / showEntries);
 
-    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids').sort({created_at : -1});
+    let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids').sort({ created_at: -1 });
     //console.log(results);
     // console.log("recordsTotal => " + recordsTotal);
     // console.log("recordsFiltered => " + recordsFiltered);
@@ -115,7 +115,7 @@ async function listing(req, res) {
         let totalSlides = 0;
         let durations = [];
         let courseImage = '';
-        let i =0;
+        let i = 0;
         for (lessons of lessons_ids) {
             totalSlides += lessons.slides.length;
             for (slide of lessons.slides) {
@@ -124,9 +124,11 @@ async function listing(req, res) {
             }
         }
         var totalDuration = globalHelper.calculateDuration(durations);
-         if (content.thumbnail !='' && fs.existsSync("assets/LearningContent/")) { 
-            courseImage = "/LearningContent/"+content.thumbnail;
-         }else{
+        console.log(content);
+
+        if ((content.thumbnail != '' || content.thumbnail == 'undefined') && fs.existsSync("assets/LearningContent/")) {
+            courseImage = "/LearningContent/" + content.thumbnail;
+        } else {
             courseImage = "/images/course-thumb.jpg";
          }
         course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="/learning-content/viewCourses/${content.id}">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);"  onclick="confirmBeforeDeletion('/learning-content/destroy/${content._id}')">Delete</a></div></div></li>`;
@@ -140,7 +142,7 @@ async function listing(req, res) {
         "totalNoOfPages": totalNoOfPages,
         "currentPage": currentPage,
         "courses": course,
-        "result":results.length,
+        "result": results.length,
     });
 
     return res.send(data);
@@ -212,15 +214,15 @@ async function store(req, res) {
                 var slide = {};
                 // img = fileNames[j];
                 // let values = Object.values(img);
-                var video ='';
-                var attachment='';
-                for(files of fileNames){
+                var video = '';
+                var attachment = '';
+                for (files of fileNames) {
                     let keys = Object.keys(files);
                     let values = Object.values(files);
-                    if(keys == `outer-list[${i}][inner-list][${j}][slide_video]`){
+                    if (keys == `outer-list[${i}][inner-list][${j}][slide_video]`) {
                         video = values[0];
                     }
-                    if(keys == `outer-list[${i}][inner-list][${j}][slide_attachments]`){
+                    if (keys == `outer-list[${i}][inner-list][${j}][slide_attachments]`) {
                         attachment = values;
                     }
                 }
@@ -245,15 +247,19 @@ async function store(req, res) {
             var slides = [];
             i++;
         }
-        req.body.thumbnail = fileNames[0].thumbnail;
+
+        console.log(req.body);
+        if (fileNames.length > 0 && fileNames[0].thumbnail) {
+            req.body.thumbnail = fileNames[0].thumbnail;
+        }
 
         var myContent = {
             grade_id: req.body.grade_id,
             topic_id: req.body.topic_id,
-            sub_topic_id: req.body.sub_topic_id,
+            sub_topic_id: (req.body.sub_topic_id ? req.body.sub_topic_id : '0' ),
             title: req.body.title,
             short_description: req.body.short_description,
-            thumbnail: req.body.thumbnail,
+            thumbnail: (req.body.thumbnail != '' ? req.body.thumbnail : ''),
             lesson_ids: myLessons,
         };
 
@@ -299,7 +305,7 @@ async function update(req, res) {
 async function destroy(req, res) {
     let id = req.params.id;
     let Content = await LearningContent.find({ "_id": id });
-    if (Content[0].thumbnail!= '') {
+    if (Content[0].thumbnail != '') {
         const filePath = './assets/LearningContent/' + Content[0].thumbnail;
         fs.exists(filePath, function (exists) {
             if (exists) {
@@ -309,10 +315,10 @@ async function destroy(req, res) {
             }
         });
     }
-    for(lession of Content[0].lesson_ids){
+    for (lession of Content[0].lesson_ids) {
         let lessionDetails = await Lesson.find({ "_id": lession });
-        for(slides of lessionDetails[0].slides){
-            if (slides.video!= '') {
+        for (slides of lessionDetails[0].slides) {
+            if (slides.video != '') {
                 const filePath = './assets/LearningContent/' + slides.video;
                 fs.exists(filePath, function (exists) {
                     if (exists) {
@@ -322,8 +328,8 @@ async function destroy(req, res) {
                     }
                 });
             }
-            for(attachment of slides.attachments){
-                if (attachment!= '') {
+            for (attachment of slides.attachments) {
+                if (attachment != '') {
                     const filePath = './assets/LearningContent/' + attachment;
                     fs.exists(filePath, function (exists) {
                         if (exists) {
@@ -371,11 +377,11 @@ async function viewCourses(req, res) {
         let results = await LearningContent.find({ "_id": courseId }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids');
         let durations = [];
         let totalSlides = 0;
-        let i =0;
-        global.learningContent =results[0].lesson_ids;
+        let i = 0;
+        global.learningContent = results[0].lesson_ids;
         var totalDuration = globalHelper.calculateDuration(durations);
-        if(results){
-            return res.render('../views/admin/learningContent/viewCourses',{content:results[0].lesson_ids[0],fs:fs,totalDuration:totalDuration});
+        if (results) {
+            return res.render('../views/admin/learningContent/viewCourses', { content: results[0].lesson_ids[0], fs: fs, totalDuration: totalDuration });
         }
     } catch (e) {
         console.log(e);

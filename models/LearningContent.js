@@ -25,7 +25,7 @@ const learningContentSchema = new mongoose.Schema({
     sub_topic_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'subTopics',
-        required: true,
+        transform: sub_topic_id => sub_topic_id == null ? '' : sub_topic_id
     },
     title: {
         type: String,
@@ -42,7 +42,9 @@ const learningContentSchema = new mongoose.Schema({
     },
     thumbnail: {
         type: String,
-        default: null
+        default: null,
+        transform: sub_topic_id => sub_topic_id == null ? '' : sub_topic_id
+
     },
     lesson_ids: [{
         type: 'ObjectId',

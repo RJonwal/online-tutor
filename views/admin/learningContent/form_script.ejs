@@ -67,7 +67,7 @@
         theme: 'mobile'
       },
       toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-      
+
       setup: function (editor) {
         editor.on("init", function () {
           // this.setContent(
@@ -85,6 +85,9 @@
     });
   }
 
+  /**
+   * loadSubTopic
+   * */
   function loadSubTopic(topicId) {
     $.ajax({
       type: "POST",
@@ -94,13 +97,21 @@
       },
       success: function (response) {
         $('#subTopics').empty();
-        for (res of response) {
-          var newOption = new Option(res.name, res._id, false, false);
+        console.log(response.length);
+        if (response.length > 0) {
+          var newOption = new Option("Select Sub Topic", "", false, false);
           $('#subTopics').append(newOption).trigger('change');
+          for (res of response) {
+            newOption = new Option(res.name, res._id, false, false);
+            $('#subTopics').append(newOption).trigger('change');
+          }
+        } else {
+          $('#subTopics').html('No results found.').trigger('change');
         }
       },
     });
   }
+
   $('#topics').change(function () {
     let topicId = $(this).val();
     loadSubTopic(topicId);
@@ -381,7 +392,7 @@
     tinymce.triggerSave();
     var form = $('#createContent');
     var formData = new FormData(form[0]);
-    
+
     // var myContent = tinymce.get("description-1-0").getContent();
     // console.log(myContent); return false ;
     formData.append('thumbnail', this.new_attachments)
@@ -408,7 +419,7 @@
       success: function (response) {
         console.log(response);
         if (response.success == true) {
-           window.location = response.redirectUrl;
+          window.location = response.redirectUrl;
         }
       },
       error: function (response) {
