@@ -15,6 +15,7 @@ module.exports = {
     index,
     listing,
     renderSubtopic,
+    renderSlickSlider,
     create,
     createOld,
     store,
@@ -42,14 +43,11 @@ async function index(req, res) {
         let topics = await Topic.find({}).sort({ 'name': 1 });
         let grades = await Grade.find({}).sort({ 'name': 1 });
 
-
         let learningContents = await LearningContent.find({ "status": 1 }).sort({ '_id': -1 });
-
         let totalLearningContent = await LearningContent.find({}).sort({ '_id': -1 }).count();
         let activeLearningContent = await LearningContent.find({ "status": 1 }).sort({ '_id': -1 }).count();
         let deactiveLearningContent = await LearningContent.find({ "status": 0 }).sort({ '_id': -1 }).count();
         const learningContentObject = { 'total': totalLearningContent, 'active': activeLearningContent, 'deactive': deactiveLearningContent }
-
 
         return res.render('../views/admin/learningContent/index', { topics: topics, grades: grades, learningContentObject: learningContentObject, learningContents: learningContents });
     } catch (e) {
@@ -175,7 +173,63 @@ async function renderSubtopic(req, res) {
         })
     }
 }
-
+/**
+ * slick slider content render. 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function renderSlickSlider(req, res) {
+    try {
+      let lessionId = req.body.id;
+      let lessionDetails = await Lesson.find({ "_id": lessionId });
+      let html = '';
+      for(slides of lessionDetails[0].slides){
+        html += ` 
+      <div class="item">
+          <div class="row">
+            <div class="col-sm-12 col-md-7">
+              <h3>${slides.title}</h3>
+              ${slides.description}`
+              if(slides.attachments) { 
+            html += `<div class="attachment-block">
+                <h3 class="title-text mb-3">Attachment</h3>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4">
+                    <a class="attch-items" href="/LearningContent/${slides.attachments}" target="_blank">View PDF</a>
+                  </div>
+                </div>
+              </div>`
+               } if(slides.video_url) {
+              `<div class="attachment-block">
+                <h3 class="title-text mb-3">Video </h3>
+                <div class="row">
+                  <div class="col-sm-12 col-md-4">
+                    <a class="attch-items" href="<%=slides.video_url%>" target="_blank">Video Url</a>
+                  </div>
+                </div>
+              </div>`
+              }
+            html +=  `</div>`
+          if (slides.video) { 
+            html += `<div class="col-sm-12 col-md-5">
+              <div class="preview-thumb">
+                <video width="320" height="240" loop autoplay muted controls>
+                  <source src="/LearningContent/${slides.video}" type="video/mp4">
+              </div>
+            </div>`
+          } 
+        html +=  `</div>
+        </div>`;
+        }
+      return res.send(html);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
 /**
  * create content.
  * @param {*} req 
