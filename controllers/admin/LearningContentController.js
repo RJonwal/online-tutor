@@ -299,24 +299,47 @@ async function update(req, res) {
 async function destroy(req, res) {
     let id = req.params.id;
     let Content = await LearningContent.find({ "_id": id });
-
-    // if (Content.thumbnail!= '') {
-    //     const filePath = './assets/LearningContent/' + Content.thumbnail;
-    //     fs.exists(filePath, function (exists) {
-    //         if (exists) {
-    //             fs.unlinkSync(filePath);
-    //         } else {
-    //             console.log('File not found, so not deleted.');
-    //         }
-    //     });
-    // }
+    if (Content[0].thumbnail!= '') {
+        const filePath = './assets/LearningContent/' + Content[0].thumbnail;
+        fs.exists(filePath, function (exists) {
+            if (exists) {
+                fs.unlinkSync(filePath);
+            } else {
+                console.log('File not found, so not deleted.');
+            }
+        });
+    }
     for(lession of Content[0].lesson_ids){
         let lessionDetails = await Lesson.find({ "_id": lession });
-        for(slides of lessionDetails.slides){
-            
+        for(slides of lessionDetails[0].slides){
+            if (slides.video!= '') {
+                const filePath = './assets/LearningContent/' + slides.video;
+                fs.exists(filePath, function (exists) {
+                    if (exists) {
+                        fs.unlinkSync(filePath);
+                    } else {
+                        console.log('File not found, so not deleted.');
+                    }
+                });
+            }
+            for(attachment of slides.attachments){
+                if (attachment!= '') {
+                    const filePath = './assets/LearningContent/' + attachment;
+                    fs.exists(filePath, function (exists) {
+                        if (exists) {
+                            fs.unlinkSync(filePath);
+                        } else {
+                            console.log('File not found, so not deleted.');
+                        }
+                    });
+                }
+            }
         }
+        let lessionDeleted = await Lesson.findByIdAndDelete(lession);
     }
-    //let StudentDeleted = await User.findByIdAndDelete(id);
+    let ContentDeleted = await LearningContent.findByIdAndDelete(id);
+    req.flash('success', 'Content is deleted successfully!');
+    return res.redirect('/learning-content');
 }
 
 /**
