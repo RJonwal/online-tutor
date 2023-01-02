@@ -43,8 +43,7 @@ const learningContentSchema = new mongoose.Schema({
     thumbnail: {
         type: String,
         default: null,
-        transform: sub_topic_id => sub_topic_id == null ? '' : sub_topic_id
-
+        transform: thumbnail => thumbnail == null ? '' : thumbnail
     },
     lesson_ids: [{
         type: 'ObjectId',

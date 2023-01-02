@@ -126,11 +126,16 @@ async function listing(req, res) {
         var totalDuration = globalHelper.calculateDuration(durations);
         console.log(content);
 
-        if ((content.thumbnail != '' || content.thumbnail == 'undefined') && fs.existsSync("assets/LearningContent/")) {
-            courseImage = "/LearningContent/" + content.thumbnail;
-        } else {
+        if (content.thumbnail === '' || content.thumbnail === undefined || content.thumbnail === "undefined") {
             courseImage = "/images/course-thumb.jpg";
-         }
+        } else {
+            // if ((content.thumbnail !== '' || content.thumbnail !== "undefined") && fs.existsSync("assets/LearningContent/")) {
+        //     courseImage = "/LearningContent/" + content.thumbnail;
+        // }
+            courseImage = "/LearningContent/" + content.thumbnail;
+        }
+
+
         course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div><div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${content.sub_topic_id.name}</p></div><div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="/learning-content/viewCourses/${content.id}">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);"  onclick="confirmBeforeDeletion('/learning-content/destroy/${content._id}')">Delete</a></div></div></li>`;
         totalSlides = 0;
         totalDuration = 0;
@@ -256,7 +261,7 @@ async function store(req, res) {
         var myContent = {
             grade_id: req.body.grade_id,
             topic_id: req.body.topic_id,
-            sub_topic_id: (req.body.sub_topic_id ? req.body.sub_topic_id : '0' ),
+            sub_topic_id: (req.body.sub_topic_id ? req.body.sub_topic_id : '0'),
             title: req.body.title,
             short_description: req.body.short_description,
             thumbnail: (req.body.thumbnail != '' ? req.body.thumbnail : ''),
