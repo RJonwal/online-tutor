@@ -187,6 +187,12 @@ async function renderSlickSlider(req, res) {
       for(slides of lessionDetails[0].slides){
         html += ` 
       <div class="item">
+            <div class="row">
+                <div class="slide-duration">
+                    <h3 class="title-text mb-0">Total Duration </h3>
+                    <span class="the-timer"><i class="fa fa-clock-o"></i>${slides.duration}</span>
+                </div>
+            </div>
           <div class="row">
             <div class="col-sm-12 col-md-7">
               <h3>${slides.title}</h3>

@@ -128,9 +128,8 @@
                   </div> 
                   <div class="collapse show" id="slideAccordion">
                     <ul class="slide-action">
-                      <% let slideIndex = 0; for(slide of lessons.slides) {  %>
-                        <li class="<%= slideIndex === '1' ? 'active' : '' %>">
-
+                      <% let slideIndex = 1; for(slide of lessons.slides) {  %>
+                        <li class="<%= slideIndex === 1 ? 'active' : '' %>">
                         <a href="#" data-slide="<%=slideIndex%>"><%=slide.title%></a>
                       </li> 
                       <% slideIndex++ } %>
@@ -142,9 +141,6 @@
           </div>
         </div> 
       </div>
-
-
-
     </div>
     <!-- /sidebar menu -->
   </div>
