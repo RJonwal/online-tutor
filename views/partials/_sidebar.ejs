@@ -119,7 +119,7 @@
                 </div>
                 <div class="right-icons"><img src="/images/arrowdown.svg" alt="img"></div>
               </div> 
-              <div id="lessons-<%=i%>" class="collapse" data-parent="#lesson-accordion">
+              <div id="lessons-<%=i%>" class="collapse <%=i === 1 ? 'show' : '' %>" data-parent="#lesson-accordion">
                 <div class="accordion" id="slide-accordion">
                   <div class="card-header collapsed show" data-toggle="collapse" data-target="#slideAccordion"
                   aria-expanded="false" aria-controls="slideAccordion">
@@ -129,7 +129,7 @@
                   <div class="collapse show" id="slideAccordion">
                     <ul class="slide-action">
                       <% let slideIndex = 1; for(slide of lessons.slides) {  %>
-                        <li class="<%= slideIndex === 1 ? 'active' : '' %>">
+                        <li class="<%=slideIndex == 1?'active':''%>">
                         <a href="#" data-slide="<%=slideIndex%>"><%=slide.title%></a>
                       </li> 
                       <% slideIndex++ } %>

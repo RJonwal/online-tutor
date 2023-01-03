@@ -190,7 +190,7 @@ async function renderSlickSlider(req, res) {
             <div class="row">
                 <div class="slide-duration">
                     <h3 class="title-text mb-0">Total Duration </h3>
-                    <span class="the-timer"><i class="fa fa-clock-o"></i>${slides.duration}</span>
+                    <span class="the-timer"><i class="fa fa-clock-o"></i> ${slides.duration} hrs</span>
                 </div>
             </div>
           <div class="row">
@@ -450,7 +450,7 @@ async function viewCourses(req, res) {
         let i = 0;
         global.learningContent = results[0].lesson_ids;
         var totalDuration = globalHelper.calculateDuration(durations);
-        if (results) {
+        if (results[0]) {
             return res.render('../views/admin/learningContent/viewCourses', { content: results[0].lesson_ids[0], fs: fs, totalDuration: totalDuration });
         }
     } catch (e) {
