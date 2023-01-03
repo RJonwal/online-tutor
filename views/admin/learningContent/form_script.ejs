@@ -387,6 +387,12 @@
   })
   $("#createContent").submit(function (e) {
     e.preventDefault();
+    // let heading = $('.editable-heading').val();
+    // alert(heading);
+    // if(heading ==''){
+    //   $('.editable-heading').css('border-color', 'red');
+    // }
+    $('.loader').show();
     tinymce.triggerSave();
     var form = $('#createContent');
     var formData = new FormData(form[0]);

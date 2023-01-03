@@ -267,7 +267,7 @@
           {
             data: "status",
             "render": function (data, type, row) {
-              return ` <label class="checkbox-inline switch-btn">
+              return `<label class="checkbox-inline switch-btn">
                       <input type="checkbox" name="status" class="record-status" data-url="/tutors/update-status" data-uid="${row._id}" ${row.status ? 'checked' : ''}>
                         <span class="slider-toggle"></span>  
                     </label>`;

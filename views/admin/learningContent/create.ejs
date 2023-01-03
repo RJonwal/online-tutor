@@ -1,4 +1,7 @@
 <div class="right_col" role="main">
+<div class="loader" style="display:none;">
+  <%- include('../../partials/_loader'); %>
+</div>
   <div class="form-wizard">
     <form id="createContent" action="./store" class="form-design" method="post" enctype="multipart/form-data"
       autocomplete="off">
@@ -149,7 +152,7 @@
                     <div class="card-header" role="tab" id="heading-1">
                       <div class="left-heading">
                         <img class="mr-2" src="/images/lessons.svg" alt="img">
-                        <input class="editable-heading" name="lesson_name" type="text" value="New Lesson" placeholder="New Lesson">
+                        <input class="editable-heading" name="lesson_name" type="text" value="New Lesson" placeholder="New Lesson" required="required">
                       </div>
                       <div class="right-icons">
                         <a href="javascript:void(0);" class="lesson-preview" data-toggle="tooltip" rel="tooltip"
