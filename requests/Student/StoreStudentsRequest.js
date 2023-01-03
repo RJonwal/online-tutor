@@ -1,5 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const User = require('../../models/user');
+const Grade = require('../../models/Grade');
+const School = require('../../models/School');
 
 var validateUser = () => [
   body('first_name')
@@ -26,12 +28,6 @@ var validateUser = () => [
     .isLength({ min: 1, max: 1000 })
     .withMessage('Last Name length is should be in a valid range!')
     .bail(),
-    body('grade_id')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Grade can not be empty!')
-    .bail(),
   body('email')
     .trim()
     .not()
@@ -54,7 +50,7 @@ var validateUser = () => [
           }
         })
     })
-  .bail(),
+    .bail(),
   body('phone')
     .not().isEmpty()
     .isInt()
@@ -72,20 +68,70 @@ var validateUser = () => [
           }
         })
     })
-  .bail(),
+    .bail(),
+  body('gender')
+    .not()
+    .isEmpty()
+    .withMessage('The gender can not be empty!')
+    .bail()
+    .isBoolean()
+    .withMessage('Select a valid gender!')
+    .bail(),
+  body('grade_id')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Grade can not be empty!')
+    .bail()
+    .isString()
+    .withMessage('Grade should be a valid string!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return Grade.find({ "_id": value })
+        .then(grade => {
+          console.log(grade);
+          console.log(grade.length);
+          if (grade.length == 0) {
+            return Promise.reject('Select A Valid Grade!');
+          }
+        })
+    })
+    .bail(),
+  body('school_id')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('School can not be empty!')
+    .bail()
+    .isString()
+    .withMessage('School should be a valid string!')
+    .bail()
+    .custom((value, { req }) => {
+      console.log(value);
+      return School.find({ "_id": value })
+        .then(school => {
+          console.log(school);
+          console.log(school.length);
+          if (school.length == 0) {
+            return Promise.reject('Select A Valid School!');
+          }
+        })
+    })
+    .bail(),
   body('note')
-  .optional({ checkFalsy: true })
-  .isString()
-  .withMessage('Note should be a valid string!')
-  .bail(),
+    .optional({ checkFalsy: true })
+    .isString()
+    .withMessage('Note should be a valid string!')
+    .bail(),
   body('status')
-  .not()
-  .isEmpty()
-  .withMessage('The status can not be empty!')
-  .bail()
-  .isBoolean()
-  .withMessage('Select a valid status!')
-  .bail(),
+    .not()
+    .isEmpty()
+    .withMessage('The status can not be empty!')
+    .bail()
+    .isBoolean()
+    .withMessage('Select a valid status!')
+    .bail(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty())

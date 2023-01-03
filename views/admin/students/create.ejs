@@ -6,29 +6,29 @@
         <h3 class="title-text">Add Student</h3>
       </div>
       <div class="x_content">
-        <form id="createStudent" action="./store" method="post" class="form-horizontal form-label-left" >
+        <form id="createStudent" action="./store" method="post" class="form-horizontal form-label-left">
           <div class="row">
             <div class="col-md-8">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="first_name">First Name<span
-                        class="required">*</span>
+                    <label class="col-form-label label-align" for="first_name">First Name<span class="required">*</span>
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.." id="first_name">
+                      <input type="text" name="first_name" class="form-control" placeholder="Enter First Name.."
+                        id="first_name">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="last_name">Last Name<span
-                        class="required">*</span>
+                    <label class="col-form-label label-align" for="last_name">Last Name<span class="required">*</span>
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.." id="last_name">
+                      <input type="text" name="last_name" class="form-control" placeholder="Enter Last Name.."
+                        id="last_name">
                     </div>
                   </div>
                 </div>
@@ -38,7 +38,7 @@
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/email.svg" class="mCS_img_loaded"></span>
-                      <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email" >
+                      <input type="email" name="email" class="form-control" placeholder="Enter Email.." id="email">
                     </div>
                   </div>
                 </div>
@@ -57,11 +57,10 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="gender">Gender</label>
+                    <label class="col-form-label label-align" for="gender">Gender<span class="required">*</span></label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/gender.svg" class="mCS_img_loaded"></span>
                       <select class="form-control select2" name="gender" id="gender">
-                        <option value="">Select Gender</option>
                         <option value="1">Male</option>
                         <option value="0">Female</option>
                       </select>
@@ -83,7 +82,8 @@
                     </label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
-                      <input type="date" name="start_date" class="form-control " placeholder="Enter Start Date.." id="start_date">
+                      <input type="date" name="start_date" class="form-control " placeholder="Enter Start Date.."
+                        id="start_date">
                     </div>
                   </div>
                 </div>
@@ -94,28 +94,32 @@
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="skill_level" class="form-control " placeholder="Enter Skill Level.." id="skill_level">
                     </div> -->
-                    <label class="col-form-label label-align" for="grade">Grade</label>
+                    <label class="col-form-label label-align" for="grade">Grade<span class="required">*</span></label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/level.svg" class="mCS_img_loaded"></span>
                       <select class="form-control select2" name="grade_id" id="grade_id">
                         <option value="">Select Grade</option>
                         <% for(Grade of grade){%>
-                          <option value="<%=Grade.id%>"><%=Grade.name%></option>
-                        <%}%>
+                          <option value="<%=Grade.id%>">
+                            <%=Grade.name%>
+                          </option>
+                          <%}%>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="col-form-label label-align" for="school">School</label>
+                    <label class="col-form-label label-align" for="school">School<span class="required">*</span></label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/school.svg" class="mCS_img_loaded"></span>
                       <select class="form-control select2" name="school_id" id="school_id">
                         <option value="">Select School</option>
                         <% for(school of data) { %>
-                          <option value="<%=school.id%>"><%=school.name%></option>
-                        <% } %> 
+                          <option value="<%=school.id%>">
+                            <%=school.name%>
+                          </option>
+                          <% } %>
                       </select>
                     </div>
                   </div>
@@ -125,14 +129,16 @@
                     <label class="col-form-label label-align" for="referrer">Referrer</label>
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/referrer.svg" class="mCS_img_loaded"></span>
-                      <input type="text" name="referrer" class="form-control " placeholder="Enter Skill Level.." id="referrer">
+                      <input type="text" name="referrer" class="form-control " placeholder="Enter Skill Level.."
+                        id="referrer">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="col-form-label label-align" for="notes">Notes </label>
-                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.." id="notes"></textarea>
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.."
+                      id="notes"></textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -156,17 +162,17 @@
                 <input type="file" name="profile_image" id="profile_image" class="form-control dropify h-auto">
               </div>
             </div>
-          </div> 
+          </div>
 
           <div class="ln_solid"></div>
           <div class="text-right">
             <button type="submit" id="storeStudentBtn" class="btn theme-btn form-button">Save</button>
           </div>
-          
+
         </form>
       </div>
     </div>
   </div>
   <!-- page title end -->
-  </div>
-  <%- include('./script'); %>
+</div>
+<%- include('./script'); %>

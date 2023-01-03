@@ -81,11 +81,13 @@
                   <div class="form-group">
                     <label class="col-form-label label-align" for="password">Password
                     </label>
+                    <span style="font-size: 8px;">Leave blank If you don`t want to update password</span>
+
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
                       <input type="password" name="password" class="form-control" placeholder="Update Password.."
                         id="password" value="">
-                      <span toggle="#password-field"
+                      <span toggle="#password"
                         class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
                     </div>
                   </div>
@@ -97,8 +99,7 @@
                     </label>
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                      <select class="form-control" name="subject_ids[]" id="subject_ids" 
-                        multiple>
+                      <select class="form-control" name="subject_ids[]" id="subject_ids" multiple>
                         <option value="">Please Select Subjects </option>
                         <% let i=0; for(subject of subjects) { %>
                           <option value="<%=subject.id%>" <% if (data.subject_ids.includes(subject.id)) { %> selected <%
@@ -117,8 +118,7 @@
                     <div class="input-group">
                       <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
                       <input type="text" name="calendar_color" class="form-control"
-                        placeholder="Enter Calendar Color Name.." required="required" id="calendar_color"
-                        value="<%=data.calendar_color %>">
+                        placeholder="Enter Calendar Color Name.." id="calendar_color" value="<%=data.calendar_color %>">
                     </div>
                   </div>
                 </div>
