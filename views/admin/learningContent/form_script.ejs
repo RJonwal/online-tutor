@@ -23,8 +23,6 @@
       },
     });
 
-
-
     $('.single-img').dropify({
       tpl: {
         message: '<div class="dropify-message"><img src="/images/frame.svg" alt="img"> <p>Drag & Drop here</p><h6 class="mb-0 mt-1 fn-12 text-dblue">Select your preferred video type. (JPEG, PNG, SVG, etc.)</h6></div>',
@@ -34,8 +32,6 @@
     $(document).ready(function () {
       $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     });
-
-
 
   });
 
@@ -58,7 +54,7 @@
       },
     });
 
-    
+
   }
 
   function inti_editor() {
@@ -132,8 +128,10 @@
 
   // Form Stepper 
   jQuery(document).ready(function () {
+
     // click on next button
     jQuery('.form-wizard-next-btn').click(function () {
+
       var parentFieldset = jQuery(this).parents('.wizard-fieldset');
       var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
       var next = jQuery(this);
@@ -143,16 +141,10 @@
         var thisType = jQuery(this).attr("type");
 
         if (thisValue == "") {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
-          }
-          jQuery(this).siblings(".wizard-form-error").slideDown();
+            jQuery(this).siblings(".wizard-form-error").slideDown();
           nextWizardStep = false;
         }
         else {
-          if (thisType == 'file') {
-            jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
-          }
           jQuery(this).siblings(".wizard-form-error").slideUp();
         }
       });
@@ -177,7 +169,6 @@
         });
       }
     });
-    //click on previous button
 
     //click on previous button
     jQuery('.form-wizard-previous-btn').click(function () {
@@ -203,28 +194,94 @@
         }
       });
     });
+
     //click on form submit button
     jQuery(document).on("click", ".form-wizard .form-wizard-submit", function () {
       var parentFieldset = jQuery(this).parents('.wizard-fieldset');
       var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+      var repeaterStep = jQuery(this);
+      var submitTrue = true;
       parentFieldset.find('.wizard-required').each(function () {
+        var thisName = jQuery(this).attr("name");
         var thisValue = jQuery(this).val();
         var thisType = jQuery(this).attr("type");
 
-        if (thisValue == ""){
+        console.log(thisName);
+        console.log(thisValue);
+        console.log(thisType);
+
+        if (thisValue == "") {
+          console.log('FFFF');
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
           }
           jQuery(this).siblings(".wizard-form-error").slideDown();
+          submitTrue = false;
+
         }
         else {
-          if (thisType == 'file'){
+          console.log('SSSS');
+          if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
           }
           jQuery(this).siblings(".wizard-form-error").slideUp();
         }
       });
+      console.log('submitTrue => '+ submitTrue);
+      if (submitTrue) {
+        $("#createContent").submit(function (e) {
+          e.preventDefault();
+          tinymce.triggerSave();
+          var form = $('#createContent');
+          var formData = new FormData(form[0]);
+
+          // var myContent = tinymce.get("description-1-0").getContent();
+          // console.log(myContent); return false ;
+          formData.append('thumbnail', this.new_attachments)
+          var url = $('#createContent').attr('action');
+          console.log(url);
+
+          // for (const pair of formData.entries()) {
+          //   console.log(pair[0] + ' - ' + pair[1]);
+          // }
+          // formData.append('file', $('input[type=file]')[0].files[0]);
+          // var data = Array.from(formData.entries()).reduce((memo, [key, value]) => ({
+          //   [key]: value,
+          // }), {});
+          // data: JSON.stringify(Object.fromEntries(formData)),
+
+          $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              console.log(response);
+              if (response.success == true) {
+                window.location = response.redirectUrl;
+              }
+            },
+            error: function (response) {
+              console.log(response);
+              let errorMessages = '';
+              $.each(response.responseJSON.errors, function (field_name, error) {
+                console.log(field_name);
+                console.log(error);
+                $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
+                // $("#storeCategoryBtn").prop('disabled', false);
+              })
+            },
+            complete: function () {
+              // $("#loading-bar-spinner").hide();
+              //$("#storeCategoryBtn").prop('disabled', false);
+            }
+          })
+        });
+      }
     });
+
     // focus on input field check empty or not
     jQuery(".form-control").on('focus', function () {
       var tmpThis = jQuery(this).val();
@@ -329,9 +386,9 @@
     isFirstItemUndeletable: true,
     repeaters: [{
       selector: '.inner-repeater',
-      repeaters: [{ 
-            selector: '.deep-inner-repeater' 
-        }],
+      repeaters: [{
+        selector: '.deep-inner-repeater'
+      }],
       show: function () {
         let element = $(this);
         /*------ slides start------*/
@@ -361,67 +418,7 @@
     // }
   ]);
 
-  $('.submitbtn').click(function () {
-    $('#createContent').submit();
-  })
-  $("#createContent").submit(function (e) {
-    e.preventDefault();
-    // let heading = $('.editable-heading').val();
-    // alert(heading);
-    // if(heading ==''){
-    //   $('.editable-heading').css('border-color', 'red');
-    // }
-    $('.loader').show();
-    tinymce.triggerSave();
-    var form = $('#createContent');
-    var formData = new FormData(form[0]);
 
-    // var myContent = tinymce.get("description-1-0").getContent();
-    // console.log(myContent); return false ;
-    formData.append('thumbnail', this.new_attachments)
-    var url = $('#createContent').attr('action');
-    console.log(url);
-
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0] + ' - ' + pair[1]);
-    // }
-    // formData.append('file', $('input[type=file]')[0].files[0]);
-    // var data = Array.from(formData.entries()).reduce((memo, [key, value]) => ({
-    //   [key]: value,
-    // }), {});
-    // data: JSON.stringify(Object.fromEntries(formData)),
-
-
-    $.ajax({
-      type: "POST",
-      url: url,
-      dataType: "json",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        console.log(response);
-        if (response.success == true) {
-          window.location = response.redirectUrl;
-        }
-      },
-      error: function (response) {
-        console.log(response);
-        let errorMessages = '';
-        $.each(response.responseJSON.errors, function (field_name, error) {
-          console.log(field_name);
-          console.log(error);
-          $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
-          // $("#storeCategoryBtn").prop('disabled', false);
-
-        })
-      },
-      complete: function () {
-        // $("#loading-bar-spinner").hide();
-        //$("#storeCategoryBtn").prop('disabled', false);
-      }
-    })
-  });
 
 
 
