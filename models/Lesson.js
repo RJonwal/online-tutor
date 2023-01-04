@@ -35,7 +35,7 @@ const slugify_options = {
 //         type: Array,
 //         default: 'null',
 //     }
-// });
+// }); 
 
 const lessonSchema = new mongoose.Schema({
     title: {
