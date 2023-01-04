@@ -51,7 +51,16 @@
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
       },
     });
+
+    $('.practice-question-img').dropify({
+      tpl: {
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Image</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (JPEG, PNG, SVG)</h6></div>',
+      },
+    });
+
+    
   }
+
   function inti_editor() {
     tinymce.init({
       selector: '.editer',
@@ -263,6 +272,11 @@
     $(this).parents().find('#slideAccordion').show();
     console.log($(this).parents().find('#slideAccordion'));
   });
+  $(document).on("click", ".informationPractices-add", function () {
+    console.log('showdata');
+    $(this).parents().find('#practiceAccordion').show();
+    console.log($(this).parents().find('#practiceAccordion'));
+  });
 
   $(document).on("click", ".slide-form-expand", function () {
     $('.slide-container').removeClass('show');
@@ -333,6 +347,9 @@
     isFirstItemUndeletable: true,
     repeaters: [{
       selector: '.inner-repeater',
+      repeaters: [{ 
+            selector: '.deep-inner-repeater' 
+        }],
       show: function () {
         var index = $($(this), '.wizards-div"').index();
         let parentIndex = $(this).parents('#wizard:last-child').attr('data-parent-index');

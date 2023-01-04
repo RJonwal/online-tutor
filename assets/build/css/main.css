@@ -1631,7 +1631,12 @@ span.total-count {
     border-radius: 5px;
     overflow: hidden;
 }
-
+.right_col .form-wizard .accordion .deep-inner-repeater .chp-add-section{
+    border: none;
+}
+.right_col .form-wizard .accordion .deep-inner-repeater .chp-add-section.add_option_block_outer > div{
+    border: 1px solid #D2D6E3;
+}
 .right_col .form-wizard .accordion .chp-add-section+.chp-add-section {
     margin-top: 15px;
 }
@@ -2189,7 +2194,6 @@ span.total-count {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 5px;
-    margin-left: 10px;
 }
 .add_option_form .btn-group .option-check-btn{
     margin: 0 5px;
@@ -2208,20 +2212,21 @@ span.total-count {
     text-transform: capitalize;
     border-radius: 5px;
     transition: all 0.3s ease-in;
+    cursor: pointer;
 }
 .add_option_form .btn-group .option-check-btn .btn-check:checked+.check-label{
     color: #fff;
     background: var(--secondary);
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);  
 }
-.add_option_block{
+/* .add_option_block{
     margin-top: 30px;
-}
+} */
 .add_option_block .form-btn{
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .add_option_block .form-btn .theme-btn{
     padding: 10px 30px;
@@ -3305,9 +3310,42 @@ span.total-count {
     -ms-transform: translateX(52px);
     transform: translateX(52px);
 }
-
-
-
+.single-question {
+    position: relative;
+    padding: 0 0 10px;
+    border-bottom: solid 1px #D2D6E3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.right-icons a.add-section.theme-btn img {
+    filter: brightness(0) invert(1);
+}
+.single-question a.add-section.theme-btn img {
+    filter: brightness(0) invert(1);
+}
+.single-question a.add-section.theme-btn {
+    max-width: 163px;
+    width: 100%;
+}
+.practice-card .tab-content .form-group.practice-question-img-sec .dropify-wrapper {
+    height: 83%;
+}
+ .right_col .form-wizard .accordion .chp-add-section.add_option_block_outer .card-body{
+    margin: 0px;
+}
+.right_col .form-wizard .accordion .chp-add-section.add_option_block_outer .card-body .add_option_block{
+    width: calc(100% - 20px);
+    margin-left: 10px;
+}
+.add_option_block label.form-label {
+    display: block;
+}
+.que_option_outer > .form-btn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 @media(max-width:1199px) {
     .course-list .course-description .course-detail {
         width: 100%;
@@ -3474,6 +3512,7 @@ span.total-count {
     .add_option_form .btn-group .option-check-btn .check-label {
         padding: 4px 10px;
         font-size: 12px;
+        cursor: pointer;
     }
     .add_option_block .form-btn .theme-btn{
         padding: 8px 20px;

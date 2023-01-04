@@ -47,7 +47,7 @@
       </div>
 
       <!-- Step1-->
-      <fieldset class="wizard-fieldset show">
+      <fieldset class="wizard-fieldset">
 
         <div class="d-flex align-items-center justify-content-between mb-30">
           <h3 class="title-text mb-0">Basic Information</h3>
@@ -136,7 +136,7 @@
       <!-- Step1-->
 
       <!-- Step2-->
-      <fieldset class="wizard-fieldset">
+      <fieldset class="wizard-fieldset show">
         <div class="repeater">
           <div class="add-more-section d-flex align-items-center justify-content-between">
             <h3 class="title-text mb-0">Add Lesson</h3>
@@ -377,267 +377,450 @@
                         <!--slides end-->
 
                         <!-- practices start -->
-                        <div class="practice accordion" id="practice">
+                        <div class="inner-repeater practice accordion" id="practice">
                           <div class="chp-add-section">
                             <div class="chp-heading">
                               <div class="left-heading"> <img class="mr-2" src="/images/practice1.svg" alt="img">
                                 <span class="editable-heading">Practices</span>
                               </div>
                               <div class="right-icons">
+                                <a href="javascript:void(0);" class="informationPractices-add" data-repeater-create
+                                  data-toggle="tooltip" rel="tooltip" data-placement="top" title="Add Practices"><img class="mr-2" src="/images/addcircle.svg" alt="img"></a>
                                 <a href="javascript:void(0);" data-toggle="tooltip" rel="tooltip" data-placement="top"
                                   title="Preview All"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel"
-                                  aria-expanded="false" aria-controls="practicePanel"><img class="mr-2"
-                                    src="/images/edit.svg" alt="img" data-toggle="tooltip" rel="tooltip"
-                                    data-placement="top" title="Edit"></a>
-                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practicePanel"
-                                  aria-expanded="false" aria-controls="practicePanel"><img src="/images/arrowdown.svg"
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#practiceAccordion"
+                                  aria-expanded="false" aria-controls="practiceAccordion"><img src="/images/arrowdown.svg"
                                     alt="img">
                                 </a>
                               </div>
                             </div>
-                            <div id="practicePanel" class="collapse" data-parent="#practice">
+                            <div class="collapse" id="practiceAccordion">
                               <div class="card-body">
-                                <div class="practice-card">
-                                  <h3 class="title-text mb-3">Add Practice</h3>
-                                  <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                    <li class="nav-item">
-                                      <a class="nav-link active" id="pills-single-sel-tab" data-toggle="pill"
-                                        href="#pills-single-sel" role="tab" aria-controls="pills-single-sel"
-                                        aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single
-                                        Select</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill"
-                                        href="#pills-multi-sel" role="tab" aria-controls="pills-multi-sel"
-                                        aria-selected="false"><img src="/images/multi-sel.svg" alt="img"> Multiple
-                                        Selects</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link" id="pills-type-text-tab" data-toggle="pill"
-                                        href="#pills-type-text" role="tab" aria-controls="pills-type-text"
-                                        aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type Text</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill"
-                                        href="#pills-drag-drop" role="tab" aria-controls="pills-drag-drop"
-                                        aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag &
-                                        Drop</a>
-                                    </li>
-                                  </ul>
-                                  <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-single-sel" role="tabpanel"
-                                      aria-labelledby="pills-single-sel-tab">
-                                      <h3 class="title-text mb-3">Add Single Question</h3>
-                                      <div class="row">
-                                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
-                                          <div class="form-group">
-                                            <input type="file" name="" id="" class="form-control single-img h-auto"
-                                              data-allowed-file-extensions="jpg jpeg png svg"
-                                              data-max-file-size-preview="5M">
-                                          </div>
+                                <div id="wizard" data-repeater-list="inner-list" data-parent-index="0">
+                                  <div class="wizards-div" data-repeater-item>
+                                    <div class="chp-add-section">
+                                      <div class="chp-heading">
+                                        <div class="chp-title text-truncate">
+                                          <img class="mr-1" src="/images/basic.svg" alt="img">
+                                          <span class="heading-title">New Practice</span>
                                         </div>
-                                        <div class="col-sm-12 col-md-8 col-lg-9">
-                                          <div class="form-group">
-                                            <label class="form-label">Practice Question</label>
-                                            <input class="form-control" type="text"
-                                              placeholder="Dose John go to the Zoo on Monday?">
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="form-label">Duration</label>
-                                            <input class="form-control" type="time" value="">
-                                          </div>
-                                          <div class="form-group mb-0">
-                                            <label class="form-label">Discription</label>
-                                            <textarea class="form-control" placeholder="Enter your text"></textarea>
-                                          </div>
+                                        <div class="right-icons">
+                                          <a href="javascript:void(0);" class="slide-form-preview" data-toggle="tooltip"
+                                            rel="tooltip" data-placement="top" title="Preview"><img class="mr-2"
+                                              src="/images/eye.svg" alt="img"></a>
+                                          <a href="javascript:void(0);" class="slide-form-expand" data-toggle="collapse"
+                                            data-target="#slide-001" aria-expanded="false" aria-controls="slide-001"><img
+                                              class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip"
+                                              rel="tooltip" data-placement="top" title="Edit">
+                                          </a>
+                                          <a href="javascript:void(0);" class="slide-form-delete"
+                                            data-repeater-delete><img src="/images/trash.svg" alt="img"
+                                              data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                              title="Delete"></a>
                                         </div>
                                       </div>
-                                      <div class="spacer2"></div>
-                                      <div class="w-50 mx-auto add-more-section mb-30">
-                                        <a class="add-section theme-btn w-100 text-center"
-                                          href="javascript:void(0);"><img src="/images/addcircle.svg" alt="img"> Add
-                                          Options</a>
-                                      </div>
-                                      <div class="quiz accordion" id="que_option">
-                                        <div class="chp-add-section">
-                                          <div class="chp-heading lightgray">
-                                            <div class="chp-title text-truncate">
-                                              <img class="mr-1" src="/images/basic.svg" alt="img">
-                                              01 Option
-                                            </div>
-                                            <div class="right-icons">
-                                              <a href="#add_option1" aria-expanded="false" data-toggle="collapse"
-                                                data-target="#add_option1" aria-controls="add_option1">
-                                                <img class="mr-1" src="/images/edit.svg" alt="img">
-                                              </a>
-                                              <a class="delete-btn" href="javascript:void(0);"><img
-                                                  src="/images/trash.svg" alt="img"></a>
-                                              <label class="yes_no_toggle">
-                                                <span>Correct Answer ?</span>
-                                                <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                  data-off="No" data-onstyle="success" data-offstyle="danger">
-                                              </label>
-                                            </div>
-                                          </div>
-                                          <div class="collapse" id="add_option1" data-parent="#que_option">
-                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
-                                              life
-                                              accusamus
-                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                              skateboard
-                                              dolor.
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="chp-add-section">
-                                          <div class="chp-heading lightgray">
-                                            <div class="chp-title text-truncate">
-                                              <img class="mr-1" src="/images/basic.svg" alt="img">
-                                              02 Option
-                                            </div>
-                                            <div class="right-icons">
-                                              <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
-                                                data-target="#add_option2" aria-controls="add_option2">
-                                                <img class="mr-1" src="/images/edit.svg" alt="img">
-                                              </a>
-                                              <a class="delete-btn" href="javascript:void(0);"><img
-                                                  src="/images/trash.svg" alt="img"></a>
-                                            </div>
-                                          </div>
 
-                                          <div class="collapse" id="add_option2" data-parent="#que_option">
-                                            <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
-                                              life
-                                              accusamus
-                                              terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                              skateboard
-                                              dolor.
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="add_option_block">
-                                        <div class="add_option_form">
-                                          <a href="javascript:void(0);" class="close_btn"><img src="/images/close.svg"
-                                              alt="img"></a>
-                                          <div class="row">
-                                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2">
-                                              <div class="form-group">
-                                                <input type="file" name="" id="" class="form-control single-img h-auto"
-                                                  data-allowed-file-extensions="jpg jpeg png svg"
-                                                  data-max-file-size-preview="5M">
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-10">
-                                              <div class="form-group">
-                                                <label class="form-label">Add Option</label>
-                                                <input class="form-control" type="text" placeholder="04 Option">
-                                              </div>
-                                              <div class="form-group">
-                                                <label class="form-label">Add Explanation</label>
-                                                <textarea class="form-control" placeholder="Text Here"></textarea>
-                                              </div>
-                                              <div class="form-group mb-0">
-                                                <div class="row">
-                                                  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
-                                                    <label class="form-label mb-0">Display preference</label>
-                                                    <div class="btn-group">
-                                                      <div class="option-check-btn">
-                                                        <input type="checkbox" class="btn-check" id="btn-check-1">
-                                                        <label class="check-label" for="btn-check-1">Text</label>
+                                      <div class="collapse slide-container" id="slide-001">
+                                        <div class="card-body">
+                                          <div class="practice-card">
+                                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                              <li class="nav-item">
+                                                <a class="nav-link active" id="pills-single-sel-tab" data-toggle="pill"
+                                                  href="#pills-single-sel" role="tab" aria-controls="pills-single-sel"
+                                                  aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single
+                                                  Select</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill"
+                                                  href="#pills-multi-sel" role="tab" aria-controls="pills-multi-sel"
+                                                  aria-selected="false"><img src="/images/multi-sel.svg" alt="img"> Multiple
+                                                  Selects</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" id="pills-type-text-tab" data-toggle="pill"
+                                                  href="#pills-type-text" role="tab" aria-controls="pills-type-text"
+                                                  aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type Text</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill"
+                                                  href="#pills-drag-drop" role="tab" aria-controls="pills-drag-drop"
+                                                  aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag &
+                                                  Drop</a>
+                                              </li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                              <div class="tab-pane fade show active" id="pills-single-sel" role="tabpanel"
+                                                aria-labelledby="pills-single-sel-tab">
+                                                <div class="">
+                                                  <h3 class="title-text single-question mb-3">
+                                                    <span>Add Single Question</span>
+                                                    
+                                                  </h3>
+                                                  <div class="row">
+                                                    <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+                                                      <div class="form-group practice-question-img-sec">
+                                                        <label class="form-label">image</label>
+                                                        <input type="file" name="practicequestion_img" id="practicequestion_img"
+                                                          class="form-control practice-question-img h-auto"
+                                                          data-max-file-size-preview="5M">
                                                       </div>
-                                                      <div class="option-check-btn">
-                                                        <input type="checkbox" class="btn-check" id="btn-check-2"
-                                                          checked>
-                                                        <label class="check-label" for="btn-check-2">Image</label>
-                                                      </div>
-                                                      <div class="option-check-btn">
-                                                        <input type="checkbox" class="btn-check" id="btn-check-3">
-                                                        <label class="check-label" for="btn-check-3">Both</label>
+                                                      <!-- <div class="form-group">
+                                                        <label class="form-label">Add img</label>
+                                                        <input type="file" name="" id="" class="form-control single-img h-auto"
+                                                          data-allowed-file-extensions="jpg jpeg png svg"
+                                                          data-max-file-size-preview="5M">
+                                                      </div> -->
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-9">
+                                                      <div class="row">
+                                                        <div class="col-sm-8 col-md-8">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Question</label>
+                                                            <input class="form-control" type="text"
+                                                              placeholder="Dose John go to the Zoo on Monday?">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Duration</label>
+                                                            <input class="form-control" type="time" value="">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                          <div class="form-group mb-0">
+                                                            <label class="form-label">Discription</label>
+                                                            <textarea class="form-control" placeholder="Enter your text"></textarea>
+                                                          </div>
+                                                        </div>
                                                       </div>
                                                     </div>
-
                                                   </div>
-                                                  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
-                                                    <div class="yes_no_toggle justify-content-xl-end">
-                                                      <span>Correct Answer ?</span>
-                                                      <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
-                                                        data-off="No" data-onstyle="success" data-offstyle="danger">
+                                                  <div class="spacer2"></div>
+                                                  <div class="quiz accordion deep-inner-repeater que_option_outer" id="que_option">
+                                                    <div class="chp-add-section add_option_block_outer" data-repeater-list="deep-inner-list">
+                                                      <div class="mt-2" data-repeater-item>
+                                                        <div class="chp-heading lightgray">
+                                                          <div class="chp-title text-truncate">
+                                                            <img class="mr-1" src="/images/basic.svg" alt="img">
+                                                            01 Option
+                                                          </div>
+                                                          <div class="right-icons">
+                                                            <a href="javascript:void(0);" data-repeater-create>
+                                                              <img class="mr-1" src="/images/addcircle.svg" alt="img">
+                                                            </a>
+                                                            <a href="#add_option1" aria-expanded="false" data-toggle="collapse"
+                                                              data-target="#add_option1" aria-controls="add_option1">
+                                                              <img class="mr-1" src="/images/edit.svg" alt="img">
+                                                            </a>
+                                                            <a class="delete-btn" data-repeater-delete href="javascript:void(0);"><img
+                                                                src="/images/trash.svg" alt="img"></a>
+                                                            <label class="yes_no_toggle">
+                                                              <span>Correct Answer ?</span>
+                                                              <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                                data-off="No" data-onstyle="success" data-offstyle="danger">
+                                                            </label>
+                                                          </div>
+                                                        </div>
+                                                        <div class="collapse show" id="add_option1" data-parent="#que_option">
+                                                          <div class="card-body">
+                                                            <div class="add_option_block">
+                                                              <div class="add_option_form">
+                                                                <!-- <a href="javascript:void(0);" class="close_btn"><img src="/images/close.svg"
+                                                                    alt="img"></a> -->
+                                                                <div class="row">
+                                                                  <div class="col-sm-12 col-md-4 col-lg-3">
+                                                                    <div class="form-group practice-question-img-sec">
+                                                                      <label class="form-label">image</label>
+                                                                      <input type="file" name="practicequestion_img" id="practicequestion_img" class="form-control practice-question-img h-auto"
+                                                                        data-max-file-size-preview="5M">
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="col-sm-12 col-md-8 col-lg-9">
+                                                                    <div class="row">
+                                                                      <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Add Option</label>
+                                                                          <input class="form-control" type="text" placeholder="04 Option">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Display preference</label>
+                                                                          <div class="btn-group">
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio" name="option-display" class="btn-check" id="btn-check-1">
+                                                                              <label class="check-label" for="btn-check-1" checked>Text</label>
+                                                                            </div>
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio" name="option-display" class="btn-check" id="btn-check-2"
+                                                                                >
+                                                                              <label class="check-label" for="btn-check-2">Image</label>
+                                                                            </div>
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio" name="option-display" class="btn-check" id="btn-check-3">
+                                                                              <label class="check-label" for="btn-check-3">Both</label>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                      <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Add Explanation</label>
+                                                                          <textarea class="form-control" placeholder="Text Here"></textarea>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    <div class="form-group mb-0">
+                                                                      <div class="row">
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                                                                          
+                  
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
+                                                                          <div class="yes_no_toggle justify-content-xl-end">
+                                                                            <span>Correct Answer ?</span>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                                              data-off="No" data-onstyle="success" data-offstyle="danger">
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <!-- <div class="chp-add-section">
+                                                      <div class="chp-heading lightgray">
+                                                        <div class="chp-title text-truncate">
+                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
+                                                          02 Option
+                                                        </div>
+                                                        <div class="right-icons">
+                                                          <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
+                                                            data-target="#add_option2" aria-controls="add_option2">
+                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
+                                                          </a>
+                                                          <a class="delete-btn" href="javascript:void(0);"><img
+                                                              src="/images/trash.svg" alt="img"></a>
+                                                        </div>
+                                                      </div>
+        
+                                                      <div class="collapse" id="add_option2" data-parent="#que_option">
+                                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
+                                                          life
+                                                          accusamus
+                                                          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                          skateboard
+                                                          dolor.
+                                                        </div>
+                                                      </div>
+                                                    </div> -->
+                                                    
+                                                    <div class="form-btn mt-3">
+                                                      <!-- <a href="javascript:void(0);" class="theme-btn shadow-btn">Close</a> -->
+                                                      <button type="button" class="theme-btn2 shadow-btn2">Save</button>
                                                     </div>
                                                   </div>
                                                 </div>
                                               </div>
+                                              <div class="tab-pane fade" id="pills-multi-sel" role="tabpanel"
+                                                aria-labelledby="pills-multi-sel-tab">
+                                                <div class="">
+                                                  <h3 class="title-text single-question mb-3">
+                                                    <span>Add Single Question</span>
+                                                    
+                                                  </h3>
+                                                  <div class="row">
+                                                    <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+                                                      <div class="form-group practice-question-img-sec">
+                                                        <label class="form-label">image</label>
+                                                        <input type="file" name="practicequestion_img" id="practicequestion_img"
+                                                          class="form-control practice-question-img h-auto"
+                                                          data-max-file-size-preview="5M">
+                                                      </div>
+                                                      <!-- <div class="form-group">
+                                                        <label class="form-label">Add img</label>
+                                                        <input type="file" name="" id="" class="form-control single-img h-auto"
+                                                          data-allowed-file-extensions="jpg jpeg png svg"
+                                                          data-max-file-size-preview="5M">
+                                                      </div> -->
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-9">
+                                                      <div class="row">
+                                                        <div class="col-sm-8 col-md-8">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Question</label>
+                                                            <input class="form-control" type="text"
+                                                              placeholder="Dose John go to the Zoo on Monday?">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Duration</label>
+                                                            <input class="form-control" type="time" value="">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                          <div class="form-group mb-0">
+                                                            <label class="form-label">Discription</label>
+                                                            <textarea class="form-control" placeholder="Enter your text"></textarea>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="spacer2"></div>
+                                                  <div class="quiz accordion que_option_outer" id="que_option">
+                                                    <div class="chp-add-section add_option_block_outer">
+                                                      <div class="chp-heading lightgray">
+                                                        <div class="chp-title text-truncate">
+                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
+                                                          01 Option
+                                                        </div>
+                                                        <div class="right-icons">
+                                                          <a href="#add_option1" aria-expanded="false" data-toggle="collapse"
+                                                            data-target="#add_option1" aria-controls="add_option1">
+                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
+                                                          </a>
+                                                          <a class="delete-btn" href="javascript:void(0);"><img
+                                                              src="/images/trash.svg" alt="img"></a>
+                                                          <label class="yes_no_toggle">
+                                                            <span>Correct Answer ?</span>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                              data-off="No" data-onstyle="success" data-offstyle="danger">
+                                                          </label>
+                                                        </div>
+                                                      </div>
+                                                      <div class="collapse show" id="add_option1" data-parent="#que_option">
+                                                        <div class="card-body">
+                                                          <div class="add_option_block">
+                                                            <div class="add_option_form">
+                                                              <!-- <a href="javascript:void(0);" class="close_btn"><img src="/images/close.svg"
+                                                                  alt="img"></a> -->
+                                                              <div class="row">
+                                                                <div class="col-sm-12 col-md-4 col-lg-3">
+                                                                  <div class="form-group practice-question-img-sec">
+                                                                    <label class="form-label">image</label>
+                                                                    <input type="file" name="practicequestion_img" id="practicequestion_img" class="form-control practice-question-img h-auto"
+                                                                      data-max-file-size-preview="5M">
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-8 col-lg-9">
+                                                                  <div class="row">
+                                                                    <div class="col-sm-12 col-md-6">
+                                                                      <div class="form-group">
+                                                                        <label class="form-label">Add Option</label>
+                                                                        <input class="form-control" type="text" placeholder="04 Option">
+                                                                      </div>
+                                                                      <div class="form-group">
+                                                                        <label class="form-label">Display preference</label>
+                                                                        <div class="btn-group">
+                                                                          <div class="option-check-btn">
+                                                                            <input type="radio" name="option-display" class="btn-check" id="btn-check-1">
+                                                                            <label class="check-label" for="btn-check-1" checked>Text</label>
+                                                                          </div>
+                                                                          <div class="option-check-btn">
+                                                                            <input type="radio" name="option-display" class="btn-check" id="btn-check-2"
+                                                                              >
+                                                                            <label class="check-label" for="btn-check-2">Image</label>
+                                                                          </div>
+                                                                          <div class="option-check-btn">
+                                                                            <input type="radio" name="option-display" class="btn-check" id="btn-check-3">
+                                                                            <label class="check-label" for="btn-check-3">Both</label>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-md-6">
+                                                                      <div class="form-group">
+                                                                        <label class="form-label">Add Explanation</label>
+                                                                        <textarea class="form-control" placeholder="Text Here"></textarea>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  
+                                                                  
+                                                                  <div class="form-group mb-0">
+                                                                    <div class="row">
+                                                                      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                                                                        
+                
+                                                                      </div>
+                                                                      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
+                                                                        <div class="yes_no_toggle justify-content-xl-end">
+                                                                          <span>Correct Answer ?</span>
+                                                                          <input type="checkbox" checked data-toggle="toggle" data-on="Yes"
+                                                                            data-off="No" data-onstyle="success" data-offstyle="danger">
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <!-- <div class="chp-add-section">
+                                                      <div class="chp-heading lightgray">
+                                                        <div class="chp-title text-truncate">
+                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
+                                                          02 Option
+                                                        </div>
+                                                        <div class="right-icons">
+                                                          <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
+                                                            data-target="#add_option2" aria-controls="add_option2">
+                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
+                                                          </a>
+                                                          <a class="delete-btn" href="javascript:void(0);"><img
+                                                              src="/images/trash.svg" alt="img"></a>
+                                                        </div>
+                                                      </div>
+        
+                                                      <div class="collapse" id="add_option2" data-parent="#que_option">
+                                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
+                                                          life
+                                                          accusamus
+                                                          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                          skateboard
+                                                          dolor.
+                                                        </div>
+                                                      </div>
+                                                    </div> -->
+                                                    
+                                                    <div class="form-btn mt-3">
+                                                      <!-- <a href="javascript:void(0);" class="theme-btn shadow-btn">Close</a> -->
+                                                      <button type="button" class="theme-btn2 shadow-btn2">Save</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="pills-type-text" role="tabpanel"
+                                                aria-labelledby="pills-type-text-tab">
+                                                <div class="col-sm-12">
+                                                  <div class="form-group">
+                                                    <label class="form-label" for="shortDescription">Short Description<span class="required">*</span>
+                                                    </label>
+                                                    <textarea name="short_description" rows="5" class="form-control wizard-required"
+                                                      placeholder="Enter short description.." id="shortDescription"></textarea>
+                                                    <div class="wizard-form-error"></div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="tab-pane fade" id="pills-drag-drop" role="tabpanel"
+                                                aria-labelledby="pills-drag-drop-tab">Drag & Drop</div>
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="form-btn">
-                                          <a href="javascript:void(0);" class="theme-btn shadow-btn">Close</a>
-                                          <button type="button" class="theme-btn2 shadow-btn2">Save</button>
-                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-multi-sel" role="tabpanel"
-                                      aria-labelledby="pills-multi-sel-tab">Multiple Selects</div>
-                                    <div class="tab-pane fade" id="pills-type-text" role="tabpanel"
-                                      aria-labelledby="pills-type-text-tab">Type Text</div>
-                                    <div class="tab-pane fade" id="pills-drag-drop" role="tabpanel"
-                                      aria-labelledby="pills-drag-drop-tab">Drag & Drop</div>
-                                  </div>
-                                </div>
-                                <div class="option accordion" id="que_section">
-                                  <div class="chp-add-section">
-                                    <div class="chp-heading">
-                                      <div class="chp-title text-truncate">
-                                        <img class="mr-1" src="/images/basic.svg" alt="img">
-                                        Other Practice Question
-                                      </div>
-                                      <div class="right-icons">
-                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg"
-                                            alt="img"></a>
-                                        <a href="#que_panel1" aria-expanded="false" data-toggle="collapse"
-                                          data-target="#que_panel1" aria-controls="que_panel1">
-                                          <img class="mr-1" src="/images/edit.svg" alt="img">
-                                        </a>
-                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
-                                            alt="img"></a>
-                                      </div>
-                                    </div>
-                                    <div class="collapse" id="que_panel1" data-parent="#que_section">
-                                      <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                        accusamus
-                                        terry
-                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="chp-add-section">
-                                    <div class="chp-heading">
-                                      <div class="chp-title text-truncate">
-                                        <img class="mr-1" src="/images/basic.svg" alt="img">
-                                        Other Practice Question
-                                      </div>
-                                      <div class="right-icons">
-                                        <a href="javascript:void(0);"><img class="mr-1" src="/images/eye.svg"
-                                            alt="img"></a>
-                                        <a href="#que_panel2" aria-expanded="false" data-toggle="collapse"
-                                          data-target="#que_panel2" aria-controls="que_panel2">
-                                          <img class="mr-1" src="/images/edit.svg" alt="img">
-                                        </a>
-                                        <a class="delete-btn" href="javascript:void(0);"><img src="/images/trash.svg"
-                                            alt="img"></a>
-                                      </div>
-                                    </div>
 
-                                    <div class="collapse" id="que_panel2" data-parent="#que_section">
-                                      <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                        accusamus
-                                        terry
-                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor.
-                                      </div>
                                     </div>
                                   </div>
-
                                 </div>
                               </div>
                             </div>
