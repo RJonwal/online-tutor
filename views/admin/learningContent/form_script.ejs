@@ -48,7 +48,7 @@
 
     $('.select-attachments').dropify({
       tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF, Excel)</h6></div>',
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF)</h6></div>',
       },
     });
 
@@ -284,6 +284,14 @@
     // $('#' + classes).addClass('show');
   });
 
+  $(document).on("click", ".practice-form-expand", function () {
+    $('.practice-container').removeClass('show');
+    let classes = $(this).attr('aria-controls');
+    // $('#' + classes).addClass('show');
+  });
+
+
+
   $('.tab_btn').click(function () {
     $('.dropify').dropify();
   })
@@ -301,39 +309,13 @@
   var $repeater = $('.repeater').repeater({
     initEmpty: false,
     show: function () {
-      var index = $($(this), '.main-wizards-div"').index();
+      let element = $(this);
+      /*------ slides start------*/
+      slides_init(element)  // for slides
+      inti_editor();        // initilized editor for all slides
+      dropify();            // initilized dropify for all slides
 
-      var newSlide = 'slide-' + index + '-0';
-      //Do something with name and value...
-      $(this).find('.slide-container').attr('id', newSlide);
-      $(this).find('.close-slide').attr('href', '#' + newSlide);
-      $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
-
-      // add unique id for tiny editor
-      $(this).find('#description-0').attr('id', 'description-' + index + '-0');
-
-      //add unique id for tiny editor
-      //let editorClass = 'description-'+ index + '-0';
-      inti_editor();
-      dropify();
-      // add unique id for tab
-      // for pill basic
-      $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + index + '-0');
-      $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + index + '-0');
-
-      //for pills video
-      $(this).find('#pills-video-tab').attr('href', '#pills-video-' + index + '-0');
-      $(this).find('#pills-video-0').attr('id', 'pills-video-' + index + '-0');
-
-      //for pills attachment
-      $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + index + '-0');
-      $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + index + '-0');
-
-      var newLesson = 'lesson-' + index;
-      $(this).find('.lesson-container').attr('id', newLesson);
-      $(this).find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
-
-      $(this).find("#wizard").attr("data-parent-index", index);
+      practice_init(element);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
@@ -351,33 +333,13 @@
             selector: '.deep-inner-repeater' 
         }],
       show: function () {
-        var index = $($(this), '.wizards-div"').index();
-        let parentIndex = $(this).parents('#wizard:last-child').attr('data-parent-index');
-        var newSlide = 'slide-' + parentIndex + '-' + index;
+        let element = $(this);
+        /*------ slides start------*/
+        slides_init(element)  // for slides
+        inti_editor();        // initilized editor for all slides
+        dropify();            // initilized dropify for all slides
 
-        //Do something with name and value...
-        $(this).find('.slide-container').attr('id', newSlide);
-        $(this).find('.close-slide').attr('href', '#' + newSlide);
-        $(this).find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
-
-        //add unique id for tiny editor
-        $(this).find('#description-0').attr('id', 'description-' + parentIndex + '-' + index);
-        //let editorClass = 'description-'+ parentIndex + '-'+index;
-        inti_editor();
-        dropify();
-        // add unique id for tab
-        // for pill basic
-        $(this).find('#pills-basic-tab').attr('href', '#pills-basic-' + parentIndex + '-' + index);
-        $(this).find('#pills-basic-0').attr('id', 'pills-basic-' + parentIndex + '-' + index);
-
-        //for pills video
-        $(this).find('#pills-video-tab').attr('href', '#pills-video-' + parentIndex + '-' + index);
-        $(this).find('#pills-video-0').attr('id', 'pills-video-' + parentIndex + '-' + index);
-
-        //for pills attachment
-        $(this).find('#pills-attachments-tab').attr('href', '#pills-attachments-' + parentIndex + '-' + index);
-        $(this).find('#pills-attachments-0').attr('id', 'pills-attachments-' + parentIndex + '-' + index);
-
+        practice_init(element);
         $(this).slideDown();
       },
       hide: function (deleteElement) {
@@ -463,5 +425,61 @@
 
 
 
+  function slides_init(element){
+    var index = $(element, '.wizards-div"').index();
+    let parentIndex = element.parents('#wizard:last-child').attr('data-parent-index');
+    var newSlide = 'slide-' + parentIndex + '-' + index;
 
+    //Do something with name and value...
+    element.find('.slide-container').attr('id', newSlide);
+    element.find('.close-slide').attr('href', '#' + newSlide);
+    element.find('.slide-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
+
+    //add unique id for tiny editor
+    element.find('#description-0').attr('id', 'description-' + parentIndex + '-' + index);
+    // add unique id for tab
+    // for pill basic
+    element.find('#pills-basic-tab').attr('href', '#pills-basic-' + parentIndex + '-' + index);
+    element.find('#pills-basic-0').attr('id', 'pills-basic-' + parentIndex + '-' + index);
+
+    //for pills video
+    element.find('#pills-video-tab').attr('href', '#pills-video-' + parentIndex + '-' + index);
+    element.find('#pills-video-0').attr('id', 'pills-video-' + parentIndex + '-' + index);
+
+    //for pills attachment
+    element.find('#pills-attachments-tab').attr('href', '#pills-attachments-' + parentIndex + '-' + index);
+    element.find('#pills-attachments-0').attr('id', 'pills-attachments-' + parentIndex + '-' + index);
+  }
+
+  function practice_init(element){
+    var index = $(element, '.practice-wizards-div"').index();
+    let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
+    var newSlide = 'practice-' + parentIndex + '-' + index;
+    console.log(parentIndex,index);
+    //Do something with name and value...
+    element.find('.practice-container').attr('id', newSlide);
+    element.find('.close-slide').attr('href', '#' + newSlide);
+    element.find('.practice-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
+
+    //add unique id for tiny editor
+    element.find('#description-0').attr('id', 'description-' + parentIndex + '-' + index);
+    // add unique id for tab
+    // for pill basic
+    element.find('#pills-single-sel-tab').attr('href', '#pills-single-sel-' + parentIndex + '-' + index);
+    element.find('#pills-single-sel-0').attr('id', 'pills-single-sel-' + parentIndex + '-' + index);
+
+    //for pills video
+    element.find('#pills-multi-sel-tab').attr('href', '#pills-multi-sel-' + parentIndex + '-' + index);
+    element.find('#pills-multi-sel-0').attr('id', 'pills-multi-sel-' + parentIndex + '-' + index);
+
+    //for pills attachment
+    element.find('#pills-type-text-tab').attr('href', '#pills-type-text-' + parentIndex + '-' + index);
+    element.find('#pills-type-text-0').attr('id', 'pills-type-text-' + parentIndex + '-' + index);
+
+    element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + parentIndex + '-' + index);
+    element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + parentIndex + '-' + index);
+
+    console.log(index,parentIndex,newSlide);
+  }
+  
 </script>

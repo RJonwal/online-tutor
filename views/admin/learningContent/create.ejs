@@ -224,8 +224,8 @@
                                         <div class="card-body">
                                           <div class="d-flex align-items-center justify-content-between mb-4">
                                             <h3 class="title-text mb-0">Lecture Details</h3>
-                                            <a data-toggle="collapse" href="#slide-0" aria-expanded="false"
-                                            class="close-slide"><img src="/images/close.svg" alt="img"></a>
+                                            <!-- <a data-toggle="collapse" href="#slide-0" aria-expanded="false"
+                                            class="close-slide"><img src="/images/close.svg" alt="img"></a> -->
                                           </div>
                                           <div class="row">
                                             <div class="col-sm-12 col-md-6">
@@ -396,8 +396,8 @@
                             </div>
                             <div class="collapse" id="practiceAccordion">
                               <div class="card-body">
-                                <div id="wizard" data-repeater-list="inner-list" data-parent-index="0">
-                                  <div class="wizards-div" data-repeater-item>
+                                <div id="practice-wizard" data-repeater-list="inner-list" data-parent-index="0">
+                                  <div class="practice-wizards-div" data-repeater-item>
                                     <div class="chp-add-section">
                                       <div class="chp-heading">
                                         <div class="chp-title text-truncate">
@@ -405,57 +405,57 @@
                                           <span class="heading-title">New Practice</span>
                                         </div>
                                         <div class="right-icons">
-                                          <a href="javascript:void(0);" class="slide-form-preview" data-toggle="tooltip"
+                                          <a href="javascript:void(0);" class="practice-form-preview" data-toggle="tooltip"
                                             rel="tooltip" data-placement="top" title="Preview"><img class="mr-2"
                                               src="/images/eye.svg" alt="img"></a>
-                                          <a href="javascript:void(0);" class="slide-form-expand" data-toggle="collapse"
-                                            data-target="#slide-001" aria-expanded="false" aria-controls="slide-001"><img
+                                          <a href="javascript:void(0);" class="practice-form-expand" data-toggle="collapse"
+                                            data-target="#practice-0" aria-expanded="false" aria-controls="practice-0"><img
                                               class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip"
                                               rel="tooltip" data-placement="top" title="Edit">
                                           </a>
-                                          <a href="javascript:void(0);" class="slide-form-delete"
+                                          <a href="javascript:void(0);" class="pratice-form-delete"
                                             data-repeater-delete><img src="/images/trash.svg" alt="img"
                                               data-toggle="tooltip" rel="tooltip" data-placement="top"
                                               title="Delete"></a>
                                         </div>
                                       </div>
 
-                                      <div class="collapse slide-container" id="slide-001">
+                                      <div class="collapse practice-container" id="practice-0">
                                         <div class="card-body">
                                           <div class="practice-card">
                                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                               <li class="nav-item">
                                                 <a class="nav-link active" id="pills-single-sel-tab" data-toggle="pill"
-                                                  href="#pills-single-sel" role="tab" aria-controls="pills-single-sel"
+                                                  href="#pills-single-sel-0" role="tab" aria-controls="pills-single-sel-0"
                                                   aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single
                                                   Select</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill"
-                                                  href="#pills-multi-sel" role="tab" aria-controls="pills-multi-sel"
+                                                  href="#pills-multi-sel-0" role="tab" aria-controls="pills-multi-sel-0"
                                                   aria-selected="false"><img src="/images/multi-sel.svg" alt="img"> Multiple
                                                   Selects</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-type-text-tab" data-toggle="pill"
-                                                  href="#pills-type-text" role="tab" aria-controls="pills-type-text"
+                                                  href="#pills-type-text-0" role="tab" aria-controls="pills-type-text-0"
                                                   aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type Text</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill"
-                                                  href="#pills-drag-drop" role="tab" aria-controls="pills-drag-drop"
+                                                  href="#pills-drag-drop-0" role="tab" aria-controls="pills-drag-drop-0"
                                                   aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag &
                                                   Drop</a>
                                               </li>
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
-                                              <div class="tab-pane fade show active" id="pills-single-sel" role="tabpanel"
+                                              <div class="tab-pane fade show active" id="pills-single-sel-0" role="tabpanel"
                                                 aria-labelledby="pills-single-sel-tab">
                                                 <div class="">
-                                                  <h3 class="title-text single-question mb-3">
+                                                  <!-- <h3 class="title-text single-question mb-3">
                                                     <span>Add Single Question</span>
                                                     
-                                                  </h3>
+                                                  </h3> -->
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
@@ -627,13 +627,13 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="tab-pane fade" id="pills-multi-sel" role="tabpanel"
+                                              <div class="tab-pane fade" id="pills-multi-sel-0" role="tabpanel"
                                                 aria-labelledby="pills-multi-sel-tab">
                                                 <div class="">
-                                                  <h3 class="title-text single-question mb-3">
+                                                  <!-- <h3 class="title-text single-question mb-3">
                                                     <span>Add Single Question</span>
                                                     
-                                                  </h3>
+                                                  </h3> -->
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
@@ -800,7 +800,7 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="tab-pane fade" id="pills-type-text" role="tabpanel"
+                                              <div class="tab-pane fade" id="pills-type-text-0" role="tabpanel"
                                                 aria-labelledby="pills-type-text-tab">
                                                 <div class="col-sm-12">
                                                   <div class="form-group">
@@ -812,7 +812,7 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="tab-pane fade" id="pills-drag-drop" role="tabpanel"
+                                              <div class="tab-pane fade" id="pills-drag-drop-0" role="tabpanel"
                                                 aria-labelledby="pills-drag-drop-tab">Drag & Drop</div>
                                             </div>
                                           </div>
