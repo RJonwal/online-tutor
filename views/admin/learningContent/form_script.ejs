@@ -211,14 +211,14 @@
         var thisValue = jQuery(this).val();
         var thisType = jQuery(this).attr("type");
 
-        if (thisValue == "") {
+        if (thisValue == ""){
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
           }
           jQuery(this).siblings(".wizard-form-error").slideDown();
         }
         else {
-          if (thisType == 'file') {
+          if (thisType == 'file'){
             jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
           }
           jQuery(this).siblings(".wizard-form-error").slideUp();
