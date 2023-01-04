@@ -10,7 +10,6 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-
 // var slideSchema = new mongoose.Schema({
 //     title: {
 //         type: String,
@@ -73,6 +72,46 @@ const lessonSchema = new mongoose.Schema({
             type: Array,
             default: 'null',
         }
+    }],
+    practices: [{
+        question_type: {
+            type: String,
+            default: 'null'
+        },
+        question_title: {
+            type: String,
+            default: 'null'
+        },
+        question_duration: {
+            type: String,
+            default: 'null'
+        },
+        question_description: {
+            type: String,
+            default: 'null'
+        },
+        question_image: {
+            type: String,
+            default: 'null'
+        },
+        options: [{
+            option_title: {
+                type: String,
+                default: 'null'
+            },
+            option_image: {
+                type: String,
+                default: 'null'
+            },
+            option_explanation: {
+                type: String,
+                default: 'null'
+            },
+            display_preference: {
+                type: String,
+                default: 'null'
+            },
+        }],
     }],
     deleted_at: {
         type: Date,
