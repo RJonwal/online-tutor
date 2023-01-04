@@ -47,14 +47,6 @@
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Attachments</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (PDF)</h6></div>',
       },
     });
-
-    $('.practice-question-img').dropify({
-      tpl: {
-        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Image</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (JPEG, PNG, SVG)</h6></div>',
-      },
-    });
-
-
   }
 
   function inti_editor() {
@@ -83,9 +75,19 @@
       },
     });
 
+    question_dropify();
+
     $('#thumbnail').dropify({
       tpl: {
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">Select File</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : JPEG, PNG, MP4</h6></div>',
+      },
+    });
+  }
+
+  function question_dropify(){
+    $('.practice-question-img').dropify({
+      tpl: {
+        message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Image</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (JPEG, PNG, SVG)</h6></div>',
       },
     });
   }
@@ -387,7 +389,16 @@
     repeaters: [{
       selector: '.inner-repeater',
       repeaters: [{
-        selector: '.deep-inner-repeater'
+        selector: '.deep-inner-repeater',
+
+        show: function () {
+        let element = $(this);
+        /*------ question start------*/
+        que_option(element);  
+        question_dropify();
+        practice_init(element);
+        $(this).slideDown();
+      },
       }],
       show: function () {
         let element = $(this);
@@ -417,10 +428,6 @@
     //     'inner-list': []
     // }
   ]);
-
-
-
-
 
   function slides_init(element){
     var index = $(element, '.wizards-div"').index();
@@ -452,7 +459,6 @@
     var index = $(element, '.practice-wizards-div"').index();
     let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
     var newSlide = 'practice-' + parentIndex + '-' + index;
-    console.log(parentIndex,index);
     //Do something with name and value...
     element.find('.practice-container').attr('id', newSlide);
     element.find('.close-slide').attr('href', '#' + newSlide);
@@ -475,8 +481,13 @@
 
     element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + parentIndex + '-' + index);
     element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + parentIndex + '-' + index);
-
-    console.log(index,parentIndex,newSlide);
   }
   
+  function que_option(element){
+    var index = $(element, '.practice-wizards-div"').index();
+    let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
+    
+    var newSlide = 'practice-' + parentIndex + '-' + index;
+    console.log(newSlide);
+  }
 </script>
