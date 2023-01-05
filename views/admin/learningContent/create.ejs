@@ -142,7 +142,7 @@
               rel="tooltip" data-placement="top" title="Add Lesson"><img src="/images/addcircle.svg" alt="img"></a>
           </div>
 
-          <div class="parent-div" data-repeater-list="outer-list">
+          <div class="parent-div" data-repeater-list="outer-list" style="display:block;">
             <div class="main-wizards-div" data-repeater-item>
               <div class="content-section mt-4">
                 <div class="lesson accordion" id="lesson-accordion">
@@ -432,7 +432,7 @@
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
-                                                        <label class="form-label">image</label>
+                                                        <label class="form-label">Question Image</label>
                                                         <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
@@ -443,14 +443,14 @@
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
-                                                            <label class="form-label">Question</label>
+                                                            <label class="form-label">Question Title</label>
                                                             <input class="form-control" type="text"
                                                               name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
-                                                            <label class="form-label">Duration</label>
+                                                            <label class="form-label">Question Duration</label>
                                                             <input class="form-control" type="time"
                                                               name="question_duration" value=""
                                                               placeholder="Question duration..">
@@ -458,7 +458,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Description</label>
+                                                            <label class="form-label">Question Description</label>
                                                             <textarea class="form-control" name="question_description"
                                                               placeholder="Question description.."></textarea>
                                                           </div>
@@ -506,7 +506,7 @@
                                                                   <div class="col-sm-12 col-md-4 col-lg-3">
                                                                     <div
                                                                       class="form-group form-group.practice-option-img-sec">
-                                                                      <label class="form-label">image</label>
+                                                                      <label class="form-label">Option Image</label>
                                                                       <input type="file" name="option_image"
                                                                         id="option_image"
                                                                         class="form-control practice-option-img h-auto"
@@ -517,13 +517,15 @@
                                                                     <div class="row">
                                                                       <div class="col-sm-12 col-md-6">
                                                                         <div class="form-group">
-                                                                          <label class="form-label">Add Option</label>
+                                                                          <label class="form-label">Option Text</label>
                                                                           <input class="form-control" type="text"
-                                                                            name="option_text" placeholder="Option">
+                                                                            name="option_text"
+                                                                            placeholder="Option text">
                                                                         </div>
                                                                         <div class="form-group">
                                                                           <label class="form-label">Display
-                                                                            preference</label>
+                                                                            Preference<span
+                                                                              class="required">*</span></label>
                                                                           <div class="btn-group">
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
@@ -558,11 +560,11 @@
                                                                       </div>
                                                                       <div class="col-sm-12 col-md-6">
                                                                         <div class="form-group">
-                                                                          <label class="form-label">Add
+                                                                          <label class="form-label">Option
                                                                             Explanation</label>
                                                                           <textarea class="form-control"
                                                                             name="option_explanation"
-                                                                            placeholder="Text Here"></textarea>
+                                                                            placeholder="Option explanation"></textarea>
                                                                         </div>
                                                                       </div>
                                                                     </div>
@@ -587,7 +589,7 @@
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
-                                                        <label class="form-label">image</label>
+                                                        <label class="form-label">Question Image</label>
                                                         <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
@@ -597,14 +599,14 @@
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
-                                                            <label class="form-label">Question</label>
+                                                            <label class="form-label">Question Title</label>
                                                             <input class="form-control" type="text"
                                                               name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
-                                                            <label class="form-label">Duration</label>
+                                                            <label class="form-label">Question Duration</label>
                                                             <input class="form-control" type="time"
                                                               name="question_duration" value=""
                                                               placeholder="Question duration..">
@@ -612,7 +614,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Description</label>
+                                                            <label class="form-label">Question Description</label>
                                                             <textarea class="form-control" name="question_description"
                                                               placeholder="Question description.."></textarea>
                                                           </div>
@@ -660,7 +662,7 @@
                                                                 <div class="row">
                                                                   <div class="col-sm-12 col-md-4 col-lg-3">
                                                                     <div class="form-group practice-question-img-sec">
-                                                                      <label class="form-label">image</label>
+                                                                      <label class="form-label">Option Image</label>
                                                                       <input type="file" name="option_image"
                                                                         id="option_image"
                                                                         class="form-control practice-question-img h-auto"
@@ -671,13 +673,15 @@
                                                                     <div class="row">
                                                                       <div class="col-sm-12 col-md-6">
                                                                         <div class="form-group">
-                                                                          <label class="form-label">Add Option</label>
+                                                                          <label class="form-label">Option Text</label>
                                                                           <input class="form-control" type="text"
-                                                                            name="option_text" placeholder="Option">
+                                                                            name="option_text"
+                                                                            placeholder="Option text">
                                                                         </div>
                                                                         <div class="form-group">
                                                                           <label class="form-label">Display
-                                                                            preference</label>
+                                                                            Preference<span
+                                                                              class="required">*</span></label>
                                                                           <div class="btn-group">
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
@@ -712,11 +716,11 @@
                                                                       </div>
                                                                       <div class="col-sm-12 col-md-6">
                                                                         <div class="form-group">
-                                                                          <label class="form-label">Add
+                                                                          <label class="form-label">Option
                                                                             Explanation</label>
                                                                           <textarea class="form-control"
                                                                             name="option_explanation"
-                                                                            placeholder="Text Here"></textarea>
+                                                                            placeholder="Option explanation"></textarea>
                                                                         </div>
                                                                       </div>
                                                                     </div>
@@ -740,7 +744,7 @@
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
-                                                        <label class="form-label">image</label>
+                                                        <label class="form-label">Question Image</label>
                                                         <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
@@ -750,14 +754,14 @@
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
-                                                            <label class="form-label">Question</label>
+                                                            <label class="form-label">Question Title</label>
                                                             <input class="form-control" type="text"
                                                               name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
-                                                            <label class="form-label">Duration</label>
+                                                            <label class="form-label">Question Duration</label>
                                                             <input class="form-control" type="time"
                                                               name="question_duration" value=""
                                                               placeholder="Question duration..">
@@ -765,7 +769,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Description</label>
+                                                            <label class="form-label">Question Description</label>
                                                             <textarea class="form-control" name="question_description"
                                                               placeholder="Question description.."></textarea>
                                                           </div>
@@ -782,7 +786,7 @@
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
-                                                        <label class="form-label">image</label>
+                                                        <label class="form-label">Question Image</label>
                                                         <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
@@ -792,14 +796,14 @@
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
-                                                            <label class="form-label">Question</label>
+                                                            <label class="form-label">Question Title</label>
                                                             <input class="form-control" type="text"
                                                               name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
-                                                            <label class="form-label">Duration</label>
+                                                            <label class="form-label">Question Duration</label>
                                                             <input class="form-control" type="time"
                                                               name="question_duration" value=""
                                                               placeholder="Question duration..">
@@ -807,7 +811,7 @@
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Description</label>
+                                                            <label class="form-label">Question Description</label>
                                                             <textarea class="form-control" name="question_description"
                                                               placeholder="Question description.."></textarea>
                                                           </div>
@@ -877,6 +881,7 @@
           <a href="javascript:void(0);" class="form-wizard-previous-btn theme-btn float-left">Previous</a>
           <a href="javascript:void(0);" class="form-wizard-submit theme-btn float-right submitbtn">Add</a>
         </div>
+
       </fieldset>
       <!-- Step2-->
 

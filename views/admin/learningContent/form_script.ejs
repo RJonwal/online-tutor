@@ -363,6 +363,7 @@
   var $repeater = $('.repeater').repeater({
     initEmpty: false,
     show: function () {
+      $(this).show();
       let element = $(this);
       /*------ slides start------*/
       slides_init(element)  // for slides
