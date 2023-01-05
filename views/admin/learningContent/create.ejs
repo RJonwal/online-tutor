@@ -481,9 +481,9 @@
                                                             <a href="javascript:void(0);" data-repeater-create>
                                                               <img class="mr-1" src="/images/addcircle.svg" alt="img">
                                                             </a>
-                                                            <a href="#add_option-1" class="practice-question-expand" aria-expanded="false"
-                                                              data-toggle="collapse" data-target="#add_option-1"
-                                                              aria-controls="add_option-1">
+                                                            <a href="#add_option-1" class="practice-question-expand"
+                                                              aria-expanded="false" data-toggle="collapse"
+                                                              data-target="#add_option-1" aria-controls="add_option-1">
                                                               <img class="mr-1" src="/images/edit.svg" alt="img">
                                                             </a>
                                                             <a class="delete-btn" data-repeater-delete
@@ -502,15 +502,13 @@
                                                           <div class="card-body">
                                                             <div class="add_option_block">
                                                               <div class="add_option_form">
-                                                                <!-- <a href="javascript:void(0);" class="close_btn"><img src="/images/close.svg"
-                                                                    alt="img"></a> -->
                                                                 <div class="row">
                                                                   <div class="col-sm-12 col-md-4 col-lg-3">
-                                                                    <div class="form-group practice-question-img-sec">
+                                                                    <div class="form-group form-group.practice-option-img-sec">
                                                                       <label class="form-label">image</label>
                                                                       <input type="file" name="option_image"
                                                                         id="option_image"
-                                                                        class="form-control practice-question-img h-auto"
+                                                                        class="form-control practice-option-img h-auto"
                                                                         data-max-file-size-preview="5M">
                                                                     </div>
                                                                   </div>
@@ -530,7 +528,7 @@
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
                                                                                 class="btn-check btn-check-text"
-                                                                                id="btn-check-text-1">
+                                                                                id="btn-check-text-1" value="text">
                                                                               <label
                                                                                 class="check-label check-label-text"
                                                                                 for="btn-check-text-1"
@@ -540,7 +538,7 @@
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
                                                                                 class="btn-check btn-check-image"
-                                                                                id="btn-check-image-1">
+                                                                                id="btn-check-image-1" value="image">
                                                                               <label
                                                                                 class="check-label check-label-image"
                                                                                 for="btn-check-image-1">Image</label>
@@ -549,7 +547,7 @@
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
                                                                                 class="btn-check btn-check-both"
-                                                                                id="btn-check-both-3">
+                                                                                id="btn-check-both-3" value="both">
                                                                               <label
                                                                                 class="check-label check-label-both"
                                                                                 for="btn-check-both-3">Both</label>
@@ -575,7 +573,7 @@
                                                         </div>
                                                       </div>
                                                     </div>
-                                                  
+
                                                     <div class="form-btn mt-3">
                                                       <button type="button" class="theme-btn2 shadow-btn2">Save</button>
                                                     </div>
@@ -684,7 +682,7 @@
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
                                                                                 class="btn-check btn-check-text"
-                                                                                id="btn-check-text-1">
+                                                                                id="btn-check-text-1" value="text">
                                                                               <label
                                                                                 class="check-label check-label-text"
                                                                                 for="btn-check-text-1"
@@ -694,7 +692,7 @@
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
                                                                                 class="btn-check btn-check-image"
-                                                                                id="btn-check-image-1">
+                                                                                id="btn-check-image-1" value="image">
                                                                               <label
                                                                                 class="check-label check-label-image"
                                                                                 for="btn-check-image-1">Image</label>
@@ -778,7 +776,47 @@
                                                 </div>
                                               </div>
                                               <div class="tab-pane fade" id="pills-drag-drop-0" role="tabpanel"
-                                                aria-labelledby="pills-drag-drop-tab">Drag & Drop</div>
+                                                aria-labelledby="pills-drag-drop-tab">
+                                                <div class="">
+                                                  <div class="row">
+                                                    <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+                                                      <div class="form-group practice-question-img-sec">
+                                                        <label class="form-label">image</label>
+                                                        <input type="file" name="question_image" id="question_image"
+                                                          class="form-control practice-question-img h-auto"
+                                                          data-max-file-size-preview="5M">
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-9">
+                                                      <div class="row">
+                                                        <div class="col-sm-8 col-md-8">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Question</label>
+                                                            <input class="form-control" type="text"
+                                                              name="question_title" placeholder="Question title..">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Duration</label>
+                                                            <input class="form-control" type="time"
+                                                              name="question_duration" value=""
+                                                              placeholder="Question duration..">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                          <div class="form-group mb-0">
+                                                            <label class="form-label">Description</label>
+                                                            <textarea class="form-control" name="question_description"
+                                                              placeholder="Question description.."></textarea>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="spacer2"></div>
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>

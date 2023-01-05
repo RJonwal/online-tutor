@@ -3328,7 +3328,7 @@ span.total-count {
     max-width: 163px;
     width: 100%;
 }
-.practice-card .tab-content .form-group.practice-question-img-sec .dropify-wrapper {
+.practice-card .tab-content .form-group.practice-question-img-sec .form-group.practice-option-img-sec .dropify-wrapper {
     height: 83%;
 }
  .right_col .form-wizard .accordion .chp-add-section.add_option_block_outer .card-body{
