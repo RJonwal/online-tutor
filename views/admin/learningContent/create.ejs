@@ -424,6 +424,7 @@
                                                   Drop</a>
                                               </li>
                                             </ul>
+                                            <input type="hidden" class="practices-type" name="practices-type[0][0]">
                                             <div class="tab-content" id="pills-tabContent">
                                               <div class="tab-pane fade show active" id="pills-single-sel-0"
                                                 role="tabpanel" aria-labelledby="pills-single-sel-tab">
@@ -475,7 +476,7 @@
                                                         <div class="chp-heading lightgray">
                                                           <div class="chp-title text-truncate">
                                                             <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                            Option 01
+                                                             <span class="option-title">Option 01</span>
                                                           </div>
                                                           <div class="right-icons">
                                                             <a href="javascript:void(0);" data-repeater-create>
@@ -489,9 +490,9 @@
                                                             <a class="delete-btn" data-repeater-delete
                                                               href="javascript:void(0);"><img src="/images/trash.svg"
                                                                 alt="img"></a>
-                                                            <label class="yes_no_toggle">
+                                                            <label class=" yes_no_toggle">
                                                               <span>Correct Answer ?</span>
-                                                              <input type="checkbox" checked data-toggle="toggle"
+                                                              <input class="single-select" type="checkbox" data-class="select-box-1" data-toggle="toggle"
                                                                 data-on="Yes" data-off="No" data-onstyle="success"
                                                                 data-offstyle="danger">
                                                             </label>
@@ -528,30 +529,30 @@
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-text"
-                                                                                id="btn-check-text-1" value="text">
+                                                                                class="btn-check btn-check-single-text"
+                                                                                id="btn-check-single-text-1">
                                                                               <label
-                                                                                class="check-label check-label-text"
-                                                                                for="btn-check-text-1"
+                                                                                class="check-label check-label-single-text"
+                                                                                for="btn-check-single-text-1"
                                                                                 checked>Text</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-image"
-                                                                                id="btn-check-image-1" value="image">
+                                                                                class="btn-check btn-check-single-image"
+                                                                                id="btn-check-image-1">
                                                                               <label
-                                                                                class="check-label check-label-image"
-                                                                                for="btn-check-image-1">Image</label>
+                                                                                class="check-label check-label-single-image"
+                                                                                for="btn-check-single-image-1">Image</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-both"
-                                                                                id="btn-check-both-3" value="both">
+                                                                                class="btn-check btn-check-single-both"
+                                                                                id="btn-check-both-3">
                                                                               <label
-                                                                                class="check-label check-label-both"
-                                                                                for="btn-check-both-3">Both</label>
+                                                                                class="check-label check-label-single-both"
+                                                                                for="btn-check-single-both-3">Both</label>
                                                                             </div>
                                                                           </div>
                                                                         </div>
@@ -629,7 +630,7 @@
                                                         <div class="chp-heading lightgray">
                                                           <div class="chp-title text-truncate">
                                                             <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                            Option 01
+                                                            <span class="option-title">Option 01</span>
                                                           </div>
                                                           <div class="right-icons">
                                                             <a href="javascript:void(0);" data-repeater-create>
@@ -682,30 +683,30 @@
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-text"
-                                                                                id="btn-check-text-1" value="text">
+                                                                                class="btn-check btn-check-multiple-text"
+                                                                                id="btn-check-multiple-text-1">
                                                                               <label
-                                                                                class="check-label check-label-text"
-                                                                                for="btn-check-text-1"
+                                                                                class="check-label check-label-multiple-text"
+                                                                                for="btn-check-multiple-text-1"
                                                                                 checked>Text</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-image"
-                                                                                id="btn-check-image-1" value="image">
+                                                                                class="btn-check btn-check-multiple-image"
+                                                                                id="btn-check-multiple-image-1">
                                                                               <label
-                                                                                class="check-label check-label-image"
-                                                                                for="btn-check-image-1">Image</label>
+                                                                                class="check-label check-label-multiple-image"
+                                                                                for="btn-check-multiple-image-1">Image</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
                                                                               <input type="radio"
                                                                                 name="option_display_preference"
-                                                                                class="btn-check btn-check-both"
-                                                                                id="btn-check-both-3">
+                                                                                class="btn-check btn-check-multiple-both"
+                                                                                id="btn-check-multiple-both-3">
                                                                               <label
-                                                                                class="check-label check-label-both"
-                                                                                for="btn-check-both-3">Both</label>
+                                                                                class="check-label check-label-multiple-both"
+                                                                                for="btn-check-multiple-both-3">Both</label>
                                                                             </div>
                                                                           </div>
                                                                         </div>

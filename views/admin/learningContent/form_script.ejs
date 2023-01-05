@@ -403,6 +403,7 @@
         inti_editor();        // initilized editor for all slides
         dropify();            // initilized dropify for all slides
         que_option(element);
+        
         practice_init(element);
         $(this).slideDown();
       },
@@ -487,8 +488,6 @@
     var newLesson = 'lesson-' + index;
     element.find('.lesson-container').attr('id', newLesson);
     element.find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
-    console.log(newLesson);
-
   }
 
   function que_option(element) {
@@ -497,22 +496,35 @@
     let parentIndex = element.parents('.practice-wizards-div:last-child').attr('data-practice-index');
 
     var questionClass = grandparentIndex + '-' + parentIndex + '-' + index;
-    console.log(questionClass);
 
-    element.find('.btn-check-text').attr('id', 'btn-check-text-' + questionClass);
-    element.find('.check-label-text').attr('for', 'btn-check-text-' + questionClass);
 
-    element.find('.btn-check-image').attr('id', 'btn-check-image-' + questionClass);
-    element.find('.check-label-image').attr('for', 'btn-check-image-' + questionClass);
+    element.find('.btn-check-single-text').attr('id', 'btn-check-single-text-'+questionClass);
+    element.find('.check-label-single-text').attr('for', 'btn-check-single-text-'+questionClass);
 
-    element.find('.btn-check-both').attr('id', 'btn-check-both-' + questionClass);
-    element.find('.check-label-both').attr('for', 'btn-check-both-' + questionClass);
+    element.find('.btn-check-single-image').attr('id', 'btn-check-single-image-'+questionClass);
+    element.find('.check-label-single-image').attr('for', 'btn-check-single-image-'+questionClass);
+
+    element.find('.btn-check-single-both').attr('id', 'btn-check-single-both-'+questionClass);
+    element.find('.check-label-single-both').attr('for', 'btn-check-single-both-'+questionClass);
+
+    element.find('.btn-check-multiple-text').attr('id', 'btn-check-multiple-text-'+questionClass);
+    element.find('.check-label-multiple-text').attr('for', 'btn-check-multiple-text-'+questionClass);
+
+    element.find('.btn-check-multiple-image').attr('id', 'btn-check-multiple-image-'+questionClass);
+    element.find('.check-label-multiple-image').attr('for', 'btn-check-multiple-image-'+questionClass);
+
+    element.find('.btn-check-multiple-both').attr('id', 'btn-check-multiple-both-'+questionClass);
+    element.find('.check-label-multiple-both').attr('for', 'btn-check-multiple-both-'+questionClass);
 
     // question collapse div
-
     var QuestionId = 'add_option-' + questionClass;
-    //Do something with name and value...
     element.find('.practice-questions').attr('id', QuestionId);
     element.find('.practice-question-expand').attr('data-target', '#' + QuestionId).attr('aria-controls', QuestionId);
+    //checkbox for single text question
+    element.find('.single-select').attr('data-class','select-box-'+ grandparentIndex + '-' + parentIndex);
+
+    // option title
+    element.find('.option-title').text('Option '+(index+1));
+   
   }
 </script>
