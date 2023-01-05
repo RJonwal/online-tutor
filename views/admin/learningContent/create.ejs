@@ -224,7 +224,6 @@
                                         <div class="card-body">
                                           <div class="d-flex align-items-center justify-content-between mb-4">
                                             <h3 class="title-text mb-0">Lecture Details</h3>
-
                                           </div>
                                           <div class="row">
                                             <div class="col-sm-12 col-md-6">
@@ -249,7 +248,6 @@
                                                 <div class="wizard-form-error"></div>
                                               </div>
                                             </div>
-
                                           </div>
                                           <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                             <li class="nav-item">
@@ -311,7 +309,7 @@
                                                         class="required">*</span>
                                                     </label>
                                                     <input type="file" name="slide_video" id="video"
-                                                      class="form-control wizard-required select-video h-auto"
+                                                      class="form-control select-video h-auto"
                                                       data-allowed-file-extensions="mp4 webm"
                                                       data-max-file-size-preview="5M">
                                                   </div>
@@ -339,13 +337,11 @@
                                           </div>
                                         </div>
                                       </div>
-
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-
                           </div>
                         </div>
                         <!--slides end-->
@@ -437,33 +433,34 @@
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
                                                         <label class="form-label">image</label>
-                                                        <input type="file" name="question_image"
-                                                          id="question_image"
+                                                        <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
                                                       </div>
-              
+
                                                     </div>
                                                     <div class="col-sm-12 col-md-8 col-lg-9">
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
                                                             <label class="form-label">Question</label>
-                                                            <input class="form-control" type="text" name="question_title" 
-                                                              placeholder="Question title..">
+                                                            <input class="form-control" type="text"
+                                                              name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
                                                             <label class="form-label">Duration</label>
-                                                            <input class="form-control" type="time" name="question_duration" value="">
+                                                            <input class="form-control" type="time"
+                                                              name="question_duration" value=""
+                                                              placeholder="Question duration..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
                                                             <label class="form-label">Description</label>
                                                             <textarea class="form-control" name="question_description"
-                                                              placeholder="description.."></textarea>
+                                                              placeholder="Question description.."></textarea>
                                                           </div>
                                                         </div>
                                                       </div>
@@ -478,7 +475,7 @@
                                                         <div class="chp-heading lightgray">
                                                           <div class="chp-title text-truncate">
                                                             <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                            01 Option
+                                                            Option 01
                                                           </div>
                                                           <div class="right-icons">
                                                             <a href="javascript:void(0);" data-repeater-create>
@@ -511,8 +508,8 @@
                                                                   <div class="col-sm-12 col-md-4 col-lg-3">
                                                                     <div class="form-group practice-question-img-sec">
                                                                       <label class="form-label">image</label>
-                                                                      <input type="file" name="practicequestion_img"
-                                                                        id="practicequestion_img"
+                                                                      <input type="file" name="option_image"
+                                                                        id="option_image"
                                                                         class="form-control practice-question-img h-auto"
                                                                         data-max-file-size-preview="5M">
                                                                     </div>
@@ -523,28 +520,38 @@
                                                                         <div class="form-group">
                                                                           <label class="form-label">Add Option</label>
                                                                           <input class="form-control" type="text"
-                                                                            placeholder="04 Option">
+                                                                            name="option_text" placeholder="Option">
                                                                         </div>
                                                                         <div class="form-group">
                                                                           <label class="form-label">Display
                                                                             preference</label>
                                                                           <div class="btn-group">
                                                                             <div class="option-check-btn">
-                                                                              <input type="radio" name="option-display"
-                                                                                class="btn-check btn-check-text" id="btn-check-text-1">
-                                                                              <label class="check-label check-label-text"
-                                                                                for="btn-check-text-1" checked>Text</label>
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-text"
+                                                                                id="btn-check-text-1">
+                                                                              <label
+                                                                                class="check-label check-label-text"
+                                                                                for="btn-check-text-1"
+                                                                                checked>Text</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
-                                                                              <input type="radio" name="option-display"
-                                                                                class="btn-check btn-check-image" id="btn-check-image-1">
-                                                                              <label class="check-label check-label-image"
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-image"
+                                                                                id="btn-check-image-1">
+                                                                              <label
+                                                                                class="check-label check-label-image"
                                                                                 for="btn-check-image-1">Image</label>
                                                                             </div>
                                                                             <div class="option-check-btn">
-                                                                              <input type="radio" name="option-display"
-                                                                                class="btn-check btn-check-both" id="btn-check-both-3">
-                                                                              <label class="check-label check-label-both"
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-both"
+                                                                                id="btn-check-both-3">
+                                                                              <label
+                                                                                class="check-label check-label-both"
                                                                                 for="btn-check-both-3">Both</label>
                                                                             </div>
                                                                           </div>
@@ -555,29 +562,8 @@
                                                                           <label class="form-label">Add
                                                                             Explanation</label>
                                                                           <textarea class="form-control"
+                                                                            name="option_explanation"
                                                                             placeholder="Text Here"></textarea>
-                                                                        </div>
-                                                                      </div>
-                                                                    </div>
-
-
-                                                                    <div class="form-group mb-0">
-                                                                      <div class="row">
-                                                                        <div
-                                                                          class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
-
-
-                                                                        </div>
-                                                                        <div
-                                                                          class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
-                                                                          <div
-                                                                            class="yes_no_toggle justify-content-xl-end">
-                                                                            <span>Correct Answer ?</span>
-                                                                            <input type="checkbox" checked
-                                                                              data-toggle="toggle" data-on="Yes"
-                                                                              data-off="No" data-onstyle="success"
-                                                                              data-offstyle="danger">
-                                                                          </div>
                                                                         </div>
                                                                       </div>
                                                                     </div>
@@ -589,35 +575,8 @@
                                                         </div>
                                                       </div>
                                                     </div>
-                                                    <!-- <div class="chp-add-section">
-                                                      <div class="chp-heading lightgray">
-                                                        <div class="chp-title text-truncate">
-                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                          02 Option
-                                                        </div>
-                                                        <div class="right-icons">
-                                                          <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
-                                                            data-target="#add_option2" aria-controls="add_option2">
-                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
-                                                          </a>
-                                                          <a class="delete-btn" href="javascript:void(0);"><img
-                                                              src="/images/trash.svg" alt="img"></a>
-                                                        </div>
-                                                      </div>
-        
-                                                      <div class="collapse" id="add_option2" data-parent="#que_option">
-                                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                          life
-                                                          accusamus
-                                                          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                                          skateboard
-                                                          dolor.
-                                                        </div>
-                                                      </div>
-                                                    </div> -->
-
+                                                  
                                                     <div class="form-btn mt-3">
-                                                      <!-- <a href="javascript:void(0);" class="theme-btn shadow-btn">Close</a> -->
                                                       <button type="button" class="theme-btn2 shadow-btn2">Save</button>
                                                     </div>
                                                   </div>
@@ -626,22 +585,14 @@
                                               <div class="tab-pane fade" id="pills-multi-sel-0" role="tabpanel"
                                                 aria-labelledby="pills-multi-sel-tab">
                                                 <div class="">
-
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
                                                         <label class="form-label">image</label>
-                                                        <input type="file" name="practicequestion_img"
-                                                          id="practicequestion_img"
+                                                        <input type="file" name="question_image" id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
                                                       </div>
-                                                      <!-- <div class="form-group">
-                                                        <label class="form-label">Add img</label>
-                                                        <input type="file" name="" id="" class="form-control single-img h-auto"
-                                                          data-allowed-file-extensions="jpg jpeg png svg"
-                                                          data-max-file-size-preview="5M">
-                                                      </div> -->
                                                     </div>
                                                     <div class="col-sm-12 col-md-8 col-lg-9">
                                                       <div class="row">
@@ -649,129 +600,124 @@
                                                           <div class="form-group">
                                                             <label class="form-label">Question</label>
                                                             <input class="form-control" type="text"
-                                                              placeholder="Dose John go to the Zoo on Monday?">
+                                                              name="question_title" placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
                                                             <label class="form-label">Duration</label>
-                                                            <input class="form-control" type="time" value="">
+                                                            <input class="form-control" type="time"
+                                                              name="question_duration" value=""
+                                                              placeholder="Question duration..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Discription</label>
-                                                            <textarea class="form-control"
-                                                              placeholder="Enter your text"></textarea>
+                                                            <label class="form-label">Description</label>
+                                                            <textarea class="form-control" name="question_description"
+                                                              placeholder="Question description.."></textarea>
                                                           </div>
                                                         </div>
                                                       </div>
                                                     </div>
                                                   </div>
                                                   <div class="spacer2"></div>
-                                                  <div class="quiz accordion que_option_outer" id="que_option">
-                                                    <div class="chp-add-section add_option_block_outer">
-                                                      <div class="chp-heading lightgray">
-                                                        <div class="chp-title text-truncate">
-                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                          01 Option
+                                                  <div class="quiz accordion deep-inner-repeater que_option_outer"
+                                                    id="que_option">
+                                                    <div class="chp-add-section add_option_block_outer"
+                                                      data-repeater-list="deep-inner-list">
+                                                      <div class="mt-2" data-repeater-item>
+                                                        <div class="chp-heading lightgray">
+                                                          <div class="chp-title text-truncate">
+                                                            <img class="mr-1" src="/images/basic.svg" alt="img">
+                                                            Option 01
+                                                          </div>
+                                                          <div class="right-icons">
+                                                            <a href="javascript:void(0);" data-repeater-create>
+                                                              <img class="mr-1" src="/images/addcircle.svg" alt="img">
+                                                            </a>
+                                                            <a href="#add_option1" aria-expanded="false"
+                                                              data-toggle="collapse" data-target="#add_option1"
+                                                              aria-controls="add_option1">
+                                                              <img class="mr-1" src="/images/edit.svg" alt="img">
+                                                            </a>
+                                                            <a class="delete-btn" data-repeater-delete
+                                                              href="javascript:void(0);"><img src="/images/trash.svg"
+                                                                alt="img"></a>
+                                                            <label class="yes_no_toggle">
+                                                              <span>Correct Answer ?</span>
+                                                              <input type="checkbox" checked data-toggle="toggle"
+                                                                data-on="Yes" data-off="No" data-onstyle="success"
+                                                                data-offstyle="danger">
+                                                            </label>
+                                                          </div>
                                                         </div>
-                                                        <div class="right-icons">
-                                                          <a href="javascript:void(0);" data-repeater-create>
-                                                            <img class="mr-1" src="/images/addcircle.svg" alt="img">
-                                                          </a>
-                                                          <a href="#add_option1" aria-expanded="false"
-                                                            data-toggle="collapse" data-target="#add_option1"
-                                                            aria-controls="add_option1">
-                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
-                                                          </a>
-                                                          <a class="delete-btn" href="javascript:void(0);"><img
-                                                              src="/images/trash.svg" alt="img"></a>
-                                                          <label class="yes_no_toggle">
-                                                            <span>Correct Answer ?</span>
-                                                            <input type="checkbox" checked data-toggle="toggle"
-                                                              data-on="Yes" data-off="No" data-onstyle="success"
-                                                              data-offstyle="danger">
-                                                          </label>
-                                                        </div>
-                                                      </div>
-                                                      <div class="collapse show" id="add_option1"
-                                                        data-parent="#que_option">
-                                                        <div class="card-body">
-                                                          <div class="add_option_block">
-                                                            <div class="add_option_form">
-                                                              <!-- <a href="javascript:void(0);" class="close_btn"><img src="/images/close.svg"
-                                                                  alt="img"></a> -->
-                                                              <div class="row">
-                                                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                                                  <div class="form-group practice-question-img-sec">
-                                                                    <label class="form-label">image</label>
-                                                                    <input type="file" name="practicequestion_img"
-                                                                      id="practicequestion_img"
-                                                                      class="form-control practice-question-img h-auto"
-                                                                      data-max-file-size-preview="5M">
+                                                        <div class="collapse show" id="add_option1"
+                                                          data-parent="#que_option">
+                                                          <div class="card-body">
+                                                            <div class="add_option_block">
+                                                              <div class="add_option_form">
+
+                                                                <div class="row">
+                                                                  <div class="col-sm-12 col-md-4 col-lg-3">
+                                                                    <div class="form-group practice-question-img-sec">
+                                                                      <label class="form-label">image</label>
+                                                                      <input type="file" name="option_image"
+                                                                        id="option_image"
+                                                                        class="form-control practice-question-img h-auto"
+                                                                        data-max-file-size-preview="5M">
+                                                                    </div>
                                                                   </div>
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-8 col-lg-9">
-                                                                  <div class="row">
-                                                                    <div class="col-sm-12 col-md-6">
-                                                                      <div class="form-group">
-                                                                        <label class="form-label">Add Option</label>
-                                                                        <input class="form-control" type="text"
-                                                                          placeholder="04 Option">
-                                                                      </div>
-                                                                      <div class="form-group">
-                                                                        <label class="form-label">Display
-                                                                          preference</label>
-                                                                        <div class="btn-group">
-                                                                          <div class="option-check-btn">
-                                                                            <input type="radio" name="option-display"
-                                                                              class="btn-check" id="btn-check-1">
-                                                                            <label class="check-label" for="btn-check-1"
-                                                                              checked>Text</label>
-                                                                          </div>
-                                                                          <div class="option-check-btn">
-                                                                            <input type="radio" name="option-display"
-                                                                              class="btn-check" id="btn-check-2">
-                                                                            <label class="check-label"
-                                                                              for="btn-check-2">Image</label>
-                                                                          </div>
-                                                                          <div class="option-check-btn">
-                                                                            <input type="radio" name="option-display"
-                                                                              class="btn-check" id="btn-check-3">
-                                                                            <label class="check-label"
-                                                                              for="btn-check-3">Both</label>
+                                                                  <div class="col-sm-12 col-md-8 col-lg-9">
+                                                                    <div class="row">
+                                                                      <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Add Option</label>
+                                                                          <input class="form-control" type="text"
+                                                                            name="option_text" placeholder="Option">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Display
+                                                                            preference</label>
+                                                                          <div class="btn-group">
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-text"
+                                                                                id="btn-check-text-1">
+                                                                              <label
+                                                                                class="check-label check-label-text"
+                                                                                for="btn-check-text-1"
+                                                                                checked>Text</label>
+                                                                            </div>
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-image"
+                                                                                id="btn-check-image-1">
+                                                                              <label
+                                                                                class="check-label check-label-image"
+                                                                                for="btn-check-image-1">Image</label>
+                                                                            </div>
+                                                                            <div class="option-check-btn">
+                                                                              <input type="radio"
+                                                                                name="option_display_preference"
+                                                                                class="btn-check btn-check-both"
+                                                                                id="btn-check-both-3">
+                                                                              <label
+                                                                                class="check-label check-label-both"
+                                                                                for="btn-check-both-3">Both</label>
+                                                                            </div>
                                                                           </div>
                                                                         </div>
                                                                       </div>
-                                                                    </div>
-                                                                    <div class="col-sm-12 col-md-6">
-                                                                      <div class="form-group">
-                                                                        <label class="form-label">Add
-                                                                          Explanation</label>
-                                                                        <textarea class="form-control"
-                                                                          placeholder="Text Here"></textarea>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-
-
-                                                                  <div class="form-group mb-0">
-                                                                    <div class="row">
-                                                                      <div
-                                                                        class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
-
-
-                                                                      </div>
-                                                                      <div
-                                                                        class="col-sm-12 col-md-12 col-lg-12 col-xl-4 align-self-center">
-                                                                        <div
-                                                                          class="yes_no_toggle justify-content-xl-end">
-                                                                          <span>Correct Answer ?</span>
-                                                                          <input type="checkbox" checked
-                                                                            data-toggle="toggle" data-on="Yes"
-                                                                            data-off="No" data-onstyle="success"
-                                                                            data-offstyle="danger">
+                                                                      <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                          <label class="form-label">Add
+                                                                            Explanation</label>
+                                                                          <textarea class="form-control"
+                                                                            name="option_explanation"
+                                                                            placeholder="Text Here"></textarea>
                                                                         </div>
                                                                       </div>
                                                                     </div>
@@ -783,35 +729,7 @@
                                                         </div>
                                                       </div>
                                                     </div>
-                                                    <!-- <div class="chp-add-section">
-                                                      <div class="chp-heading lightgray">
-                                                        <div class="chp-title text-truncate">
-                                                          <img class="mr-1" src="/images/basic.svg" alt="img">
-                                                          02 Option
-                                                        </div>
-                                                        <div class="right-icons">
-                                                          <a href="#add_option2" aria-expanded="false" data-toggle="collapse"
-                                                            data-target="#add_option2" aria-controls="add_option2">
-                                                            <img class="mr-1" src="/images/edit.svg" alt="img">
-                                                          </a>
-                                                          <a class="delete-btn" href="javascript:void(0);"><img
-                                                              src="/images/trash.svg" alt="img"></a>
-                                                        </div>
-                                                      </div>
-        
-                                                      <div class="collapse" id="add_option2" data-parent="#que_option">
-                                                        <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high
-                                                          life
-                                                          accusamus
-                                                          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                                          skateboard
-                                                          dolor.
-                                                        </div>
-                                                      </div>
-                                                    </div> -->
-
                                                     <div class="form-btn mt-3">
-                                                      <!-- <a href="javascript:void(0);" class="theme-btn shadow-btn">Close</a> -->
                                                       <button type="button" class="theme-btn2 shadow-btn2">Save</button>
                                                     </div>
                                                   </div>
@@ -819,16 +737,44 @@
                                               </div>
                                               <div class="tab-pane fade" id="pills-type-text-0" role="tabpanel"
                                                 aria-labelledby="pills-type-text-tab">
-                                                <div class="col-sm-12">
-                                                  <div class="form-group">
-                                                    <label class="form-label" for="shortDescription">Short
-                                                      Description<span class="required">*</span>
-                                                    </label>
-                                                    <textarea name="short_description" rows="5" class="form-control"
-                                                      placeholder="Enter short description.."
-                                                      id="shortDescription"></textarea>
-
+                                                <div class="">
+                                                  <div class="row">
+                                                    <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
+                                                      <div class="form-group practice-question-img-sec">
+                                                        <label class="form-label">image</label>
+                                                        <input type="file" name="question_image" id="question_image"
+                                                          class="form-control practice-question-img h-auto"
+                                                          data-max-file-size-preview="5M">
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-9">
+                                                      <div class="row">
+                                                        <div class="col-sm-8 col-md-8">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Question</label>
+                                                            <input class="form-control" type="text"
+                                                              name="question_title" placeholder="Question title..">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                          <div class="form-group">
+                                                            <label class="form-label">Duration</label>
+                                                            <input class="form-control" type="time"
+                                                              name="question_duration" value=""
+                                                              placeholder="Question duration..">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-12">
+                                                          <div class="form-group mb-0">
+                                                            <label class="form-label">Description</label>
+                                                            <textarea class="form-control" name="question_description"
+                                                              placeholder="Question description.."></textarea>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
                                                   </div>
+                                                  <div class="spacer2"></div>
                                                 </div>
                                               </div>
                                               <div class="tab-pane fade" id="pills-drag-drop-0" role="tabpanel"

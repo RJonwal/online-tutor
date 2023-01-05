@@ -13,27 +13,27 @@ const slugify_options = {
 // var slideSchema = new mongoose.Schema({
 //     title: {
 //         type: String,
-//         default: 'null'
+//         default: null
 //     },
 //     duration: {
 //         type: Number,
-//         default: 'null'
+//         default: null
 //     },
 //     description: {
 //         type: String,
-//         default: 'null'
+//         default: null
 //     },
 //     video_url: {
 //         type: String,
-//         default: 'null'
+//         default: null
 //     },
 //     video: {
 //         type: String,
-//         default: 'null'
+//         default: null
 //     },
 //     attachments: {
 //         type: Array,
-//         default: 'null',
+//         default: null,
 //     }
 // }); 
 
@@ -50,67 +50,72 @@ const lessonSchema = new mongoose.Schema({
     slides: [{
         title: {
             type: String,
-            default: 'null'
+            default: null
         },
         duration: {
             type: String,
-            default: 'null'
+            default: null
         },
         description: {
             type: String,
-            default: 'null'
+            default: null
         },
         video_url: {
             type: String,
-            default: 'null'
+            default: null
         },
         video: {
             type: String,
-            default: 'null'
+            default: null
         },
         attachments: {
             type: Array,
-            default: 'null',
+            default: null,
         }
     }],
     practices: [{
         question_type: {
             type: String,
-            default: 'null'
+            default: null
         },
         question_title: {
             type: String,
-            default: 'null'
+            default: null
         },
         question_duration: {
             type: String,
-            default: 'null'
+            default: null
         },
         question_description: {
             type: String,
-            default: 'null'
+            default: null
         },
         question_image: {
             type: String,
-            default: 'null'
+            default: null
         },
         options: [{
-            option_title: {
-                type: String,
-                default: 'null'
-            },
             option_image: {
                 type: String,
-                default: 'null'
+                default: null
+            },
+            option_text: {
+                type: String,
+                default: null
             },
             option_explanation: {
                 type: String,
-                default: 'null'
+                default: null
             },
-            display_preference: {
+            option_display_preference: {
                 type: String,
-                default: 'null'
+                default: null
             },
+            option_correct: {
+                type: Boolean,
+                default: false
+            },
+
         }],
     }],
     deleted_at: {
