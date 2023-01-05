@@ -203,7 +203,7 @@
       var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
       var repeaterStep = jQuery(this);
       var submitTrue = true;
-      parentFieldset.find('.wizard-required').each(function (index,element) {
+      parentFieldset.find('.wizard-required').each(function (index, element) {
         var thisName = jQuery(this).attr("name");
         var thisValue = jQuery(this).val();
         var thisType = jQuery(this).attr("type");
@@ -314,8 +314,6 @@
     });
   });
 
-
-
   $(document).on("click", ".lesson-edit", function () {
     $(this).closest('.card-header').find('.editable-heading').focus();
   });
@@ -331,8 +329,9 @@
     $(this).parents().find('#slideAccordion').show();
     // console.log($(this).parents().find('#slideAccordion'));
   });
+
   $(document).on("click", ".informationPractices-add", function () {
-    
+
     $(this).parents().find('#practiceAccordion').show();
     // console.log($(this).parents().find('#practiceAccordion'));
   });
@@ -349,8 +348,6 @@
     // $('#' + classes).addClass('show');
   });
 
-
-
   $('.tab_btn').click(function () {
     $('.dropify').dropify();
   })
@@ -362,8 +359,6 @@
     $(this).parents('.wizards-div').find('.heading-title').html(title);
     //console.log($(this).parents('.slide-container').find('#title').val())
   });
-
-
 
   var $repeater = $('.repeater').repeater({
     initEmpty: false,
@@ -458,13 +453,13 @@
 
   }
 
-  function practice_init(element){
+  function practice_init(element) {
 
     var index = $(element, '.practice-wizards-div"').index();
     $(element, '.practice-wizards-div"').attr("data-practice-index", index);
 
     let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
-    
+
     var newSlide = 'practice-' + parentIndex + '-' + index;
     //Do something with name and value...
     element.find('.practice-container').attr('id', newSlide);
@@ -488,7 +483,7 @@
 
     element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + parentIndex + '-' + index);
     element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + parentIndex + '-' + index);
-    
+
     var newLesson = 'lesson-' + index;
     element.find('.lesson-container').attr('id', newLesson);
     element.find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
@@ -503,15 +498,15 @@
 
     var questionClass = grandparentIndex + '-' + parentIndex + '-' + index;
     console.log(questionClass);
-    
-    element.find('.btn-check-text').attr('id', 'btn-check-text-'+questionClass);
-    element.find('.check-label-text').attr('for', 'btn-check-text-'+questionClass);
 
-    element.find('.btn-check-image').attr('id', 'btn-check-image-'+questionClass);
-    element.find('.check-label-image').attr('for', 'btn-check-image-'+questionClass);
+    element.find('.btn-check-text').attr('id', 'btn-check-text-' + questionClass);
+    element.find('.check-label-text').attr('for', 'btn-check-text-' + questionClass);
 
-    element.find('.btn-check-both').attr('id', 'btn-check-both-'+questionClass);
-    element.find('.check-label-both').attr('for', 'btn-check-both-'+questionClass);
+    element.find('.btn-check-image').attr('id', 'btn-check-image-' + questionClass);
+    element.find('.check-label-image').attr('for', 'btn-check-image-' + questionClass);
+
+    element.find('.btn-check-both').attr('id', 'btn-check-both-' + questionClass);
+    element.find('.check-label-both').attr('for', 'btn-check-both-' + questionClass);
 
     // question collapse div
 
