@@ -503,6 +503,7 @@
 
     var questionClass = grandparentIndex + '-' + parentIndex + '-' + index;
     console.log(questionClass);
+    
     element.find('.btn-check-text').attr('id', 'btn-check-text-'+questionClass);
     element.find('.check-label-text').attr('for', 'btn-check-text-'+questionClass);
 
@@ -512,5 +513,11 @@
     element.find('.btn-check-both').attr('id', 'btn-check-both-'+questionClass);
     element.find('.check-label-both').attr('for', 'btn-check-both-'+questionClass);
 
+    // question collapse div
+
+    var QuestionId = 'add_option-' + questionClass;
+    //Do something with name and value...
+    element.find('.practice-questions').attr('id', QuestionId);
+    element.find('.practice-question-expand').attr('data-target', '#' + QuestionId).attr('aria-controls', QuestionId);
   }
 </script>
