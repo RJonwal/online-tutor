@@ -224,7 +224,7 @@
                                         <div class="card-body">
                                           <div class="d-flex align-items-center justify-content-between mb-4">
                                             <h3 class="title-text mb-0">Lecture Details</h3>
-                                         
+
                                           </div>
                                           <div class="row">
                                             <div class="col-sm-12 col-md-6">
@@ -235,7 +235,7 @@
                                                 <input type="text" name="slide_title"
                                                   class="form-control wizard-required" placeholder="Enter title.."
                                                   id="title" value="New Slide">
-                                                  <div class="wizard-form-error"></div>
+                                                <div class="wizard-form-error"></div>
                                               </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
@@ -246,7 +246,7 @@
                                                 <input type="time" name="slide_duration"
                                                   class="form-control wizard-required" placeholder="Enter duration.."
                                                   id="duration">
-                                                  <div class="wizard-form-error"></div>
+                                                <div class="wizard-form-error"></div>
                                               </div>
                                             </div>
 
@@ -298,8 +298,7 @@
                                                     <label class="form-label" for="video_url">Video URL<span
                                                         class="required">*</span>
                                                     </label>
-                                                    <input type="text" name="slide_video_url"
-                                                      class="form-control"
+                                                    <input type="text" name="slide_video_url" class="form-control"
                                                       placeholder="Enter videoUrl.." id="video_url">
                                                   </div>
                                                 </div>
@@ -381,13 +380,14 @@
                                           <span class="heading-title">New Practice</span>
                                         </div>
                                         <div class="right-icons">
-                                          <a href="javascript:void(0);" class="practice-form-preview" data-toggle="tooltip"
-                                            rel="tooltip" data-placement="top" title="Preview"><img class="mr-2"
-                                              src="/images/eye.svg" alt="img"></a>
-                                          <a href="javascript:void(0);" class="practice-form-expand" data-toggle="collapse"
-                                            data-target="#practice-0" aria-expanded="false" aria-controls="practice-0"><img
-                                              class="mr-2" src="/images/edit.svg" alt="img" data-toggle="tooltip"
-                                              rel="tooltip" data-placement="top" title="Edit">
+                                          <a href="javascript:void(0);" class="practice-form-preview"
+                                            data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                            title="Preview"><img class="mr-2" src="/images/eye.svg" alt="img"></a>
+                                          <a href="javascript:void(0);" class="practice-form-expand"
+                                            data-toggle="collapse" data-target="#practice-0" aria-expanded="false"
+                                            aria-controls="practice-0"><img class="mr-2" src="/images/edit.svg"
+                                              alt="img" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                                              title="Edit">
                                           </a>
                                           <a href="javascript:void(0);" class="pratice-form-delete"
                                             data-repeater-delete><img src="/images/trash.svg" alt="img"
@@ -402,69 +402,68 @@
                                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                               <li class="nav-item">
                                                 <a class="nav-link active" id="pills-single-sel-tab" data-toggle="pill"
-                                                  href="#pills-single-sel-0" role="tab" aria-controls="pills-single-sel-0"
-                                                  aria-selected="true"><img src="/images/single-sel.svg" alt="img">Single
+                                                  href="#pills-single-sel-0" role="tab"
+                                                  aria-controls="pills-single-sel-0" aria-selected="true"><img
+                                                    src="/images/single-sel.svg" alt="img">Single
                                                   Select</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-multi-sel-tab" data-toggle="pill"
                                                   href="#pills-multi-sel-0" role="tab" aria-controls="pills-multi-sel-0"
-                                                  aria-selected="false"><img src="/images/multi-sel.svg" alt="img"> Multiple
+                                                  aria-selected="false"><img src="/images/multi-sel.svg" alt="img">
+                                                  Multiple
                                                   Selects</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-type-text-tab" data-toggle="pill"
                                                   href="#pills-type-text-0" role="tab" aria-controls="pills-type-text-0"
-                                                  aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type Text</a>
+                                                  aria-selected="false"><img src="/images/type-text.svg" alt="img"> Type
+                                                  Text</a>
                                               </li>
                                               <li class="nav-item">
                                                 <a class="nav-link" id="pills-drag-drop-tab" data-toggle="pill"
                                                   href="#pills-drag-drop-0" role="tab" aria-controls="pills-drag-drop-0"
-                                                  aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag &
+                                                  aria-selected="false"><img src="/images/drag-drop.svg" alt="img"> Drag
+                                                  &
                                                   Drop</a>
                                               </li>
                                             </ul>
                                             <div class="tab-content" id="pills-tabContent">
-                                              <div class="tab-pane fade show active" id="pills-single-sel-0" role="tabpanel"
-                                                aria-labelledby="pills-single-sel-tab">
+                                              <div class="tab-pane fade show active" id="pills-single-sel-0"
+                                                role="tabpanel" aria-labelledby="pills-single-sel-tab">
                                                 <div class="">
-                                                
+
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
                                                         <label class="form-label">image</label>
-                                                        <input type="file" name="practicequestion_img"
-                                                          id="practicequestion_img"
+                                                        <input type="file" name="question_image"
+                                                          id="question_image"
                                                           class="form-control practice-question-img h-auto"
                                                           data-max-file-size-preview="5M">
                                                       </div>
-                                                      <!-- <div class="form-group">
-                                                        <label class="form-label">Add img</label>
-                                                        <input type="file" name="" id="" class="form-control single-img h-auto"
-                                                          data-allowed-file-extensions="jpg jpeg png svg"
-                                                          data-max-file-size-preview="5M">
-                                                      </div> -->
+              
                                                     </div>
                                                     <div class="col-sm-12 col-md-8 col-lg-9">
                                                       <div class="row">
                                                         <div class="col-sm-8 col-md-8">
                                                           <div class="form-group">
                                                             <label class="form-label">Question</label>
-                                                            <input class="form-control" type="text"
-                                                              placeholder="Dose John go to the Zoo on Monday?">
+                                                            <input class="form-control" type="text" name="question_title" 
+                                                              placeholder="Question title..">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                           <div class="form-group">
                                                             <label class="form-label">Duration</label>
-                                                            <input class="form-control" type="time" value="">
+                                                            <input class="form-control" type="time" name="question_duration" value="">
                                                           </div>
                                                         </div>
                                                         <div class="col-sm-12 col-md-12">
                                                           <div class="form-group mb-0">
-                                                            <label class="form-label">Discription</label>
-                                                            <textarea class="form-control"
-                                                              placeholder="Enter your text"></textarea>
+                                                            <label class="form-label">Description</label>
+                                                            <textarea class="form-control" name="question_description"
+                                                              placeholder="description.."></textarea>
                                                           </div>
                                                         </div>
                                                       </div>
@@ -627,7 +626,7 @@
                                               <div class="tab-pane fade" id="pills-multi-sel-0" role="tabpanel"
                                                 aria-labelledby="pills-multi-sel-tab">
                                                 <div class="">
-                                               
+
                                                   <div class="row">
                                                     <div class="col-sm-12 col-md-4 col-lg-3 mb-3 mb-md-0">
                                                       <div class="form-group practice-question-img-sec">
@@ -828,7 +827,7 @@
                                                     <textarea name="short_description" rows="5" class="form-control"
                                                       placeholder="Enter short description.."
                                                       id="shortDescription"></textarea>
-                                                  
+
                                                   </div>
                                                 </div>
                                               </div>

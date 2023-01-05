@@ -84,7 +84,7 @@
     });
   }
 
-  function question_dropify(){
+  function question_dropify() {
     $('.practice-question-img').dropify({
       tpl: {
         message: '<div class="dropify-message"><span class="file-icon" /> <p>Drag & Drop here size should be</p><a class="d-inline-block mt-2 mb-3 theme-btn" href="javasript:void(0);">+ Image</a><h6 class="mb-0 fn-12 text-dblue">Supported formates : (JPEG, PNG, SVG)</h6></div>',
@@ -104,7 +104,7 @@
       },
       success: function (response) {
         $('#subTopics').empty();
-        console.log(response.length);
+
         if (response.length > 0) {
           var newOption = new Option("Select Sub Topic", "", false, false);
           $('#subTopics').append(newOption).trigger('change');
@@ -143,7 +143,7 @@
         var thisType = jQuery(this).attr("type");
 
         if (thisValue == "") {
-            jQuery(this).siblings(".wizard-form-error").slideDown();
+          jQuery(this).siblings(".wizard-form-error").slideDown();
           nextWizardStep = false;
         }
         else {
@@ -203,25 +203,28 @@
       var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
       var repeaterStep = jQuery(this);
       var submitTrue = true;
-      parentFieldset.find('.wizard-required').each(function () {
+      parentFieldset.find('.wizard-required').each(function (index,element) {
         var thisName = jQuery(this).attr("name");
         var thisValue = jQuery(this).val();
         var thisType = jQuery(this).attr("type");
 
-        console.log(thisName);
-        console.log(thisValue);
-        console.log(thisType);
+        console.log('Name => ' + thisName);
+        console.log('Value => ' + thisValue);
+        console.log('Type => ' + thisType);
+        console.log('index => ' + index);
 
         if (thisValue == "") {
-          console.log('FFFF');
+
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
           }
+
           jQuery(this).siblings(".wizard-form-error").slideDown();
           submitTrue = false;
 
         }
         else {
+
           console.log('SSSS');
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
@@ -229,7 +232,7 @@
           jQuery(this).siblings(".wizard-form-error").slideUp();
         }
       });
-      console.log('submitTrue => '+ submitTrue);
+      console.log('submitTrue => ' + submitTrue);
       if (submitTrue) {
         $("#createContent").submit(function (e) {
           e.preventDefault();
@@ -238,10 +241,8 @@
           var formData = new FormData(form[0]);
 
           // var myContent = tinymce.get("description-1-0").getContent();
-          // console.log(myContent); return false ;
           formData.append('thumbnail', this.new_attachments)
           var url = $('#createContent').attr('action');
-          console.log(url);
 
           // for (const pair of formData.entries()) {
           //   console.log(pair[0] + ' - ' + pair[1]);
@@ -260,17 +261,16 @@
             processData: false,
             contentType: false,
             success: function (response) {
-              console.log(response);
+
               if (response.success == true) {
                 window.location = response.redirectUrl;
               }
             },
             error: function (response) {
-              console.log(response);
+
               let errorMessages = '';
               $.each(response.responseJSON.errors, function (field_name, error) {
-                console.log(field_name);
-                console.log(error);
+
                 $(document).find('[id=' + error.param + ']').after('<span class="help-block text-danger">' + error.msg + '</span>');
                 // $("#storeCategoryBtn").prop('disabled', false);
               })
@@ -327,14 +327,14 @@
   });
 
   $(document).on("click", ".informationSlide-add", function () {
-    console.log('showdata');
+
     $(this).parents().find('#slideAccordion').show();
-    console.log($(this).parents().find('#slideAccordion'));
+    // console.log($(this).parents().find('#slideAccordion'));
   });
   $(document).on("click", ".informationPractices-add", function () {
     
     $(this).parents().find('#practiceAccordion').show();
-    console.log($(this).parents().find('#practiceAccordion'));
+    // console.log($(this).parents().find('#practiceAccordion'));
   });
 
   $(document).on("click", ".slide-form-expand", function () {
@@ -393,13 +393,13 @@
         selector: '.deep-inner-repeater',
 
         show: function () {
-        let element = $(this);
-        /*------ question start------*/
-        que_option(element);  
-        question_dropify();
-        practice_init(element);
-        $(this).slideDown();
-      },
+          let element = $(this);
+          /*------ question start------*/
+          que_option(element);
+          question_dropify();
+          practice_init(element);
+          $(this).slideDown();
+        },
       }],
       show: function () {
         let element = $(this);
@@ -430,7 +430,7 @@
     // }
   ]);
 
-  function slides_init(element){
+  function slides_init(element) {
     var index = $(element, '.wizards-div"').index();
     let parentIndex = element.parents('#wizard:last-child').attr('data-parent-index');
     var newSlide = 'slide-' + parentIndex + '-' + index;
@@ -495,8 +495,8 @@
     console.log(newLesson);
 
   }
-  
-  function que_option(element){
+
+  function que_option(element) {
     var index = $(element, '.practice-wizards-div"').index();
     let grandparentIndex = element.parents('.main-wizards-div').attr('data-practice-index');
     let parentIndex = element.parents('.practice-wizards-div:last-child').attr('data-practice-index');
