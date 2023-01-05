@@ -5,8 +5,6 @@ const LearningContent = require('../../models/LearningContent');
 const Lesson = require('../../models/Lesson');
 const globalHelper = require('../../_helper/GlobalHelper');
 
-
-
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify')
@@ -132,17 +130,17 @@ async function listing(req, res) {
             courseImage = "/LearningContent/" + content.thumbnail;
         }
 
-        if(content.sub_topic_id){
-            subTopicName= content.sub_topic_id.name
-        }else{
+        if (content.sub_topic_id) {
+            subTopicName = content.sub_topic_id.name
+        } else {
             subTopicName = "None";
         }
 
         course += `<li><div class="course-thumb"><img src="${courseImage}"></div><div class="course-description"><div class="top-dis"><h3 class="title-text">${content.title}</h3><p>${content.short_description}</p></div><div class="course-detail"><div class="detail-col"><p class="p-light">Grade</p><p class="p-dark">${content.grade_id.name}</p></div><div class="detail-col"><p class="p-light">Topic</p><p class="p-dark">${content.topic_id.name}</p></div>`
-        if(subTopicName !='None'){
-        course +=`<div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${subTopicName}</p></div>`
+        if (subTopicName != 'None') {
+            course += `<div class="detail-col"><p class="p-light">SubTopic</p><p class="p-dark">${subTopicName}</p></div>`
         }
-       
+
         course += `<div class="detail-col"><p class="p-light">Lessons</p><p class="p-dark">${content.lesson_ids.length}</p></div><div class="detail-col"><p class="p-light">Slides</p><p class="p-dark">${totalSlides}</p></div><div class="detail-col"><p class="p-light">Duration</p><p class="p-dark">${totalDuration}</p></div><div class="detail-col"><p class="p-light">Status</p><p class="p-dark"><a class="${statusClass}" href="javascript:void(0);">${contentStatus}</a></p></div></div></div><div class="dropdown"><button type="button" class="btn" data-toggle="dropdown" aria-expanded="false"><img src="/images/menu-dot.svg" alt="Menu"></button><div class="dropdown-menu dropdown-menu-right"><a href="/learning-content/viewCourses/${content.id}">View</a><a href="javascript:void(0);">Edit</a><a class="text-danger" href="javascript:void(0);"  onclick="confirmBeforeDeletion('/learning-content/destroy/${content._id}')">Delete</a></div></div></li>`;
         totalSlides = 0;
         totalDuration = 0;
@@ -177,6 +175,7 @@ async function renderSubtopic(req, res) {
         })
     }
 }
+
 /**
  * slick slider content render. 
  * @param {*} req 
@@ -185,16 +184,16 @@ async function renderSubtopic(req, res) {
  */
 async function renderSlickSlider(req, res) {
     try {
-      let lessionId = req.body.id;
-      let lessionDetails = await Lesson.find({ "_id": lessionId });
-      let html = '';
-      for(slides of lessionDetails[0].slides){
-        if(slides.video_url ==''){
-             classes = 'col-md-12';
-        }else{
-             classes = 'col-md-7';
-        }
-        html += ` 
+        let lessionId = req.body.id;
+        let lessionDetails = await Lesson.find({ "_id": lessionId });
+        let html = '';
+        for (slides of lessionDetails[0].slides) {
+            if (slides.video_url == '') {
+                classes = 'col-md-12';
+            } else {
+                classes = 'col-md-7';
+            }
+            html += ` 
       <div class="item">
             <div class="row">
                 <div class="slide-duration">
@@ -206,34 +205,34 @@ async function renderSlickSlider(req, res) {
             <div class="col-sm-12 ${classes}">
               <h3>${slides.title}</h3>
               ${slides.description}`
-            if(slides.attachments !='') { 
-            html += `<div class="attachment-block">
+            if (slides.attachments != '') {
+                html += `<div class="attachment-block">
                   <div class="col-sm-12 col-md-4">
                     <h3 class="title-text mb-3">Attachment</h3>
                     <a class="attch-items" href="/LearningContent/${slides.attachments}" target="_blank">View PDF</a>
                   </div>
               </div>`
-               } if(slides.video_url !='') {
-            html += `<div class="attachment-block video">
+            } if (slides.video_url != '') {
+                html += `<div class="attachment-block video">
                   <div class="col-sm-12 col-md-4">
                     <h3 class="title-text mb-3">Video </h3>
                     <a class="attch-items" href="${slides.video_url}" target="_blank">Video Url</a>
                   </div>
               </div>`
-              }
-            html +=  `</div>`
-          if (slides.video) { 
-            html += `<div class="col-sm-12 col-md-5">
+            }
+            html += `</div>`
+            if (slides.video) {
+                html += `<div class="col-sm-12 col-md-5">
               <div class="preview-thumb">
                 <video width="320" height="240" loop autoplay muted controls>
                   <source src="/LearningContent/${slides.video}" type="video/mp4">
               </div>
             </div>`
-          } 
-        html +=  `</div>
+            }
+            html += `</div>
         </div>`;
         }
-      return res.send(html);
+        return res.send(html);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -241,6 +240,7 @@ async function renderSlickSlider(req, res) {
         })
     }
 }
+
 /**
  * create content.
  * @param {*} req 
@@ -358,7 +358,6 @@ async function store(req, res) {
  * @returns 
  */
 async function edit(req, res) {
-
 }
 
 /**
@@ -368,7 +367,6 @@ async function edit(req, res) {
  * @returns 
  */
 async function update(req, res) {
-
 }
 
 /**
