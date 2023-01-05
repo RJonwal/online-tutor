@@ -269,6 +269,7 @@ async function create(req, res) {
  */
 async function store(req, res) {
     try {
+        // get all the files.
         var fileNames;
         if (req.files != undefined) {
             fileNames = req.files.map(function (file) {
@@ -278,17 +279,22 @@ async function store(req, res) {
             });
         }
 
+        // console.log(req.body);
+
         let innerList = req.body['outer-list'];
+
         let i = 0;
         var myLessons = [];
         var slides = [];
-        let index = 0;
+        var practices = [];
+
         for (lessons of innerList) {
             let j = 0;
             for (content of lessons['inner-list']) {
                 var slide = {};
                 // img = fileNames[j];
                 // let values = Object.values(img);
+
                 var video = '';
                 var attachment = '';
                 for (files of fileNames) {
@@ -301,33 +307,77 @@ async function store(req, res) {
                         attachment = values;
                     }
                 }
+
                 //console.log(video[0],attachment);
+
+                // slide object creation
                 slide = {};
                 slide['title'] = content.slide_title;
                 slide['duration'] = content.slide_duration;
-                slide['description'] = content.slide_description; // ??
+                slide['description'] = content.slide_description; //
                 slide['video_url'] = content.slide_video_url;
                 slide['video'] = video;
                 slide['attachments'] = attachment;
-
                 slides.push(slide);
+
+                // question object creation
+                question = {};
+                question['question_type'] = content[0];
+                question['question_title'] = content.question_title;
+                question['question_duration'] = content.question_duration;
+                question['question_description'] = content.question_description; //
+                question['question_image'] = content.question_image; //
+
+                let deepInnerList = content['deep-inner-list'];
+                let k = 0;
+                var options = [];
+
+                if (typeof deepInnerList !== 'undefined' && deepInnerList.length > 0) {
+                    for (deepContent of deepInnerList) {
+                        // console.log(deepContent);
+                        option = {};
+                        option['option_image'] = deepContent.option_image;
+                        option['option_text'] = deepContent.option_text;
+                        option['option_explanation'] = deepContent.option_explanation; //
+                        option['option_display_preference'] = deepContent.option_display_preference;
+                        // option['option_correct'] = deepContent.option_correct[0];
+                        console.log(option);
+                        options.push(option);
+                        k++;
+                    }
+                    question['options'] = options; //
+                }
+                practices.push(question);
+                var options = [];
+
                 j++;
             }
+
+            // console.log(slides);
+            console.log(practices);
+
+            // lesson object creation
             var myLesson = {
                 title: lessons.lesson_name,
                 slides: slides,
+                practices: practices,
             };
+
+            // console.log(myLesson);
+
+            // insert lesson content
             let lesson = await Lesson.create(myLesson);
             myLessons.push(lesson._id);
             var slides = [];
+            var practices = [];
             i++;
         }
 
-        console.log(req.body);
         if (fileNames.length > 0 && fileNames[0].thumbnail) {
             req.body.thumbnail = fileNames[0].thumbnail;
         }
 
+        // learning content object
         var myContent = {
             grade_id: req.body.grade_id,
             topic_id: req.body.topic_id,
@@ -338,17 +388,21 @@ async function store(req, res) {
             lesson_ids: myLessons,
         };
 
+        // insert learning content
         let learningContent = await LearningContent.create(myContent);
-        if (learningContent) {
-            req.flash('success', 'learningContent is Created successfully!');
-            res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
-        }
+        console.log(learningContent);
+        // if (learningContent) {
+        //     req.flash('success', 'learningContent is Created successfully!');
+        //     res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
+        // }
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             message: 'Something went wrong, please try again later.'
         })
     }
+
+
 }
 
 /**
