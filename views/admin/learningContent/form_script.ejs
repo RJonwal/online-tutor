@@ -526,6 +526,25 @@
 
     // option title
     element.find('.option-title').text('Option '+(index+1));
-   
   }
+
+  $(document).on('keyup','.option_text', function(){
+    let parent = $(this).parents('.question-lightfray').find('.option-title').text($(this).val());
+  })
+  
+  $(document).on('click','.practice-tab', function(){
+    let id = $(this).attr('href');
+    let type = $(this).attr('data-type');
+    $('.practice-fieldset').attr('disabled', 'disabled');
+    $(this).parents('.practice-card').find('.practices-type').val(type)
+    let parent = $(id).find('fieldset').prop('disabled', false);
+  })
+
+  $(document).on('click','.shadow-btn2', function(){
+    let title = $(this).parents('.practice-fieldset').find('.question_title').val();
+    console.log(title);
+    $(this).parents('.practice-wizard').find('.heading-title').val(title);
+    $(this).parents('.practice-wizard').find('.practice-container').removeClass('show');
+  })
+
 </script>
