@@ -339,7 +339,7 @@ async function store(req, res) {
                         option['option_image'] = deepContent.option_image;
                         option['option_text'] = deepContent.option_text;
                         option['option_explanation'] = deepContent.option_explanation; //
-                        option['option_display_preference'] = deepContent.option_display_preference;
+                        // option['option_display_preference'] = deepContent.option_display_preference;
                         // option['option_correct'] = deepContent.option_correct[0];
                         console.log(option);
                         options.push(option);
