@@ -342,6 +342,10 @@
     // $('#' + classes).addClass('show');
   });
 
+  $(document).on("click", ".practice-question-expand", function () {
+    $('.practice-questions').removeClass('show');
+  });
+  
   $(document).on("click", ".practice-form-expand", function () {
     $('.practice-container').removeClass('show');
     let classes = $(this).attr('aria-controls');
@@ -542,9 +546,15 @@
 
   $(document).on('click','.shadow-btn2', function(){
     let title = $(this).parents('.practice-fieldset').find('.question_title').val();
-    console.log(title);
-    $(this).parents('.practice-wizard').find('.heading-title').val(title);
-    $(this).parents('.practice-wizard').find('.practice-container').removeClass('show');
+    $(this).parents('.practice-section').find('.practice-heading-title').text(title);
+    $(this).parents('.practice-container').removeClass('show');
+  })
+
+// uncheck all checkbox of question
+$(document).on('click','.single-select', function(){
+    $(this).parents('.practice-fieldset').find('input[type=checkbox]:checked').prop("checked", false);
+    //$('.single-select').prop("checked", false);
+    $(this).prop("checked", true);
   })
 
 </script>
