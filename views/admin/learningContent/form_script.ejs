@@ -332,7 +332,7 @@
     console.log($(this).parents().find('#slideAccordion'));
   });
   $(document).on("click", ".informationPractices-add", function () {
-    console.log('showdata');
+    
     $(this).parents().find('#practiceAccordion').show();
     console.log($(this).parents().find('#practiceAccordion'));
   });
@@ -375,6 +375,7 @@
       dropify();            // initilized dropify for all slides
 
       practice_init(element);
+      que_option(element);
       $(this).slideDown();
     },
     hide: function (deleteElement) {
@@ -453,11 +454,17 @@
     //for pills attachment
     element.find('#pills-attachments-tab').attr('href', '#pills-attachments-' + parentIndex + '-' + index);
     element.find('#pills-attachments-0').attr('id', 'pills-attachments-' + parentIndex + '-' + index);
+
+
   }
 
   function practice_init(element){
+
     var index = $(element, '.practice-wizards-div"').index();
+    $(element, '.practice-wizards-div"').attr("data-practice-index", index);
+
     let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
+    
     var newSlide = 'practice-' + parentIndex + '-' + index;
     //Do something with name and value...
     element.find('.practice-container').attr('id', newSlide);
@@ -481,13 +488,29 @@
 
     element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + parentIndex + '-' + index);
     element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + parentIndex + '-' + index);
+    
+    var newLesson = 'lesson-' + index;
+    element.find('.lesson-container').attr('id', newLesson);
+    element.find('.lesson-expand').attr('data-target', '#' + newLesson).attr('aria-controls', newLesson);
+    console.log(newLesson);
+
   }
   
   function que_option(element){
     var index = $(element, '.practice-wizards-div"').index();
-    let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
-    
-    var newSlide = 'practice-' + parentIndex + '-' + index;
-    console.log(newSlide);
+    let grandparentIndex = element.parents('.main-wizards-div').attr('data-practice-index');
+    let parentIndex = element.parents('.practice-wizards-div:last-child').attr('data-practice-index');
+
+    var questionClass = grandparentIndex + '-' + parentIndex + '-' + index;
+    console.log(questionClass);
+    element.find('.btn-check-text').attr('id', 'btn-check-text-'+questionClass);
+    element.find('.check-label-text').attr('for', 'btn-check-text-'+questionClass);
+
+    element.find('.btn-check-image').attr('id', 'btn-check-image-'+questionClass);
+    element.find('.check-label-image').attr('for', 'btn-check-image-'+questionClass);
+
+    element.find('.btn-check-both').attr('id', 'btn-check-both-'+questionClass);
+    element.find('.check-label-both').attr('for', 'btn-check-both-'+questionClass);
+
   }
 </script>
