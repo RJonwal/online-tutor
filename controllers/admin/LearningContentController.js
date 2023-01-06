@@ -279,7 +279,6 @@ async function store(req, res) {
             });
         }
 
-        // console.log(req.body);
         let innerList = req.body['outer-list'];
 
         let i = 0;
@@ -290,12 +289,13 @@ async function store(req, res) {
         for (lessons of innerList) {
             let j = 0;
             for (content of lessons['inner-list']) {
-                // console.log(content);
+
                 var slide = {};
-                // img = fileNames[j];
-                // let values = Object.values(img);
                 var video = '';
                 var attachment = '';
+                var questionImage = '';
+
+
                 for (files of fileNames) {
                     let keys = Object.keys(files);
                     let values = Object.values(files);
@@ -305,9 +305,10 @@ async function store(req, res) {
                     if (keys == `outer-list[${i}][inner-list][${j}][slide_attachments]`) {
                         attachment = values;
                     }
+                    if (keys == `outer-list[${i}][inner-list][${j}][question_image]`) {
+                        questionImage = values[0];
+                    }
                 }
-
-                //console.log(video[0],attachment);
 
                 // slide object creation
                 slide = {};
@@ -321,26 +322,34 @@ async function store(req, res) {
 
                 // question object creation
                 question = {};
-                question['question_type'] = content[0];
+                question['question_type'] = (content[0] ? content[0] : 'single');
                 question['question_title'] = content.question_title;
                 question['question_duration'] = content.question_duration;
                 question['question_description'] = content.question_description;
-                question['question_image'] = content.question_image;
+                question['question_image'] = questionImage;
 
                 let deepInnerList = content['deep-inner-list'];
                 let k = 0;
                 var options = [];
-
                 if (typeof deepInnerList !== 'undefined' && deepInnerList.length > 0) {
                     for (deepContent of deepInnerList) {
-                        console.log(deepContent);
+                        optionImage = '';
+                        for (files of fileNames) {
+                            let keys = Object.keys(files);
+                            let values = Object.values(files);
+                            if (keys == `outer-list[${i}][inner-list][${j}][deep-inner-list][${k}][option_image]`) {
+                                optionImage = values[0];
+                            }
+                        }
                         option = {};
-                        option['option_image'] = deepContent.option_image;
+                        option['option_image'] = optionImage;
                         option['option_text'] = deepContent.option_text;
                         option['option_explanation'] = deepContent.option_explanation;
-                        // option['option_display_preference'] = deepContent.option_display_preference;
-                        // option['option_correct'] = deepContent.option_correct[0];
-                        // console.log(option);
+                        option['option_display_preference'] = deepContent.option_display_preference;
+                        correctOption = 'option_correct' in deepContent;
+                        if (correctOption) {
+                            option['option_correct'] = correctOption;
+                        }
                         options.push(option);
                         k++;
                     }
@@ -351,7 +360,6 @@ async function store(req, res) {
                 j++;
             }
 
-            // console.log(slides);
             newArr = practices.filter(object => {
                 return object.question_type !== undefined || object.question_type === "undefined";
             });
@@ -364,11 +372,9 @@ async function store(req, res) {
                 practices: practices,
             };
 
-            // console.log(myLesson);
-
             // insert lesson content
-            // let lesson = await Lesson.create(myLesson);
-            // myLessons.push(lesson._id);
+            let lesson = await Lesson.create(myLesson);
+            myLessons.push(lesson._id);
             var slides = [];
             newArr = [];
             var practices = [];
@@ -380,30 +386,30 @@ async function store(req, res) {
         }
 
         // learning content object
-        // var myContent = {
-        //     grade_id: req.body.grade_id,
-        //     topic_id: req.body.topic_id,
-        //     sub_topic_id: (req.body.sub_topic_id ? req.body.sub_topic_id : null),
-        //     title: req.body.title,
-        //     short_description: req.body.short_description,
-        //     thumbnail: (req.body.thumbnail != '' ? req.body.thumbnail : ''),
-        //     lesson_ids: myLessons,
-        // };
+        var myContent = {
+            grade_id: req.body.grade_id,
+            topic_id: req.body.topic_id,
+            sub_topic_id: (req.body.sub_topic_id ? req.body.sub_topic_id : null),
+            title: req.body.title,
+            short_description: req.body.short_description,
+            thumbnail: (req.body.thumbnail != '' ? req.body.thumbnail : ''),
+            lesson_ids: myLessons,
+        };
 
         // insert learning content
-        // let learningContent = await LearningContent.create(myContent);
-        // console.log(learningContent);
-        // if (learningContent) {
-        //     req.flash('success', 'learningContent is Created successfully!');
-        //     res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
-        // }
+        let learningContent = await LearningContent.create(myContent);
+        console.log(learningContent);
+        if (learningContent) {
+            req.flash('success', 'learningContent is Created successfully!');
+            res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
+        }
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             message: 'Something went wrong, please try again later.'
         })
     }
-Z}
+}
 
 /**
  * edit learningContent.
