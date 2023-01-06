@@ -214,24 +214,22 @@
         console.log('index => ' + index);
 
         if (thisValue == "") {
-
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
           }
-
           jQuery(this).siblings(".wizard-form-error").slideDown();
           submitTrue = false;
-
         }
         else {
-
           console.log('SSSS');
           if (thisType == 'file') {
             jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
           }
           jQuery(this).siblings(".wizard-form-error").slideUp();
         }
+
       });
+
       console.log('submitTrue => ' + submitTrue);
       if (submitTrue) {
         $('#createContent').submit();
@@ -319,8 +317,6 @@
     })
   });
 
-
-
   $(document).on("click", ".lesson-edit", function () {
     $(this).closest('.card-header').find('.editable-heading').focus();
   });
@@ -332,7 +328,6 @@
   });
 
   $(document).on("click", ".informationSlide-add", function () {
-
     $(this).parents().find('#slideAccordion').show();
     // console.log($(this).parents().find('#slideAccordion'));
   });
@@ -549,6 +544,26 @@
     $(id).find('fieldset').prop('disabled', false);
   })
 
+  $(document).on('click', '.slider-tab', function () {
+    let id = $(this).attr('href');
+    let type = $(this).attr('data-type');
+    $(id).parents('.slide-container').find('.editer').removeClass('wizard-required');
+    $(id).parents('.slide-container').find('.video_url').removeClass('wizard-required');
+    $(id).parents('.slide-container').find('.select-video').removeClass('wizard-required');
+    $(id).parents('.slide-container').find('.select-attachments').removeClass('wizard-required');
+    if(type==='basic'){
+      $(id).parents('.slide-container').find('.editer').addClass('wizard-required'); 
+    }
+    if(type==='video'){
+      $(id).parents('.slide-container').find('.video_url').addClass('wizard-required'); 
+      $(id).parents('.slide-container').find('.select-video').addClass('wizard-required'); 
+    }
+    if(type==='attachment'){
+      $(id).parents('.slide-container').find('.select-attachments').addClass('wizard-required'); 
+    }
+  })
+
+  
   $(document).on('click', '.shadow-btn2', function () {
     let title = $(this).parents('.practice-fieldset').find('.question_title').val();
     $(this).parents('.practice-section').find('.practice-heading-title').text(title);
@@ -556,12 +571,9 @@
   })
 
 // uncheck all checkbox of question
-$(document).on('click','.single-select', function(){
+  $(document).on('click','.single-select', function(){
     $(this).parents('.practice-fieldset').find('input[type=checkbox]:checked').prop("checked", false);
     //$('.single-select').prop("checked", false);
     $(this).prop("checked", true);
   })
-
-
-
 </script>

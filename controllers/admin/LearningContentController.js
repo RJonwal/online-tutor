@@ -348,13 +348,8 @@ async function store(req, res) {
                 }
                 practices.push(question);
                 var options = [];
-
                 j++;
             }
-
-            // console.log(slides);
-            console.log(practices);
-
             // lesson object creation
             var myLesson = {
                 title: lessons.lesson_name,
