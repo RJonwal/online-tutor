@@ -71,6 +71,10 @@
           //   "The init function knows on which editor its called - this is for " +
           //   editor.id
           // );
+          this.on('keyup', function(e) {
+            console.log(e);
+            })
+           
         });
         editor.on("change", function (e) {
           console.log(jQuery(this)[0].id);
@@ -586,7 +590,14 @@
   // uncheck all checkbox of question
   $(document).on('click', '.single-select', function () {
     $(this).parents('.practice-fieldset').find('input[type=checkbox]:checked').prop("checked", false);
-    //$('.single-select').prop("checked", false);
+    $(this).parents('.practice-fieldset').find('input[type=checkbox]:checked').removeClass('wizard-required');
     $(this).prop("checked", true);
+  })
+
+  $(document).on('click', '.practice-option-add', function () {
+    $(this).parents('.practice-fieldset').find('.practice-option-add').hide();
+    $(this).show();
+    // $(this).parents('.practice-fieldset').find('.delete-btn').show();
+    // $(this).siblings('.delete-btn').hide();
   })
 </script>

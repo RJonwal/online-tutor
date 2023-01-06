@@ -4007,4 +4007,9 @@ span.total-count {
 .practice-wizards-div{
     margin-bottom: 10px;
 }
+div#practice {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /** loader css */

@@ -351,7 +351,7 @@
                         <!--slides end-->
 
                         <!-- practices start -->
-                        <div class="inner-repeater practice accordion" id="practice">
+                        <div class="inner-repeater practice-accordion" id="practice">
                           <div class="chp-add-section">
                             <div class="chp-heading">
                               <div class="left-heading"> <img class="mr-2" src="/images/practice1.svg" alt="img">
@@ -476,14 +476,14 @@
                                                       id="que_option">
                                                       <div class="chp-add-section add_option_block_outer"
                                                         data-repeater-list="deep-inner-list">
-                                                        <div class="mt-2 question-lightfray" data-repeater-item>
+                                                        <div class="mt-2 question-lightfray" data-practice-index="0" data-repeater-item>
                                                           <div class="chp-heading lightgray">
                                                             <div class="chp-title text-truncate">
                                                               <img class="mr-1" src="/images/basic.svg" alt="img">
                                                               <span class="option-title">Option 01</span>
                                                             </div>
                                                             <div class="right-icons">
-                                                              <a href="javascript:void(0);" data-repeater-create>
+                                                              <a href="javascript:void(0);" data-repeater-create class="practice-option-add">
                                                                 <img class="mr-1" src="/images/addcircle.svg" alt="img">
                                                               </a>
                                                               <a href="#add_option-1" class="practice-question-expand"
@@ -493,15 +493,16 @@
                                                               </a>
                                                               <a class="delete-btn" data-repeater-delete
                                                                 href="javascript:void(0);"><img src="/images/trash.svg"
-                                                                  alt="img"></a>
+                                                                  alt="img" style="display: none;"></a>
                                                               <label class=" yes_no_toggle">
                                                                 <span>Correct Answer ?</span>
-                                                                <input class="single-select" name="option_correct" type="checkbox" data-class="select-box-1" data-toggle="toggle"
+                                                                <input class="single-select wizard-required" name="option_correct" type="checkbox" data-class="select-box-1" data-toggle="toggle"
                                                                   data-on="Yes" data-off="No" data-onstyle="success"
                                                                   data-offstyle="danger">
                                                               </label>
                                                             </div>
                                                           </div>
+                                                          <div class="wizard-form-error"></div>
                                                           <div class="collapse practice-questions" id="add_option-1"
                                                             data-parent="#que_option">
                                                             <div class="card-body">
@@ -641,7 +642,7 @@
                                                               <span class="option-title">Option 01</span>
                                                             </div>
                                                             <div class="right-icons">
-                                                              <a href="javascript:void(0);" data-repeater-create>
+                                                              <a href="javascript:void(0);" data-repeater-create >
                                                                 <img class="mr-1" src="/images/addcircle.svg" alt="img">
                                                               </a>
                                                               <a href="#add_option-1" class="practice-question-expand"
