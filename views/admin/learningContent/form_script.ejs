@@ -467,12 +467,10 @@
   }
 
   function practice_init(element) {
-
-    var index = $(element, '.practice-wizards-div"').index();
-    $(element, '.practice-wizards-div"').attr("data-practice-index", index);
-
+    let grandparentIndex = element.parents('.main-wizards-div').attr('data-practice-index');
     let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
-
+    var index = $(element, '.practice-wizards-div"').index();
+     $(element, '.practice-wizards-div"').attr("data-practice-index", index);
     var newSlide = 'practice-' + parentIndex + '-' + index;
     //Do something with name and value...
     element.find('.practice-container').attr('id', newSlide);
@@ -480,22 +478,22 @@
     element.find('.practice-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
 
     //add unique id for tiny editor
-    element.find('#description-0').attr('id', 'description-' + parentIndex + '-' + index);
+    element.find('#description-0').attr('id', 'description-' + grandparentIndex+'-'+ parentIndex + '-' + index);
     // add unique id for tab
     // for pill basic
-    element.find('#pills-single-sel-tab').attr('href', '#pills-single-sel-' + parentIndex + '-' + index);
-    element.find('#pills-single-sel-0').attr('id', 'pills-single-sel-' + parentIndex + '-' + index);
+    element.find('#pills-single-sel-tab').attr('href', '#pills-single-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-single-sel-0').attr('id', 'pills-single-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
 
     //for pills video
-    element.find('#pills-multi-sel-tab').attr('href', '#pills-multi-sel-' + parentIndex + '-' + index);
-    element.find('#pills-multi-sel-0').attr('id', 'pills-multi-sel-' + parentIndex + '-' + index);
+    element.find('#pills-multi-sel-tab').attr('href', '#pills-multi-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-multi-sel-0').attr('id', 'pills-multi-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
 
     //for pills attachment
-    element.find('#pills-type-text-tab').attr('href', '#pills-type-text-' + parentIndex + '-' + index);
-    element.find('#pills-type-text-0').attr('id', 'pills-type-text-' + parentIndex + '-' + index);
+    element.find('#pills-type-text-tab').attr('href', '#pills-type-text-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-type-text-0').attr('id', 'pills-type-text-' + grandparentIndex+'-'+ parentIndex + '-' + index);
 
-    element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + parentIndex + '-' + index);
-    element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + parentIndex + '-' + index);
+    element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + grandparentIndex+'-'+ parentIndex + '-' + index);
 
     var newLesson = 'lesson-' + index;
     element.find('.lesson-container').attr('id', newLesson);
@@ -546,9 +544,9 @@
   $(document).on('click', '.practice-tab', function () {
     let id = $(this).attr('href');
     let type = $(this).attr('data-type');
-    $('.practice-fieldset').attr('disabled', 'disabled');
+    $(id).parents('.practice-container').find('fieldset').prop('disabled', true);
     $(this).parents('.practice-card').find('.practices-type').val(type)
-    let parent = $(id).find('fieldset').prop('disabled', false);
+    $(id).find('fieldset').prop('disabled', false);
   })
 
   $(document).on('click', '.shadow-btn2', function () {
