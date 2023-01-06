@@ -72,6 +72,19 @@
           //   editor.id
           // );
         });
+        editor.on("change", function (e) {
+          console.log(jQuery(this)[0].id);
+          let descriptionId = jQuery(this)[0].id;
+          // console.log(tinymce.activeEditor.getContent());
+          $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
+
+
+        });
+        editor.on("keyup", function () {
+          let descriptionId = jQuery(this)[0].id;
+          // console.log(tinymce.activeEditor.getContent());
+          $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
+        });
       },
     });
 
@@ -347,7 +360,7 @@
   $(document).on("click", ".practice-question-expand", function () {
     $('.practice-questions').removeClass('show');
   });
-  
+
   $(document).on("click", ".practice-form-expand", function () {
     $('.practice-container').removeClass('show');
     let classes = $(this).attr('aria-controls');
@@ -465,7 +478,7 @@
     let grandparentIndex = element.parents('.main-wizards-div').attr('data-practice-index');
     let parentIndex = element.parents('#practice-wizard:last-child').attr('data-parent-index');
     var index = $(element, '.practice-wizards-div"').index();
-     $(element, '.practice-wizards-div"').attr("data-practice-index", index);
+    $(element, '.practice-wizards-div"').attr("data-practice-index", index);
     var newSlide = 'practice-' + parentIndex + '-' + index;
     //Do something with name and value...
     element.find('.practice-container').attr('id', newSlide);
@@ -473,22 +486,22 @@
     element.find('.practice-form-expand').attr('data-target', '#' + newSlide).attr('aria-controls', newSlide);
 
     //add unique id for tiny editor
-    element.find('#description-0').attr('id', 'description-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#description-0').attr('id', 'description-' + grandparentIndex + '-' + parentIndex + '-' + index);
     // add unique id for tab
     // for pill basic
-    element.find('#pills-single-sel-tab').attr('href', '#pills-single-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
-    element.find('#pills-single-sel-0').attr('id', 'pills-single-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-single-sel-tab').attr('href', '#pills-single-sel-' + grandparentIndex + '-' + parentIndex + '-' + index);
+    element.find('#pills-single-sel-0').attr('id', 'pills-single-sel-' + grandparentIndex + '-' + parentIndex + '-' + index);
 
     //for pills video
-    element.find('#pills-multi-sel-tab').attr('href', '#pills-multi-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
-    element.find('#pills-multi-sel-0').attr('id', 'pills-multi-sel-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-multi-sel-tab').attr('href', '#pills-multi-sel-' + grandparentIndex + '-' + parentIndex + '-' + index);
+    element.find('#pills-multi-sel-0').attr('id', 'pills-multi-sel-' + grandparentIndex + '-' + parentIndex + '-' + index);
 
     //for pills attachment
-    element.find('#pills-type-text-tab').attr('href', '#pills-type-text-' + grandparentIndex+'-'+ parentIndex + '-' + index);
-    element.find('#pills-type-text-0').attr('id', 'pills-type-text-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-type-text-tab').attr('href', '#pills-type-text-' + grandparentIndex + '-' + parentIndex + '-' + index);
+    element.find('#pills-type-text-0').attr('id', 'pills-type-text-' + grandparentIndex + '-' + parentIndex + '-' + index);
 
-    element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + grandparentIndex+'-'+ parentIndex + '-' + index);
-    element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + grandparentIndex+'-'+ parentIndex + '-' + index);
+    element.find('#pills-drag-drop-tab').attr('href', '#pills-drag-drop-' + grandparentIndex + '-' + parentIndex + '-' + index);
+    element.find('#pills-drag-drop-0').attr('id', 'pills-drag-drop-' + grandparentIndex + '-' + parentIndex + '-' + index);
 
     var newLesson = 'lesson-' + index;
     element.find('.lesson-container').attr('id', newLesson);
@@ -551,27 +564,27 @@
     $(id).parents('.slide-container').find('.video_url').removeClass('wizard-required');
     $(id).parents('.slide-container').find('.select-video').removeClass('wizard-required');
     $(id).parents('.slide-container').find('.select-attachments').removeClass('wizard-required');
-    if(type==='basic'){
-      $(id).parents('.slide-container').find('.editer').addClass('wizard-required'); 
+    if (type === 'basic') {
+      $(id).parents('.slide-container').find('.editer').addClass('wizard-required');
     }
-    if(type==='video'){
-      $(id).parents('.slide-container').find('.video_url').addClass('wizard-required'); 
-      $(id).parents('.slide-container').find('.select-video').addClass('wizard-required'); 
+    if (type === 'video') {
+      $(id).parents('.slide-container').find('.video_url').addClass('wizard-required');
+      $(id).parents('.slide-container').find('.select-video').addClass('wizard-required');
     }
-    if(type==='attachment'){
-      $(id).parents('.slide-container').find('.select-attachments').addClass('wizard-required'); 
+    if (type === 'attachment') {
+      $(id).parents('.slide-container').find('.select-attachments').addClass('wizard-required');
     }
   })
 
-  
+
   $(document).on('click', '.shadow-btn2', function () {
     let title = $(this).parents('.practice-fieldset').find('.question_title').val();
     $(this).parents('.practice-section').find('.practice-heading-title').text(title);
     $(this).parents('.practice-container').removeClass('show');
   })
 
-// uncheck all checkbox of question
-  $(document).on('click','.single-select', function(){
+  // uncheck all checkbox of question
+  $(document).on('click', '.single-select', function () {
     $(this).parents('.practice-fieldset').find('input[type=checkbox]:checked').prop("checked", false);
     //$('.single-select').prop("checked", false);
     $(this).prop("checked", true);
