@@ -24,6 +24,7 @@ function calculateDuration(durationArray) {
     var mm = [];
 
    for (duration of durationArray) {
+        // console.log(duration);
         splitTime = duration.split(':');
         hh[i] = splitTime[0];
         mm[i] = splitTime[1];
