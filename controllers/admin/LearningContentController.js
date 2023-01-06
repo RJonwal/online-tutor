@@ -294,7 +294,6 @@ async function store(req, res) {
                 var slide = {};
                 // img = fileNames[j];
                 // let values = Object.values(img);
-
                 var video = '';
                 var attachment = '';
                 for (files of fileNames) {
