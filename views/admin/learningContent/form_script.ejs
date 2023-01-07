@@ -605,8 +605,15 @@
   $(document).on('click', '.btn-check', function () {
     let option_type = $(this).val();
     let $this = $(this).parents('.practice-fieldset');
-    if (option_type == 'text') {
-
+    if(option_type == 'text'){
+      $this.find('.option_image').hide();
+      $this.find('.option_text_form').show();
+    }else if(option_type == 'image'){
+      $this.find('.option_image').show();
+      $this.find('.option_text_form').hide();
+    }else {
+      $this.find('.option_image').show();
+      $this.find('.option_text_form').show();
     }
   })
 </script>
