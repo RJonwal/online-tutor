@@ -47,6 +47,21 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label class="col-form-label label-align" for="password">Password
+                    </label>
+                    <span style="font-size: 8px;">Leave blank If you don`t want to update password</span>
+
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                      <input type="password" name="password" class="form-control" placeholder="Update Password.."
+                        id="password" value="">
+                      <span toggle="#password"
+                        class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
                     <label class="col-form-label label-align" for="phone">Contact No.
                       <span class="required">*</span>
                     </label>
@@ -137,13 +152,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="col-form-label label-align" for="notes">Notes </label>
-                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.."
-                      id="notes"><%=data.note %></textarea>
-                  </div>
-                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="col-form-label label-align" for="status">Status<span class="required">*</span>
@@ -155,6 +163,13 @@
                         <option value="0" <%=data.status=='0' ? 'selected' : '' %>>Deactive</option>
                       </select>
                     </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="notes">Notes </label>
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.."
+                      id="notes"><%=data.note %></textarea>
                   </div>
                 </div>
               </div>
