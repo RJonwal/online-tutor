@@ -71,10 +71,10 @@
           //   "The init function knows on which editor its called - this is for " +
           //   editor.id
           // );
-          this.on('keyup', function(e) {
+          this.on('keyup', function (e) {
             console.log(e);
-            })
-            
+          })
+
         });
         editor.on("change", function (e) {
           console.log(jQuery(this)[0].id);
@@ -270,16 +270,10 @@
       var tmpType = jQuery(this).attr("type");
 
       if (tmpThis == '') {
-        if (tmpType == 'file') {
-          jQuery(this).parents(".dropify-wrapper").css("border-color", "red");
-        }
         jQuery(this).parent().removeClass("focus-input");
         jQuery(this).siblings('.wizard-form-error').slideDown("3000");
       }
       else if (tmpThis != '') {
-        if (tmpType == 'file') {
-          jQuery(this).parents(".dropify-wrapper").css("border-color", "#4A4674");
-        }
         jQuery(this).parent().addClass("focus-input");
         jQuery(this).siblings('.wizard-form-error').slideUp("3000");
       }
@@ -560,7 +554,8 @@
     let id = $(this).attr('href');
     let type = $(this).attr('data-type');
     $(id).parents('.practice-container').find('fieldset').prop('disabled', true);
-    $(this).parents('.practice-card').find('.practices-type').val(type)
+    $(this).parents('.practice-card').find('.practices-type').val(type);
+    console.log($(this).parents('.practice-card').find('.practice-fieldset').find('.form-control').addClass('wizard-required'));
     $(id).find('fieldset').prop('disabled', false);
   })
 

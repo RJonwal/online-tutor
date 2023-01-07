@@ -2195,21 +2195,21 @@ span.total-count {
 .add_option_form .dropify-wrapper .dropify-message h6{
    display: none;
 }
-.add_option_form .btn-group{
+.btn-group{
     background: #fff;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 5px;
 }
-.add_option_form .btn-group .option-check-btn{
+.btn-group .display-check-btn{
     margin: 0 5px;
 }
-.add_option_form .btn-group .option-check-btn .btn-check{
+.btn-group .display-check-btn .btn-check{
     position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;
 }
-.add_option_form .btn-group .option-check-btn .check-label{
+.btn-group .display-check-btn .check-label{
     margin: 0;
     padding: 5px 15px;
     color: var(--dblue);
@@ -2220,7 +2220,7 @@ span.total-count {
     transition: all 0.3s ease-in;
     cursor: pointer;
 }
-.add_option_form .btn-group .option-check-btn .btn-check:checked+.check-label{
+.btn-group .display-check-btn .btn-check:checked+.check-label{
     color: #fff;
     background: var(--secondary);
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);  
@@ -2299,7 +2299,12 @@ span.total-count {
     height: 100px;
 }
 
-
+.option-img-upload .dropify-wrapper{
+    height: 188px !important;
+}
+.practice-question-img-sec .dropify-wrapper{
+    height: 188px !important;
+}
 
 
 
