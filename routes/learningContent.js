@@ -4,8 +4,10 @@ const router = express.Router();
 const passport = require('passport');
 const fs = require('fs');
 const path = require('path');
-const learningContentController = require('../controllers/Admin/LearningContentController')
+const learningContentController = require('../controllers/Admin/LearningContentController');
 
+var storeLearningContentRequest = require('../requests/LearningContent/StoreLearningContentRequest');
+var updateLearningContentRequest = require('../requests/LearningContent/UpdateLearningContentRequest');
 
 const storageContentImg = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -17,10 +19,11 @@ const storageContentImg = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        const newFileName = Date.now() +'-'+fileName;
+        const newFileName = Date.now() + '-' + fileName;
         callback(null, newFileName);
     }
 });
+
 var uploadContentImgImage = multer({
     storage: storageContentImg,
     fileFilter: (req, file, callback) => {
@@ -37,7 +40,7 @@ var uploadContentImgImage = multer({
 
 router.get('/', passport.checkAuthentication, learningContentController.index);
 router.get('/create', passport.checkAuthentication, learningContentController.create);
-router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(), learningContentController.store);
+router.post('/store', passport.checkAuthentication, uploadContentImgImage.any(), storeLearningContentRequest, learningContentController.store);
 router.post('/listing', passport.checkAuthentication, learningContentController.listing);
 router.get('/createOld', passport.checkAuthentication, learningContentController.createOld);
 router.get('/viewCourses/:id', passport.checkAuthentication, learningContentController.viewCourses);

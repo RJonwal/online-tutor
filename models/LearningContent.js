@@ -10,7 +10,6 @@ const slugify_options = {
     trim: true         // trim leading and trailing replacement chars, defaults to `true`
 }
 
-
 const learningContentSchema = new mongoose.Schema({
     grade_id: {
         type: mongoose.Schema.Types.ObjectId,
