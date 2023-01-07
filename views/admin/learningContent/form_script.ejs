@@ -80,14 +80,17 @@
           console.log(jQuery(this)[0].id);
           let descriptionId = jQuery(this)[0].id;
           // console.log(tinymce.activeEditor.getContent());
-          $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
+          // $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
+          tinymce.triggerSave();
 
 
         });
         editor.on("keyup", function () {
           let descriptionId = jQuery(this)[0].id;
+          tinymce.triggerSave();
+
           // console.log(tinymce.activeEditor.getContent());
-          $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
+          // $("textarea#" + descriptionId).text(tinymce.activeEditor.getContent());
         });
       },
     });
