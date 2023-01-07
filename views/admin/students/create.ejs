@@ -44,6 +44,20 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password<span
+                        class="required">*</span>
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><img src="/images/lock.svg" class="mCS_img_loaded"></span>
+                      <input type="password" name="password" class="form-control" placeholder="Enter Password.."
+                        id="password">
+                      <span toggle="#password"
+                        class="fa fa-fw fa-eye field-icon form-control-feedback right toggle-password"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
                     <label class="col-form-label label-align" for="phone">Contact No.
                       <span class="required">*</span>
                     </label>
@@ -134,13 +148,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="col-form-label label-align" for="notes">Notes </label>
-                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.."
-                      id="notes"></textarea>
-                  </div>
-                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="col-form-labellabel-align" for="status">Status<span class="required">*</span>
@@ -154,6 +161,13 @@
                     </div>
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="col-form-label label-align" for="notes">Notes </label>
+                    <textarea name="note" rows="5" class="form-control" placeholder="Enter Notes.."
+                      id="notes"></textarea>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-4">
@@ -163,12 +177,10 @@
               </div>
             </div>
           </div>
-
           <div class="ln_solid"></div>
           <div class="text-right">
             <button type="submit" id="storeStudentBtn" class="btn theme-btn form-button">Save</button>
           </div>
-
         </form>
       </div>
     </div>

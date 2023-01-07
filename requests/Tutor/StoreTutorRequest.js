@@ -58,6 +58,18 @@ var validateUser = () => [
         })
     })
     .bail(),
+  body('password')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('password can not be empty!')
+    .bail()
+    .isString()
+    .withMessage('password should be a valid string!')
+    .bail()
+    .isStrongPassword({ minLength: 8 }) //, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 })
+    .withMessage('password length should be 8 character!')
+    .bail(),
   body('phone')
     .not().isEmpty()
     .isInt()
@@ -76,7 +88,7 @@ var validateUser = () => [
         })
     })
     .bail(),
-    body('subject_ids')
+  body('subject_ids')
     .exists()
     .withMessage('Subject can not be empty!')
     .bail(),
