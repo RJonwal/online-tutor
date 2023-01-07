@@ -1932,7 +1932,13 @@ span.total-count {
     font-weight: 500;
     color: var(--dblue);
 }
-
+.courses-sidebar .card-header .right-icons{
+    transform: rotate(-90deg);
+    transition: all 0.3s ease-in;
+}
+.courses-sidebar .card-header[aria-expanded="true"] .right-icons{
+    transform: rotate(0deg);
+}
 .courses-sidebar {
     background: #fff;
     height: 100%;

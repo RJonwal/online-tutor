@@ -104,25 +104,33 @@
     $(this).addClass('active');
   });
   let lessonId = $('.slider-menu').data('id');
+  let lessionData = $('.slider-menu').data('type');
+
   $('#lessons-1').find('.slide-action').addClass('active-slick-list');
-  renderSliderContent(lessonId);
+
+  renderSliderContent(lessonId,lessionData);
   $('.slider-menu').click(function () {
+    $('#practiceAccordion').removeClass('show');
+    $('#slideAccordion').removeClass('show');
+    $($(this).data('data-target')).addClass('show');
     $('.slide-action').removeClass('active-slick-list');
     let lessonId = $(this).data('id');
+    let lessionData = $(this).data('type');
     let sliderClass = $(this).data('target');
     $(sliderClass).find('.slide-action').addClass('active-slick-list');
     $('.active-slick-list li:first-child').addClass('active');
 
-    renderSliderContent(lessonId);
+    renderSliderContent(lessonId,lessionData);
   })
   sliderInit();
 
-  function renderSliderContent(lessonId) {
+  function renderSliderContent(lessonId,lessionData) {
     $.ajax({
       type: "POST",
       url: '/learning-content/renderSlickSlider',
       data: {
         id: lessonId,
+        type:lessionData,
       },
       success: function (response) {
         $('.slideshow').slick('unslick');

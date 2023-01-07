@@ -185,52 +185,198 @@ async function renderSubtopic(req, res) {
 async function renderSlickSlider(req, res) {
     try {
         let lessionId = req.body.id;
+        let lessionData = req.body.type;
         let lessionDetails = await Lesson.find({ "_id": lessionId });
         let html = '';
-        for (slides of lessionDetails[0].slides) {
-            if (slides.video_url == '') {
-                classes = 'col-md-12';
-            } else {
-                classes = 'col-md-7';
+        if(lessionData == 'slides'){
+            for (slides of lessionDetails[0].slides) {
+                if (slides.video_url == '') {
+                    classes = 'col-md-12';
+                } else {
+                    classes = 'col-md-7';
+                }
+                html += ` 
+                <div class="item">
+                    <div class="row">
+                        <div class="slide-duration">
+                            <h3 class="title-text mb-0">Total Duration </h3>
+                            <span class="the-timer"><i class="fa fa-clock-o"></i> ${slides.duration} hrs</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 ${classes}">
+                            <h3>${slides.title}</h3>
+                            ${slides.description}`
+                            if (slides.attachments != '') {
+                                html += `<div class="attachment-block">
+                                    <div class="col-sm-12 col-md-4">
+                                        <h3 class="title-text mb-3">Attachment</h3>
+                                        <a class="attch-items" href="/LearningContent/${slides.attachments}" target="_blank">View PDF</a>
+                                    </div>
+                                </div>`
+                            } if (slides.video_url != '') {
+                                html += `<div class="attachment-block video">
+                                    <div class="col-sm-12 col-md-4">
+                                        <h3 class="title-text mb-3">Video </h3>
+                                        <a class="attch-items" href="${slides.video_url}" target="_blank">Video Url</a>
+                                    </div>
+                                </div>`
+                            }
+                            html += `</div>`
+                            if (slides.video) {
+                                html += `<div class="col-sm-12 col-md-5">
+                                    <div class="preview-thumb">
+                                        <video width="320" height="240" loop autoplay muted controls>
+                                        <source src="/LearningContent/${slides.video}" type="video/mp4">
+                                    </div>
+                                </div>`
+                            }
+                        html += `</div>
+                    </div>
+                </div>`;
             }
-            html += ` 
-      <div class="item">
-            <div class="row">
-                <div class="slide-duration">
-                    <h3 class="title-text mb-0">Total Duration </h3>
-                    <span class="the-timer"><i class="fa fa-clock-o"></i> ${slides.duration} hrs</span>
-                </div>
-            </div>
-          <div class="row">
-            <div class="col-sm-12 ${classes}">
-              <h3>${slides.title}</h3>
-              ${slides.description}`
-            if (slides.attachments != '') {
-                html += `<div class="attachment-block">
-                  <div class="col-sm-12 col-md-4">
-                    <h3 class="title-text mb-3">Attachment</h3>
-                    <a class="attch-items" href="/LearningContent/${slides.attachments}" target="_blank">View PDF</a>
-                  </div>
-              </div>`
-            } if (slides.video_url != '') {
-                html += `<div class="attachment-block video">
-                  <div class="col-sm-12 col-md-4">
-                    <h3 class="title-text mb-3">Video </h3>
-                    <a class="attch-items" href="${slides.video_url}" target="_blank">Video Url</a>
-                  </div>
-              </div>`
+        }
+        if(lessionData == 'practice'){
+            for (practices of lessionDetails[0].practices) {
+                html += ` 
+                <div class="item">
+                    <div class="row">    
+                        <div class="col-sm-12">
+                            <div class="que-block text-center">
+                                <h1><span class="text-sky">Que</span> : ${practices.question_title
+                                }</span></h1>
+                                <p class="desctext">${practices.question_description
+                                }</p>
+                                <form>`
+                                    if(practices.question_type == 'image'){
+                                    html +=`<div class="row justify-content-center">
+                                            <div class="col-12 col-sm-6">
+                                            <div class="quest-imagelarge">  
+                                                <img src="/images/quest-img.svg" alt="img">
+                                            </div>  
+                                            </div>
+                                            <div class="col-sm-12">
+                                            <ul class="quest-list image-question mw-100">
+                                                <li>
+                                                <input type="radio" id="question11" class="custom-option" name="question1">
+                                                <label class="label-option" for="question11">
+                                                    <img src="/images/frame.svg" alt="img">
+                                                </label>
+                                                <span class="label-text">01 : English Developing People, Leading
+                                                    Teams & Managing Processes</span>
+                                                </li>
+                                                <li>
+                                                <input type="radio" id="question22" class="custom-option" name="question1" checked>
+                                                <label class="label-option" for="question22">
+                                                    <img src="/images/frame.svg" alt="img">
+                                                </label>
+                                                <span class="label-text">02 : English Developing People, Leading
+                                                    Teams & Managing Processes</span>
+                                                </li>
+                                                <li>
+                                                <input type="radio" id="question33" class="custom-option" name="question1">
+                                                <label class="label-option" for="question33">
+                                                    <img src="/images/frame.svg" alt="img">
+                                                </label>
+                                                <span class="label-text">03 : English Developing People, Leading
+                                                    Teams & Managing Processes</span>
+                                                </li>
+                                                <li>
+                                                <input type="radio" id="question44" class="custom-option" name="question1">
+                                                <label class="label-option" for="question44">
+                                                    <img src="/images/frame.svg" alt="img">
+                                                </label>
+                                                <span class="label-text">04 : English Developing People, Leading
+                                                    Teams & Managing Processes</span>
+                                                </li>
+                                            </ul>
+                                            <div class="quest-bottom">
+                                                <div class="row">
+                                                <div class="col-sm-12">
+                                                    <button type="submit" class="check-btn">Check Answer</button>
+                                                    <p>Please select one option</p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>`;
+                                    }if(practices.question_type == 'text'){
+                                        html +=`<ul class="quest-list">
+                                        <p>Please select one option</p>
+                                        <li>
+                                          <input type="radio" id="question111" class="custom-option" name="question3">
+                                          <label class="label-option" for="question111">01 Option</label>
+                                        </li>
+                                        <li>
+                                          <input type="radio" id="question222" class="custom-option" name="question3">
+                                          <label class="label-option" for="question222">02 Option</label>
+                                        </li>
+                                        <li>
+                                          <input type="radio" id="question333" class="custom-option" name="question3">
+                                          <label class="label-option" for="question333">03 Option</label>
+                                        </li>
+                                        <li>
+                                          <input type="radio" id="question444" class="custom-option correct" name="question3" checked>
+                                          <label class="label-option" for="question444">41 Option</label>
+                                        </li>
+                                        <div class="quest-bottom text-center text-md-left">
+                                          <div class="row">
+                                            <div class="col-sm-12 col-md-6 align-self-center">
+                                              <button type="submit" class="check-btn correct-btn mb-md-0">Check Answer</button>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                              <div class="single-text answer-msg correct-answer-msg">
+                                                <img src="/images/correct-answer-icon.svg" alt="icon">
+                                                <span>Conratulations <small>Correct Answer</small></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </ul>`;
+                                    }
+                                    else{
+                                        html +=`  <div class="row">
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                        <div class="quest-imagelarge">  
+                                          <img src="/images/quest-img.svg" alt="img">
+                                        </div>  
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 text-left">
+                                          <p>Please select one option</p>
+                                          <ul class="quest-list text-left mw-100">
+                                            <li>
+                                              <input type="radio" id="question1" class="custom-option" name="question1">
+                                              <label class="label-option" for="question1">01 Option</label>
+                                            </li>
+                                            <li>
+                                              <input type="radio" id="question2" class="custom-option" name="question1">
+                                              <label class="label-option" for="question2">02 Option</label>
+                                            </li>
+                                            <li>
+                                              <input type="radio" id="question3" class="custom-option" name="question1">
+                                              <label class="label-option" for="question3">03 Option</label>
+                                            </li>
+                                            <li>
+                                              <input type="radio" id="question4" class="custom-option" name="question1" checked>
+                                              <label class="label-option" for="question4">41 Option</label>
+                                            </li>
+                                          </ul>
+                                          <div class="quest-bottom">
+                                            <div class="row">
+                                              <div class="col-sm-12">
+                                                <button type="submit" class="check-btn">Check Answer</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>`;
+                                    }
+                               html += `</form>
+                            </div>              
+                        </div>
+                    </div>
+                </div>`;
             }
-            html += `</div>`
-            if (slides.video) {
-                html += `<div class="col-sm-12 col-md-5">
-              <div class="preview-thumb">
-                <video width="320" height="240" loop autoplay muted controls>
-                  <source src="/LearningContent/${slides.video}" type="video/mp4">
-              </div>
-            </div>`
-            }
-            html += `</div>
-        </div>`;
         }
         return res.send(html);
     } catch (e) {
