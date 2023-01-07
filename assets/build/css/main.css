@@ -4013,3 +4013,7 @@ div#practice {
 }
 
 /** loader css */
+
+.add_option_block_outer > .question-lightfray:first-child > .lightgray > .right-icons > .delete-btn {
+ display: none;
+}
