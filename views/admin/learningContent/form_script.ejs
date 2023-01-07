@@ -554,9 +554,12 @@
     let id = $(this).attr('href');
     let type = $(this).attr('data-type');
     $(id).parents('.practice-container').find('fieldset').prop('disabled', true);
+    $(id).parents('.practice-container').find('.form-control').removeClass('wizard-required');
     $(this).parents('.practice-card').find('.practices-type').val(type);
-    console.log($(this).parents('.practice-card').find('.practice-fieldset').find('.form-control').addClass('wizard-required'));
+    //console.log($(this).parents('.practice-card').find('.practice-fieldset').find('.form-control').addClass('wizard-required'));
     $(id).find('fieldset').prop('disabled', false);
+    $(id).find('fieldset').find('.form-control').addClass('wizard-required')
+
   })
 
   $(document).on('click', '.slider-tab', function () {
@@ -597,5 +600,13 @@
     $(this).show();
     // $(this).parents('.practice-fieldset').find('.delete-btn').show();
     // $(this).siblings('.delete-btn').hide();
+  })
+
+  $(document).on('click','.btn-check',function(){
+    let option_type = $(this).val();
+    let $this = $(this).parents('.practice-fieldset');
+    if(option_type == 'text'){
+      
+    }
   })
 </script>
