@@ -94,6 +94,10 @@ const lessonSchema = new mongoose.Schema({
             type: String,
             default: null
         },
+        option_display_preference: {
+            type: String,
+            default: null
+        },
         options: [{
             option_image: {
                 type: String,
@@ -107,15 +111,10 @@ const lessonSchema = new mongoose.Schema({
                 type: String,
                 default: null
             },
-            option_display_preference: {
-                type: String,
-                default: null
-            },
             option_correct: {
                 type: Boolean,
                 default: false
-            },
-
+            }
         }],
     }],
     deleted_at: {

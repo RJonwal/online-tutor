@@ -188,7 +188,7 @@ async function renderSlickSlider(req, res) {
         let lessionData = req.body.type;
         let lessionDetails = await Lesson.find({ "_id": lessionId });
         let html = '';
-        if(lessionData == 'slides'){
+        if (lessionData == 'slides') {
             for (slides of lessionDetails[0].slides) {
                 if (slides.video_url == '') {
                     classes = 'col-md-12';
@@ -207,36 +207,36 @@ async function renderSlickSlider(req, res) {
                         <div class="col-sm-12 ${classes}">
                             <h3>${slides.title}</h3>
                             ${slides.description}`
-                            if (slides.attachments != '') {
-                                html += `<div class="attachment-block">
+                if (slides.attachments != '') {
+                    html += `<div class="attachment-block">
                                     <div class="col-sm-12 col-md-4">
                                         <h3 class="title-text mb-3">Attachment</h3>
                                         <a class="attch-items" href="/LearningContent/${slides.attachments}" target="_blank">View PDF</a>
                                     </div>
                                 </div>`
-                            } if (slides.video_url != '') {
-                                html += `<div class="attachment-block video">
+                } if (slides.video_url != '') {
+                    html += `<div class="attachment-block video">
                                     <div class="col-sm-12 col-md-4">
                                         <h3 class="title-text mb-3">Video </h3>
                                         <a class="attch-items" href="${slides.video_url}" target="_blank">Video Url</a>
                                     </div>
                                 </div>`
-                            }
-                            html += `</div>`
-                            if (slides.video) {
-                                html += `<div class="col-sm-12 col-md-5">
+                }
+                html += `</div>`
+                if (slides.video) {
+                    html += `<div class="col-sm-12 col-md-5">
                                     <div class="preview-thumb">
                                         <video width="320" height="240" loop autoplay muted controls>
                                         <source src="/LearningContent/${slides.video}" type="video/mp4">
                                     </div>
                                 </div>`
-                            }
-                        html += `</div>
+                }
+                html += `</div>
                     </div>
                 </div>`;
             }
         }
-        if(lessionData == 'practice'){
+        if (lessionData == 'practice') {
             for (practices of lessionDetails[0].practices) {
                 html += ` 
                 <div class="item">
@@ -244,12 +244,12 @@ async function renderSlickSlider(req, res) {
                         <div class="col-sm-12">
                             <div class="que-block text-center">
                                 <h1><span class="text-sky">Que</span> : ${practices.question_title
-                                }</span></h1>
+                    }</span></h1>
                                 <p class="desctext">${practices.question_description
-                                }</p>
+                    }</p>
                                 <form>`
-                                    if(practices.question_type == 'image'){
-                                    html +=`<div class="row justify-content-center">
+                if (practices.question_type == 'image') {
+                    html += `<div class="row justify-content-center">
                                             <div class="col-12 col-sm-6">
                                             <div class="quest-imagelarge">  
                                                 <img src="/images/quest-img.svg" alt="img">
@@ -300,8 +300,8 @@ async function renderSlickSlider(req, res) {
                                             </div>
                                             </div>
                                         </div>`;
-                                    }if(practices.question_type == 'text'){
-                                        html +=`<ul class="quest-list">
+                } if (practices.question_type == 'text') {
+                    html += `<ul class="quest-list">
                                         <p>Please select one option</p>
                                         <li>
                                           <input type="radio" id="question111" class="custom-option" name="question3">
@@ -333,9 +333,9 @@ async function renderSlickSlider(req, res) {
                                           </div>
                                         </div>
                                       </ul>`;
-                                    }
-                                    else{
-                                        html +=`  <div class="row">
+                }
+                else {
+                    html += `  <div class="row">
                                         <div class="col-sm-12 col-md-6 mb-3">
                                         <div class="quest-imagelarge">  
                                           <img src="/images/quest-img.svg" alt="img">
@@ -370,8 +370,8 @@ async function renderSlickSlider(req, res) {
                                           </div>
                                         </div>
                                       </div>`;
-                                    }
-                               html += `</form>
+                }
+                html += `</form>
                             </div>              
                         </div>
                     </div>
@@ -441,7 +441,6 @@ async function store(req, res) {
                 var attachment = '';
                 var questionImage = '';
 
-
                 for (files of fileNames) {
                     let keys = Object.keys(files);
                     let values = Object.values(files);
@@ -473,6 +472,7 @@ async function store(req, res) {
                 question['question_duration'] = content.question_duration;
                 question['question_description'] = content.question_description;
                 question['question_image'] = questionImage;
+                question['option_display_preference'] = content.option_display_preference;
 
                 let deepInnerList = content['deep-inner-list'];
                 let k = 0;
@@ -491,7 +491,6 @@ async function store(req, res) {
                         option['option_image'] = optionImage;
                         option['option_text'] = deepContent.option_text;
                         option['option_explanation'] = deepContent.option_explanation;
-                        option['option_display_preference'] = deepContent.option_display_preference;
                         correctOption = 'option_correct' in deepContent;
                         if (correctOption) {
                             option['option_correct'] = correctOption;
