@@ -1,0 +1,404 @@
+<div class="right_col" role="main">
+  <!-- page content starts-->
+  <div class="row main_row">
+    <div class="x_panel form_panel">
+      <div class="x_title">
+        <h3 class="title-text">Add Assessment</h3>
+      </div>
+      <div class="x_content">
+        <form id="" action="./store" method="post" class="form-horizontal form-label-left">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="assessmentname">Assessment Name <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/assessment.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="assessmentname" class="form-control" placeholder="Assessment Name" id="assessmentname">
+                </div>
+              </div>
+            </div> 
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="class_select">Grade <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="class" id="class_select" tabindex="-1" single>
+                    <option value="0" disabled selected>Select Grade</option>
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>  
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="teacher_select">Teacher <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="teacher" id="teacher_select" tabindex="-1" single>
+                    <option value="0" disabled>Select Teacher</option>
+                    <option value="1">Victor Strokin</option>
+                    <option value="2">Blake Cain</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">  
+              <div class="form-group">
+                <label class="col-form-label label-align" for="date">Date <span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/date.svg" class="mCS_img_loaded"></span>
+                  <input type="text" name="date" class="form-control" placeholder="" id="datepicker">
+                </div>
+              </div>
+            </div>  
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="time">Start Time <span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/time.svg" class="mCS_img_loaded"></span>
+                  <input type="text" class="form-control timePicker" placeholder="Start Date">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="time">End Time <span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text"><img src="/images/time.svg" class="mCS_img_loaded"></span>
+                  <input type="text" class="form-control timePicker" placeholder="End Date">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mt-4">
+              <h3 class="title-text fn-16">Select Content</h3>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="select_grade">Grade <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="garde" id="select_grade" tabindex="-1" single>
+                    <option value="0" disabled selected>Select Grade</option>
+                    <option value="1">Grade 1</option>
+                    <option value="2">Grade 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="select_topic">Topic <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="topic" id="select_topic" tabindex="-1" single>
+                    <option value="0" disabled selected>Select Topic</option>
+                    <option value="1">Topic 1</option>
+                    <option value="2">Topic 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="select_subtopic">Sub Topic <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/subcategory.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="subtopic" id="select_subtopic" tabindex="-1" single>
+                    <option value="0" disabled selected>Select Sub Topic</option>
+                    <option value="1">Sub Topic 1</option>
+                    <option value="2">Sub Topic 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="select_learning">Learning Content <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control" name="Learning" id="select_learning" tabindex="-1" single>
+                    <option value="0" disabled selected>Select Learning Content</option>
+                    <option value="1">Science</option>
+                    <option value="2">Maths</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="select_lesson">Lesson <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select_all" name="lesson" data-placeholder="Select Lesson" id="select_lesson" tabindex="-1" multiple>
+                    <option value="1">Lesson 1</option>
+                    <option value="2">Lesson 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="assessment_type">Assessment Type <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select_all" name="assessmenttype" data-placeholder="Select Assessment Type" id="assessment_type" tabindex="-1" multiple>     
+                    <option value="1">Information Slides</option>                             
+                    <option value="2">Practices</option>     
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="assessment_option">Assessments <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select_all" name="assessmentoption" data-placeholder="Select Assessments" id="assessment_option" tabindex="-1" multiple>  
+                    <optgroup label="Information Slides">
+                      <option value="1">Slides 1</option>                             
+                      <option value="2">Slides 2</option>  
+                    </optgroup>   
+                    <optgroup label="Practices">
+                      <option value="1">Practices 1</option>  
+                      <option value="2">Practices 2</option>  
+                    </optgroup>   
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="d-block" >&nbsp;</span>
+              </label>
+              <button type="submit" class="content-submit theme-btn">Submit</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mt-4">
+              <h3 class="title-text fn-16">Selected Content</h3>
+            </div>
+            <div class="col-sm-12">
+              <ul class="selectedcontent sortable">
+                <li>
+                  <div class="iconleft">
+                    <img src="/images/lesson.svg" alt="img">
+                  </div>
+                  <div class="content-detail-block">
+                    <h4 class="assessment-title">Work, Energy And Power</h4>
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">Grade 1</li>
+                      <li class="breadcrumb-item">Topic 1</li>
+                      <li class="breadcrumb-item">Sub Topic 1</li>
+                      <li class="breadcrumb-item">Science</li>
+                      <li class="breadcrumb-item">Lesson</li>
+                    </ol>
+                  </div>
+                  <div class="action-right">
+                    <a class="remove_content" href="javascript:void(0);">&times;</a>
+                    <a class="move_content handle" href="javascript:void(0);"><i class="fa fa-arrows"></i></a>
+                  </div>
+                </li>
+                <li>
+                  <div class="iconleft">
+                    <img src="/images/basic.svg" alt="img">
+                  </div>
+                  <div class="content-detail-block">
+                    <h4 class="assessment-title">Work, Energy And Power</h4>
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">Grade 2</li>
+                      <li class="breadcrumb-item">Topic 1</li>
+                      <li class="breadcrumb-item">Sub Topic 1</li>
+                      <li class="breadcrumb-item">Science</li>
+                      <li class="breadcrumb-item">Lesson 1</li>
+                      <li class="breadcrumb-item">Information Slides</li>
+                    </ol>
+                  </div>
+                  <div class="action-right">
+                    <a class="remove_content" href="javascript:void(0);">&times;</a>
+                    <a class="move_content handle" href="javascript:void(0);"><i class="fa fa-arrows"></i></a>
+                  </div>
+                </li>
+                <li>
+                  <div class="iconleft">
+                    <img src="/images/practice1.svg" alt="img">
+                  </div>
+                  <div class="content-detail-block">
+                    <h4 class="assessment-title">Work, Energy And Power</h4>
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">Grade 2</li>
+                      <li class="breadcrumb-item">Topic 1</li>
+                      <li class="breadcrumb-item">Sub Topic 1</li>
+                      <li class="breadcrumb-item">Science</li>
+                      <li class="breadcrumb-item">Lesson 1</li>
+                      <li class="breadcrumb-item">Practices</li>
+                    </ol>
+                  </div>
+                  <div class="action-right">
+                    <a class="remove_content" href="javascript:void(0);">&times;</a>
+                    <a class="move_content handle" href="javascript:void(0);"><i class="fa fa-arrows"></i></a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+          <div class="text-right">
+            <button type="submit" id="" class="btn theme-btn">Assign</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- page title end -->
+</div>
+<script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+$('.timePicker').datetimepicker({
+  allowInputToggle: true,
+  useCurrent: true,
+  keepOpen: true,
+  format: "hh:mm A"
+});
+
+$('#datepicker').daterangepicker({
+  locale: {
+    format: 'M/DD/YY'
+  }
+});
+
+
+$("#class_select").select2({
+  placeholder: "Select Class",
+  allowClear: false,
+});
+
+$("#teacher_select").select2({
+  placeholder: "Select Teacher",
+  allowClear: false,
+});
+$("#select_grade").select2({
+  placeholder: "Select grade",
+  allowClear: false,
+});
+
+$("#select_topic").select2({
+  placeholder: "Select Topic",
+  allowClear: false,
+});
+
+$("#select_subtopic").select2({
+  placeholder: "Select Sub Topic",
+  allowClear: false,
+});
+
+$("#select_learning").select2({
+  placeholder: "Select Learning",
+  allowClear: false,
+});
+
+
+
+$(".sortable").sortable({ 
+  handle: '.handle',
+  group: 'list',
+  animation: 200,
+  ghostClass: 'ghost',
+});
+
+$('.selectedcontent').on('click', '.remove_content', function(){
+	$(this).closest('li').fadeOut('slow', function(){
+  	$(this).remove();
+  });
+});
+
+let input = document.getElementById('assessmentname');
+let outs = document.getElementsByClassName("assessment-title");
+
+input.onkeyup = function() {
+  for(var i = 0; i < outs.length; i++){
+      outs.item(i).innerHTML = input.value;
+  }
+}
+
+
+/*Define the adapter so that it's reusable*/
+$.fn.select2.amd.define('select2/selectAllAdapter', [
+    'select2/utils',
+    'select2/dropdown',
+    'select2/dropdown/attachBody'
+], function(Utils, Dropdown, AttachBody) {
+
+    function SelectAll() {}
+    SelectAll.prototype.render = function(decorated) {
+        var self = this,
+            $rendered = decorated.call(this),
+            $selectAll = $(
+                '<button class="btn btn-xs btn-default" type="button"> Select All</button>'
+            ),
+            $unselectAll = $(
+                '<button class="btn btn-xs btn-default" type="button"> Unselect All</button>'
+            ),
+            $btnContainer = $('<div class="selectbtns" style="margin:3px 0;">').append($selectAll).append($unselectAll);
+        if (!this.$element.prop("multiple")) {
+            // this isn't a multi-select -> don't add the buttons!
+            return $rendered;
+        }
+        $rendered.find('.select2-dropdown').prepend($btnContainer);
+        $selectAll.on('click', function(e) {
+            var $results = $rendered.find('.select2-results__option[aria-selected=false]');
+            $results.each(function() {
+                self.trigger('select', {
+                    data: $(this).data('data')
+                });
+            });
+            self.trigger('close');
+        });
+        $unselectAll.on('click', function(e) {
+            var $results = $rendered.find('.select2-results__option[aria-selected=true]');
+            $results.each(function() {
+                self.trigger('unselect', {
+                    data: $(this).data('data')
+                });
+            });
+            self.trigger('close');
+        });
+        return $rendered;
+    };
+
+    return Utils.Decorate(
+        Utils.Decorate(
+            Dropdown,
+            AttachBody
+        ),
+        SelectAll
+    );
+
+});
+
+$('.select_all').select2({
+    placeholder: 'Select',
+    // allowClear: true,
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+    
+});
+</script>

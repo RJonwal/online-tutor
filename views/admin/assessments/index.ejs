@@ -1,0 +1,132 @@
+<div class="right_col" role="main">
+  <!-- page content starts -->
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="stcard-box">
+            <span class="shade1">1</span>
+            <h3 class="title-text mb-0">Total Assessments</h3>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="stcard-box">
+            <span class="shade2">2</span>
+            <h3 class="title-text mb-0">Total Courses</h3>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="stcard-box">
+            <span class="shade4">3</span>
+            <h3 class="title-text mb-0">Total Assigned Teachers</h3>
+        </div>
+    </div>
+  </div>
+  <div class="card-block mb-30">
+    <h3 class="title-text">Filter Assessment</h3>
+    <ul class="filter-row">
+      <li class="filter-col">
+        <select class="form-control select2" id="" tabindex="-1" single>
+          <option value="">Select Assessment</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <select class="form-control select2" id="" tabindex="-1" single>
+          <option value="1">Select Course</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <select class="form-control select2" id="" tabindex="-1" single>
+          <option value="1">Select Teacher</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </li>
+      <li class="filter-col">
+        <button class="btn theme-btn filter">Filter</button>
+        <button class="btn theme-btn reset">Reset</button>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h3 class="title-text mb-0">Assessments List</h3>
+          <ul class="right-btns">
+            <li> <a href="./assessments/create" class="btn theme-btn" data-toggle="tooltip" rel="tooltip" data-placement="top"
+                title="Assign">+ Assign</a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="card-box table-responsive">
+            <table id="assessments" class="table table-striped table-bordered dt-responsive nowrap"
+              cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <!-- <th>#</th> -->
+                  <th>Assessment Name</th>
+                  <th>Course Name</th>
+                  <th>Assigned Teacher</th>
+                  <th>Date and Time</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!-- <td>1</td> -->
+                  <td>Science</td>
+                  <td>Ecology</td>
+                  <td>Blake Cain</td>
+                  <td>
+                    <span class="td-items"><i class="fa fa-calendar"></i> 05 Jan 2023 - 08 Jan 2023</span>
+                    <span class="td-items"><i class="fa fa-clock-o"></i> 11:30 PM - 12:00 AM</span>
+                  </td>
+                  <td>
+                    <div class="text-md-center mr-2">  
+                      <a href="javascript:void(0)"><img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Delete"></a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <!-- <td>2</td> -->
+                  <td>Math</td>
+                  <td>Algebra</td>
+                  <td>Blake Cain</td>
+                  <td>
+                    <span class="td-items"><i class="fa fa-calendar"></i> 05 Jan 2023 - 08 Jan 2023</span>
+                    <span class="td-items"><i class="fa fa-clock-o"></i> 11:30 PM - 12:00 AM</span>
+                  </td>
+                  <td>
+                    <div class="text-md-center mr-2">  
+                      <a href="javascript:void(0)"><img src="/images/trash.svg" alt="icon" data-toggle="tooltip" rel="tooltip" data-placement="top" title="Delete"></a>
+                    </div>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- page content end -->
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".select2").select2({
+      allowClear: false,
+    });
+  });
+
+  $(document).ready( function () {
+    $('#assessments').DataTable();
+} );
+  
+</script>  
