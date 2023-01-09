@@ -91,11 +91,16 @@
           </li>
           
           <% if(user_detail.role !=3) { %>
-          <li>
-            <a href="javascript:void(0);">
-              <span class="icon"><img src="/images/assessment.svg"></span> <span class="link-title">Assessments</span>
-            </a>
-          </li>
+            <li>
+              <a href="javascript:void(0);">
+                <span class="icon"><img src="/images/assessment.svg"></span> <span class="link-title">Assessments</span>
+                <span class="fa fa-chevron-down"></span>
+              </a>
+              <ul class="nav child_menu">
+                <li><a href="/assessments">List</a></li>
+                <li><a href="/assessments/create">Assign</a></li>
+              </ul>
+            </li>
           <% } %>
 
           <% if(user_detail.role !=1) { %>

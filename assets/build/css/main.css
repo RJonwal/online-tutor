@@ -391,12 +391,17 @@ ul {
 .container.body .col-md-3.left_col .profile {
     margin-top: 70px;
 }
-
+.img-circle.profile_img{
+    width: 50px;
+    height: 50px;
+}
 .nav-sm .profile_pic {
     width: auto;
     float: none;
 }
-
+.mCustomScrollBox{
+    width: 100%;
+}
 .nav-sm .profile_info {
     width: auto;
     float: none;
@@ -644,6 +649,7 @@ ul {
     color: #fff;
     text-align: right;
     margin-right: 0;
+    margin-top: 0;
 }
 
 .nav.side-menu>li:hover,
@@ -907,7 +913,21 @@ span.total-count {
     border-top: 2px solid var(--exLightBlue) !important;
     padding: 5px 0;
 }
-
+.select2-dropdown .selectbtns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.select2-dropdown .selectbtns .btn {
+    color: var(--dblue);
+    background: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease-in;
+}
+.select2-dropdown .selectbtns .btn:hover{
+    color: var(--secondary);
+}
 .select2-dropdown .select2-search .select2-search__field {
     background: #fff;
     margin-bottom: 5px;
@@ -922,9 +942,17 @@ span.total-count {
     font-size: 12px;
     font-weight: 500;
     color: var(--dblue);
+    margin-bottom: 1px;
     transition: all 0.3s ease-in;
 }
-
+.select2-dropdown .select2-results .select2-results__option .select2-results__options--nested{
+    padding: 0 12px;
+}
+.select2-selection--multiple .select2-selection__rendered span.select2-selection__clear{
+    margin-right: 22px !important;
+    font-size: 16px;
+    margin-top: 4px !important;
+}
 .select2-dropdown .select2-results .select2-results__option[aria-selected="true"] {
     background: var(--exLightBlue);
 }
@@ -933,7 +961,32 @@ span.total-count {
     background: #fff;
     color: var(--secondary);
 }
-
+.select2-dropdown .select2-results .select2-results__option div.checkbox{
+    display: flex;
+    align-items: center;
+}
+.select2-dropdown .select2-results .select2-results__option div.checkbox input[type="checkbox"]{
+    accent-color: var(--dblue);
+    width: 14px;
+    height: 14px;
+}
+.select2-selection--multiple:before {
+    content: "";
+    background: url(../../images/droparrow.svg) no-repeat center right;
+    border: none;
+    width: 14px;
+    height: 8px;
+    position: absolute;
+    right: 13px;
+    top: 18px;
+    transition: all 0.3s ease-in;
+}
+.select2-container--default.select2-container--open .select2-selection--multiple::before{
+    transform: rotate(180deg);
+}
+.select2-dropdown .select2-results .select2-results__option div.checkbox label{
+    margin: 0 0 0 5px;
+}
 .select2-dropdown ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -1932,13 +1985,7 @@ span.total-count {
     font-weight: 500;
     color: var(--dblue);
 }
-.courses-sidebar .card-header .right-icons{
-    transform: rotate(-90deg);
-    transition: all 0.3s ease-in;
-}
-.courses-sidebar .card-header[aria-expanded="true"] .right-icons{
-    transform: rotate(0deg);
-}
+
 .courses-sidebar {
     background: #fff;
     height: 100%;
@@ -2195,21 +2242,21 @@ span.total-count {
 .add_option_form .dropify-wrapper .dropify-message h6{
    display: none;
 }
-.btn-group{
+.add_option_form .btn-group{
     background: #fff;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 5px;
 }
-.btn-group .display-check-btn{
+.add_option_form .btn-group .option-check-btn{
     margin: 0 5px;
 }
-.btn-group .display-check-btn .btn-check{
+.add_option_form .btn-group .option-check-btn .btn-check{
     position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;
 }
-.btn-group .display-check-btn .check-label{
+.add_option_form .btn-group .option-check-btn .check-label{
     margin: 0;
     padding: 5px 15px;
     color: var(--dblue);
@@ -2220,7 +2267,7 @@ span.total-count {
     transition: all 0.3s ease-in;
     cursor: pointer;
 }
-.btn-group .display-check-btn .btn-check:checked+.check-label{
+.add_option_form .btn-group .option-check-btn .btn-check:checked+.check-label{
     color: #fff;
     background: var(--secondary);
     box-shadow: 5px 4px 15px rgba(244, 120, 23, 0.33);  
@@ -2299,12 +2346,7 @@ span.total-count {
     height: 100px;
 }
 
-.option-img-upload .dropify-wrapper{
-    height: 188px !important;
-}
-.practice-question-img-sec .dropify-wrapper{
-    height: 188px !important;
-}
+
 
 
 
@@ -2589,7 +2631,12 @@ span.total-count {
 .x_content table.table-striped tbody tr:nth-of-type(even) {
     background: var(--lightgray);
 }
-
+.x_content table tbody td .td-items{
+    display: block;
+}
+.x_content table tbody td .td-items i{
+    width: 15px;
+}
 /* Main Content Css */
 
 .x_content table .checkbox label .toggle,
@@ -2817,7 +2864,9 @@ span.total-count {
     border-radius: 5px;
     height: 200px;
 }
-
+.form_panel .drop-content .dropify-wrapper{
+    max-width: 100%;
+}
 .form_panel .x_content .dropify-wrapper.touch-fallback .dropify-message {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -2844,6 +2893,7 @@ span.total-count {
 .form_panel .select2-container .select2-search--inline .select2-search__field {
     margin-top: 0px;
     padding: 10px;
+    width: 100% !important;
 }
 
 .form_panel .select2-container--default .select2-selection--single,
@@ -3339,7 +3389,7 @@ span.total-count {
     max-width: 163px;
     width: 100%;
 }
-.practice-card .tab-content .form-group.practice-question-img-sec .form-group.practice-option-img-sec .dropify-wrapper {
+.practice-card .tab-content .form-group.practice-question-img-sec .dropify-wrapper {
     height: 83%;
 }
  .right_col .form-wizard .accordion .chp-add-section.add_option_block_outer .card-body{
@@ -3357,6 +3407,152 @@ span.total-count {
     align-items: center;
     justify-content: flex-end;
 }
+
+.daterangepicker .calendar-time select{
+    background-color: var(--lightgray);
+    border: 1px solid var(--border-color);
+    border-radius: 3px !important;
+    height: 35px;  
+}
+.daterangepicker .drp-buttons .btn.applyBtn{
+    background: var(--dblue);
+    border-color: var(--dblue);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 3px;
+    transition: all 0.3s ease-in;
+}
+.daterangepicker .drp-buttons .btn.applyBtn:hover{
+    background: var(--skyblue);
+    border-color: var(--skyblue);
+}
+.daterangepicker .drp-buttons .btn.cancelBtn{
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 3px;
+    transition: all 0.3s ease-in;
+}
+.daterangepicker .drp-buttons .btn.cancelBtn:hover{
+    background: var(--dorange);
+    border-color: var(--dorange);
+}
+.content-submit{
+    padding:10px 25px;
+}
+.selectedcontent{
+    position: relative;
+}
+.selectedcontent > li{
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 6px 4px 14px rgba(32, 27, 83, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.selectedcontent> li+li{
+    margin-top: 10px;
+}
+.selectedcontent >li .iconleft{
+    width: 25px;
+}
+.selectedcontent >li .iconleft img{
+    width: 25px;
+}
+.selectedcontent >li .content-detail-block{
+    width: calc(100% - 75px);
+    padding: 0 15px;
+}
+.selectedcontent >li .content-detail-block h4{
+    color: var(--dblue);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.selectedcontent >li .content-detail-block .breadcrumb-item{
+    font-size: 13px;
+    color: var(--lightBlue);
+}
+.selectedcontent >li .action-right{
+    width: 50px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.selectedcontent >li .action-right .remove_content{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--lightBlue);
+    transition: all 0.3s ease-in;
+}
+.selectedcontent >li .action-right .remove_content:hover {
+    color: var(--red);
+}
+.selectedcontent >li .action-right .move_content{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--lightBlue);
+    margin-left: 10px;
+    cursor: all-scroll;
+    transition: all 0.3s ease-in;
+}
+.selectedcontent >li .action-right .move_content:hover {
+    color: var(--dblue);
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    padding: 0px;
+    margin: 0;
+    z-index: 99999;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid var(--border-color);
+}
+.daterangepicker td.active, .daterangepicker td.active:hover{
+    background: var(--dblue);
+    color: var(--white);
+}
+.daterangepicker td.in-range {
+    background: var(--exLightBlue);
+    color: #000000;
+}
+.x_content .bootstrap-datetimepicker-widget table{
+    border: none;
+    margin: 0;
+}  
+.x_content .bootstrap-datetimepicker-widget table td{
+    border: none;
+    text-align: center;
+    padding: 5px 10px;
+    color: var(--dblue);
+    font-size: 16px;
+}
+.x_content .bootstrap-datetimepicker-widget table td .glyphicon {
+    color: var(--dblue);
+    font-size: 16px;
+}
+.x_content .bootstrap-datetimepicker-widget table td .btn-primary {
+    background-color: var(--dblue);
+    border-color: var(--dblue);
+    color: var(--white);
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 3px;
+    width: 60px;
+    text-align: center;
+}
+.x_content .bootstrap-datetimepicker-widget table td .btn-primary:hover {
+    background: var(--skyblue);
+    border-color: var(--skyblue);
+}
+
+
 @media(max-width:1199px) {
     .course-list .course-description .course-detail {
         width: 100%;
@@ -3901,6 +4097,36 @@ span.total-count {
         width: 100%;
         margin: 0 0 10px;
     }
+
+    .selectedcontent > li{
+        padding: 10px;
+    }
+    .selectedcontent >li .iconleft{
+        width: 20px;
+    }
+    .selectedcontent >li .iconleft img{
+        width: 20px;
+    }
+    .selectedcontent >li .content-detail-block{
+        width: calc(100% - 55px);
+        padding: 0 10px;
+    }
+    .selectedcontent >li .content-detail-block h4{
+        font-size: 12px;
+    }
+    .selectedcontent >li .content-detail-block .breadcrumb-item{
+        font-size: 11px;
+    }
+    .selectedcontent >li .action-right{
+        width: 35px;
+    }
+    .selectedcontent >li .action-right .remove_content{
+        font-size: 20px;
+    }
+    .selectedcontent >li .action-right .move_content{
+        font-size: 12px;
+    }
+
     
 }
 
@@ -4015,16 +4241,4 @@ span.total-count {
 		opacity: 1;
 	}
 }
-.practice-wizards-div{
-    margin-bottom: 10px;
-}
-div#practice {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 /** loader css */
-
-.add_option_block_outer > .question-lightfray:first-child > .lightgray > .right-icons > .delete-btn {
- display: none;
-}
