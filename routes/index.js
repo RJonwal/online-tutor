@@ -11,5 +11,6 @@ router.use('/subTopics',require('./subTopic'));    // route added for subCategor
 router.use('/learning-content', require('./learningContent'));    // route added for learningContent
 router.use('/students',require('./student'));    // route added for student
 router.use('/tutors',require('./tutor'));    // route added for tutor
-router.use('/assessments',require('./assessments'));
+router.use('/assessments',require('./assessment'));    // route added for assessment
+
 module.exports = router;
