@@ -12,7 +12,10 @@ var slugify = require('slugify')
 module.exports = {
     index,
     listing,
+    renderContents,
     renderSubtopic,
+    getContentDetail,
+    getLessonDetail,
     renderSlickSlider,
     create,
     createOld,
@@ -159,13 +162,91 @@ async function listing(req, res) {
 }
 
 /**
- * list learningContent. 
+ * render learningContent. 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function renderContents(req, res) {
+    try {
+        var reqObj = {};
+        if (req.body.grade_id) {
+            reqObj["grade_id"] = req.body.grade_id;
+        }
+        if (req.body.topic_id) {
+            reqObj["topic_id"] = req.body.topic_id;
+        } 
+        if (req.body.sub_topic_id) {
+            reqObj["sub_topic_id"] = req.body.sub_topic_id;
+        }
+
+        let recordsFiltered = await LearningContent.find({ $and: [ reqObj] }).sort({ "title": 'asc' });;
+    
+        return res.send(recordsFiltered);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+/**
+ * get LessonsContentWise. 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function getContentDetail(req, res) {
+    try {
+        let learningContent = await LearningContent.find({ "_id": req.body.content_id }).populate('lesson_ids');
+        console.log(learningContent);
+        return res.send(learningContent[0]);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+
+
+/**
+ * getLessonDetail. 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function getLessonDetail(req, res) {
+    try {
+        console.log('AAWADFDSAFEDSFEDSERWD');
+        console.log(req.body);
+                let learningContent = await LearningContent.find({ "_id": req.body.content_id }, {'lesson_ids' : {$elemMatch:{"_id": '63bd3e69003c7a63f69e2229' }}}).populate('lesson_ids');
+                console.log(learningContent);
+        // return res.send(learningContent[0]);
+
+
+
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
+
+
+/**
+ * render subTopic. 
  * @param {*} req 
  * @param {*} res 
  * @returns 
  */
 async function renderSubtopic(req, res) {
     try {
+        let topicId = req.body.id;
+        console.log("topicId => " + topicId);
         let subTopics = await SubTopic.find({ topic_id: req.body.id }).sort({ 'name': 1 });
         return res.send(subTopics);
     } catch (e) {
@@ -175,6 +256,7 @@ async function renderSubtopic(req, res) {
         })
     }
 }
+
 
 /**
  * slick slider content render. 
@@ -386,6 +468,7 @@ async function renderSlickSlider(req, res) {
         })
     }
 }
+
 
 /**
  * create content.

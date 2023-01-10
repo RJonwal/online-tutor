@@ -46,7 +46,18 @@ router.get('/createOld', passport.checkAuthentication, learningContentController
 router.get('/viewCourses/:id', passport.checkAuthentication, learningContentController.viewCourses);
 router.get('/previewCourses', passport.checkAuthentication, learningContentController.previewCourses);
 router.get('/destroy/:id', passport.checkAuthentication, learningContentController.destroy);
+
+router.post('/render-contents', passport.checkAuthentication, learningContentController.renderContents);
+router.post('/get-content-detail', passport.checkAuthentication, learningContentController.getContentDetail);
+router.post('/get-lesson-detail', passport.checkAuthentication, learningContentController.getLessonDetail);
+
+
+
+
+
 router.post('/renderSubtopic', passport.checkAuthentication, learningContentController.renderSubtopic);
+
+
 router.post('/renderSlickSlider', passport.checkAuthentication, learningContentController.renderSlickSlider);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);
@@ -57,3 +68,4 @@ router.get('/multipleSelectWithImage', passport.checkAuthentication, learningCon
 router.get('/multipleSelectText', passport.checkAuthentication, learningContentController.multipleSelectText);
 
 module.exports = router;
+

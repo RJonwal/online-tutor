@@ -10,43 +10,51 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="assessmentname">Assessment Name <span class="required">*</span>
+                <label class="col-form-label label-align" for="assessmentname">Assessment Name <span
+                    class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/assessment.svg" class="mCS_img_loaded"></span>
-                  <input type="text" name="assessmentname" class="form-control" placeholder="Assessment Name" id="assessmentname">
+                  <input type="text" name="name" class="form-control" id="assessment_name"
+                    placeholder="Assessment Name">
                 </div>
               </div>
-            </div> 
+            </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label class="col-form-label label-align" for="class_select">Grade <span class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="class" id="class_select" tabindex="-1" single>
-                    <option value="0" disabled selected>Select Grade</option>
-                    <option value="1">Class 1</option>
-                    <option value="2">Class 2</option>
-                  </select>
-                </div>
-              </div>
-            </div>  
-            <div class="col-md-4">
-              <div class="form-group">
-                <label class="col-form-label label-align" for="teacher_select">Teacher <span class="required">*</span>
-                </label>
-                <div class="input-group flex-nowrap">
-                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="teacher" id="teacher_select" tabindex="-1" single>
-                    <option value="0" disabled>Select Teacher</option>
-                    <option value="1">Victor Strokin</option>
-                    <option value="2">Blake Cain</option>
+                  <select class="form-control select2" name="grade_id" id="grade" tabindex="-1" single>
+                    <option value="">Select Grade</option>
+                    <% for(grade of grades) { %>
+                      <option value="<%=grade.id%>">
+                        <%=grade.name%>
+                      </option>
+                      <% } %>
                   </select>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 col-lg-4">  
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="col-form-label label-align" for="teacher_select">Tutor <span class="required">*</span>
+                </label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text"><img src="/images/student.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select2" name="tutor_id" id="tutor" tabindex="-1" single>
+                    <option value="">Select Tutor</option>
+                    <% for(tutor of tutors) { %>
+                      <option value="<%=tutor.id%>">
+                        <%=tutor.first_name+' '+tutor.last_name %>
+                      </option>
+                      <% } %>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
               <div class="form-group">
                 <label class="col-form-label label-align" for="date">Date <span class="required">*</span>
                 </label>
@@ -55,14 +63,14 @@
                   <input type="text" name="date" class="form-control" placeholder="" id="datepicker">
                 </div>
               </div>
-            </div>  
+            </div>
             <div class="col-md-4 col-lg-4">
               <div class="form-group">
                 <label class="col-form-label label-align" for="time">Start Time <span class="required">*</span>
                 </label>
                 <div class="input-group">
                   <span class="input-group-text"><img src="/images/time.svg" class="mCS_img_loaded"></span>
-                  <input type="text" class="form-control timePicker" placeholder="Start Date">
+                  <input type="text" name="start_time" class="form-control timePicker" placeholder="Start Time">
                 </div>
               </div>
             </div>
@@ -72,68 +80,70 @@
                 </label>
                 <div class="input-group">
                   <span class="input-group-text"><img src="/images/time.svg" class="mCS_img_loaded"></span>
-                  <input type="text" class="form-control timePicker" placeholder="End Date">
+                  <input type="text" name="end_time" class="form-control timePicker" placeholder="End Time">
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row">
             <div class="col-md-12 mt-4">
               <h3 class="title-text fn-16">Select Content</h3>
-            </div>
+            </div>  
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="select_grade">Grade <span class="required">*</span>
+                <label class="col-form-label label-align" for="class_select">Grade <span class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="garde" id="select_grade" tabindex="-1" single>
-                    <option value="0" disabled selected>Select Grade</option>
-                    <option value="1">Grade 1</option>
-                    <option value="2">Grade 2</option>
+                  <select class="form-control select2 filter-content" name="sc_grade_id" id="sc_grade" tabindex="-1" single>
+                    <option value="">Select Grade</option>
+                    <% for(grade of grades) { %>
+                      <option value="<%=grade.id%>">
+                        <%=grade.name%>
+                      </option>
+                      <% } %>
                   </select>
                 </div>
               </div>
-            </div>
+            </div>       
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="select_topic">Topic <span class="required">*</span>
+                <label class="col-form-label label-align" for="class_select">Topic <span class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text"><img src="/images/categories.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="topic" id="select_topic" tabindex="-1" single>
-                    <option value="0" disabled selected>Select Topic</option>
-                    <option value="1">Topic 1</option>
-                    <option value="2">Topic 2</option>
+                  <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select2 filter-content" name="sc_topic_id" id="sc_topic" tabindex="-1" single>
+                    <option value="">Select Topic</option>
+                    <% for(topic of topics) { %>
+                      <option value="<%=topic.id%>">
+                        <%=topic.name%>
+                      </option>
+                      <% } %>
                   </select>
                 </div>
               </div>
-            </div>
+            </div>      
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="select_subtopic">Sub Topic <span class="required">*</span>
+                <label class="col-form-label label-align" for="class_select">Sub Topic <span class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
-                  <span class="input-group-text"><img src="/images/subcategory.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="subtopic" id="select_subtopic" tabindex="-1" single>
-                    <option value="0" disabled selected>Select Sub Topic</option>
-                    <option value="1">Sub Topic 1</option>
-                    <option value="2">Sub Topic 2</option>
+                  <span class="input-group-text"><img src="/images/classes.svg" class="mCS_img_loaded"></span>
+                  <select class="form-control select2 filter-content" name="sc_sub_topic_id" id="sc_sub_topic" tabindex="-1" single>
+                    <option value="">Select Sub Topic</option>
                   </select>
                 </div>
               </div>
-            </div>
+            </div>  
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="select_learning">Learning Content <span class="required">*</span>
+                <label class="col-form-label label-align" for="select_learning">Learning Content <span
+                    class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control" name="Learning" id="select_learning" tabindex="-1" single>
-                    <option value="0" disabled selected>Select Learning Content</option>
-                    <option value="1">Science</option>
-                    <option value="2">Maths</option>
+                  <select class="form-control select2" name="learning_content" id="learning_content" tabindex="-1" single>
+                    <option value="">Select Learning Content</option>
                   </select>
                 </div>
               </div>
@@ -144,49 +154,52 @@
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control select_all" name="lesson" data-placeholder="Select Lesson" id="select_lesson" tabindex="-1" multiple>
-                    <option value="1">Lesson 1</option>
-                    <option value="2">Lesson 2</option>
+                  <select class="form-control select2" name="lesson_ids" data-placeholder="Select Lessons"
+                    id="lessons" tabindex="-1" multiple>
+                    <option value="">Select Lessons</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="assessment_type">Assessment Type <span class="required">*</span>
+                <label class="col-form-label label-align" for="assessment_type">Assessment Type <span
+                    class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control select_all" name="assessmenttype" data-placeholder="Select Assessment Type" id="assessment_type" tabindex="-1" multiple>     
-                    <option value="1">Information Slides</option>                             
-                    <option value="2">Practices</option>     
+                  <select class="form-control select2" name="assessment_type" id="assessment_type" tabindex="-1" multiple>
+                    <option value="1">Information Slides</option>
+                    <option value="2">Practices</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label class="col-form-label label-align" for="assessment_option">Assessments <span class="required">*</span>
+                <label class="col-form-label label-align" for="assessment_option">Assessments <span
+                    class="required">*</span>
                 </label>
                 <div class="input-group flex-nowrap">
                   <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
-                  <select class="form-control select_all" name="assessmentoption" data-placeholder="Select Assessments" id="assessment_option" tabindex="-1" multiple>  
+                  <select class="form-control select2" name="assessments" data-placeholder="Select Assessments"
+                    id="assessments" tabindex="-1" multiple>
                     <optgroup label="Information Slides">
-                      <option value="1">Slides 1</option>                             
-                      <option value="2">Slides 2</option>  
-                    </optgroup>   
+                      <option value="1">Slides 1</option>
+                      <option value="2">Slides 2</option>
+                    </optgroup>
                     <optgroup label="Practices">
-                      <option value="1">Practices 1</option>  
-                      <option value="2">Practices 2</option>  
-                    </optgroup>   
+                      <option value="1">Practices 1</option>
+                      <option value="2">Practices 2</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
-              <label class="d-block" >&nbsp;</span>
+              <label class="d-block">&nbsp;</span>
               </label>
-              <button type="submit" class="content-submit theme-btn">Submit</button>
+              <button type="button" class="content-submit theme-btn">Add Content</button>
             </div>
           </div>
 
@@ -258,9 +271,10 @@
               </ul>
             </div>
           </div>
+
           <div class="ln_solid"></div>
           <div class="text-right">
-            <button type="submit" id="" class="btn theme-btn">Assign</button>
+            <button type="submit" id="assign" class="btn theme-btn">Assign</button>
           </div>
         </form>
       </div>
@@ -268,137 +282,135 @@
   </div>
   <!-- page title end -->
 </div>
-<script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-<script>
-$('.timePicker').datetimepicker({
-  allowInputToggle: true,
-  useCurrent: true,
-  keepOpen: true,
-  format: "hh:mm A"
-});
 
-$('#datepicker').daterangepicker({
-  locale: {
-    format: 'M/DD/YY'
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    $(".select2").select2({
+      allowClear: false,
+    });
+
+    $("#datepicker").daterangepicker({ minDate: new Date(), locale: { format: ' DD MMM YYYY', } });
+    $('.timePicker').datetimepicker({
+      allowInputToggle: true, keepOpen: true, useCurrent: false,
+      format: "hh:mm A"
+    }).on('dp.show', function () { });
+  }); /** * loadSubTopic */ function
+    loadSubTopic(topicId) {
+      $('#sc_sub_topic').empty(); $.ajax({
+        type: "POST",
+        url: '/learning-content/renderSubtopic', data: { id: topicId, }, success: function (response) {
+          if (response.length > 0) {
+            var newOption = new Option("Select Sub Topic", "", false, false);
+            $('#sc_sub_topic').append(newOption).trigger('change');
+            for (res of response) {
+              newOption = new Option(res.name, res._id, false, false);
+              $('#sc_sub_topic').append(newOption).trigger('change');
+            }
+          } else {
+            $('#sc_sub_topic').html('No results found.').trigger('change');
+          }
+        },
+      });
   }
-});
 
-
-$("#class_select").select2({
-  placeholder: "Select Class",
-  allowClear: false,
-});
-
-$("#teacher_select").select2({
-  placeholder: "Select Teacher",
-  allowClear: false,
-});
-$("#select_grade").select2({
-  placeholder: "Select grade",
-  allowClear: false,
-});
-
-$("#select_topic").select2({
-  placeholder: "Select Topic",
-  allowClear: false,
-});
-
-$("#select_subtopic").select2({
-  placeholder: "Select Sub Topic",
-  allowClear: false,
-});
-
-$("#select_learning").select2({
-  placeholder: "Select Learning",
-  allowClear: false,
-});
-
-
-
-$(".sortable").sortable({ 
-  handle: '.handle',
-  group: 'list',
-  animation: 200,
-  ghostClass: 'ghost',
-});
-
-$('.selectedcontent').on('click', '.remove_content', function(){
-	$(this).closest('li').fadeOut('slow', function(){
-  	$(this).remove();
+  $('#sc_topic').change(function () {
+    let topicId = $(this).val();
+    loadSubTopic(topicId);
   });
-});
 
-let input = document.getElementById('assessmentname');
-let outs = document.getElementsByClassName("assessment-title");
+  function loadLearningContent() {
+    let grade = $('#sc_grade').val();
+    let topic = $('#sc_topic').val();
+    let subTopic = $('#sc_sub_topic').val();
 
-input.onkeyup = function() {
-  for(var i = 0; i < outs.length; i++){
-      outs.item(i).innerHTML = input.value;
+    $('#learning_content').empty();
+    if (grade != '' || topic != '' || subTopic != '') {
+      $.ajax({
+        type: "POST",
+        url: '/learning-content/render-contents',
+        data: {
+          grade_id: grade,
+          topic_id: topic,
+          sub_topic_id: subTopic,
+        },
+        success: function (response) {
+          if (response.length > 0) {
+            $('#learning_content').empty();
+            var newOption = new Option("Select Learning Content", "", false, false);
+            $('#learning_content').append(newOption).trigger('change');
+            for (res of response) {
+              newOption = new Option(res.title, res._id, false, false);
+              $('#learning_content').append(newOption).trigger('change');
+            }
+          } else {
+            $('#learning_content').html('No results found.').trigger('change');
+          }
+        },
+      });
+    }
   }
-}
+
+  $(".filter-content").change(function () {
+    loadLearningContent();
+  });
 
 
-/*Define the adapter so that it's reusable*/
-$.fn.select2.amd.define('select2/selectAllAdapter', [
-    'select2/utils',
-    'select2/dropdown',
-    'select2/dropdown/attachBody'
-], function(Utils, Dropdown, AttachBody) {
+  $("#learning_content").change(function () {
+    let content = $(this).val();
+    $('#lessons').empty();
+    if (content != '') {
+      $.ajax({
+        type: "POST",
+        url: '/learning-content/get-content-detail',
+        data: {
+          content_id: content,
+        },
+        success: function (response) {
+          if (response) {
+            $('#lessons').empty();
+            var newOption = new Option("Select Learning Content", "", false, false);
+            $('#lessons').append(newOption).trigger('change');
+            for (lesson of response.lesson_ids) {
+              newOption = new Option(lesson.title, lesson._id, false, false);
+              $('#lessons').append(newOption).trigger('change');
+            }
+          } else {
+            $('#lessons').html('No results found.').trigger('change');
+          }
+        },
+      });
+    }
+  });
 
-    function SelectAll() {}
-    SelectAll.prototype.render = function(decorated) {
-        var self = this,
-            $rendered = decorated.call(this),
-            $selectAll = $(
-                '<button class="btn btn-xs btn-default" type="button"> Select All</button>'
-            ),
-            $unselectAll = $(
-                '<button class="btn btn-xs btn-default" type="button"> Unselect All</button>'
-            ),
-            $btnContainer = $('<div class="selectbtns" style="margin:3px 0;">').append($selectAll).append($unselectAll);
-        if (!this.$element.prop("multiple")) {
-            // this isn't a multi-select -> don't add the buttons!
-            return $rendered;
-        }
-        $rendered.find('.select2-dropdown').prepend($btnContainer);
-        $selectAll.on('click', function(e) {
-            var $results = $rendered.find('.select2-results__option[aria-selected=false]');
-            $results.each(function() {
-                self.trigger('select', {
-                    data: $(this).data('data')
-                });
-            });
-            self.trigger('close');
-        });
-        $unselectAll.on('click', function(e) {
-            var $results = $rendered.find('.select2-results__option[aria-selected=true]');
-            $results.each(function() {
-                self.trigger('unselect', {
-                    data: $(this).data('data')
-                });
-            });
-            self.trigger('close');
-        });
-        return $rendered;
-    };
 
-    return Utils.Decorate(
-        Utils.Decorate(
-            Dropdown,
-            AttachBody
-        ),
-        SelectAll
-    );
+  $("#assessment_type, #lessons").change(function () {
+    let contentId = $('#learning_content').val();
+    let lessonIds = $('#lessons').val();
+    let assessmentType = $('#assessment_type').val();
+    console.log(lessonIds);
+    console.log(assessmentType);
 
-});
+    if (contentId != '' && lessonIds != null || assessmentType != null) {
+      $.ajax({
+        type: "POST",
+        url: '/learning-content/get-lesson-detail',
+        data: {
+          content_id :contentId,
+          lesson_ids: lessonIds,
+          assessment_type: assessmentType,
+        },
+        success: function (response) {
+          console.log(response);
+        },
+      });
+    }
+  });
 
-$('.select_all').select2({
-    placeholder: 'Select',
-    // allowClear: true,
-    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
-    
-});
+
+
+
 </script>
