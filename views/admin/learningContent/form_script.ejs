@@ -617,7 +617,9 @@
     }
   });
 
-  $(document).on('click', '.custom-add-option', function () {
+  $(document).on('click', '.practice-option-add', function () {
+    console.log($(this));
     $(this).parents('.practice-fieldset').find('.check-label:checkbox:checked').trigger('click');
+
   })
 </script>

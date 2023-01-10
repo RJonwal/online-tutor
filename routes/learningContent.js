@@ -59,6 +59,7 @@ router.post('/renderSubtopic', passport.checkAuthentication, learningContentCont
 
 
 router.post('/renderSlickSlider', passport.checkAuthentication, learningContentController.renderSlickSlider);
+router.post('/submitPracticeAnswer', passport.checkAuthentication, learningContentController.submitPracticeAnswer);
 router.get('/singleSelectText', passport.checkAuthentication, learningContentController.singleSelectText);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);
 router.get('/singleSelectImage', passport.checkAuthentication, learningContentController.singleSelectImage);

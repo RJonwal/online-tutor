@@ -140,4 +140,37 @@
     });
   }
 
+$(document).on('click','.check-btn',function(){
+  $this = $(this).parents('.slick-active')
+  let formData = $this.find('form').serialize();
+  submitPracticeAnswer(formData,$this);
+});
+
+function submitPracticeAnswer(formData,element){
+  $('.explanation-div').hide();
+  $('.correct-answer-msg').hide();
+  $('.incorrect-answer-msg').hide();
+  $.ajax({
+      type: "POST",
+      url: '/learning-content/submitPracticeAnswer',
+      data: formData,
+      dataType: "json",
+      success: function (response) {
+
+        console.log(response);
+        for(submittedId of response.submitted_answer){
+          $('input[value="'+response.submitted_answer.id+'"]').addClass('incorrect');
+        }
+        $('input[value="'+response.correct_answer.id+'"]').addClass('correct');
+        element.find('.explanation-div').show();
+        element.find('.description').text(response.correct_answer.description);
+        if(response.submitted_answer.correct){
+          $('.correct-answer-msg').show();
+        }else{
+          $('input[value="'+response.submitted_answer.id+'"]').addClass('incorrect');
+          $('.incorrect-answer-msg').show();
+        }
+      }
+  });
+}
 </script>

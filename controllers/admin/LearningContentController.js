@@ -7,7 +7,8 @@ const globalHelper = require('../../_helper/GlobalHelper');
 
 const fs = require('fs');
 let session = require('express-session');
-var slugify = require('slugify')
+var slugify = require('slugify');
+const { join } = require('path');
 
 module.exports = {
     index,
@@ -25,6 +26,7 @@ module.exports = {
     destroy,
     previewCourses,
     viewCourses,
+    submitPracticeAnswer,
     singleSelectText,
     singleSelectImage,
     singleSelectWithImage,
@@ -319,7 +321,9 @@ async function renderSlickSlider(req, res) {
             }
         }
         if (lessionData == 'practice') {
+            let i = 0;
             for (practices of lessionDetails[0].practices) {
+                i++;
                 html += ` 
                 <div class="item">
                     <div class="row">    
@@ -328,133 +332,182 @@ async function renderSlickSlider(req, res) {
                                 <h1><span class="text-sky">Que</span> : ${practices.question_title
                     }</span></h1>
                                 <p class="desctext">${practices.question_description
-                    }</p>
-                                <form>`
-                if (practices.question_type == 'image') {
-                    html += `<div class="row justify-content-center">
-                                            <div class="col-12 col-sm-6">
-                                            <div class="quest-imagelarge">  
-                                                <img src="/images/quest-img.svg" alt="img">
-                                            </div>  
-                                            </div>
+                    }</p>`
+                    if(practices.option_display_preference == 'image') {
+                        html += `
+                        <form method="post" action="./submitPracticeAnswer">
+                            <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
+                            <div class="row justify-content-center">`
+                            if(practices.question_image){
+                            html += `<div class="col-12 col-sm-6">
+                                <div class="quest-imagelarge">  
+                                    <img src="/LearningContent/${practices.question_image}" alt="img">
+                                </div>  
+                            </div>`
+                            }
+                            html +=`<div class="col-sm-12">
+                                <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
+                                <ul class="quest-list image-question mw-100">`;
+                                let j =0;
+                                for(option of practices.options){
+                                j++;
+                                    if(practices.question_type =='single'){
+                                        html +=`<li>
+                                        <input type="radio" id="question${i}${j}" class="custom-option" name="question" value="${option.id}">
+                                        <label class="label-option" for="question${i}${j}">
+                                            <img src="/LearningContent/${option.option_image}" alt="img">
+                                        </label>
+                                        <span class="label-text">${option.option_text}</span>
+                                    </li>`;
+                                    }else{
+                                        html +=`<li>
+                                            <input type="checkbox" id="question${i}${j}" class="custom-option" name="question[]" value="${option.id}">
+                                            <label class="label-option" for="question${i}${j}">
+                                                <img src="/LearningContent/${option.option_image}" alt="img">
+                                            </label>
+                                            <span class="label-text">${option.option_text}</span>
+                                        </li>`;
+                                    }
+                               
+                                }    
+                                html +=`</ul>
+                                    <div class="quest-bottom">
+                                        <div class="row">
                                             <div class="col-sm-12">
-                                            <ul class="quest-list image-question mw-100">
-                                                <li>
-                                                <input type="radio" id="question11" class="custom-option" name="question1">
-                                                <label class="label-option" for="question11">
-                                                    <img src="/images/frame.svg" alt="img">
-                                                </label>
-                                                <span class="label-text">01 : English Developing People, Leading
-                                                    Teams & Managing Processes</span>
-                                                </li>
-                                                <li>
-                                                <input type="radio" id="question22" class="custom-option" name="question1" checked>
-                                                <label class="label-option" for="question22">
-                                                    <img src="/images/frame.svg" alt="img">
-                                                </label>
-                                                <span class="label-text">02 : English Developing People, Leading
-                                                    Teams & Managing Processes</span>
-                                                </li>
-                                                <li>
-                                                <input type="radio" id="question33" class="custom-option" name="question1">
-                                                <label class="label-option" for="question33">
-                                                    <img src="/images/frame.svg" alt="img">
-                                                </label>
-                                                <span class="label-text">03 : English Developing People, Leading
-                                                    Teams & Managing Processes</span>
-                                                </li>
-                                                <li>
-                                                <input type="radio" id="question44" class="custom-option" name="question1">
-                                                <label class="label-option" for="question44">
-                                                    <img src="/images/frame.svg" alt="img">
-                                                </label>
-                                                <span class="label-text">04 : English Developing People, Leading
-                                                    Teams & Managing Processes</span>
-                                                </li>
-                                            </ul>
-                                            <div class="quest-bottom">
-                                                <div class="row">
-                                                <div class="col-sm-12">
-                                                    <button type="submit" class="check-btn">Check Answer</button>
-                                                    <p>Please select one option</p>
-                                                </div>
-                                                </div>
+                                                <button type="button" class="check-btn correct-btn">Check Answer</button>
+                                                <p>Please select one option</p>
                                             </div>
-                                            </div>
-                                        </div>`;
-                } if (practices.question_type == 'text') {
-                    html += `<ul class="quest-list">
-                                        <p>Please select one option</p>
-                                        <li>
-                                          <input type="radio" id="question111" class="custom-option" name="question3">
-                                          <label class="label-option" for="question111">01 Option</label>
-                                        </li>
-                                        <li>
-                                          <input type="radio" id="question222" class="custom-option" name="question3">
-                                          <label class="label-option" for="question222">02 Option</label>
-                                        </li>
-                                        <li>
-                                          <input type="radio" id="question333" class="custom-option" name="question3">
-                                          <label class="label-option" for="question333">03 Option</label>
-                                        </li>
-                                        <li>
-                                          <input type="radio" id="question444" class="custom-option correct" name="question3" checked>
-                                          <label class="label-option" for="question444">41 Option</label>
-                                        </li>
-                                        <div class="quest-bottom text-center text-md-left">
-                                          <div class="row">
-                                            <div class="col-sm-12 col-md-6 align-self-center">
-                                              <button type="submit" class="check-btn correct-btn mb-md-0">Check Answer</button>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                              <div class="single-text answer-msg correct-answer-msg">
-                                                <img src="/images/correct-answer-icon.svg" alt="icon">
-                                                <span>Conratulations <small>Correct Answer</small></span>
-                                              </div>
-                                            </div>
-                                          </div>
                                         </div>
-                                      </ul>`;
-                }
-                else {
-                    html += `  <div class="row">
-                                        <div class="col-sm-12 col-md-6 mb-3">
-                                        <div class="quest-imagelarge">  
-                                          <img src="/images/quest-img.svg" alt="img">
-                                        </div>  
+                                    </div>
+                                    <div class="col-sm-12 explanation-div">
+                                        <div class="explanation">
+                                            <h4 class="text-dgreen">Explanation</h4>
+                                            <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
                                         </div>
-                                        <div class="col-sm-12 col-md-6 text-left">
-                                          <p>Please select one option</p>
-                                          <ul class="quest-list text-left mw-100">
-                                            <li>
-                                              <input type="radio" id="question1" class="custom-option" name="question1">
-                                              <label class="label-option" for="question1">01 Option</label>
-                                            </li>
-                                            <li>
-                                              <input type="radio" id="question2" class="custom-option" name="question1">
-                                              <label class="label-option" for="question2">02 Option</label>
-                                            </li>
-                                            <li>
-                                              <input type="radio" id="question3" class="custom-option" name="question1">
-                                              <label class="label-option" for="question3">03 Option</label>
-                                            </li>
-                                            <li>
-                                              <input type="radio" id="question4" class="custom-option" name="question1" checked>
-                                              <label class="label-option" for="question4">41 Option</label>
-                                            </li>
-                                          </ul>
-                                          <div class="quest-bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>`;
+                    }if (practices.option_display_preference == 'text') {
+                        let className='';
+                        if(practices.question_type =='multiple'){
+                            className = "multi-select";
+                        }
+                       
+                            if(practices.question_image !== ''){
+                                html += `<div class="col-sm-12 col-md-6 mb-3">
+                                    <div class="quest-imagelarge">  
+                                        <img src="/LearningContent/${practices.question_image}" alt="img">
+                                    </div>  
+                                </div>
+                                <div class="col-sm-12 col-md-6 text-left">`
+                            }
+                            html += `
+                            <form method="post" action="./submitPracticeAnswer">
+                                <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
+                                <div class="col-md-12 ">
+                                    <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
+                                    <ul class="quest-list ${className}">
+                                        <p> Please select one option</p>`;
+                                        let j =0;
+                                        for(option of practices.options){ 
+                                            j++;
+                                            if(practices.question_type =='single'){
+                                                html +=`
+                                                <li>
+                                                    <input type="radio" id="question${i}${j}" class="custom-option" name="question" value="${option.id}">
+                                                    <label class="label-option" for="question${i}${j}">${option.option_text}</label>
+                                                </li>`;
+                                            }else{
+                                                html +=`<li>
+                                                    <input type="checkbox" id="question${i}${j}" class="custom-option" name="question[]" value="${option.id}">
+                                                    <label class="label-option" for="question111">${option.option_text}</label>
+                                                </li>`;
+                                            }
+                                        }
+                                        html +=`<div class="quest-bottom text-center text-md-left">
                                             <div class="row">
-                                              <div class="col-sm-12">
-                                                <button type="submit" class="check-btn">Check Answer</button>
-                                              </div>
+                                                <div class="col-sm-12 col-md-6 align-self-center">
+                                                    <button type="button" class="check-btn correct-btn mb-md-0">Check Answer</button>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="single-text answer-msg correct-answer-msg" style="display:none;">
+                                                        <img src="/images/correct-answer-icon.svg" alt="icon">
+                                                        <span>Conratulations <small>Correct Answer</small></span>
+                                                    </div>
+                                                    <div class="single-text answer-msg incorrect-answer-msg" style="display:none;">
+                                                        <img src="/images/incorrect-answer-icon.svg" alt="icon">
+                                                        <span>Wrong <small>Incorrect Answer</small></span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                          </div>
                                         </div>
-                                      </div>`;
-                }
-                html += `</form>
-                            </div>              
+                                    </ul>
+                                </div>
+                                <div class="col-sm-12 explanation-div">
+                                    <div class="explanation">
+                                        <h4 class="text-dgreen">Explanation</h4>
+                                        <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
+                                    </div>
+                                </div>
+                            </form>`;
+                    }if (practices.option_display_preference == 'both') {
+                        html += `<div class="row justify-content-center">`
+                         if(practices.question_image){
+                        html += `<div class="col-12 col-sm-6">
+                            <div class="quest-imagelarge">  
+                                <img src="/LearningContent/${practices.question_image}" alt="img">
+                            </div>  
+                        </div>`
+                         }
+                        html +=`<form method="post" action="./submitPracticeAnswer">
+                            <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
+                            <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
+                            <div class="col-sm-12">
+                                <ul class="quest-list image-question mw-100">`;
+                                    let j =0;
+                                    for(option of practices.options){
+                                        j++;
+                                        if(practices.question_type =='single'){
+                                            html +=`
+                                            <li>
+                                            <input type="radio" id="question${i}${j}" class="custom-option" value="${option.id}" name="question">
+                                            <label class="label-option" for="question${i}${j}">
+                                                <img src="/LearningContent/${option.option_image}" alt="img">
+                                            </label>
+                                            <span class="label-text">${option.option_text}</span>
+                                        </li>`;
+                                            }else{
+                                                html +=`
+                                                <li>
+                                                    <input type="checkbox" id="question${i}${j}" class="custom-option" value="${option.id}" name="question[]">
+                                                    <label class="label-option" for="question${i}${j}">
+                                                        <img src="/LearningContent/${option.option_image}" alt="img">
+                                                    </label>
+                                                    <span class="label-text">${option.option_text}</span>
+                                                </li>`;
+                                            }
+                                    }    
+                                html +=`</ul>
+                                <div class="quest-bottom">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button type="button" class="check-btn correct-btn">Check Answer</button>
+                                            <p>Please select one option</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 explanation-div">
+                                    <div class="explanation">
+                                        <h4 class="text-dgreen">Explanation</h4>
+                                        <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>`;
+                    }
+                html += `</div>              
                         </div>
                     </div>
                 </div>`;
@@ -752,6 +805,42 @@ async function viewCourses(req, res) {
     }
 }
 
+/**
+ * submit practice answer
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+async function submitPracticeAnswer(req, res) {
+    try {
+        // get only practices
+        console.log(req.body);
+        let value = req.body.question;
+        let correct = [];
+        let data = [];
+        let results = await Lesson.find({"_id": req.body.lession_id},{practices: {$elemMatch:{"_id": req.body.practice_id}}}
+        ,{"practices":1});
+        let practices = results[0].practices[0]
+        for(practice of practices.options){
+            if(value.includes(practice.id)){
+                data.push({'id':practice.id,'description':practice.option_explanation});
+            }
+            if(practice.option_correct){
+                correct.push({'id':practice.id,'description':practice.option_explanation});
+            }
+        }
+        final_data = JSON.stringify({
+            "submitted_answer": value,
+            "correct_answer": correct
+        })
+        return res.send(final_data);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            message: 'Something went wrong, please try again later.'
+        })
+    }
+}
 
 /**
  * signle Select Text
