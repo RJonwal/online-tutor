@@ -399,24 +399,25 @@
           assessment_type: assessmentType,
         },
         success: function (response) {
+          console.log(response);
           if (response.length > 0) {
             $('#assessments').empty();
             for (lesson of response) {
-                  
-              if (lesson.slides.length > 0) {
+              if (lesson.slides && lesson.slides.length > 0) {
                 for (slide of lesson.slides) {
                   newOption = new Option(slide.title, slide._id, false, false);
+                  console.log(newOption);
                   $('#assessments').append(newOption).trigger('change');
                   slides.push(slide._id);
                 }
               }
 
-              if (lesson.practices.length > 0) {
+              if (lesson.practices && lesson.practices.length > 0) {
                 for (practice of lesson.practices) {
-                newOption = new Option(practice.title, practice._id, false, false);
-                $('#assessments').append(newOption).trigger('change');
-                practices.push(practice._id);
-              }
+                  newOption = new Option(practice.question_title, practice._id, false, false);
+                  $('#assessments').append(newOption).trigger('change');
+                  practices.push(practice._id);
+                }
               }
               
 

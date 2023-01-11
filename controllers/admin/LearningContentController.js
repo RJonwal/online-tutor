@@ -1,3 +1,4 @@
+
 const Topic = require('../../models/Topic');
 const SubTopic = require('../../models/SubTopic');
 const Grade = require('../../models/Grade');
@@ -233,26 +234,26 @@ async function getLessonDetail(req, res) {
 
         let assessmentType = req.body.assessment_type;
         let lessons = null;
-        
+        console.log(assessmentType);
         if (typeof assessmentType !== 'undefined' || assessmentType.length > 0) {
 
-            if (assessmentType[0] == 1) {
+            if (assessmentType[0] == 1 && assessmentType[1] == 2) {
+                console.log('bothA');
+                let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
+                return res.send(lessons);
+            }else if (assessmentType[0] == 1) {
+                console.log('slides');
                 let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1 }).populate('slides');
                 return res.send(lessons);
-            }
-
-            if (assessmentType[0] == 2) {
+            }elseif (assessmentType[0] == 2) {
+                console.log('practices');
                 let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "practices": 1 }).populate('practices');
-                return res.send(lessons);
-            }
-
-            if (assessmentType[0] == 1 && assessmentType[1] == 2) {
-                let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
                 return res.send(lessons);
             }
         }
 
         if (assessmentType == '') {
+            console.log('both');
             let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
             return res.send(lessons);
         }
@@ -374,8 +375,18 @@ async function renderSlickSlider(req, res) {
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
                             </div>`
-                    if (practices.question_image) {
-                        html += `<div class="col-12 col-sm-6">
+                            if(practices.question_type =='single'){
+                                html +=`
+                                <div class="col-sm-12 explanation-div">
+                                    <div class="explanation">
+                                        <h4 class="text-dgreen">Explanation</h4>
+                                        <p class="description">${practices.question_description
+                                        }</p>
+                                    </div>
+                                </div>`
+                            } 
+                            if(practices.question_image){
+                            html += `<div class="col-12 col-sm-6">
                                 <div class="quest-imagelarge">  
                                     <img src="/LearningContent/${practices.question_image}" alt="img">
                                 </div>  
@@ -409,10 +420,11 @@ async function renderSlickSlider(req, res) {
                                     <div class="quest-bottom">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <button type="button" class="check-btn correct-btn">Check Answer</button>
+                                                <button type="button" class="check-btn">Check Answer</button>
                                                 <p>Please select one option</p>
                                             </div>
                                         </div>
+<<<<<<< Updated upstream
                                     </div>`
                     if (practices.question_type == 'single') {
                         html += `
@@ -425,6 +437,10 @@ async function renderSlickSlider(req, res) {
                                     </div>`
                     }
                     html += `</div>
+=======
+                                    </div>   
+                               </div>
+>>>>>>> Stashed changes
                             </div>
                         </form>`;
                 } if (practices.option_display_preference == 'text') {
@@ -516,6 +532,19 @@ async function renderSlickSlider(req, res) {
                                     <img src="/images/incorrect-answer-icon.svg" alt="icon">
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
+                            </div>`
+                            if(practices.question_type =='single'){
+                                html +=`
+                                <div class="col-sm-12 explanation-div">
+                                    <div class="explanation">
+                                        <h4 class="text-dgreen">Explanation</h4>
+                                        <p class="description">${practices.question_description
+                                        }</p>
+                                    </div>
+                                </div>`
+                            } 
+                            html +=`
+                            <div class="col-sm-12">
                                 <ul class="quest-list image-question mw-100">`;
                     let j = 0;
                     for (option of practices.options) {
@@ -538,28 +567,18 @@ async function renderSlickSlider(req, res) {
                                                     </label>
                                                     <span class="label-text">${option.option_text}</span>
                                                 </li>`;
-                        }
-                    }
-                    html += `</ul>
-                                <div class="quest-bottom">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <button type="button" class="check-btn correct-btn">Check Answer</button>
-                                            <p>Please select one option</p>
+                                            }
+                                    }    
+                                html +=`</ul>
+                                    <div class="quest-bottom">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button type="button" class="check-btn">Check Answer</button>
+                                                <p>Please select one option</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>`
-                    if (practices.question_type == 'single') {
-                        html += `
-                                    <div class="col-sm-12 explanation-div">
-                                        <div class="explanation">
-                                            <h4 class="text-dgreen">Explanation</h4>
-                                            <p class="description">${practices.question_description
-                            }</p>
-                                        </div>
-                                    </div>`
-                    }
-                    html += `</div>
+                                </div>
                             </div>
                         </div>
                         </form>`;

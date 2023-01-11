@@ -607,12 +607,15 @@
     let $this = $(this).parents('.practice-fieldset');
     if (option_type == 'text') {
       $this.find('.option_image').hide();
+      $this.find('.practice-question-img').removeClass('wizard-required');
       $this.find('.option_text_form').show();
     } else if (option_type == 'image') {
       $this.find('.option_image').show();
+      $this.find('.practice-question-img').addClass('wizard-required');
       $this.find('.option_text_form').hide();
     } else {
       $this.find('.option_image').show();
+      $this.find('.practice-question-img').addClass('wizard-required');
       $this.find('.option_text_form').show();
     }
   });

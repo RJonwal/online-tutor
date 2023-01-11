@@ -59,7 +59,7 @@
       dots: false,
       arrow:false,
       infinite: false,
-      adaptiveHeight: true,
+      // adaptiveHeight: true,
       draggable: false,
       swipeToSlide: false,
       accessibility: false,
@@ -165,6 +165,7 @@ function submitPracticeAnswer(formData,element){
         element.find('.description').text(response.correct_answer.description);
         for(submitted of response.submitted_answer){
           $('input[value="'+submitted.id+'"]').addClass('incorrect');
+          $('input[value="'+submitted.id+'"]').removeClass('correct');
           $('input[value="'+submitted.id+'"]').prop('checked', true);
         }
         for(correct of response.correct_answer){
@@ -173,9 +174,14 @@ function submitPracticeAnswer(formData,element){
         }
         if(JSON.stringify(response.correct_answer)==JSON.stringify(response.submitted_answer)){
           element.find('.correct-answer-msg').show();
+          element.find('.check-btn').addClass('correct-btn');
+          element.find('.check-btn').removeClass('incorrect-btn');
         }else{
           $('input[value="'+response.submitted_answer.id+'"]').addClass('incorrect');
           element.find('.incorrect-answer-msg').show();
+          element.find('.check-btn').addClass('incorrect-btn');
+          element.find('.check-btn').removeClass('correct-btn');
+
         }
       }
   });

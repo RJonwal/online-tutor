@@ -3193,14 +3193,14 @@ span.total-count {
     margin-left: 8px;
     display: inline-block;
     color: var(--dblue);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     line-height: 18px;
 }
 .answer-msg span small{
     color: var(--dgreen);
     display: block;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
 }
 .answer-msg.correct-answer-msg{
@@ -3213,14 +3213,14 @@ span.total-count {
     color: var(--red);
 }
 .answer-msg img{
-    width: auto !important;
+    width: 35px !important;
 }
 .answer-msg.single-text{
     margin: 0 0 0 auto;
 }
 .que-block .image-question{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 15px;
@@ -3269,7 +3269,7 @@ span.total-count {
     display: flex;
     align-items: center;
     text-align: left;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .que-block .explanation h4{
     font-size: 14px;
