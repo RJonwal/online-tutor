@@ -5,6 +5,7 @@ const LearningContent = require('../../models/LearningContent');
 const Lesson = require('../../models/Lesson');
 const globalHelper = require('../../_helper/GlobalHelper');
 
+const mongoose = require('mongoose');
 const fs = require('fs');
 let session = require('express-session');
 var slugify = require('slugify');
@@ -100,12 +101,7 @@ async function listing(req, res) {
     totalNoOfPages = Math.ceil(recordsFiltered / showEntries);
 
     let results = await LearningContent.find({ $and: [obj, searchStr] }, '_id grade_id topic_id sub_topic_id title slug short_description thumbnail lesson_ids status created_at', { 'skip': Number(offset), 'limit': Number(showEntries) }).populate('grade_id').populate('topic_id').populate('sub_topic_id').populate('lesson_ids').sort({ created_at: -1 });
-    //console.log(results);
-    // console.log("recordsTotal => " + recordsTotal);
-    // console.log("recordsFiltered => " + recordsFiltered);
-    // console.log("totalNoOfPages => " + totalNoOfPages);
 
-    // console.log(results);
 
     var courses = [];
     let course = '';
@@ -177,13 +173,13 @@ async function renderContents(req, res) {
         }
         if (req.body.topic_id) {
             reqObj["topic_id"] = req.body.topic_id;
-        } 
+        }
         if (req.body.sub_topic_id) {
             reqObj["sub_topic_id"] = req.body.sub_topic_id;
         }
 
-        let recordsFiltered = await LearningContent.find({ $and: [ reqObj] }).sort({ "title": 'asc' });;
-    
+        let recordsFiltered = await LearningContent.find({ $and: [reqObj] }).sort({ "title": 'asc' });;
+
         return res.send(recordsFiltered);
     } catch (e) {
         console.log(e);
@@ -201,9 +197,8 @@ async function renderContents(req, res) {
  */
 async function getContentDetail(req, res) {
     try {
-        let learningContent = await LearningContent.find({ "_id": req.body.content_id }).populate('lesson_ids');
-        console.log(learningContent);
-        return res.send(learningContent[0]);
+        let learningContent = await LearningContent.findOne({ "_id": req.body.content_id }).populate('lesson_ids');
+        return res.send(learningContent);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -222,13 +217,45 @@ async function getContentDetail(req, res) {
  */
 async function getLessonDetail(req, res) {
     try {
-        console.log('AAWADFDSAFEDSFEDSERWD');
-        console.log(req.body);
-                let learningContent = await LearningContent.find({ "_id": req.body.content_id }, {'lesson_ids' : {$elemMatch:{"_id": '63bd3e69003c7a63f69e2229' }}}).populate('lesson_ids');
-                console.log(learningContent);
-        // return res.send(learningContent[0]);
+        let req_lesson_ids = req.body.lesson_ids.map(function (element) {
+            return mongoose.Types.ObjectId(element)
+        }, this);
 
+        let learningContent = await LearningContent.findOne({ "_id": req.body.content_id });
 
+        let all_lesson_ids = learningContent.lesson_ids;
+
+        var filteredLessonIds = req_lesson_ids.filter(function (e1) {
+            return !all_lesson_ids.some(function (e2) {
+                return e1 === e2;
+            });
+        });
+
+        let assessmentType = req.body.assessment_type;
+        let lessons = null;
+        
+        if (typeof assessmentType !== 'undefined' || assessmentType.length > 0) {
+
+            if (assessmentType[0] == 1) {
+                let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1 }).populate('slides');
+                return res.send(lessons);
+            }
+
+            if (assessmentType[0] == 2) {
+                let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "practices": 1 }).populate('practices');
+                return res.send(lessons);
+            }
+
+            if (assessmentType[0] == 1 && assessmentType[1] == 2) {
+                let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
+                return res.send(lessons);
+            }
+        }
+
+        if (assessmentType == '') {
+            let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
+            return res.send(lessons);
+        }
 
     } catch (e) {
         console.log(e);
@@ -248,7 +275,6 @@ async function getLessonDetail(req, res) {
 async function renderSubtopic(req, res) {
     try {
         let topicId = req.body.id;
-        console.log("topicId => " + topicId);
         let subTopics = await SubTopic.find({ topic_id: req.body.id }).sort({ 'name': 1 });
         return res.send(subTopics);
     } catch (e) {
@@ -333,8 +359,8 @@ async function renderSlickSlider(req, res) {
                     }</span></h1>
                                 <p class="desctext">${practices.question_description
                     }</p>`
-                    if(practices.option_display_preference == 'image') {
-                        html += `
+                if (practices.option_display_preference == 'image') {
+                    html += `
                         <form method="post" action="./submitPracticeAnswer">
                             <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
                             <div class="row justify-content-center">
@@ -348,38 +374,38 @@ async function renderSlickSlider(req, res) {
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
                             </div>`
-                            if(practices.question_image){
-                            html += `<div class="col-12 col-sm-6">
+                    if (practices.question_image) {
+                        html += `<div class="col-12 col-sm-6">
                                 <div class="quest-imagelarge">  
                                     <img src="/LearningContent/${practices.question_image}" alt="img">
                                 </div>  
                             </div>`
-                            }
-                            html +=`<div class="col-sm-12">
+                    }
+                    html += `<div class="col-sm-12">
                                 <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
                                 <ul class="quest-list image-question mw-100">`;
-                                let j =0;
-                                for(option of practices.options){
-                                j++;
-                                    if(practices.question_type =='single'){
-                                        html +=`<li>
+                    let j = 0;
+                    for (option of practices.options) {
+                        j++;
+                        if (practices.question_type == 'single') {
+                            html += `<li>
                                         <input type="radio" id="question${i}${j}" class="custom-option" name="question" value="${option.id}">
                                         <label class="label-option" for="question${i}${j}">
                                             <img src="/LearningContent/${option.option_image}" alt="img">
                                         </label>
                                         <span class="label-text">${option.option_text}</span>
                                     </li>`;
-                                    }else{
-                                        html +=`<li>
+                        } else {
+                            html += `<li>
                                             <input type="checkbox" id="question${i}${j}" class="custom-option" name="question[]" value="${option.id}">
                                             <label class="label-option" for="question${i}${j}">
                                                 <img src="/LearningContent/${option.option_image}" alt="img">
                                             </label>
                                             <span class="label-text">${option.option_text}</span>
                                         </li>`;
-                                    }
-                                }    
-                                html +=`</ul>
+                        }
+                    }
+                    html += `</ul>
                                     <div class="quest-bottom">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -388,57 +414,57 @@ async function renderSlickSlider(req, res) {
                                             </div>
                                         </div>
                                     </div>`
-                                if(practices.question_type =='single'){
-                                html +=`
+                    if (practices.question_type == 'single') {
+                        html += `
                                     <div class="col-sm-12 explanation-div">
                                         <div class="explanation">
                                             <h4 class="text-dgreen">Explanation</h4>
                                             <p class="description">${practices.question_description
-                                            }</p>
+                            }</p>
                                         </div>
                                     </div>`
-                                }    
-                                html +=`</div>
+                    }
+                    html += `</div>
                             </div>
                         </form>`;
-                    }if (practices.option_display_preference == 'text') {
-                        let className='';
-                        if(practices.question_type =='multiple'){
-                            className = "multi-select";
-                        }
-                       
-                            if(practices.question_image !== ''){
-                                html += `<div class="col-sm-12 col-md-6 mb-3">
+                } if (practices.option_display_preference == 'text') {
+                    let className = '';
+                    if (practices.question_type == 'multiple') {
+                        className = "multi-select";
+                    }
+
+                    if (practices.question_image !== '') {
+                        html += `<div class="col-sm-12 col-md-6 mb-3">
                                     <div class="quest-imagelarge">  
                                         <img src="/LearningContent/${practices.question_image}" alt="img">
                                     </div>  
                                 </div>
                                 <div class="col-sm-12 col-md-6 text-left">`
-                            }
-                            html += `
+                    }
+                    html += `
                             <form method="post" action="./submitPracticeAnswer">
                                 <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
                                 <div class="col-md-12 ">
                                     <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
                                     <ul class="quest-list ${className}">
                                         <p> Please select one option</p>`;
-                                        let j =0;
-                                        for(option of practices.options){ 
-                                            j++;
-                                            if(practices.question_type =='single'){
-                                                html +=`
+                    let j = 0;
+                    for (option of practices.options) {
+                        j++;
+                        if (practices.question_type == 'single') {
+                            html += `
                                                 <li>
                                                     <input type="radio" id="question${i}${j}" class="custom-option" name="question" value="${option.id}">
                                                     <label class="label-option" for="question${i}${j}">${option.option_text}</label>
                                                 </li>`;
-                                            }else{
-                                                html +=`<li>
+                        } else {
+                            html += `<li>
                                                     <input type="checkbox" id="question${i}${j}" class="custom-option" name="question[]" value="${option.id}">
                                                     <label class="label-option" for="question111">${option.option_text}</label>
                                                 </li>`;
-                                            }
-                                        }
-                                        html +=`<div class="quest-bottom text-center text-md-left">
+                        }
+                    }
+                    html += `<div class="quest-bottom text-center text-md-left">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6 align-self-center">
                                                     <button type="button" class="check-btn correct-btn mb-md-0">Check Answer</button>
@@ -457,28 +483,28 @@ async function renderSlickSlider(req, res) {
                                         </div>
                                     </ul>
                                 </div>`
-                                if(practices.question_type =='single'){
-                                html +=`
+                    if (practices.question_type == 'single') {
+                        html += `
                                     <div class="col-sm-12 explanation-div">
                                         <div class="explanation">
                                             <h4 class="text-dgreen">Explanation</h4>
                                             <p class="description">${practices.question_description
-                                            }</p>
+                            }</p>
                                         </div>
                                     </div>`
-                                }    
-                                html +=`</div>
+                    }
+                    html += `</div>
                             </form>`;
-                    }if (practices.option_display_preference == 'both') {
-                        html += `<div class="row justify-content-center">`
-                         if(practices.question_image){
+                } if (practices.option_display_preference == 'both') {
+                    html += `<div class="row justify-content-center">`
+                    if (practices.question_image) {
                         html += `<div class="col-12 col-sm-6">
                             <div class="quest-imagelarge">  
                                 <img src="/LearningContent/${practices.question_image}" alt="img">
                             </div>  
                         </div>`
-                         }
-                        html +=`<form method="post" action="./submitPracticeAnswer">
+                    }
+                    html += `<form method="post" action="./submitPracticeAnswer">
                             <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
                             <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
                             <div class="col-sm-12">
@@ -491,11 +517,11 @@ async function renderSlickSlider(req, res) {
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
                                 <ul class="quest-list image-question mw-100">`;
-                                    let j =0;
-                                    for(option of practices.options){
-                                        j++;
-                                        if(practices.question_type =='single'){
-                                            html +=`
+                    let j = 0;
+                    for (option of practices.options) {
+                        j++;
+                        if (practices.question_type == 'single') {
+                            html += `
                                             <li>
                                             <input type="radio" id="question${i}${j}" class="custom-option" value="${option.id}" name="question">
                                             <label class="label-option" for="question${i}${j}">
@@ -503,8 +529,8 @@ async function renderSlickSlider(req, res) {
                                             </label>
                                             <span class="label-text">${option.option_text}</span>
                                         </li>`;
-                                            }else{
-                                                html +=`
+                        } else {
+                            html += `
                                                 <li>
                                                     <input type="checkbox" id="question${i}${j}" class="custom-option" value="${option.id}" name="question[]">
                                                     <label class="label-option" for="question${i}${j}">
@@ -512,9 +538,9 @@ async function renderSlickSlider(req, res) {
                                                     </label>
                                                     <span class="label-text">${option.option_text}</span>
                                                 </li>`;
-                                            }
-                                    }    
-                                html +=`</ul>
+                        }
+                    }
+                    html += `</ul>
                                 <div class="quest-bottom">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -523,21 +549,21 @@ async function renderSlickSlider(req, res) {
                                         </div>
                                     </div>
                                 </div>`
-                                if(practices.question_type =='single'){
-                                html +=`
+                    if (practices.question_type == 'single') {
+                        html += `
                                     <div class="col-sm-12 explanation-div">
                                         <div class="explanation">
                                             <h4 class="text-dgreen">Explanation</h4>
                                             <p class="description">${practices.question_description
-                                            }</p>
+                            }</p>
                                         </div>
                                     </div>`
-                                }    
-                                html +=`</div>
+                    }
+                    html += `</div>
                             </div>
                         </div>
                         </form>`;
-                    }
+                }
                 html += `</div>              
                         </div>
                     </div>
@@ -710,7 +736,7 @@ async function store(req, res) {
 
         // insert learning content
         let learningContent = await LearningContent.create(myContent);
-        console.log(learningContent);
+
         if (learningContent) {
             req.flash('success', 'learningContent is Created successfully!');
             res.status(200).json({ "success": true, "message": "learningContent is created successfully!", "redirectUrl": "/learning-content" });
@@ -845,19 +871,19 @@ async function viewCourses(req, res) {
 async function submitPracticeAnswer(req, res) {
     try {
         // get only practices
-        console.log(req.body);
+
         let value = req.body.question;
         let correct = [];
         let data = [];
-        let results = await Lesson.find({"_id": req.body.lession_id},{practices: {$elemMatch:{"_id": req.body.practice_id}}}
-        ,{"practices":1});
+        let results = await Lesson.find({ "_id": req.body.lession_id }, { practices: { $elemMatch: { "_id": req.body.practice_id } } }
+            , { "practices": 1 });
         let practices = results[0].practices[0]
-        for(practice of practices.options){
-            if(value.includes(practice.id)){
-                data.push({'id':practice.id,'description':practice.option_explanation});
+        for (practice of practices.options) {
+            if (value.includes(practice.id)) {
+                data.push({ 'id': practice.id, 'description': practice.option_explanation });
             }
-            if(practice.option_correct){
-                correct.push({'id':practice.id,'description':practice.option_explanation});
+            if (practice.option_correct) {
+                correct.push({ 'id': practice.id, 'description': practice.option_explanation });
             }
         }
         final_data = JSON.stringify({

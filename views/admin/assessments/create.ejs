@@ -184,14 +184,7 @@
                   <span class="input-group-text"><img src="/images/courses.svg" class="mCS_img_loaded"></span>
                   <select class="form-control select2" name="assessments" data-placeholder="Select Assessments"
                     id="assessments" tabindex="-1" multiple>
-                    <optgroup label="Information Slides">
-                      <option value="1">Slides 1</option>
-                      <option value="2">Slides 2</option>
-                    </optgroup>
-                    <optgroup label="Practices">
-                      <option value="1">Practices 1</option>
-                      <option value="2">Practices 2</option>
-                    </optgroup>
+                  
                   </select>
                 </div>
               </div>
@@ -391,20 +384,46 @@
     let contentId = $('#learning_content').val();
     let lessonIds = $('#lessons').val();
     let assessmentType = $('#assessment_type').val();
-    console.log(lessonIds);
-    console.log(assessmentType);
+
+
+    let slides = [];
+    let practices = [];
 
     if (contentId != '' && lessonIds != null || assessmentType != null) {
       $.ajax({
         type: "POST",
         url: '/learning-content/get-lesson-detail',
         data: {
-          content_id :contentId,
+          content_id: contentId,
           lesson_ids: lessonIds,
           assessment_type: assessmentType,
         },
         success: function (response) {
-          console.log(response);
+          if (response.length > 0) {
+            $('#assessments').empty();
+            for (lesson of response) {
+                  
+              if (lesson.slides.length > 0) {
+                for (slide of lesson.slides) {
+                  newOption = new Option(slide.title, slide._id, false, false);
+                  $('#assessments').append(newOption).trigger('change');
+                  slides.push(slide._id);
+                }
+              }
+
+              if (lesson.practices.length > 0) {
+                for (practice of lesson.practices) {
+                newOption = new Option(practice.title, practice._id, false, false);
+                $('#assessments').append(newOption).trigger('change');
+                practices.push(practice._id);
+              }
+              }
+              
+
+            }
+          }
+          console.log(slides);
+          console.log(practices);
         },
       });
     }
