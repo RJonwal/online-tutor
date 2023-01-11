@@ -2,9 +2,11 @@
   .menu_section {
     display: none;
   }
-
   .courses-sidebar {
     display: block;
+  }
+  a#menu_toggle {
+    display: none;
   }
 </style>
 <div class="right_col" role="main">
@@ -146,6 +148,9 @@ $(document).on('click','.check-btn',function(){
   submitPracticeAnswer(formData,$this);
 });
 
+$(document).on('click','.custom-option',function(){
+  $(this).toggleClass("correct");
+});
 function submitPracticeAnswer(formData,element){
   $('.explanation-div').hide();
   $('.correct-answer-msg').hide();
@@ -156,21 +161,29 @@ function submitPracticeAnswer(formData,element){
       data: formData,
       dataType: "json",
       success: function (response) {
-
-        console.log(response);
-        for(submittedId of response.submitted_answer){
-          $('input[value="'+response.submitted_answer.id+'"]').addClass('incorrect');
-        }
-        $('input[value="'+response.correct_answer.id+'"]').addClass('correct');
         element.find('.explanation-div').show();
         element.find('.description').text(response.correct_answer.description);
-        if(response.submitted_answer.correct){
-          $('.correct-answer-msg').show();
+        for(submitted of response.submitted_answer){
+          $('input[value="'+submitted.id+'"]').addClass('incorrect');
+          $('input[value="'+submitted.id+'"]').prop('checked', true);
+        }
+        for(correct of response.correct_answer){
+          $('input[value="'+correct.id+'"]').removeClass('incorrect');
+          $('input[value="'+correct.id+'"]').addClass('correct');
+        }
+        if(JSON.stringify(response.correct_answer)==JSON.stringify(response.submitted_answer)){
+          element.find('.correct-answer-msg').show();
         }else{
           $('input[value="'+response.submitted_answer.id+'"]').addClass('incorrect');
-          $('.incorrect-answer-msg').show();
+          element.find('.incorrect-answer-msg').show();
         }
       }
   });
 }
+
+// setTimeout(function(){
+//   alert('amit');
+// }, 2000);
+
+
 </script>

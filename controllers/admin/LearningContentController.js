@@ -337,7 +337,17 @@ async function renderSlickSlider(req, res) {
                         html += `
                         <form method="post" action="./submitPracticeAnswer">
                             <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
-                            <div class="row justify-content-center">`
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <div class="single-text answer-msg correct-answer-msg" style="display:none;margin:auto">
+                                    <img src="/images/correct-answer-icon.svg" alt="icon">
+                                    <span>Conratulations <small>Correct Answer</small></span>
+                                </div>
+                                <div class="single-text answer-msg incorrect-answer-msg" style="display:none;margin:auto;">
+                                    <img src="/images/incorrect-answer-icon.svg" alt="icon">
+                                    <span>Wrong <small>Incorrect Answer</small></span>
+                                </div>
+                            </div>`
                             if(practices.question_image){
                             html += `<div class="col-12 col-sm-6">
                                 <div class="quest-imagelarge">  
@@ -368,7 +378,6 @@ async function renderSlickSlider(req, res) {
                                             <span class="label-text">${option.option_text}</span>
                                         </li>`;
                                     }
-                               
                                 }    
                                 html +=`</ul>
                                     <div class="quest-bottom">
@@ -378,14 +387,18 @@ async function renderSlickSlider(req, res) {
                                                 <p>Please select one option</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>`
+                                if(practices.question_type =='single'){
+                                html +=`
                                     <div class="col-sm-12 explanation-div">
                                         <div class="explanation">
                                             <h4 class="text-dgreen">Explanation</h4>
-                                            <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
+                                            <p class="description">${practices.question_description
+                                            }</p>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>`
+                                }    
+                                html +=`</div>
                             </div>
                         </form>`;
                     }if (practices.option_display_preference == 'text') {
@@ -431,11 +444,11 @@ async function renderSlickSlider(req, res) {
                                                     <button type="button" class="check-btn correct-btn mb-md-0">Check Answer</button>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <div class="single-text answer-msg correct-answer-msg" style="display:none;">
+                                                    <div class="single-text answer-msg correct-answer-msg" style="display:none;margin:auto;">
                                                         <img src="/images/correct-answer-icon.svg" alt="icon">
                                                         <span>Conratulations <small>Correct Answer</small></span>
                                                     </div>
-                                                    <div class="single-text answer-msg incorrect-answer-msg" style="display:none;">
+                                                    <div class="single-text answer-msg incorrect-answer-msg" style="display:none;margin:auto;">
                                                         <img src="/images/incorrect-answer-icon.svg" alt="icon">
                                                         <span>Wrong <small>Incorrect Answer</small></span>
                                                     </div>
@@ -443,13 +456,18 @@ async function renderSlickSlider(req, res) {
                                             </div>
                                         </div>
                                     </ul>
-                                </div>
-                                <div class="col-sm-12 explanation-div">
-                                    <div class="explanation">
-                                        <h4 class="text-dgreen">Explanation</h4>
-                                        <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
-                                    </div>
-                                </div>
+                                </div>`
+                                if(practices.question_type =='single'){
+                                html +=`
+                                    <div class="col-sm-12 explanation-div">
+                                        <div class="explanation">
+                                            <h4 class="text-dgreen">Explanation</h4>
+                                            <p class="description">${practices.question_description
+                                            }</p>
+                                        </div>
+                                    </div>`
+                                }    
+                                html +=`</div>
                             </form>`;
                     }if (practices.option_display_preference == 'both') {
                         html += `<div class="row justify-content-center">`
@@ -464,6 +482,14 @@ async function renderSlickSlider(req, res) {
                             <input type="hidden" class="lession_id" name="lession_id" value="${lessionDetails[0].id}">
                             <input type="hidden" class="practice_id" name="practice_id" value="${practices.id}">
                             <div class="col-sm-12">
+                                <div class="single-text answer-msg correct-answer-msg" style="display:none;margin:auto">
+                                    <img src="/images/correct-answer-icon.svg" alt="icon">
+                                    <span>Conratulations <small>Correct Answer</small></span>
+                                </div>
+                                <div class="single-text answer-msg incorrect-answer-msg" style="display:none;margin:auto">
+                                    <img src="/images/incorrect-answer-icon.svg" alt="icon">
+                                    <span>Wrong <small>Incorrect Answer</small></span>
+                                </div>
                                 <ul class="quest-list image-question mw-100">`;
                                     let j =0;
                                     for(option of practices.options){
@@ -496,13 +522,18 @@ async function renderSlickSlider(req, res) {
                                             <p>Please select one option</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 explanation-div">
-                                    <div class="explanation">
-                                        <h4 class="text-dgreen">Explanation</h4>
-                                        <p class="description">Lorem ipsum dolor sit amet consectetur. Id at fames malesuada ac ornare. Ac scelerisque consectetur consequat nec eleifend lacus molestie. Purus sit curabitur dapibus luctus.</p>
-                                    </div>
-                                </div>
+                                </div>`
+                                if(practices.question_type =='single'){
+                                html +=`
+                                    <div class="col-sm-12 explanation-div">
+                                        <div class="explanation">
+                                            <h4 class="text-dgreen">Explanation</h4>
+                                            <p class="description">${practices.question_description
+                                            }</p>
+                                        </div>
+                                    </div>`
+                                }    
+                                html +=`</div>
                             </div>
                         </div>
                         </form>`;
@@ -830,7 +861,7 @@ async function submitPracticeAnswer(req, res) {
             }
         }
         final_data = JSON.stringify({
-            "submitted_answer": value,
+            "submitted_answer": data,
             "correct_answer": correct
         })
         return res.send(final_data);
