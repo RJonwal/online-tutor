@@ -192,7 +192,7 @@
             <div class="col-md-4">
               <label class="d-block">&nbsp;</span>
               </label>
-              <button type="button" class="content-submit theme-btn">Add Content</button>
+              <button type="button" class="content-submit theme-btn" id="add_content">Add Content</button>
             </div>
           </div>
 
@@ -384,8 +384,6 @@
     let contentId = $('#learning_content').val();
     let lessonIds = $('#lessons').val();
     let assessmentType = $('#assessment_type').val();
-
-
     let slides = [];
     let practices = [];
 
@@ -419,7 +417,7 @@
                   practices.push(practice._id);
                 }
               }
-              
+
 
             }
           }
@@ -428,6 +426,26 @@
         },
       });
     }
+  });
+
+
+  $("#add_content").click(function () {
+
+    let grade = $('#sc_grade').val();
+    let topic = $('#sc_topic').val();
+    let subTopic = $('#sc_sub_topic').val();
+    let learningContent = $('#learning_content').val();
+    let assessmentType = $('#assessment_type').val();
+    let assessments = $('#assessments').val();
+
+    console.log("grade => " + grade);
+    console.log("topic =>" + topic);
+    console.log("subTopic =>" + subTopic);
+    console.log("learningContent =>" + learningContent);
+    console.log("assessmentType =>" + assessmentType);
+    console.log("assessmentType =>" + assessmentType);
+    console.log("assessments =>" + assessments);
+
   });
 
 

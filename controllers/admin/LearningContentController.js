@@ -241,11 +241,11 @@ async function getLessonDetail(req, res) {
                 console.log('bothA');
                 let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1, "practices": 1 }).populate('slides').populate('practices');
                 return res.send(lessons);
-            }else if (assessmentType[0] == 1) {
+            } else if (assessmentType[0] == 1) {
                 console.log('slides');
                 let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "slides": 1 }).populate('slides');
                 return res.send(lessons);
-            }elseif (assessmentType[0] == 2) {
+            } else if(assessmentType[0] == 2) {
                 console.log('practices');
                 let lessons = await Lesson.find({ "_id": { "$in": filteredLessonIds } }, { "practices": 1 }).populate('practices');
                 return res.send(lessons);
@@ -375,18 +375,18 @@ async function renderSlickSlider(req, res) {
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
                             </div>`
-                            if(practices.question_type =='single'){
-                                html +=`
+                    if (practices.question_type == 'single') {
+                        html += `
                                 <div class="col-sm-12 explanation-div">
                                     <div class="explanation">
                                         <h4 class="text-dgreen">Explanation</h4>
                                         <p class="description">${practices.question_description
-                                        }</p>
+                            }</p>
                                     </div>
                                 </div>`
-                            } 
-                            if(practices.question_image){
-                            html += `<div class="col-12 col-sm-6">
+                    }
+                    if (practices.question_image) {
+                        html += `<div class="col-12 col-sm-6">
                                 <div class="quest-imagelarge">  
                                     <img src="/LearningContent/${practices.question_image}" alt="img">
                                 </div>  
@@ -533,17 +533,17 @@ async function renderSlickSlider(req, res) {
                                     <span>Wrong <small>Incorrect Answer</small></span>
                                 </div>
                             </div>`
-                            if(practices.question_type =='single'){
-                                html +=`
+                    if (practices.question_type == 'single') {
+                        html += `
                                 <div class="col-sm-12 explanation-div">
                                     <div class="explanation">
                                         <h4 class="text-dgreen">Explanation</h4>
                                         <p class="description">${practices.question_description
-                                        }</p>
+                            }</p>
                                     </div>
                                 </div>`
-                            } 
-                            html +=`
+                    }
+                    html += `
                             <div class="col-sm-12">
                                 <ul class="quest-list image-question mw-100">`;
                     let j = 0;
@@ -567,9 +567,9 @@ async function renderSlickSlider(req, res) {
                                                     </label>
                                                     <span class="label-text">${option.option_text}</span>
                                                 </li>`;
-                                            }
-                                    }    
-                                html +=`</ul>
+                        }
+                    }
+                    html += `</ul>
                                     <div class="quest-bottom">
                                         <div class="row">
                                             <div class="col-sm-12">
